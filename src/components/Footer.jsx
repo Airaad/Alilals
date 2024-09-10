@@ -33,6 +33,7 @@ export function Footer() {
                 <p className="text-sm text-gray-300">
                   &copy; {new Date().getFullYear()}. All Rights Reserved by AlilalsAgrico.
                 </p>
+                <p className='text-sm text-white my-5'>Designed by Harud Studios</p>
               </div>
             </div>
           </div>

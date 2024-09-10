@@ -2,6 +2,7 @@ import TopNav from "@/components/TopNav";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import { Footer } from "@/components/Footer";
+import FooterComp from "@/components/FooterComp";
 
 
 export const metadata = {
@@ -20,6 +21,7 @@ export default function RootLayout({ children }) {
       <TopNav/>
       <Nav/>
         {children}
+      <FooterComp/>
       <Footer/>
       </body>
     </html>

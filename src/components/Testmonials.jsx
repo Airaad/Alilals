@@ -37,7 +37,7 @@ export function Testimonials() {
     },
   ];
   return (
-    <section className="px-6 py-16 ">
+    <section className="px-6 py-14 md:py-16 ">
       <div className="flex flex-col gap-1 items-center mb-16">
         <h1 className="text-2xl font-semibold">Testimonials</h1>
         <div className="h-[0.15rem] bg-[#44A05B] w-48 " />
@@ -57,7 +57,7 @@ export function Testimonials() {
         className="mySwiper"
       >
         {slides.map((slide) => (
-          <SwiperSlide key={slide.id}>
+          <SwiperSlide key={slide.id} className="px-16 py-16 md:px-10">
             <div className="mx-auto max-w-4xl">
               <div className="md:flex md:items-center md:justify-center md:space-x-14">
                 <div className="relative h-48 w-48 flex-shrink-0">
@@ -70,7 +70,7 @@ export function Testimonials() {
 
                 <div className="mt-10 md:mt-0">
                   <blockquote>
-                    <p className="text-xl text-black">{slide.quote}</p>
+                    <p className="text-lg md:text-xl text-black">{slide.quote}</p>
                   </blockquote>
                   <p className="mt-7 text-lg font-semibold text-black">
                     {slide.name}
