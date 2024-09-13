@@ -35,8 +35,8 @@ const FAQ = () => {
   ];
 
   return (
-    <div className="flex flex-col-reverse md:flex-row  py-12">
-      <div className="w-full md:w-1/2 p-6 pl-8">
+    <div className="flex flex-col-reverse lg:flex-row py-12">
+      <div className="w-full lg:w-1/2 px-6 pl-8">
         <div className="flex gap-2 items-center">
           <RiLeafFill className="text-[#44A05B]" />
           <span className="text-[#44A05B]">FAQ</span>
@@ -76,11 +76,11 @@ const FAQ = () => {
         ))}
       </div>
 
-      <div className="w-full md:w-1/2 p-6">
+      <div className="lg:w-[30%] md:w-[50%] w-full mb-6 md:mb-0">
         <img
-          src="/assets/images/pexels-thealmani-19447958.jpg" // Replace with your actual image path
-          alt="Agriculture Company"
-          className="w-full md:h-[600px] lg:w-[400px] lg:h-[600px] h-auto ml-auto rounded-md shadow-md"
+          src="assets/images/pexels-pixabay-255501.jpg"
+          alt="Company Image"
+          className="lg:w-[600px] lg:h-[600px] object-cover rounded-lg shadow-md"
         />
       </div>
     </div>

@@ -2,31 +2,40 @@ import React from "react";
 import { RiLeafFill } from "react-icons/ri";
 import { FaCheckCircle } from "react-icons/fa";
 import { ButtonComponent } from "./ButtonComponent";
+import Link from "next/link";
 
 const AboutCompany = () => {
   return (
-    <div className="flex flex-col md:flex-row items-center md:items-start md:space-x-8 py-12 px-6 bg-[#F6F4EC]">
-      <div className="md:w-[30%] w-full mb-6 md:mb-0">
+    <div className="flex flex-col lg:flex-row items-center md:items-center md:space-x-8 py-12 px-6 bg-[#F6F4EC]">
+      <div className="lg:w-[30%] md:w-[50%] w-full mb-6 lg:mb-0">
         <img
-          src="/assets/images/pexels-pixabay-255501.jpg"
+          src="/assets/images/pexels-thealmani-19447958.jpg"
           alt="Company Image"
-          className="md:h-[600px] lg:w-[600px] lg:h-[600px] object-cover rounded-lg shadow-md"
+          className="lg:w-[600px] lg:h-[600px] object-cover rounded-lg shadow-md"
         />
       </div>
 
-      <div className="md:w-1/2 w-full">
+      <div className="lg:w-1/2 w-full">
         <div className="flex gap-2 items-center">
           <RiLeafFill className="text-[#44A05B]" />
-          <span className="text-[#44A05B]">OUR ABOUT US</span>
+          <span className="text-[#44A05B]">Who We Are</span>
         </div>
         <h2 className="text-4xl font-bold text-[#122F2A] mb-4">
-          Welcome to AlilasAgrico
+          Welcome to AlilasAgrico Pvt. Ltd
         </h2>
         <div className="mb-6">
           <p className="text-md text-[#636363] mb-4">
-            Our company is dedicated to delivering exceptional services and
-            innovative solutions to meet our clients' needs. We believe in
-            quality, transparency, and customer satisfaction.
+            Our company is an agri-tech and innovations startup based in Jammu &
+            Kashmir. We are focused on transforming the template horticulture
+            landscape of the region through innovations and sustainable
+            development. Specialising in sustainable orchards and precision
+            farming, we provide farmers with tech support to increase yields,
+            increase profitability and encourage environment friendly practices
+            in farming. With a strong commitment to devlop rural communities,
+            Alilas Agrico is setting new standards for modern and sustainable
+            agriculture in J&K. Since inception in 2022, Alilas Agrico has saved
+            over 100 growers in last two years with state of the art Orchard
+            development and management services.
           </p>
           <div className="h-[0.09rem] bg-[#44A05B] w-full " />
         </div>
@@ -55,8 +64,10 @@ const AboutCompany = () => {
             </div>
           </div>
 
-          <div className="mx-auto md:mx-0 md:mt-[100px] lg:mt-[220px]">
-            <ButtonComponent text="Contact Us" />
+          <div className="mx-auto lg:mx-0 lg:mt-[80px]">
+            <Link href="/contact">
+              <ButtonComponent text="Contact Us" />
+            </Link>
           </div>
         </div>
       </div>
