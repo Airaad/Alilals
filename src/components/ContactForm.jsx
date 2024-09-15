@@ -10,12 +10,29 @@ const ContactForm = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    toast({
-      title: "Form Sent",
-      description: "We will reach you soon.",
-      className: "bg-green-500 text-white border border-green-700",
-    });
-    e.target.reset();
+    const formData = new FormData(e.target);
+    fetch(
+      "https://script.google.com/macros/s/AKfycbzu6h31268WCBXuYYphOtFDl5ini7Ohp9OzuVNdNZQpA5D_SArUP4r6tQBQQhcpMyvmmg/exec",
+      {
+        method: "POST",
+        body: formData,
+      },
+    )
+      .then(() => {
+        toast({
+          title: "Message Sent",
+          description: "We will reach you soon.",
+          className: "bg-green-500 text-white border border-green-700",
+        });
+        e.target.reset();
+      })
+      .catch((err) => {
+        toast({
+          title: "Failed to send message",
+          description: err.message,
+          className: "bg-red-500 text-white border border-red-700",
+        });
+      });
   };
 
   return (
@@ -52,6 +69,7 @@ const ContactForm = () => {
               <label className="block text-[#636363] mb-2">Name</label>
               <input
                 type="text"
+                name="Name"
                 className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]"
                 placeholder="Your Name"
                 required
@@ -61,6 +79,7 @@ const ContactForm = () => {
               <label className="block text-[#636363] mb-2">Email</label>
               <input
                 type="email"
+                name="Email"
                 className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]"
                 placeholder="Your Email"
                 required
@@ -72,6 +91,7 @@ const ContactForm = () => {
               <label className="block text-[#636363] mb-2">Phone</label>
               <input
                 type="text"
+                name="Phone"
                 className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]"
                 placeholder="Your Phone"
                 required
@@ -81,6 +101,7 @@ const ContactForm = () => {
               <label className="block text-[#636363] mb-2">Address</label>
               <input
                 type="text"
+                name="Address"
                 className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]"
                 placeholder="Your Address"
                 required
@@ -92,6 +113,7 @@ const ContactForm = () => {
             <textarea
               className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]"
               placeholder="Your Query"
+              name="Query"
               rows="4"
               required
             ></textarea>
