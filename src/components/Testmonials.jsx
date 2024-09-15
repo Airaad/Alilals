@@ -38,7 +38,7 @@ export function Testimonials() {
   ];
   return (
     <section className="px-6 py-14 md:py-16 ">
-      <div className="flex flex-col gap-1 items-center mb-16">
+      <div className="flex flex-col gap-1 items-center md:mb-16">
         <h1 className="text-2xl font-semibold">Testimonials</h1>
         <div className="h-[0.15rem] bg-[#44A05B] w-48 " />
       </div>

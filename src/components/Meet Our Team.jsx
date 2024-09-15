@@ -46,7 +46,7 @@ const Team = () => {
   };
 
   return (
-    <section style={backgroundStyle} className="p-12 bg-[#F6F4EC] mt-20">
+    <section style={backgroundStyle} className="p-12 bg-[#F6F4EC] md:mt-20">
       <div className="flex flex-col gap-1 items-center mb-16">
         <h1 className="text-2xl font-semibold">Meet Our Team</h1>
         <div className="h-[0.15rem] bg-[#44A05B] w-48 " />

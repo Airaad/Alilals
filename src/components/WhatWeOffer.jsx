@@ -45,7 +45,7 @@ export function WhatWeOffer() {
           <div className="h-[0.15rem] bg-[#44A05B] w-full " />
         </div>
         <div className="flex flex-col md:flex-row p-8">
-          <div className="grid grid-cols-1 gap-20 md:grid-cols-3">
+          <div className="grid grid-cols-1 gap-5 md:gap-20 md:grid-cols-3">
             {services.map((service) => (
               <div
                 key={service.id}
