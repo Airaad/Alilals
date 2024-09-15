@@ -147,7 +147,7 @@ const EstimationCalci = () => {
         form to schedule an appointment with us.
       </div>
 
-      <div className="relative bg-white w-full md:h-[50vh] rounded-xl">
+      <div className="relative bg-white w-full rounded-xl md:h-[30rem]">
         {/* Form step 1 */}
         <form className={`py-10 px-10 ${formStage === 1 ? "" : "hidden"}`}>
           <label htmlFor="groverName">
@@ -345,7 +345,7 @@ const EstimationCalci = () => {
         </form>
       </div>
 
-      <div className="relative bg-white w-full md:h-[27vh] rounded-xl mt-10 py-5 md:px-20">
+      <div className="relative bg-white w-full rounded-xl mt-10 py-10 md:pb-14 md:px-20">
         <h1 className="text-center text-2xl md:mb-10 mb-5">Estimated Cost</h1>
         <div className="flex justify-center md:justify-between items-center">
           <div className="flex items-center justify-center md:w-20 md:h-20 w-14 h-14 rounded-full border-2 border-green-600 mr-5">
