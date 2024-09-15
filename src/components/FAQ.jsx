@@ -32,10 +32,15 @@ const FAQ = () => {
       answer:
         "You can reach our support team through email, phone, or by visiting our office. We are available 24/7 for any queries you may have.",
     },
+    {
+      question: "What are your pricing plans for agricultural services?",
+      answer:
+        "Our pricing depends on the type and scale of services required. You can use our cost estimator tool to get an approximate quote or contact us for detailed pricing.",
+    },
   ];
 
   return (
-    <div className="flex flex-col-reverse lg:flex-row py-12">
+    <div className="flex flex-col-reverse md:justify-between md:px-12 lg:flex-row py-12">
       <div className="w-full lg:w-1/2 px-6 pl-8">
         <div className="flex gap-2 items-center">
           <RiLeafFill className="text-[#44A05B]" />

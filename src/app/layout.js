@@ -3,7 +3,7 @@ import "./globals.css";
 import Nav from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import FooterComp from "@/components/FooterComp";
-
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata = {
   title: "AlilalsAgrico",
@@ -11,18 +11,19 @@ export const metadata = {
 };
 
 const appFont = {
-  fontFamily: 'Inter, sans-serif', // Replace with your desired font family
+  fontFamily: "Inter, sans-serif", // Replace with your desired font family
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" style={appFont}>
       <body>
-      <TopNav/>
-      <Nav/>
+        <TopNav />
+        <Nav />
         {children}
-      <FooterComp/>
-      <Footer/>
+        <FooterComp />
+        <Footer />
+        <Toaster />
       </body>
     </html>
   );

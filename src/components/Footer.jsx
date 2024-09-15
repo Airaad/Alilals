@@ -1,11 +1,12 @@
-import React from 'react'
+import React from "react";
 
 export function Footer() {
   return (
-    <section 
-      className="relative overflow-hidden py-10 bg-cover bg-center" 
+    <section
+      className="relative overflow-hidden py-10 bg-cover bg-center"
       style={{
-        backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/assets/images/pexels-nc-farm-bureau-mark-8877368.jpg')",
+        backgroundImage:
+          "linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/assets/images/pexels-nc-farm-bureau-mark-8877368.jpg')",
       }}
     >
       <div className="relative z-10 mx-auto max-w-7xl px-4">
@@ -27,13 +28,18 @@ export function Footer() {
                     fill="black"
                   />
                 </svg> */}
-                <span className="ml-4 text-2xl font-bold text-white">AlilalsAgrico</span>
+                <span className="ml-4 text-2xl font-bold text-white">
+                  AlilalsAgrico
+                </span>
               </div>
               <div>
                 <p className="text-sm text-gray-300">
-                  &copy; {new Date().getFullYear()}. All Rights Reserved by AlilalsAgrico.
+                  &copy; {new Date().getFullYear()}. All Rights Reserved by
+                  AlilalsAgrico.
                 </p>
-                <p className='text-sm text-white my-5'>Designed by Harud Studios</p>
+                <p className="text-sm text-white my-5">
+                  Designed by Harud Studios
+                </p>
               </div>
             </div>
           </div>
@@ -46,22 +52,34 @@ export function Footer() {
               </h3>
               <ul>
                 <li className="mb-4">
-                  <a className="text-base font-medium text-white hover:text-gray-300" href="#">
+                  <a
+                    className="text-base font-medium text-white hover:text-gray-300"
+                    href="#"
+                  >
                     Features
                   </a>
                 </li>
                 <li className="mb-4">
-                  <a className="text-base font-medium text-white hover:text-gray-300" href="#">
+                  <a
+                    className="text-base font-medium text-white hover:text-gray-300"
+                    href="#"
+                  >
                     Pricing
                   </a>
                 </li>
                 <li className="mb-4">
-                  <a className="text-base font-medium text-white hover:text-gray-300" href="#">
+                  <a
+                    className="text-base font-medium text-white hover:text-gray-300"
+                    href="#"
+                  >
                     Affiliate Program
                   </a>
                 </li>
                 <li>
-                  <a className="text-base font-medium text-white hover:text-gray-300" href="#">
+                  <a
+                    className="text-base font-medium text-white hover:text-gray-300"
+                    href="#"
+                  >
                     Press Kit
                   </a>
                 </li>
@@ -77,22 +95,34 @@ export function Footer() {
               </h3>
               <ul>
                 <li className="mb-4">
-                  <a className="text-base font-medium text-white hover:text-gray-300" href="#">
+                  <a
+                    className="text-base font-medium text-white hover:text-gray-300"
+                    href="#"
+                  >
                     Account
                   </a>
                 </li>
                 <li className="mb-4">
-                  <a className="text-base font-medium text-white hover:text-gray-300" href="#">
+                  <a
+                    className="text-base font-medium text-white hover:text-gray-300"
+                    href="#"
+                  >
                     Help
                   </a>
                 </li>
                 <li className="mb-4">
-                  <a className="text-base font-medium text-white hover:text-gray-300" href="#">
+                  <a
+                    className="text-base font-medium text-white hover:text-gray-300"
+                    href="#"
+                  >
                     Contact Us
                   </a>
                 </li>
                 <li>
-                  <a className="text-base font-medium text-white hover:text-gray-300" href="#">
+                  <a
+                    className="text-base font-medium text-white hover:text-gray-300"
+                    href="#"
+                  >
                     Customer Support
                   </a>
                 </li>
@@ -108,26 +138,34 @@ export function Footer() {
               </h3>
               <ul>
                 <li className="mb-4">
-                  <a className="text-base font-medium text-white hover:text-gray-300" href="#">
+                  <a
+                    className="text-base font-medium text-white hover:text-gray-300"
+                    href="#"
+                  >
                     Terms &amp; Conditions
                   </a>
                 </li>
                 <li className="mb-4">
-                  <a className="text-base font-medium text-white hover:text-gray-300" href="#">
+                  <a
+                    className="text-base font-medium text-white hover:text-gray-300"
+                    href="#"
+                  >
                     Privacy Policy
                   </a>
                 </li>
                 <li>
-                  <a className="text-base font-medium text-white hover:text-gray-300" href="#">
+                  <a
+                    className="text-base font-medium text-white hover:text-gray-300"
+                    href="#"
+                  >
                     Licensing
                   </a>
                 </li>
               </ul>
             </div>
           </div>
-
         </div>
       </div>
     </section>
-  )
+  );
 }

@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-export function ButtonComponent({text}) {
+export function ButtonComponent({ text }) {
   return (
     <button className="relative px-8 py-3 text-white bg-black rounded-full overflow-hidden shadow-lg">
       <span className="relative z-10">{text}</span>

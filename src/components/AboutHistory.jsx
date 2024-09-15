@@ -26,12 +26,12 @@ const AboutHistory = () => {
   ];
 
   return (
-    <div className="py-12 px-6 bg-[#202221]">
+    <div className="py-12 px-6 bg-gray-100 md:px-20">
       <div className="flex gap-2 items-center">
         <RiLeafFill className="text-[#44A05B]" />
         <span className="text-[#44A05B]">History</span>
       </div>
-      <h2 className="text-4xl font-bold text-white mb-4">Our History</h2>
+      <h2 className="text-4xl font-bold  mb-4">Our History</h2>
       <div className="mb-6">
         <p className="text-md text-[#636363] mb-4">
           Our journey began with a vision to innovate and lead in our industry.
@@ -51,7 +51,7 @@ const AboutHistory = () => {
 
             {/* Description */}
             <div className="pl-4">
-              <p className="text-md md:text-lg my-16 text-white">{item.description}</p>
+              <p className="text-md md:text-lg my-16">{item.description}</p>
             </div>
           </div>
         ))}

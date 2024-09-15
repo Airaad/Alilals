@@ -6,16 +6,15 @@ import Team from "@/components/Meet Our Team";
 import OrchidSection from "@/components/OrchidSection";
 import { WhatWeOffer } from "@/components/WhatWeOffer";
 
-
 const Home = () => {
   return (
     <main>
-      <HeroSection/>
-      <OrchidSection/>
-      <WhatWeOffer/>
-      <OurServices/>
-      <Testimonials/>
-      <Team/>
+      <HeroSection />
+      <OrchidSection />
+      <WhatWeOffer />
+      <OurServices />
+      <Testimonials />
+      <Team />
     </main>
   );
 };

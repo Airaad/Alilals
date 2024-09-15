@@ -70,7 +70,9 @@ export function Testimonials() {
 
                 <div className="mt-10 md:mt-0">
                   <blockquote>
-                    <p className="text-lg md:text-xl text-black">{slide.quote}</p>
+                    <p className="text-lg md:text-xl text-black">
+                      {slide.quote}
+                    </p>
                   </blockquote>
                   <p className="mt-7 text-lg font-semibold text-black">
                     {slide.name}

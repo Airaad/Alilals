@@ -26,7 +26,7 @@ const ContactInfo = () => {
   ];
 
   return (
-    <div className="py-12 px-6 bg-[#F6F4EC]">
+    <div className="py-12 px-6 bg-[#F6F4EC] md:px-20">
       <div className="flex gap-2 items-center">
         <RiLeafFill className="text-[#44A05B]" />
         <span className="text-[#44A05B]">Contact Us</span>
