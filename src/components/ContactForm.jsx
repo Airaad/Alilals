@@ -1,15 +1,22 @@
 "use client";
 
-import React from "react";
+import { React, useState } from "react";
 import { ButtonComponent } from "./ButtonComponent";
 import { RiLeafFill } from "react-icons/ri";
 import { useToast } from "@/hooks/use-toast";
 
 const ContactForm = () => {
   const { toast } = useToast();
+  const [disableBtn, setDisableBtn] = useState(false);
 
   const submitHandler = (e) => {
     e.preventDefault();
+    setDisableBtn(true);
+    toast({
+      title: "Sending Message...",
+      description: "Please wait for a moment.",
+      className: "bg-yellow-500 text-white border border-yellow-700",
+    });
     const formData = new FormData(e.target);
     fetch(
       "https://script.google.com/macros/s/AKfycbzu6h31268WCBXuYYphOtFDl5ini7Ohp9OzuVNdNZQpA5D_SArUP4r6tQBQQhcpMyvmmg/exec",
@@ -25,6 +32,7 @@ const ContactForm = () => {
           className: "bg-green-500 text-white border border-green-700",
         });
         e.target.reset();
+        setDisableBtn(false);
       })
       .catch((err) => {
         toast({
@@ -32,6 +40,7 @@ const ContactForm = () => {
           description: err.message,
           className: "bg-red-500 text-white border border-red-700",
         });
+        setDisableBtn(false);
       });
   };
 
@@ -119,7 +128,7 @@ const ContactForm = () => {
             ></textarea>
           </div>
           <div className="text-center">
-            <ButtonComponent text="Send" />
+            <ButtonComponent text="Send" disabled={disableBtn} />
           </div>
         </form>
       </div>
