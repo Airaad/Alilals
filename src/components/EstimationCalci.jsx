@@ -61,6 +61,11 @@ const EstimationCalci = () => {
     setNorthSouthLen("");
     setEastWestLen("");
     setEstimatedCost(0);
+    toast({
+      title: "Form Resetted",
+      description: "Estimation from has been resetted",
+      className: "bg-red-500 text-white border border-red-700",
+    });
   };
 
   const goToNext = (e) => {
@@ -105,6 +110,11 @@ const EstimationCalci = () => {
         return;
       }
     }
+    toast({
+      title: "Estimation Calculated",
+      description: "Your estimated cost has been calculated",
+      className: "bg-green-500 text-white border border-green-700",
+    });
     setEstimatedCost(120000);
   };
 
