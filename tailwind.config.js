@@ -8,6 +8,9 @@ module.exports = {
   ],
   theme: {
   	extend: {
+		animation: {
+        'bounce-slow': 'bounce 2s infinite', // Slows down the bounce effect
+      },
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',

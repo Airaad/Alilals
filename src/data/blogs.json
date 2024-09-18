@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "title": "Understanding Organic Farming",
+    "uploader": "Admin",
+    "date": "August 12, 2022",
+    "brief": "This blog covers the basics of organic farming, its benefits, and how to get started.",
+    "image": "https://images.pexels.com/photos/851213/pexels-photo-851213.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+  },
+  {
+    "id": 2,
+    "title": "Top 5 Organic Fertilizers for Your Garden",
+    "uploader": "Admin",
+    "date": "August 13, 2022",
+    "brief": "Learn about the top 5 organic fertilizers that can boost soil fertility and promote healthy plant growth in your home garden.",
+    "image": "https://images.pexels.com/photos/28408027/pexels-photo-28408027/free-photo-of-person-walking-through-maple-syrup-harvesting-forest.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+  },
+  {
+    "id": 3,
+    "title": "How to Start Your Own Urban Farm",
+    "uploader": "Admin",
+    "date": "August 13, 2022",
+    "brief": "Urban farming is gaining popularity in cities. Find out how to start your own small-scale farm in your backyard or balcony.",
+    "image": "https://images.pexels.com/photos/14242144/pexels-photo-14242144.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+  },
+  {
+    "id": 4,
+    "title": "The Benefits of Crop Rotation",
+    "uploader": "Admin",
+    "date": "August 13, 2022",
+    "brief": "Crop rotation is a key practice in farming that can improve soil health and reduce pests. This blog explains its benefits and how to implement it.",
+    "image": "https://images.pexels.com/photos/5249676/pexels-photo-5249676.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+  },
+  {
+    "id": 5,
+    "title": "Future of Farming: Robotics and AI in Agriculture",
+    "uploader": "Admin",
+    "date": "August 13, 2022",
+    "brief": "Explore how robotics and artificial intelligence are revolutionizing the agricultural industry, making farming more efficient and productive.",
+    "image": "https://images.pexels.com/photos/3822859/pexels-photo-3822859.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+  }
+]
