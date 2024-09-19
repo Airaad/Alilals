@@ -38,5 +38,45 @@
     "date": "August 13, 2022",
     "brief": "Explore how robotics and artificial intelligence are revolutionizing the agricultural industry, making farming more efficient and productive.",
     "image": "https://images.pexels.com/photos/3822859/pexels-photo-3822859.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+  },
+  {
+    "id": 6,
+    "title": "Sustainable Agriculture: Practices for a Greener Future",
+    "uploader": "Dr. Green",
+    "date": "September 2, 2023",
+    "brief": "Discover sustainable farming practices that aim to reduce environmental impact and promote long-term agricultural productivity.",
+    "image": "https://images.pexels.com/photos/1166757/pexels-photo-1166757.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+  },
+  {
+    "id": 7,
+    "title": "Vertical Farming: A New Era of Urban Agriculture",
+    "uploader": "AgriTech News",
+    "date": "June 25, 2023",
+    "brief": "Learn how vertical farming is transforming urban spaces by growing crops in vertically stacked layers, reducing land use and water consumption.",
+    "image": "https://images.pexels.com/photos/28469559/pexels-photo-28469559/free-photo-of-farmer-tending-lush-green-fields-in-autumn.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+  },
+  {
+    "id": 8,
+    "title": "Blockchain in Agriculture: Ensuring Transparency in the Food Chain",
+    "uploader": "TechFarm",
+    "date": "July 18, 2023",
+    "brief": "Explore how blockchain technology is being implemented in agriculture to improve traceability and transparency throughout the food supply chain.",
+    "image": "https://images.pexels.com/photos/259280/pexels-photo-259280.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+  },
+  {
+    "id": 9,
+    "title": "Precision Farming: How Data is Shaping the Future of Agriculture",
+    "uploader": "Farm Insights",
+    "date": "May 9, 2023",
+    "brief": "Discover the role of precision farming in using data and GPS technology to optimize crop yields and reduce waste in modern agriculture.",
+    "image": "https://images.pexels.com/photos/248880/pexels-photo-248880.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+  },
+  {
+    "id": 10,
+    "title": "Organic Farming: Benefits and Challenges in Modern Agriculture",
+    "uploader": "Agro Life",
+    "date": "April 16, 2023",
+    "brief": "Understand the growing trend of organic farming, its environmental benefits, and the challenges farmers face in transitioning to organic practices.",
+    "image": "https://images.pexels.com/photos/2853297/pexels-photo-2853297.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
   }
 ]
