@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
-import blogs from "@/data/blogs.json";
+import { useEffect, useState } from "react";
+import { getAllBlogs } from "../../firebase/blogs/read";
 
 export default function Blogs() {
   const backgroundStyle = {
@@ -10,14 +10,16 @@ export default function Blogs() {
       'url("https://www.transparenttextures.com/patterns/arches.png")',
   };
 
+  const [blogs, setblogs] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const blogsPerPage = 6;
 
   const totalPages = Math.ceil(blogs.length / blogsPerPage);
 
-  const indexOfLastBlog = currentPage * blogsPerPage;
-  const indexOfFirstBlog = indexOfLastBlog - blogsPerPage;
-  const currentBlogs = blogs.slice(indexOfFirstBlog, indexOfLastBlog);
+  let indexOfLastBlog = currentPage * blogsPerPage;
+  let indexOfFirstBlog = indexOfLastBlog - blogsPerPage;
+  let currentBlogs = blogs?.slice(indexOfFirstBlog, indexOfLastBlog);
 
   const handleNextPage = () => {
     if (currentPage < totalPages) setCurrentPage(currentPage + 1);
@@ -26,6 +28,39 @@ export default function Blogs() {
   const handlePrevPage = () => {
     if (currentPage > 1) setCurrentPage(currentPage - 1);
   };
+
+  useEffect(() => {
+    getAllBlogs().then((data) => {
+      setblogs(data);
+      setLoading(false);
+    });
+  }, []);
+
+  // Enhanced loading state design
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="flex flex-col items-center">
+          <div className="animate-spin rounded-full h-24 w-24 border-t-4 border-b-4 border-green-500 mb-4"></div>
+          <p className="text-lg text-gray-600">Loading blogs, please wait...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Handle no blogs found
+  if (!loading && blogs.length === 0) {
+    return (
+      <div className="flex flex-col justify-center items-center min-h-screen">
+        <h2 className="text-2xl font-semibold text-gray-700 mb-4">
+          No blogs found!
+        </h2>
+        <p className="text-lg text-gray-600">
+          Check back later for exciting content.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div style={backgroundStyle} className="p-6">
@@ -42,7 +77,7 @@ export default function Blogs() {
             {/* Blog Image */}
             <div className="overflow-hidden rounded-t-lg">
               <img
-                src={blog.image}
+                src={blog.imageUrl}
                 alt={blog.title}
                 className="w-full h-80 object-cover transform transition-transform duration-300 hover:scale-105"
               />

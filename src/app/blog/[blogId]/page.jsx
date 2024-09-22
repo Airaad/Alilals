@@ -1,7 +1,6 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import blogs from "@/data/blogs.json";
 import { FaCalendarAlt, FaUserAlt } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import Link from "next/link";
@@ -15,19 +14,60 @@ import {
   LinkedinIcon,
   WhatsappIcon,
 } from "react-share";
+import { getblog, getAllBlogs } from "../../../../firebase/blogs/read";
 
-export default function BlogDetail({ id }) {
+export default function BlogDetail() {
   const { blogId } = useParams();
   const [blog, setBlog] = useState(null);
+  const [allBlogs, setAllBlogs] = useState([]);
+  const [loadingBlog, setLoadingBlog] = useState(true);
+  const [loadingAllBlogs, setLoadingAllBlogs] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
+    async function fetchData() {
+      try {
+        setLoadingBlog(true);
+        const fetchedBlog = await getblog(blogId);
+        setBlog(fetchedBlog);
+        setLoadingBlog(false);
+      } catch (err) {
+        setError("Failed to load the blog");
+        setLoadingBlog(false);
+      }
+
+      try {
+        setLoadingAllBlogs(true);
+        const fetchedAllBlogs = await getAllBlogs();
+        setAllBlogs(fetchedAllBlogs);
+        setLoadingAllBlogs(false);
+      } catch (err) {
+        setError("Failed to load related blogs");
+        setLoadingAllBlogs(false);
+      }
+    }
+
     if (blogId) {
-      const selectedBlog = blogs.find((b) => b.id === parseInt(blogId));
-      setBlog(selectedBlog);
+      fetchData();
     }
   }, [blogId]);
 
-  if (!blog) return <div>Loading...</div>;
+  if (loadingBlog) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-green-500"></div>
+        <span className="ml-4 text-lg">Loading blog...</span>
+      </div>
+    );
+  }
+
+  if (error) {
+    return <div className="text-center text-red-600">{error}</div>;
+  }
+
+  if (!blog) {
+    return <div className="text-center">No blog found.</div>;
+  }
 
   const blogUrl = `${window.location.origin}/blog/${blogId}`;
 
@@ -56,7 +96,7 @@ export default function BlogDetail({ id }) {
           {/* Blog Image */}
           <div className="mb-8">
             <img
-              src={blog.image}
+              src={blog.imageUrl}
               alt={blog.title}
               className="w-full h-[400px] object-cover rounded-lg shadow-lg"
             />
@@ -64,53 +104,9 @@ export default function BlogDetail({ id }) {
 
           {/* Blog Content */}
           <div className="prose lg:prose-xl max-w-none text-[#404040] leading-relaxed text-justify">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
-              semper, purus quis rhoncus hendrerit, leo lacus mollis libero, non
-              posuere sem metus ut nisi. Morbi feugiat condimentum suscipit.
-              Aenean id erat semper, tincidunt tortor non, commodo purus.
-              Pellentesque finibus sapien vel orci posuere, eu placerat nisl
-              placerat. Duis venenatis lectus ac consectetur rutrum. Integer
-              rutrum quam ut justo bibendum feugiat. Duis et dapibus est.
-              Suspendisse nec mi odio. Donec iaculis sit amet augue ac tempus.
-              Donec feugiat lobortis lorem, id volutpat leo vulputate vel. Sed
-              at ipsum lacus. Phasellus pulvinar orci eros, non mollis nunc
-              facilisis ac. Cras laoreet libero velit, nec elementum mi sodales
-              vitae. Phasellus aliquet imperdiet hendrerit. Aliquam erat
-              volutpat. Vestibulum interdum quam quis velit vulputate efficitur.
-              Quisque velit magna, maximus ac iaculis non, fermentum ac turpis.
-              Praesent vulputate interdum turpis quis lacinia. Duis sed
-              condimentum lorem, a pretium neque. Praesent turpis mi, convallis
-              a nisi vel, iaculis aliquam nulla. Quisque eu est metus. Sed vitae
-              odio convallis, auctor nunc eget, tristique ante. Suspendisse eu
-              egestas sapien, sit amet lobortis risus. Donec tincidunt lorem
-              viverra ex feugiat, ac facilisis neque consectetur. Morbi
-              imperdiet varius tortor at congue. Maecenas at erat vitae magna
-              tincidunt blandit. Suspendisse sit amet purus in tortor eleifend
-              efficitur sit amet cursus nibh. Morbi a tellus et dui accumsan
-              malesuada. Curabitur consectetur nec magna nec pharetra. Maecenas
-              eu feugiat turpis. Proin ante orci, commodo ultrices porttitor
-              quis, aliquam eget augue. Nam sed mi nunc. Etiam vitae lobortis
-              odio. Vestibulum commodo nisl eu risus posuere ornare. Integer
-              imperdiet metus id convallis aliquam. Donec eleifend nec risus vel
-              condimentum. Vivamus lacinia lacus sed turpis euismod dictum.
-              Aliquam erat volutpat. Sed pretium, dui vel dignissim condimentum,
-              metus mauris tincidunt elit, quis cursus nunc nulla quis diam. Sed
-              et pharetra magna. Ut pretium eu augue eu suscipit. Duis viverra
-              felis cursus, efficitur leo eu, hendrerit odio. Aliquam id dui eu
-              leo pharetra auctor eget eget ligula. Duis eget sem urna. Proin
-              egestas iaculis nibh in sollicitudin. Aenean vestibulum ut leo sed
-              dapibus. Curabitur lacus ex, varius non enim et, molestie commodo
-              est. Aliquam erat nulla, venenatis vel nisl ac, efficitur placerat
-              leo. Pellentesque consequat sodales turpis, eget rutrum leo
-              lobortis sed. Duis convallis consectetur massa, at euismod turpis
-              rhoncus id. Praesent purus quam, accumsan eget semper vel, congue
-              eu augue. Nunc diam felis, condimentum eleifend consequat sit
-              amet, euismod at mauris. Nunc ac magna tempor, tristique ex eget,
-              consectetur quam. Sed sit amet purus quis nibh euismod semper
-              facilisis ac arcu.
-            </p>
-
+            <div className="no-global-styles">
+              <div dangerouslySetInnerHTML={{ __html: blog?.content }}></div>
+            </div>
             <blockquote className="bg-gray-100 p-4 border-l-4 border-[#44A05B] italic rounded-lg my-8">
               "Farming is not just a job, its a way of life..."
             </blockquote>
@@ -143,29 +139,37 @@ export default function BlogDetail({ id }) {
           <h3 className="text-2xl font-semibold">
             Liked this blog? Check out more articles:
           </h3>
-          <div className="flex flex-col items-center gap-8 lg:flex-row mt-6">
-            {blogs.slice(0, 3).map((relatedBlog) => (
-              <div key={relatedBlog.id} className="w-full">
-                <Link href={`/blog/${relatedBlog.id}`}>
-                  <div className="bg-[#F6F4EC] text-[#202221] rounded-lg shadow-lg overflow-hidden">
-                    <img
-                      src={relatedBlog.image}
-                      alt={relatedBlog.title}
-                      className="w-full h-48 object-cover transform transition-transform duration-300 hover:scale-105"
-                    />
-                    <div className="p-4">
-                      <h4 className="text-lg font-semibold mb-2">
-                        {relatedBlog.title}
-                      </h4>
-                      <p className="text-sm text-gray-600">
-                        {relatedBlog.brief}
-                      </p>
+
+          {loadingAllBlogs ? (
+            <div className="flex justify-center items-center mt-4">
+              <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-green-500"></div>
+              <span className="ml-4 text-lg">Loading related blogs...</span>
+            </div>
+          ) : (
+            <div className="flex flex-col items-center gap-8 lg:flex-row mt-6">
+              {allBlogs.slice(0, 3).map((relatedBlog) => (
+                <div key={relatedBlog.id} className="w-full">
+                  <Link href={`/blog/${relatedBlog.id}`}>
+                    <div className="bg-[#F6F4EC] text-[#202221] rounded-lg shadow-lg overflow-hidden">
+                      <img
+                        src={relatedBlog.imageUrl}
+                        alt={relatedBlog.title}
+                        className="w-full h-48 object-cover transform transition-transform duration-300 hover:scale-105"
+                      />
+                      <div className="p-4">
+                        <h4 className="text-lg font-semibold mb-2">
+                          {relatedBlog.title}
+                        </h4>
+                        <p className="text-sm text-gray-600">
+                          {relatedBlog.brief}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                </Link>
-              </div>
-            ))}
-          </div>
+                  </Link>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>

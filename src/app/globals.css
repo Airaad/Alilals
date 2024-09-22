@@ -81,3 +81,26 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  .no-global-styles {
+    all: unset;
+  }
+
+  .no-global-styles h1,
+  .no-global-styles ul,
+  .no-global-styles ol,
+  .no-global-styles h2,
+  .no-global-styles h3,
+  .no-global-styles p,
+  .no-global-styles a {
+    margin: revert;
+    padding: revert;
+    font-size: revert;
+    font-weight: revert;
+
+    list-style: revert;
+    text-decoration: revert;
+    color: revert;
+  }
+}
