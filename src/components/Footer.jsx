@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 export function Footer() {
   return (
@@ -37,9 +38,11 @@ export function Footer() {
                   &copy; {new Date().getFullYear()}. All Rights Reserved by
                   AlilalsAgrico.
                 </p>
+                <Link href='https://harudstudios.framer.website'>
                 <p className="text-sm text-white my-5">
                   Designed by Harud Studios
                 </p>
+                </Link>
               </div>
             </div>
           </div>

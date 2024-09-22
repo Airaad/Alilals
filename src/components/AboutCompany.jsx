@@ -6,7 +6,7 @@ import Link from "next/link";
 
 const AboutCompany = () => {
   return (
-    <div className="flex flex-col lg:flex-row items-center md:items-center md:space-x-8 py-12 px-6 bg-[#F6F4EC] md:px-20">
+    <div className="flex flex-col lg:flex-row items-center lg:items-start md:space-x-8 py-12 px-6 bg-[#F6F4EC] md:px-20">
       <div className="lg:w-[30%] md:w-[50%] w-full mb-6 lg:mb-0">
         <img
           src="/assets/images/pexels-thealmani-19447958.jpg"
@@ -24,7 +24,7 @@ const AboutCompany = () => {
           Welcome to AlilasAgrico Pvt. Ltd
         </h2>
         <div className="mb-6">
-          <p className="text-md text-[#636363] mb-4">
+          <p className="text-md text-[#636363] mb-4 text-justify">
             Our company is an agri-tech and innovations startup based in Jammu &
             Kashmir. We are focused on transforming the template horticulture
             landscape of the region through innovations and sustainable

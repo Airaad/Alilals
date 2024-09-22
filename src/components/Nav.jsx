@@ -30,7 +30,7 @@ export default function Nav() {
       >
         <div className="flex md:flex-1">
           <Link href="/" className="-m-1.5 p-1.5">
-            <h2 className="text-4xl font-bold text-green-500">AlilalsAgrico</h2>
+            <h2 className="text-3xl lg:text-4xl font-bold text-green-500">AlilalsAgrico</h2>
           </Link>
         </div>
         <div className="flex md:hidden">
@@ -44,34 +44,34 @@ export default function Nav() {
           </button>
         </div>
 
-        <PopoverGroup className="hidden md:flex md:gap-x-12">
+        <PopoverGroup className="hidden md:flex md:gap-x-8 lg:gap-x-12">
           <Link
             href="/"
-            className={`text-lg font-semibold leading-6 text-[#636363] hover:text-green-500 ${pathname == "/" ? "text-green-500" : ""}`}
+            className={`text-md lg:text-lg font-semibold leading-6 text-[#636363] hover:text-green-500 ${pathname == "/" ? "text-green-500" : ""}`}
           >
             Home
           </Link>
           <Link
             href="/about"
-            className={`text-lg font-semibold leading-6 text-[#636363] hover:text-green-500 ${pathname == "/about" ? "text-green-500" : ""}`}
+            className={`text-md lg:text-lg font-semibold leading-6 text-[#636363] hover:text-green-500 ${pathname == "/about" ? "text-green-500" : ""}`}
           >
             About
           </Link>
           <Link
             href="/contact"
-            className={`text-lg font-semibold leading-6 text-[#636363] hover:text-green-500 ${pathname == "/contact" ? "text-green-500" : ""}`}
+            className={`text-md lg:text-lg font-semibold leading-6 text-[#636363] hover:text-green-500 ${pathname == "/contact" ? "text-green-500" : ""}`}
           >
             Contact
           </Link>
           <Link
             href="/blog"
-            className={`text-lg font-semibold leading-6 text-[#636363] hover:text-green-500 ${pathname == "/blog" ? "text-green-500" : ""}`}
+            className={`text-md lg:text-lg font-semibold leading-6 text-[#636363] hover:text-green-500 ${pathname == "/blog" ? "text-green-500" : ""}`}
           >
             Blogs
           </Link>
           <Link
             href="/estimation-calculator"
-            className={`text-lg font-semibold leading-6 text-[#636363] hover:text-green-500 ${pathname == "/estimation-calculator" ? "text-green-500" : ""}`}
+            className={`text-md lg:text-lg font-semibold leading-6 text-[#636363] hover:text-green-500 ${pathname == "/estimation-calculator" ? "text-green-500" : ""}`}
           >
             Estimation Calculator
           </Link>

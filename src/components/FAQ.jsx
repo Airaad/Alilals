@@ -40,7 +40,7 @@ const FAQ = () => {
   ];
 
   return (
-    <div className="flex flex-col-reverse md:justify-between md:px-12 lg:flex-row py-12">
+    <div className="flex flex-col-reverse items-center lg:items-start md:justify-between md:px-12 lg:flex-row py-12">
       <div className="w-full lg:w-1/2 px-6 pl-8">
         <div className="flex gap-2 items-center">
           <RiLeafFill className="text-[#44A05B]" />
@@ -81,7 +81,7 @@ const FAQ = () => {
         ))}
       </div>
 
-      <div className="lg:w-[30%] md:w-[50%] w-full mb-6 md:mb-0">
+      <div className="lg:w-[30%] md:w-[50%] w-full mb-6 md:mb-0 p-8">
         <img
           src="assets/images/pexels-pixabay-255501.jpg"
           alt="Company Image"

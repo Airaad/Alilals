@@ -154,7 +154,7 @@ const EstimationCalci = () => {
             Name of Grover<span className="text-red-500">*</span>
           </label>
           <Input
-            className="mb-10 mt-2 md:w-1/2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]"
+            className="mb-10 mt-2 lg:w-1/2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]"
             type="text"
             placeholder="Enter Name"
             id="groverName"
@@ -165,7 +165,7 @@ const EstimationCalci = () => {
             Address<span className="text-red-500">*</span>
           </label>
           <Input
-            className="mb-10 mt-2 md:w-1/2  border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]"
+            className="mb-10 mt-2 lg:w-1/2  border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]"
             type="text"
             placeholder="Enter Address"
             id="groverAddress"
@@ -176,7 +176,7 @@ const EstimationCalci = () => {
             Phone Number<span className="text-red-500">*</span>
           </label>
           <Input
-            className="mb-20 mt-2  md:w-1/2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]"
+            className="mb-20 mt-2  lg:w-1/2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]"
             type="text"
             placeholder="Enter Phone Number"
             id="groverNumber"
@@ -209,7 +209,7 @@ const EstimationCalci = () => {
             Trellis Type<span className="text-red-500">*</span>
           </label>
           <Select value={trellisType} onValueChange={setTrellisType} required>
-            <SelectTrigger className="md:w-1/4 mb-10 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]">
+            <SelectTrigger className="lg:w-1/3 mb-10 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]">
               <SelectValue placeholder="Select Type" />
             </SelectTrigger>
             <SelectContent>
@@ -223,7 +223,7 @@ const EstimationCalci = () => {
             Wire Pattern<span className="text-red-500">*</span>
           </label>
           <Select value={wirePattern} onValueChange={setWirePattern} required>
-            <SelectTrigger className="md:w-1/4 mb-10 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]">
+            <SelectTrigger className="lg:w-1/3 mb-10 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]">
               <SelectValue placeholder="Select Pattern" />
             </SelectTrigger>
             <SelectContent>
@@ -242,7 +242,7 @@ const EstimationCalci = () => {
             onValueChange={setTrellisHeight}
             required
           >
-            <SelectTrigger className="md:w-1/4 mb-4 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]">
+            <SelectTrigger className="lg:w-1/3 mb-4 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]">
               <SelectValue placeholder="Select Height" />
             </SelectTrigger>
             <SelectContent>

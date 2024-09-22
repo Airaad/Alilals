@@ -14,12 +14,12 @@ const page = () => {
     <>
       <PageTitle pageTitle={""} />
       <OrchidSection />
-      <div className="relative w-full bg-gray-100 py-10 md:py-20 md:px-48 px-5">
+      <div className="relative w-full bg-gray-100 py-10 md:py-20 md:px-24 xl:px-48 px-5">
         <div className="grid md:grid-cols-[70%_30%] gap-16">
           <div>
             <EstimationCalci />
           </div>
-          <div className="md:flex flex-col">
+          <div className="flex flex-col items-center md:items-start">
             <img
               src="/assets/images/apples-1872997_1280.jpg"
               alt="error"

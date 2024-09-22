@@ -148,19 +148,19 @@ export default function BlogDetail() {
           ) : (
             <div className="flex flex-col items-center gap-8 lg:flex-row mt-6">
               {allBlogs.slice(0, 3).map((relatedBlog) => (
-                <div key={relatedBlog.id} className="w-full">
+                <div key={relatedBlog.id} className="w-full lg:w-1/3">
                   <Link href={`/blog/${relatedBlog.id}`}>
-                    <div className="bg-[#F6F4EC] text-[#202221] rounded-lg shadow-lg overflow-hidden">
+                    <div className="bg-[#F6F4EC] text-[#202221] rounded-lg shadow-lg overflow-hidden h-full">
                       <img
                         src={relatedBlog.imageUrl}
                         alt={relatedBlog.title}
                         className="w-full h-48 object-cover transform transition-transform duration-300 hover:scale-105"
                       />
-                      <div className="p-4">
+                      <div className="p-4 lg:h-[325px] xl:h-[250px] 2xl:h-[205px] flex flex-col flex-grow">
                         <h4 className="text-lg font-semibold mb-2">
                           {relatedBlog.title}
                         </h4>
-                        <p className="text-sm text-gray-600">
+                        <p className="text-sm text-gray-600 text-justify">
                           {relatedBlog.brief}
                         </p>
                       </div>

@@ -63,7 +63,7 @@ const ContactForm = () => {
       </div>
 
       {/* Form */}
-      <div className="relative z-10 bg-white p-8 md:p-12 rounded-lg shadow-lg w-full md:w-1/2">
+      <div className="relative z-10 bg-white p-8 md:p-12 rounded-lg shadow-lg w-full md:w-[70%] lg:w-1/2">
         <div className="flex gap-2 items-center justify-center">
           <RiLeafFill className="text-[#44A05B]" />
           <span className="text-[#44A05B]">Contact Us</span>

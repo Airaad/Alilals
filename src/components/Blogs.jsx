@@ -67,7 +67,7 @@ export default function Blogs() {
       <div
         style={backgroundStyle}
         id="blogs-section"
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center gap-8 bg-[#F6F4EC]"
+        className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 place-items-center gap-8 bg-[#F6F4EC]"
       >
         {currentBlogs.map((blog) => (
           <div
