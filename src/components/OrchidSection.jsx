@@ -1,6 +1,7 @@
 import React from "react";
 import { ButtonComponent } from "./ButtonComponent";
 import { FaShoppingBag } from "react-icons/fa";
+import Link from "next/link";
 
 const OrchidSection = () => {
   return (
@@ -20,7 +21,9 @@ const OrchidSection = () => {
         </div>
       </div>
       <div>
-        <ButtonComponent text="Buy Now" />
+        <Link href="/estimation-calculator">
+          <ButtonComponent text="Buy Now" />
+        </Link>
       </div>
     </div>
   );

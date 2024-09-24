@@ -30,7 +30,7 @@ const OurServices = () => {
               className="w-full h-64 object-cover rounded-md"
             />
             <h2 className="text-center text-2xl font-semibold text-white">
-              Title of Service
+              Orchard Care
             </h2>
           </div>
           <div className="h-[0.15rem] bg-[#44A05B] w-[80%] md:w-full " />
@@ -47,7 +47,7 @@ const OurServices = () => {
               className="w-full h-64 object-cover rounded-md"
             />
             <h2 className="text-center text-2xl font-semibold text-white">
-              Title of Service
+              Soil Testing
             </h2>
           </div>
           <div className="h-[0.15rem] bg-[#44A05B] w-[80%] md:w-full " />
@@ -64,7 +64,7 @@ const OurServices = () => {
               className="w-full h-64 object-cover rounded-md"
             />
             <h2 className="text-center text-2xl font-semibold text-white">
-              Title of Service
+              Orchard Infra
             </h2>
           </div>
           <div className="h-[0.15rem] bg-[#44A05B] w-[80%] md:w-full " />

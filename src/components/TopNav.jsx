@@ -11,7 +11,10 @@ const TopNav = () => {
   };
 
   return (
-    <div style={backgroundStyle} className="hidden md:flex h-11 bg-[#F6F4EC] ">
+    <div
+      style={backgroundStyle}
+      className="hidden md:flex h-11 mt-[55px] bg-[#F6F4EC] "
+    >
       <div
         className="bg-[#44A05B] md:w-5 lg:w-8 xl:w-28"
         style={{
@@ -39,14 +42,14 @@ const TopNav = () => {
           <div className="flex items-center gap-1">
             <IoCallOutline className="text-[#44A05B]" />
             <span className="text-[#636363] text-xs lg:text-sm font-semibold">
-              999 888 0000
+              0194-796-1490
             </span>
           </div>
 
           <div className="flex items-center gap-1">
             <CiMail className="text-[#44a05b]" />
             <span className="text-[#636363] text-xs lg:text-sm font-semibold">
-              example@gmail.com
+              info@alilals.com
             </span>
           </div>
         </div>

@@ -1,89 +1,81 @@
 "use client";
 import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination, Navigation } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
+import { FaYoutube } from "react-icons/fa";
 
 export function Testimonials() {
-  const slides = [
+  const videos = [
     {
       id: 1,
-      image:
-        "https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60",
-      quote:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam aliquam repellat laborum minima tempore deserunt explicabo placeat! Fugit, molestias nesciunt",
+      image: "https://img.youtube.com/vi/BnABcEtKFCA/hqdefault.jpg", // Replace VIDEO_ID2 with the actual YouTube video ID
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam aliquam repellat laborum minima tempore.",
       name: "John Doe",
       role: "Frontend Developer at Harud",
+      youtubeLink: "https://www.youtube.com/watch?v=VIDEO_ID1", // Replace with the actual video URL
     },
     {
       id: 2,
-      image:
-        "https://passport-photo.online/images/cms/prepare_light_b364e3ec37.webp?quality=80&format=webp&width=1920",
-      quote:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam aliquam repellat laborum minima tempore deserunt explicabo placeat! Fugit, molestias nesciunt",
+      image: "https://img.youtube.com/vi/C-FuoKqQ80M/hqdefault.jpg",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam aliquam repellat laborum minima tempore.",
       name: "Nisha",
       role: "Backend Developer at BEL",
+      youtubeLink: "https://www.youtube.com/watch?v=C-FuoKqQ80M",
     },
     {
       id: 3,
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjUlz1U0tD1XCrGV3h1cajmk1lhVFru9Qabg&s",
-      quote:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam aliquam repellat laborum minima tempore deserunt explicabo placeat! Fugit, molestias nesciunt",
+      image: "https://img.youtube.com/vi/VjpQ4D8wDpA/hqdefault.jpg",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam aliquam repellat laborum minima tempore.",
       name: "Alex",
       role: "Fullstack Developer at CyberSpark",
+      youtubeLink: "https://www.youtube.com/watch?v=VjpQ4D8wDpA",
     },
   ];
+
+  const backgroundStyle = {
+    backgroundColor: "#f6f4ec",
+    backgroundImage:
+      'url("https://www.transparenttextures.com/patterns/arches.png")',
+  };
+
   return (
-    <section className="px-6 py-14 md:py-16 ">
-      <div className="flex flex-col gap-1 items-center md:mb-16">
+    <section
+      style={backgroundStyle}
+      className="px-6 py-14 md:py-16 bg-[#F6F4EC]"
+    >
+      <div className="flex flex-col gap-1 items-center mb-16">
         <h1 className="text-2xl font-semibold">Testimonials</h1>
         <div className="h-[0.15rem] bg-[#44A05B] w-48 " />
       </div>
-      <Swiper
-        spaceBetween={0}
-        centeredSlides={true}
-        autoplay={{
-          delay: 2500,
-          disableOnInteraction: false,
-        }}
-        pagination={{
-          clickable: true,
-        }}
-        navigation={true}
-        modules={[Autoplay, Pagination, Navigation]}
-        className="mySwiper"
-      >
-        {slides.map((slide) => (
-          <SwiperSlide key={slide.id} className="px-16 py-16 md:px-10">
-            <div className="mx-auto max-w-4xl">
-              <div className="md:flex md:items-center md:justify-center md:space-x-14">
-                <div className="relative h-48 w-48 flex-shrink-0">
-                  <img
-                    className="relative h-48 w-48 rounded-full object-cover"
-                    src={slide.image}
-                    alt=""
-                  />
-                </div>
-
-                <div className="mt-10 md:mt-0">
-                  <blockquote>
-                    <p className="text-lg md:text-xl text-black">
-                      {slide.quote}
-                    </p>
-                  </blockquote>
-                  <p className="mt-7 text-lg font-semibold text-black">
-                    {slide.name}
-                  </p>
-                  <p className="mt-1 text-base text-gray-600">{slide.role}</p>
-                </div>
-              </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {videos.map((video) => (
+          <div key={video.id} className="bg-white rounded-lg shadow-lg p-4">
+            <a
+              href={video.youtubeLink}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                className="w-full h-52 object-cover rounded-t-lg"
+                src={video.image}
+                alt={video.name}
+              />
+            </a>
+            <div className="p-4">
+              <p className="mt-4 text-gray-700">{video.description}</p>
+              <a
+                href={video.youtubeLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-flex items-center text-red-500 font-semibold"
+              >
+                <FaYoutube className="mr-2" /> Watch Video
+              </a>
             </div>
-          </SwiperSlide>
+          </div>
         ))}
-      </Swiper>
+      </div>
     </section>
   );
 }

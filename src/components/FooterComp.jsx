@@ -10,7 +10,7 @@ const FooterComp = () => {
         <LuPhoneCall className="text-4xl text-white" />
         <div>
           <h2 className="text-lg font-semibold text-white">Phone</h2>
-          <span className="text-md text-white">999 888 0000</span>
+          <span className="text-md text-white">0194-796-1490</span>
         </div>
       </div>
 
@@ -26,7 +26,7 @@ const FooterComp = () => {
         <LuMailOpen className="text-4xl text-white" />
         <div>
           <h2 className="text-lg font-semibold text-white">Email</h2>
-          <span className="text-md text-white">example@gmail.com</span>
+          <span className="text-md text-white">info@alilals.com</span>
         </div>
       </div>
     </div>
