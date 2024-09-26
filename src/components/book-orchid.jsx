@@ -548,6 +548,14 @@ const bookOrchid = () => {
                   </TableRow>
                   <TableRow>
                     <TableCell className="font-medium text-green-700">
+                      Post Type
+                    </TableCell>
+                    <TableCell className="text-right text-green-700">
+                      {postType}
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-medium text-green-700">
                       Plant to Plant Distance
                     </TableCell>
                     <TableCell className="text-right text-green-700">
