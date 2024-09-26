@@ -7,7 +7,6 @@ import React from "react";
 const Contact = () => {
   return (
     <div>
-      <PageTitle pageTitle={""} />
       <ContactHero />
       <ContactInfo />
       <ContactForm />

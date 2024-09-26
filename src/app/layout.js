@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" style={appFont}>
       <body>
-      <StickyNav/>
+        <StickyNav />
         <TopNav />
         <Nav />
         {children}

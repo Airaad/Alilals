@@ -8,7 +8,6 @@ import React from "react";
 const About = () => {
   return (
     <div>
-      <PageTitle pageTitle={""} />
       <AboutHero />
       <AboutCompany />
       <FAQ />

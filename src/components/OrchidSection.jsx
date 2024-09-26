@@ -21,7 +21,7 @@ const OrchidSection = () => {
         </div>
       </div>
       <div>
-        <Link href="/estimation-calculator">
+        <Link href="/book-orchid">
           <ButtonComponent text="Buy Now" />
         </Link>
       </div>

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { BsFlower1 } from "react-icons/bs";
 
 const StickyNav = () => {
@@ -9,12 +10,12 @@ const StickyNav = () => {
           <span>Our Orchid Store</span>
         </div>
 
-        <a
-          href="/estimation-calculator"
+        <Link
+          href="/book-orchid"
           className="bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 text-transparent bg-clip-text font-bold px-4 py-2 border border-purple-500 rounded-full animate-pulse hover:shadow-lg"
         >
           Buy Orchids
-        </a>
+        </Link>
       </div>
     </div>
   );

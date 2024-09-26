@@ -4,7 +4,6 @@ import OurServices from "@/components/OurServices";
 import { Testimonials } from "@/components/Testmonials";
 import OrchidSection from "@/components/OrchidSection";
 
-
 const Home = () => {
   return (
     <main>
