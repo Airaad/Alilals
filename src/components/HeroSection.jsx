@@ -39,9 +39,9 @@ const HeroVideo = () => {
         Your browser does not support the video tag.
       </video>
 
-      <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50"></div>
+      <div className="absolute top-0 left-0 w-full h-full bg-black opacity-40"></div>
 
-      <Swiper
+      {/* <Swiper
         modules={[Autoplay, EffectFade]}
         effect="fade"
         autoplay={{ delay: 3000, disableOnInteraction: false }}
@@ -60,7 +60,7 @@ const HeroVideo = () => {
             </div>
           </SwiperSlide>
         ))}
-      </Swiper>
+      </Swiper> */}
     </div>
   );
 };
