@@ -1,4 +1,4 @@
-import BookOrchid from "@/components/book-orchid";
+import BookOrchid from "@/components/BookOrchid";
 import PageTitle from "@/components/PageTitle";
 import React from "react";
 
