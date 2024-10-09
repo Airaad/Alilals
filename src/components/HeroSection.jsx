@@ -35,7 +35,7 @@ const HeroVideo = () => {
         playsInline
         className="absolute top-0 left-0 w-full h-full object-cover"
       >
-        <source src="/assets/videos/Video Banner Stock Videos - Rural_ Farming_ Agricu(720P_HD).mp4" />
+        <source src="/assets/videos/Website Video (1).mp4" />
         Your browser does not support the video tag.
       </video>
 

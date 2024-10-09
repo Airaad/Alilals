@@ -28,15 +28,15 @@ const BlogHero = () => {
 
         <button
           onClick={scrollToBlogs}
-          className="flex items-center space-x-2 bg-[#44A05B] text-white text-lg px-8 py-4 rounded-full shadow-lg hover:shadow-xl hover:from-green-600 hover:via-green-700 hover:to-green-800 transition-transform transform hover:scale-105 focus:outline-none"
+          className="flex items-center space-x-2 bg-[#44A05B] text-white text-lg font-medium px-8 py-4 rounded-full shadow-lg hover:shadow-xl hover:from-green-600 hover:via-green-700 hover:to-green-800 transition-transform transform hover:scale-105 focus:outline-none"
         >
           <span className="font-medium">Explore</span>
           <FaArrowDown className="text-white animate-bounce-slow" />
         </button>
       </div>
 
-      <div className="absolute top-0 left-0 w-0 h-0 border-t-[90px] border-t-[#44A05B] border-r-[70px] border-r-transparent"></div>
-      <div className="absolute bottom-0 right-0 w-0 h-0 border-b-[90px] border-b-[#44A05B] border-l-[70px] border-l-transparent"></div>
+      <div className="absolute top-0 left-0 w-0 h-0 border-t-[90px] border-t-[#193831] border-r-[70px] border-r-transparent"></div>
+      <div className="absolute bottom-0 right-0 w-0 h-0 border-b-[90px] border-b-[#193831] border-l-[70px] border-l-transparent"></div>
     </div>
   );
 };

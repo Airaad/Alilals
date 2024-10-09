@@ -6,7 +6,7 @@ import Link from "next/link";
 
 const AboutCompany = () => {
   return (
-    <div className="flex flex-col lg:flex-row items-center lg:items-start md:space-x-8 py-12 px-6 bg-[#F6F4EC] md:px-20">
+    <div className="flex flex-col lg:flex-row items-center lg:items-start md:space-x-8 py-12 px-6 bg-[#F6F2EF] md:px-20">
       <div className="lg:w-[30%] md:w-[50%] w-full mb-6 lg:mb-0">
         <img
           src="/assets/images/pexels-thealmani-19447958.jpg"

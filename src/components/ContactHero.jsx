@@ -11,9 +11,9 @@ const ContactHero = () => {
         </h1>
       </div>
 
-      <div className="absolute top-0 left-0 w-0 h-0 border-t-[70px] border-t-[#44A05B] border-r-[50px] border-r-transparent"></div>
+      <div className="absolute top-0 left-0 w-0 h-0 border-t-[70px] border-t-[#193831] border-r-[50px] border-r-transparent"></div>
 
-      <div className="absolute bottom-0 right-0 w-0 h-0 border-b-[70px] border-b-[#44A05B] border-l-[50px] border-l-transparent"></div>
+      <div className="absolute bottom-0 right-0 w-0 h-0 border-b-[70px] border-b-[#193831] border-l-[50px] border-l-transparent"></div>
     </div>
   );
 };

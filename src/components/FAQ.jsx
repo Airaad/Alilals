@@ -40,13 +40,13 @@ const FAQ = () => {
   ];
 
   return (
-    <div className="flex flex-col-reverse items-center lg:items-start md:justify-between md:px-12 lg:flex-row py-12">
+    <div className="bg-[#142827] flex flex-col-reverse items-center lg:items-start md:justify-between md:px-12 lg:flex-row py-12">
       <div className="w-full lg:w-1/2 px-6 pl-8">
         <div className="flex gap-2 items-center">
           <RiLeafFill className="text-[#44A05B]" />
           <span className="text-[#44A05B]">FAQ</span>
         </div>
-        <h2 className="text-4xl text-[#122F2A] font-bold mb-4">
+        <h2 className="text-4xl text-[#44A05B] font-bold mb-4">
           Frequently Asked Questions
         </h2>
         <p className="mb-8 text-lg text-[#636363]">

@@ -4,12 +4,6 @@ import { useEffect, useState } from "react";
 import { getAllBlogs } from "../../firebase/blogs/read";
 
 export default function Blogs() {
-  const backgroundStyle = {
-    backgroundColor: "#f6f4ec",
-    backgroundImage:
-      'url("https://www.transparenttextures.com/patterns/arches.png")',
-  };
-
   const [blogs, setblogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
@@ -63,11 +57,10 @@ export default function Blogs() {
   }
 
   return (
-    <div style={backgroundStyle} className="p-6">
+    <div className="p-6 bg-[#142827]">
       <div
-        style={backgroundStyle}
         id="blogs-section"
-        className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 place-items-center gap-8 bg-[#F6F4EC]"
+        className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 place-items-center gap-8 bg-[#142827]"
       >
         {currentBlogs.map((blog) => (
           <div
@@ -122,7 +115,7 @@ export default function Blogs() {
         >
           Previous
         </button>
-        <span className="text-lg">
+        <span className="text-lg text-white">
           Page {currentPage} of {totalPages}
         </span>
         <button

@@ -5,7 +5,7 @@ import { LuMailOpen } from "react-icons/lu";
 
 const FooterComp = () => {
   return (
-    <div className='flex flex-col md:flex-row  items-center md:justify-evenly bg-green-500 bg-[url("https://www.transparenttextures.com/patterns/cartographer.png")]'>
+    <div className='flex flex-col md:flex-row  items-center md:justify-evenly bg-green-500'>
       <div className="flex items-center justify-center gap-5  w-80 h-36">
         <LuPhoneCall className="text-4xl text-white" />
         <div>

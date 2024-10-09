@@ -26,7 +26,7 @@ const AboutHistory = () => {
   ];
 
   return (
-    <div className="py-12 px-6 bg-gray-100 md:px-20">
+    <div className="py-12 px-6 bg-[#F6F2EF] md:px-20">
       <div className="flex gap-2 items-center">
         <RiLeafFill className="text-[#44A05B]" />
         <span className="text-[#44A05B]">History</span>
