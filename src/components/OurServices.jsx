@@ -1,11 +1,8 @@
 "use client";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
-import { useInView } from "react-intersection-observer";
+import React from "react";
 
 const OurServices = () => {
-  const [visibleSections, setVisibleSections] = useState([false, false, false]);
-
   const sections = [
     {
       title: "Plantation",
@@ -27,37 +24,6 @@ const OurServices = () => {
     },
   ];
 
-  // Use the `useInView` hook for each section and store the refs in an array
-  const inViewRefs = sections.map(() => useInView({ triggerOnce: false, threshold: 0.1 }));
-
-  const handleVisibilityChange = (index) => {
-    setVisibleSections((prev) => {
-      const newVisible = [...prev];
-      newVisible[index] = true;
-      return newVisible;
-    });
-  };
-
-  useEffect(() => {
-    // Set a timeout for each section's visibility change based on its index
-    const timeouts = inViewRefs.map(([ref, inView], index) => {
-      if (inView) {
-        const timeout = setTimeout(() => {
-          handleVisibilityChange(index);
-        }, index * 200); // Delay for each section based on index
-        return timeout;
-      }
-      return null;
-    });
-
-    // Cleanup timeouts on unmount
-    return () => {
-      timeouts.forEach((timeout) => {
-        if (timeout) clearTimeout(timeout);
-      });
-    };
-  }, [inViewRefs]);
-
   return (
     <div className="px-12 py-16 bg-[#142827]">
       <div className="flex flex-col justify-center items-center gap-5 mb-16">
@@ -66,59 +32,39 @@ const OurServices = () => {
             Our Services
           </h1>
           <p className="text-lg text-gray-300 font-light">
-            Delivering sustainability through innovation in orchard care and farming.
+            Delivering sustainability through innovation in orchard care and
+            farming.
           </p>
         </div>
       </div>
 
       <div className="flex flex-col lg:flex-row w-full gap-16 lg:p-8 p-5 lg:gap-32 mx-auto">
-        {sections.map((section, index) => {
-          const [ref, inView] = inViewRefs[index];
-
-          useEffect(() => {
-            if (inView) {
-              handleVisibilityChange(index);
-            } else {
-              setVisibleSections((prev) => {
-                const newVisible = [...prev];
-                newVisible[index] = false; // Reset the visibility state
-                return newVisible;
-              });
-            }
-          }, [inView, index]);
-
-          return (
-            <div
-              ref={ref}
-              key={index}
-              className={`flex flex-1 flex-col gap-6 justify-between items-center transition-opacity duration-500 transform ${
-                visibleSections[index]
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-20"
-              }`}
-            >
-              <div className="flex flex-col gap-4 items-center text-center">
-                <Image
-                  src={section.imgSrc}
-                  alt={section.title}
-                  width={200}
-                  height={200}
-                  className="object-cover w-40 h-40 md:w-52 md:h-52 rounded-full border-4 border-[#44A05B] hover:scale-110 hover:border-white transition-transform duration-300 shadow-lg"
-                />
-                <h2 className="text-2xl font-semibold text-white">
-                  {section.title}
-                </h2>
-                <p className="text-sm text-[#a9b3b1] max-w-xs">
-                  {section.description}
-                </p>
-              </div>
-
-              <button className="px-8 py-3 bg-[#44A05B] text-white text-lg font-medium rounded-full shadow-lg hover:bg-white hover:text-[#44A05B] transition-colors duration-300">
-                Discover More
-              </button>
+        {sections.map((section, index) => (
+          <div
+            key={index}
+            className="flex flex-1 flex-col gap-6 justify-between items-center"
+          >
+            <div className="flex flex-col gap-4 items-center text-center">
+              <Image
+                src={section.imgSrc}
+                alt={section.title}
+                width={200}
+                height={200}
+                className="object-cover w-40 h-40 md:w-52 md:h-52 rounded-full border-4 border-[#44A05B] hover:scale-110 hover:border-white transition-transform duration-300 shadow-lg"
+              />
+              <h2 className="text-2xl font-semibold text-white">
+                {section.title}
+              </h2>
+              <p className="text-sm text-[#a9b3b1] max-w-xs">
+                {section.description}
+              </p>
             </div>
-          );
-        })}
+
+            <button className="px-8 py-3 bg-[#44A05B] text-white text-lg font-medium rounded-full shadow-lg hover:bg-white hover:text-[#44A05B] transition-colors duration-300">
+              Discover More
+            </button>
+          </div>
+        ))}
       </div>
     </div>
   );
