@@ -134,7 +134,7 @@ export default function BlogDetail() {
       </div>
 
       {/* Suggested Blogs */}
-      <div className="bg-[#202221] bg-[url('https://www.transparenttextures.com/patterns/cartographer.png')] text-white py-8 mt-12">
+      <div className="bg-[#142827] text-white py-8 mt-12">
         <div className="container mx-auto px-6 lg:px-12">
           <h3 className="text-2xl font-semibold">
             Liked this blog? Check out more articles:

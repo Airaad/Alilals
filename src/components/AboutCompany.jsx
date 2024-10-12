@@ -20,7 +20,7 @@ const AboutCompany = () => {
           <RiLeafFill className="text-[#44A05B]" />
           <span className="text-[#44A05B]">Who We Are</span>
         </div>
-        <h2 className="text-4xl font-bold text-[#122F2A] mb-4">
+        <h2 className="text-4xl font-bold text-[#1A3A32] mb-4">
           Welcome to AlilasAgrico Pvt. Ltd
         </h2>
         <div className="mb-6">

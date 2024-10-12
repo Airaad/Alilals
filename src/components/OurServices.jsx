@@ -90,15 +90,13 @@ const OurServices = () => {
                 <h2 className="text-2xl font-semibold text-white">{section.title}</h2>
                 <p className="text-sm text-[#a9b3b1] max-w-xs">{section.description}</p>
               </div>
+    
+              <button className="px-8 py-3 bg-[#44A05B] text-white text-lg font-medium rounded-full shadow-lg hover:bg-white hover:text-[#44A05B] transition-colors duration-300">
+                Discover More
+              </button>
             </div>
           );
         })}
-      </div>
-
-      <div className="flex justify-center mt-12">
-        <button className="px-8 py-3 bg-[#44A05B] text-white text-lg font-medium rounded-full shadow-lg hover:bg-white hover:text-[#44A05B] transition-colors duration-300">
-          Discover More
-        </button>
       </div>
     </div>
   );

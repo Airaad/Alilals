@@ -31,7 +31,7 @@ const AboutHistory = () => {
         <RiLeafFill className="text-[#44A05B]" />
         <span className="text-[#44A05B]">History</span>
       </div>
-      <h2 className="text-4xl font-bold  mb-4">Our History</h2>
+      <h2 className="text-4xl font-bold text-[#1A3A32]  mb-4">Our History</h2>
       <div className="mb-6">
         <p className="text-md text-[#636363] mb-4">
           Our journey began with a vision to innovate and lead in our industry.
@@ -41,11 +41,11 @@ const AboutHistory = () => {
         <div className="h-[0.09rem] bg-[#44A05B] w-full " />
       </div>
 
-      <div className="relative border-l-4 border-green-500 ml-4">
+      <div className="relative border-l-4 border-[#1A3A32] ml-4">
         {historyData.map((item, index) => (
           <div key={index} className="mb-8 ml-6">
             {/* Timeline Marker */}
-            <div className="absolute w-11 h-11 bg-green-500 rounded-full -left-6 flex items-center justify-center text-white font-semibold">
+            <div className="absolute w-11 h-11 bg-[#1A3A32] rounded-full -left-6 flex items-center justify-center text-white font-semibold">
               {item.year}
             </div>
 

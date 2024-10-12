@@ -2,13 +2,13 @@ import React from "react";
 import HeroSection from "@/components/HeroSection";
 import OurServices from "@/components/OurServices";
 import { Testimonials } from "@/components/Testmonials";
-import OrchidSection from "@/components/OrchidSection";
+import GrowWithUs from "@/components/GrowWithUs";
 
 const Home = () => {
   return (
     <main>
       <HeroSection />
-      <OrchidSection />
+      <GrowWithUs />
       <OurServices />
       <Testimonials />
     </main>

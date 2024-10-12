@@ -23,7 +23,7 @@ export default function Nav() {
   const pathname = usePathname();
 
   return (
-    <header className="h-28 md:m-0 bg-[#F6F2EF]">
+    <header className="h-28 md:m-0 sticky top-0 bg-[#F6F2EF] z-20">
       <nav
         aria-label="Global"
         className="mx-auto flex max-w-7xl items-center justify-between p-8 pl-0 md:p-8 md:pl-3"
@@ -50,11 +50,12 @@ export default function Nav() {
                 <style></style>
                 <use id="Background" href="#img1" x="0" y="0" />
               </svg>
+              <div className='flex flex-col'>
               <h2 className="text-3xl font-semibold mt-2 text-[#035803] leading-none">
-                Alilas
-                <br />
-                <span className="ml-5 md:ml-10">Agrico</span>
+                Alilas Agrico
               </h2>
+              <span className="text-xs font-medium text-gray-500">Private Limited</span>
+              </div>
             </div>
           </Link>
         </div>
@@ -123,7 +124,7 @@ export default function Nav() {
         <Dialog
           open={mobileMenuOpen}
           onClose={() => setMobileMenuOpen(false)}
-          className="fixed inset-0 z-10 overflow-hidden"
+          className="fixed inset-0 z-40 overflow-hidden"
         >
           <DialogPanel className="fixed inset-y-0 left-0 z-20 w-[60%] max-w-sm overflow-y-auto bg-[#142827] px-7 py-7">
             <div className="flex items-center justify-between">

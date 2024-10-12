@@ -49,7 +49,7 @@ const FAQ = () => {
         <h2 className="text-4xl text-[#44A05B] font-bold mb-4">
           Frequently Asked Questions
         </h2>
-        <p className="mb-8 text-lg text-[#636363]">
+        <p className="mb-8 text-lg text-white">
           Learn more about our agriculture company through these common
           questions.
         </p>
@@ -59,7 +59,7 @@ const FAQ = () => {
           <div key={index} className="mb-4">
             <button
               onClick={() => toggleQuestion(index)}
-              className="w-full flex justify-between items-center py-3 px-4 text-left bg-[#F6F4EC] rounded-md hover:bg-[#44A05B] transition duration-300"
+              className="w-full flex justify-between items-center py-3 px-4 text-left bg-[#F6F4EC] rounded-md hover:bg-gray-300 transition duration-300"
             >
               <span className="text-lg text-[#122F2A] font-medium">
                 {faq.question}
@@ -75,7 +75,7 @@ const FAQ = () => {
                 activeIndex === index ? "max-h-40" : "max-h-0"
               }`}
             >
-              <p className="p-4 text-[#636363]">{faq.answer}</p>
+              <p className="p-4 text-white">{faq.answer}</p>
             </div>
           </div>
         ))}
