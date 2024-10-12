@@ -27,6 +27,9 @@ const OurServices = () => {
     },
   ];
 
+  // Use the `useInView` hook for each section and store the refs in an array
+  const inViewRefs = sections.map(() => useInView({ triggerOnce: false, threshold: 0.1 }));
+
   const handleVisibilityChange = (index) => {
     setVisibleSections((prev) => {
       const newVisible = [...prev];
@@ -34,6 +37,26 @@ const OurServices = () => {
       return newVisible;
     });
   };
+
+  useEffect(() => {
+    // Set a timeout for each section's visibility change based on its index
+    const timeouts = inViewRefs.map(([ref, inView], index) => {
+      if (inView) {
+        const timeout = setTimeout(() => {
+          handleVisibilityChange(index);
+        }, index * 200); // Delay for each section based on index
+        return timeout;
+      }
+      return null;
+    });
+
+    // Cleanup timeouts on unmount
+    return () => {
+      timeouts.forEach((timeout) => {
+        if (timeout) clearTimeout(timeout);
+      });
+    };
+  }, [inViewRefs]);
 
   return (
     <div className="px-12 py-16 bg-[#142827]">
@@ -43,27 +66,19 @@ const OurServices = () => {
             Our Services
           </h1>
           <p className="text-lg text-gray-300 font-light">
-            Delivering sustainability through innovation in orchard care and
-            farming.
+            Delivering sustainability through innovation in orchard care and farming.
           </p>
         </div>
       </div>
 
       <div className="flex flex-col lg:flex-row w-full gap-16 lg:p-8 p-5 lg:gap-32 mx-auto">
         {sections.map((section, index) => {
-          const [ref, inView] = useInView({
-            triggerOnce: false, // Allow re-triggering
-            threshold: 0.1, // Trigger when 10% of the element is in view
-          });
+          const [ref, inView] = inViewRefs[index];
 
           useEffect(() => {
             if (inView) {
-              const timeout = setTimeout(() => {
-                handleVisibilityChange(index);
-              }, index * 100); // Delay for each section based on index
-              return () => clearTimeout(timeout); // Cleanup timeout on unmount
+              handleVisibilityChange(index);
             } else {
-              // Reset visibility when it goes out of view
               setVisibleSections((prev) => {
                 const newVisible = [...prev];
                 newVisible[index] = false; // Reset the visibility state
