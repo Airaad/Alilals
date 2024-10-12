@@ -18,7 +18,7 @@ export function Footer() {
             <div className="flex h-full flex-col justify-between">
               <div className="mb-4 inline-flex items-center">
                 {/* SVG Logo */}
-                <img src='/assets/logo/logo.png' className='h-16 w-16'/>
+                <img src="/assets/logo/logo.png" className="h-16 w-16" />
                 <span className="ml-4 text-2xl font-bold text-white">
                   Alilals Agrico Private Limited
                 </span>

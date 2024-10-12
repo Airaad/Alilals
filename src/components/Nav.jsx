@@ -50,11 +50,13 @@ export default function Nav() {
                 <style></style>
                 <use id="Background" href="#img1" x="0" y="0" />
               </svg>
-              <div className='flex flex-col'>
-              <h2 className="text-3xl font-semibold mt-2 text-[#035803] leading-none">
-                Alilas Agrico
-              </h2>
-              <span className="text-xs font-medium text-gray-500">Private Limited</span>
+              <div className="flex flex-col">
+                <h2 className="text-3xl font-semibold mt-2 text-[#035803] leading-none">
+                  Alilas Agrico
+                </h2>
+                <span className="text-xs font-medium text-[#035833]">
+                  Private Limited
+                </span>
               </div>
             </div>
           </Link>
@@ -73,9 +75,9 @@ export default function Nav() {
         <PopoverGroup className="hidden md:flex md:gap-x-8 lg:gap-x-12">
           <Link
             href="/"
-            className={`text-md font-semibold leading-6 text-[#636363] hover:text-green-500 relative inline-block 
+            className={`text-md font-semibold leading-6 text-[#636363] hover:text-green-700 relative inline-block 
               before:content-[''] before:absolute before:-bottom-1 before:left-0 before:right-0 
-              before:h-0.5 before:bg-green-500 before:scale-x-0 
+              before:h-0.5 before:bg-green-700 before:scale-x-0 
               hover:before:scale-x-100 transition-transform duration-300 ${pathname == "/" ? "text-green-700" : ""}`}
           >
             Home
@@ -83,18 +85,18 @@ export default function Nav() {
 
           <Link
             href="/about"
-            className={`text-md font-semibold leading-6 text-[#636363] hover:text-green-500 relative inline-block 
+            className={`text-md font-semibold leading-6 text-[#636363] hover:text-green-700 relative inline-block 
               before:content-[''] before:absolute before:-bottom-1 before:left-0 before:right-0 
-              before:h-0.5 before:bg-green-500 before:scale-x-0 
+              before:h-0.5 before:bg-green-700 before:scale-x-0 
               hover:before:scale-x-100 transition-transform duration-300 ${pathname == "/about" ? "text-green-700" : ""}`}
           >
             About
           </Link>
           <Link
             href="/contact"
-            className={`text-md font-semibold leading-6 text-[#636363] hover:text-green-500 relative inline-block 
+            className={`text-md font-semibold leading-6 text-[#636363] hover:text-green-700 relative inline-block 
               before:content-[''] before:absolute before:-bottom-1 before:left-0 before:right-0 
-              before:h-0.5 before:bg-green-500 before:scale-x-0 
+              before:h-0.5 before:bg-green-700 before:scale-x-0 
               hover:before:scale-x-100 transition-transform duration-300 ${pathname == "/contact" ? "text-green-700" : ""}`}
           >
             Contact
@@ -102,9 +104,9 @@ export default function Nav() {
 
           <Link
             href="/blog"
-            className={`text-md font-semibold leading-6 text-[#636363] hover:text-green-500 relative inline-block 
+            className={`text-md font-semibold leading-6 text-[#636363] hover:text-green-700 relative inline-block 
               before:content-[''] before:absolute before:-bottom-1 before:left-0 before:right-0 
-              before:h-0.5 before:bg-green-500 before:scale-x-0 
+              before:h-0.5 before:bg-green-700 before:scale-x-0 
               hover:before:scale-x-100 transition-transform duration-300 ${pathname == "/blog" ? "text-green-700" : ""}`}
           >
             Blogs

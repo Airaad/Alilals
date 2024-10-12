@@ -2,7 +2,7 @@ import React from "react";
 import { IoCallOutline } from "react-icons/io5";
 import { CiMail } from "react-icons/ci";
 import { ClockIcon, MapPinIcon } from "@heroicons/react/24/outline";
-import { GiAppleCore } from "react-icons/gi"; 
+import { GiAppleCore } from "react-icons/gi";
 
 const TopNav = () => {
   return (
@@ -23,7 +23,6 @@ const TopNav = () => {
             </span>
           </div>
         </div>
-
 
         <div className="flex items-center justify-center">
           <GiAppleCore className="text-[#44A05B] h-6 w-6" aria-hidden="true" />

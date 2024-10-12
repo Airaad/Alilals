@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
@@ -43,7 +43,8 @@ const OurServices = () => {
             Our Services
           </h1>
           <p className="text-lg text-gray-300 font-light">
-            Delivering sustainability through innovation in orchard care and farming.
+            Delivering sustainability through innovation in orchard care and
+            farming.
           </p>
         </div>
       </div>
@@ -76,7 +77,9 @@ const OurServices = () => {
               ref={ref}
               key={index}
               className={`flex flex-1 flex-col gap-6 justify-between items-center transition-opacity duration-500 transform ${
-                visibleSections[index] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
+                visibleSections[index]
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-20"
               }`}
             >
               <div className="flex flex-col gap-4 items-center text-center">
@@ -87,10 +90,14 @@ const OurServices = () => {
                   height={200}
                   className="object-cover w-40 h-40 md:w-52 md:h-52 rounded-full border-4 border-[#44A05B] hover:scale-110 hover:border-white transition-transform duration-300 shadow-lg"
                 />
-                <h2 className="text-2xl font-semibold text-white">{section.title}</h2>
-                <p className="text-sm text-[#a9b3b1] max-w-xs">{section.description}</p>
+                <h2 className="text-2xl font-semibold text-white">
+                  {section.title}
+                </h2>
+                <p className="text-sm text-[#a9b3b1] max-w-xs">
+                  {section.description}
+                </p>
               </div>
-    
+
               <button className="px-8 py-3 bg-[#44A05B] text-white text-lg font-medium rounded-full shadow-lg hover:bg-white hover:text-[#44A05B] transition-colors duration-300">
                 Discover More
               </button>

@@ -265,25 +265,25 @@ const BookOrchid = () => {
         requirements, and the calculator will provide an almost precise quote.
       </div>
 
-      <div className="md:h-[47rem] bg-green-50 rounded-xl relative">
+      <div className="md:h-[47rem] bg-[#F6F2EF] rounded-xl relative">
         <div className="flex bg-white border rounded-t-xl mb-10">
           <div
-            className={`text-xs md:text-sm px-5 py-3 border border-[#44A05B] rounded-tl-xl ${formStage === 1 ? "bg-green-400" : "bg-white"}`}
+            className={`text-xs md:text-sm px-5 py-3 border border-[#035803] rounded-tl-xl ${formStage === 1 ? "bg-[#035803] text-white" : "bg-white"}`}
           >
             Grover Details
           </div>
           <div
-            className={`text-xs md:text-sm px-5 py-3 border border-[#44A05B] ${formStage === 2 ? "bg-green-400" : "bg-white"}`}
+            className={`text-xs md:text-sm px-5 py-3 border border-[#035803] ${formStage === 2 ? "bg-[#035803] text-white" : "bg-white"}`}
           >
             Land Details
           </div>
           <div
-            className={`text-xs md:text-sm px-5 py-3 border border-[#44A05B] ${formStage === 3 ? "bg-green-400" : "bg-white"}`}
+            className={`text-xs md:text-sm px-5 py-3 border border-[#035803] ${formStage === 3 ? "bg-[#035803] text-white" : "bg-white"}`}
           >
             Plantation Details
           </div>
           <div
-            className={`rounded-tr-xl md:rounded-none text-xs md:text-sm px-5 py-3 border border-[#44A05B] ${formStage === 4 ? "bg-green-400" : "bg-white"}`}
+            className={`rounded-tr-xl md:rounded-none text-xs md:text-sm px-5 py-3 border border-[#035803] ${formStage === 4 ? "bg-[#035803] text-white" : "bg-white"}`}
           >
             Total Cost
           </div>
@@ -451,10 +451,10 @@ const BookOrchid = () => {
         >
           <div className="flex justify-center md:justify-around items-center">
             <div className="flex items-center justify-center w-20 h-20 md:w-32 md:h-32 rounded-full border-2 border-green-600 mr-5">
-              <FaWallet className="text-4xl md:text-7xl text-green-500" />
+              <FaWallet className="text-4xl md:text-7xl text-[#44A05B]" />
             </div>
             <div className="flex items-end flex-col">
-              <span className="text-3xl md:text-5xl text-green-500">
+              <span className="text-3xl md:text-5xl text-[#44A05B]">
                 {formatAmount(totalPrice())}
               </span>
             </div>
@@ -463,7 +463,7 @@ const BookOrchid = () => {
             <AlertDialogTrigger asChild>
               <div className="text-center">
                 <button
-                  className={`mt-14 text-2xl md:text-4xl bg-green-500 hover:bg-green-600 text-white font-semibold py-4 px-6 rounded-lg shadow-md transition duration-300 ease-in-out 
+                  className={`mt-14 text-2xl md:text-4xl bg-[#44A05B] hover:bg-green-600 text-white font-semibold py-4 px-6 rounded-lg shadow-md transition duration-300 ease-in-out 
                   hover:shadow-[0_0_15px_5px_rgba(34,197,94,0.8)] focus:ring-4 focus:ring-green-300 neon-green`}
                 >
                   Book Orchid

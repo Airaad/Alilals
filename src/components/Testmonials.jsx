@@ -62,7 +62,9 @@ export function Testimonials() {
             </a>
             <div className="p-6">
               <p className="text-gray-700 mb-4 text-sm">
-                <FaQuoteLeft className='text-xl font-bold text-[#C83219] inline-block mr-2'/>{video.description}<FaQuoteRight className='text-xl font-bold text-[#C83219] inline-block ml-2'/>
+                <FaQuoteLeft className="text-xl font-bold text-[#C83219] inline-block mr-2" />
+                {video.description}
+                <FaQuoteRight className="text-xl font-bold text-[#C83219] inline-block ml-2" />
               </p>
               <a
                 href={video.youtubeLink}

@@ -6,7 +6,7 @@ const page = () => {
   return (
     <>
       <div className="relative w-full bg-white py-10 md:py-20 md:px-24 xl:px-48 px-5">
-        <h1 className="text-3xl md:text-5xl text-center mb-10 md:mb-16 text-green-600">
+        <h1 className="text-3xl md:text-5xl text-center mb-10 md:mb-16 text-[#44A05B]">
           Fill the form to book your orchid
         </h1>
         <div className="grid md:grid-cols-[70%_30%] gap-16">
