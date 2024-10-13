@@ -1,5 +1,4 @@
-import BookOrchid from "@/components/BookOrchid";
-import PageTitle from "@/components/PageTitle";
+import BookExpertCall from "@/components/BookExpertCall";
 import React from "react";
 
 const page = () => {
@@ -7,11 +6,11 @@ const page = () => {
     <>
       <div className="relative w-full bg-white py-10 md:py-20 md:px-24 xl:px-48 px-5">
         <h1 className="text-3xl md:text-5xl text-center mb-10 md:mb-16 text-[#44A05B]">
-          Fill the form to book your orchard
+          Fill the form to talk to our expert
         </h1>
         <div className="grid md:grid-cols-[70%_30%] gap-16">
           <div>
-            <BookOrchid />
+            <BookExpertCall />
           </div>
           <div className="flex flex-col items-center md:items-start">
             <img

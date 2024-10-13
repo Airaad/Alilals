@@ -55,7 +55,7 @@ export function Testimonials() {
               className="block"
             >
               <img
-                className="w-full h-52 object-cover rounded-t-lg transition-transform duration-300 hover:scale-110"
+                className="w-full h-64 object-cover rounded-t-lg transition-transform duration-300 hover:scale-110"
                 src={video.image}
                 alt="Testimonial"
               />

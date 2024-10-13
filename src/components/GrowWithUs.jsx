@@ -15,11 +15,18 @@ export default function GrowWithUs() {
         <div className="grid grid-cols-1  lg:grid-cols-3 gap-8">
           {/* Book Your Orchard Card */}
           <div
-            className="relative bg-cover bg-center bg-no-repeat h-96 rounded-lg shadow-lg hover:shadow-xl transition-shadow overflow-hidden"
+            className="relative bg-cover bg-center bg-no-repeat h-96 rounded-lg shadow-lg hover:shadow-xl transition-shadow overflow-hidden group"
             style={{
               backgroundImage: "url('/assets/images/apples-1873078_1280.jpg')",
             }}
           >
+            <div
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-500 group-hover:scale-110"
+              style={{
+                backgroundImage:
+                  "url('/assets/images/apples-1873078_1280.jpg')",
+              }}
+            ></div>
             <div className="absolute inset-0 bg-black bg-opacity-50"></div>
             <div className="relative h-full flex flex-col justify-end p-6 text-left">
               <h3 className="text-2xl font-semibold text-white mb-4">
@@ -39,13 +46,21 @@ export default function GrowWithUs() {
 
           {/* Book Soil Test Card */}
           <div
-            className="relative bg-cover bg-center bg-no-repeat h-96 rounded-lg shadow-lg hover:shadow-xl transition-shadow overflow-hidden"
+            className="relative bg-cover bg-center bg-no-repeat h-96 rounded-lg shadow-lg hover:shadow-xl transition-shadow overflow-hidden group"
             style={{
               backgroundImage:
                 "url('/assets/images/ai-generated-8756079_1280.jpg')",
             }}
           >
+            <div
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-500 group-hover:scale-110"
+              style={{
+                backgroundImage:
+                  "url('/assets/images/ai-generated-8756079_1280.jpg')",
+              }}
+            ></div>
             <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+
             <div className="relative h-full flex flex-col justify-end p-6 text-left">
               <h3 className="text-2xl font-semibold text-white mb-4">
                 Book Soil Test
@@ -54,7 +69,7 @@ export default function GrowWithUs() {
                 Discover the health of your soil. Get detailed insights into its
                 nutrients and properties to grow the best crops.
               </p>
-              <Link href="">
+              <Link href="soil-test">
                 <button className="bg-[#44A05B] text-white font-medium py-2 px-5 rounded-full shadow-lg hover:bg-white hover:text-[#44A05B] transition-colors self-start">
                   Schedule Test
                 </button>
@@ -64,12 +79,19 @@ export default function GrowWithUs() {
 
           {/* Speak to Our Expert Card */}
           <div
-            className="relative bg-cover bg-center bg-no-repeat h-96 rounded-lg shadow-lg hover:shadow-xl transition-shadow overflow-hidden"
+            className="relative bg-cover bg-center bg-no-repeat h-96 rounded-lg shadow-lg hover:shadow-xl transition-shadow overflow-hidden group"
             style={{
               backgroundImage:
                 "url('/assets/images/call-center-8643477_1280.jpg')",
             }}
           >
+            <div
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-500 group-hover:scale-110"
+              style={{
+                backgroundImage:
+                  "url('/assets/images/call-center-8643477_1280.jpg')",
+              }}
+            ></div>
             <div className="absolute inset-0 bg-black bg-opacity-50"></div>
             <div className="relative h-full flex flex-col justify-end p-6 text-left">
               <h3 className="text-2xl font-semibold text-white mb-4">
@@ -79,7 +101,7 @@ export default function GrowWithUs() {
                 Have questions? Our seasoned experts are here to guide you on
                 best practices, soil health, and orchard management.
               </p>
-              <Link href="">
+              <Link href="expert">
                 <button className="bg-[#44A05B] text-white font-medium py-2 px-5 rounded-full shadow-lg hover:bg-white hover:text-[#44A05B] transition-colors self-start">
                   Talk to an Expert
                 </button>

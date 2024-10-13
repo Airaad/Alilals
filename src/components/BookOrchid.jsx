@@ -32,6 +32,7 @@ import {
 } from "@/components/ui/table";
 import { FaWallet } from "react-icons/fa";
 import { useRouter } from "next/navigation";
+import { ButtonComponent } from "./ButtonComponent";
 
 const BookOrchid = () => {
   const basicPrices = {
@@ -61,16 +62,17 @@ const BookOrchid = () => {
   const [plantToPlantDistance, setPlantToPlantDistance] = useState("");
   const [wirePattern, setWirePattern] = useState("");
   const [open, setOpen] = useState(false);
+  const [disableBookingBtn, setDisableBookingBtn] = useState(false);
+
+  const fillError = () => {
+    toast({
+      title: "Action required",
+      description: "Please fill out all required fields.",
+      className: "bg-red-500 text-white border border-red-700",
+    });
+  };
 
   const goToNext = () => {
-    const fillError = () => {
-      toast({
-        title: "Action required",
-        description: "Please fill out all required fields.",
-        className: "bg-red-500 text-white border border-red-700",
-      });
-    };
-
     if (formStage === 1 && (!groverAddress || !groverName || !groverNumber)) {
       fillError();
       return;
@@ -86,22 +88,23 @@ const BookOrchid = () => {
       });
       return;
     }
-    if (
-      formStage === 3 &&
-      (!rowToRowDistance ||
-        !poleToPoleDistance ||
-        !plantToPlantDistance ||
-        !wirePattern)
-    ) {
-      fillError();
-      return;
-    }
     setFormStage((prevStep) => Math.min(prevStep + 1, 4));
   };
 
   const goToPrev = () => setFormStage((prevStep) => Math.max(prevStep - 1, 1));
 
   const generateEstimation = () => {
+    if (
+      formStage === 3 &&
+      (!rowToRowDistance ||
+        !poleToPoleDistance ||
+        !plantToPlantDistance ||
+        !wirePattern ||
+        !postType)
+    ) {
+      fillError();
+      return;
+    }
     goToNext();
     toast({
       title: "Cost Calculated",
@@ -118,6 +121,7 @@ const BookOrchid = () => {
     setLandSizeMarlas("");
     setRowToRowDistance("");
     setPoleToPoleDistance("");
+    setPostType("");
     setPlantToPlantDistance("");
     setWirePattern("");
     toast({
@@ -226,6 +230,8 @@ const BookOrchid = () => {
       TotalCost: formatAmount(totalPrice()),
     }).toString();
 
+    setDisableBookingBtn(true);
+
     fetch(
       "https://script.google.com/macros/s/AKfycbw9wGaIkKb-opX2UzflE640b1LCNc61AAVwVdNpb3pc_X3g64vFI-5nNssZBilnvbRVmg/exec",
       {
@@ -237,6 +243,7 @@ const BookOrchid = () => {
       },
     )
       .then(() => {
+        setDisableBookingBtn(false);
         router.push("/");
         toast({
           title: "Booking Recorded",
@@ -245,6 +252,7 @@ const BookOrchid = () => {
         });
       })
       .catch((err) => {
+        setDisableBookingBtn(false);
         toast({
           title: "Failed to send booking",
           description: err.message,
@@ -266,7 +274,7 @@ const BookOrchid = () => {
       </div>
 
       <div className="md:h-[47rem] bg-[#F6F2EF] rounded-xl relative">
-        <div className="flex bg-white border rounded-t-xl mb-10">
+        <div className="grid grid-cols-4 bg-white border rounded-t-xl mb-10">
           <div
             className={`text-xs md:text-sm px-5 py-3 border border-[#035803] rounded-tl-xl ${formStage === 1 ? "bg-[#035803] text-white" : "bg-white"}`}
           >
@@ -283,7 +291,7 @@ const BookOrchid = () => {
             Plantation Details
           </div>
           <div
-            className={`rounded-tr-xl md:rounded-none text-xs md:text-sm px-5 py-3 border border-[#035803] ${formStage === 4 ? "bg-[#035803] text-white" : "bg-white"}`}
+            className={`rounded-tr-xl text-xs md:text-sm px-5 py-3 border border-[#035803] ${formStage === 4 ? "bg-[#035803] text-white" : "bg-white"}`}
           >
             Total Cost
           </div>
@@ -462,12 +470,10 @@ const BookOrchid = () => {
           <AlertDialog open={open} onOpenChange={setOpen}>
             <AlertDialogTrigger asChild>
               <div className="text-center">
-                <button
-                  className={`mt-14 text-2xl md:text-4xl bg-[#44A05B] hover:bg-green-600 text-white font-semibold py-4 px-6 rounded-lg shadow-md transition duration-300 ease-in-out 
-                  hover:shadow-[0_0_15px_5px_rgba(34,197,94,0.8)] focus:ring-4 focus:ring-green-300 neon-green`}
-                >
-                  Book Orchid
-                </button>
+                <ButtonComponent
+                  text={"Book Orchard"}
+                  disabled={disableBookingBtn}
+                />
 
                 <p className="mt-4 mb-64 md:mb-20 md:text-lg text-gray-600">
                   Click the button to book your orchid today!
@@ -475,23 +481,24 @@ const BookOrchid = () => {
               </div>
             </AlertDialogTrigger>
 
-            <AlertDialogContent className="sm:max-w-[425px] bg-green-50 border border-green-500">
+            <AlertDialogContent className="sm:max-w-[425px] bg-[#F6F2EF]">
               <AlertDialogHeader>
-                <AlertDialogTitle className="text-green-800">
+                <AlertDialogTitle className="text-[#035803]">
                   Confirm your details
                 </AlertDialogTitle>
               </AlertDialogHeader>
 
               <Table className="bg-white">
-                <TableCaption className="text-green-600">
-                  Please check the details carefully before booking.
+                <TableCaption className="text-green-700">
+                  Are you sure you want to book your orchard? Please review all
+                  details before confirming.
                 </TableCaption>
                 <TableHeader>
                   <TableRow>
-                    <TableHead className="w-[200px] text-green-800">
+                    <TableHead className="w-[200px] text-lg text-[#035803] font-bold">
                       Label
                     </TableHead>
-                    <TableHead className="text-right text-green-800">
+                    <TableHead className="text-right w-[200px] text-lg text-[#035803] font-bold">
                       Info
                     </TableHead>
                   </TableRow>
@@ -582,12 +589,12 @@ const BookOrchid = () => {
               </Table>
 
               <AlertDialogFooter>
-                <AlertDialogCancel className="bg-gray-500 hover:bg-green-50 text-white px-4 py-2 rounded-lg">
+                <AlertDialogCancel className="bg-gray-500 text-white font-medium  shadow-lg hover:bg-white hover:text-gray-500 transition-colors px-4 py-2 rounded-lg">
                   Cancel
                 </AlertDialogCancel>
                 <AlertDialogAction
                   onClick={bookingHandler}
-                  className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg"
+                  className="bg-[#44A05B] text-white font-medium  shadow-lg hover:bg-white hover:text-[#44A05B] transition-colors px-4 py-2 rounded-lg"
                 >
                   Confirm Booking
                 </AlertDialogAction>

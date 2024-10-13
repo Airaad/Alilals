@@ -61,7 +61,7 @@ const OurServices = () => {
             </div>
 
             <button className="px-8 py-3 bg-[#44A05B] text-white text-lg font-medium rounded-full shadow-lg hover:bg-white hover:text-[#44A05B] transition-colors duration-300">
-              Discover More
+              Explore Service
             </button>
           </div>
         ))}
