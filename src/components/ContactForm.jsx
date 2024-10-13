@@ -48,7 +48,7 @@ const ContactForm = () => {
     <div className="relative min-h-screen flex justify-center items-center py-16 px-8">
       <div className="absolute inset-0 w-full h-full">
         <div
-          className="absolute top-0 left-0 w-full h-full bg-[#44A05B]"
+          className="absolute top-0 left-0 w-full h-full bg-[#035833]"
           style={{
             clipPath: "polygon(0 0, 100% 0, 100% 50%, 0 100%)",
           }}
