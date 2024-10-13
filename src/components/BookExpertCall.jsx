@@ -114,9 +114,10 @@ const BookExpertCall = () => {
     <div>
       <div className="font-[Raleway] mb-10">
         <b>
-          Before we book your soil test, we need to know about your orchard?
+          Before we book your call with our expert, we need to know a little
+          about your?
         </b>{" "}
-        Fill this form so that we can understand your orchard better.
+        Fill this form so that we can contact you later.
       </div>
       <div className="md:h-[47rem] bg-[#F6F2EF] rounded-xl relative">
         <div className="grid grid-cols-3 bg-white border rounded-t-xl mb-10">
