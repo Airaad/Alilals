@@ -18,6 +18,7 @@ export default function GrowWithUs() {
             whileInView="visible"
             variants={fadeInUp}
             transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
           >
             Grow With Us
           </motion.h2>
