@@ -64,19 +64,19 @@ export default function Blogs() {
         {currentBlogs.map((blog) => (
           <div
             key={blog.id}
-            className="max-w-[400px] w-full flex flex-col justify-between border rounded-lg shadow-lg bg-[#1c2d34] hover:bg-[#233842] transition duration-300"
+            className="max-w-[400px] w-full h-[600px] flex flex-col justify-between border rounded-lg shadow-lg bg-[#1c2d34] hover:bg-[#233842] transition duration-300"
           >
             {/* Blog Image */}
             <div className="overflow-hidden rounded-t-lg">
               <img
                 src={blog.imageUrl}
                 alt={blog.title}
-                className="w-full h-60 object-cover transform transition-transform duration-300 hover:scale-105"
+                className="w-full h-[300px]  object-cover transform transition-transform duration-300 hover:scale-105"
               />
             </div>
 
             {/* Content */}
-            <div className="p-4 flex flex-col">
+            <div className="p-4 h-[300px] flex flex-col">
               <div className="flex items-center text-gray-400 text-xs mb-3">
                 {/* Date and Author Icons */}
                 <FaCalendarAlt className="mr-2" />

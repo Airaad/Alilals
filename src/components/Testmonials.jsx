@@ -2,8 +2,13 @@
 import React from "react";
 import { FaYoutube } from "react-icons/fa";
 import { GiPlantSeed } from "react-icons/gi"; // Importing an icon for a farming theme
-import { FaQuoteLeft } from "react-icons/fa";
-import { FaQuoteRight } from "react-icons/fa";
+import { FaQuoteLeft, FaQuoteRight } from "react-icons/fa";
+import { motion } from "framer-motion"; // Importing motion
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 },
+};
 
 export function Testimonials() {
   const videos = [
@@ -33,20 +38,36 @@ export function Testimonials() {
   return (
     <section className="px-6 py-16 md:py-20 bg-[#F6F2EF]">
       <div className="text-center mb-14">
-        <h1 className="text-5xl font-semibold text-[#44A05B] tracking-wide mb-2">
+        <motion.h1 
+          className="text-5xl font-semibold text-[#44A05B] tracking-wide mb-2" 
+          initial="hidden" 
+          whileInView="visible" 
+          variants={fadeInUp} 
+          transition={{ duration: 0.6 }}
+        >
           What People Say
           {/* <GiPlantSeed className="inline-block text-4xl text-[#388D4B]" /> */}
-        </h1>
-        <p className="text-lg text-gray-600">
+        </motion.h1>
+        <motion.p 
+          className="text-lg text-gray-600" 
+          initial="hidden" 
+          whileInView="visible" 
+          variants={fadeInUp} 
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
           Hear what our community has to say about our practices!
-        </p>
+        </motion.p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-        {videos.map((video) => (
-          <div
+        {videos.map((video, index) => (
+          <motion.div
             key={video.id}
             className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 transform hover:scale-105 relative overflow-hidden"
+            initial="hidden"
+            whileInView="visible"
+            variants={fadeInUp}
+            transition={{ duration: 0.6, delay: 0.4 + index * 0.2 }} // Staggered effect
           >
             <a
               href={video.youtubeLink}
@@ -75,7 +96,7 @@ export function Testimonials() {
                 <FaYoutube className="mr-2 text-xl" /> Watch Video
               </a>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </section>

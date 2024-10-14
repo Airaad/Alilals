@@ -1,24 +1,47 @@
+'use client'
 import Link from "next/link";
+import { motion } from "framer-motion";
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 },
+};
 
 export default function GrowWithUs() {
   return (
     <section className="bg-[#F6F2EF] py-12 px-10">
       <div className="container mx-auto text-center">
         <div className="mb-20 flex flex-col gap-2">
-          <h2 className="text-5xl font-semibold text-[#44A05B] tracking-wide">
+          <motion.h2 
+            className="text-5xl font-semibold text-[#44A05B] tracking-wide" 
+            initial="hidden" 
+            whileInView="visible" 
+            variants={fadeInUp} 
+            transition={{ duration: 0.6 }}
+          >
             Grow With Us
-          </h2>
-          <p className="text-lg text-gray-600">
+          </motion.h2>
+          <motion.p 
+            className="text-lg text-gray-600" 
+            initial="hidden" 
+            whileInView="visible" 
+            variants={fadeInUp} 
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
             Unlock the full potential of your orchard with our expert services.
-          </p>
+          </motion.p>
         </div>
-        <div className="grid grid-cols-1  lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Book Your Orchard Card */}
-          <div
+          <motion.div
             className="relative bg-cover bg-center bg-no-repeat h-96 rounded-lg shadow-lg hover:shadow-xl transition-shadow overflow-hidden group"
             style={{
               backgroundImage: "url('/assets/images/apples-1873078_1280.jpg')",
             }}
+            initial="hidden"
+            whileInView="visible"
+            variants={fadeInUp}
+            transition={{ duration: 0.6, delay: 0.4 }} // Delay for the first card
           >
             <div
               className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-500 group-hover:scale-110"
@@ -42,15 +65,19 @@ export default function GrowWithUs() {
                 </button>
               </Link>
             </div>
-          </div>
+          </motion.div>
 
           {/* Book Soil Test Card */}
-          <div
+          <motion.div
             className="relative bg-cover bg-center bg-no-repeat h-96 rounded-lg shadow-lg hover:shadow-xl transition-shadow overflow-hidden group"
             style={{
               backgroundImage:
                 "url('/assets/images/ai-generated-8756079_1280.jpg')",
             }}
+            initial="hidden"
+            whileInView="visible"
+            variants={fadeInUp}
+            transition={{ duration: 0.6, delay: 0.6 }} // Delay for the second card
           >
             <div
               className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-500 group-hover:scale-110"
@@ -75,15 +102,19 @@ export default function GrowWithUs() {
                 </button>
               </Link>
             </div>
-          </div>
+          </motion.div>
 
           {/* Speak to Our Expert Card */}
-          <div
+          <motion.div
             className="relative bg-cover bg-center bg-no-repeat h-96 rounded-lg shadow-lg hover:shadow-xl transition-shadow overflow-hidden group"
             style={{
               backgroundImage:
                 "url('/assets/images/call-center-8643477_1280.jpg')",
             }}
+            initial="hidden"
+            whileInView="visible"
+            variants={fadeInUp}
+            transition={{ duration: 0.6, delay: 0.8 }} // Delay for the third card
           >
             <div
               className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-500 group-hover:scale-110"
@@ -107,7 +138,7 @@ export default function GrowWithUs() {
                 </button>
               </Link>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
