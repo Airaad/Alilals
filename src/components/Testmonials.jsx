@@ -38,22 +38,24 @@ export function Testimonials() {
   return (
     <section className="px-6 py-16 md:py-20 bg-[#F6F2EF]">
       <div className="text-center mb-14">
-        <motion.h1 
-          className="text-5xl font-semibold text-[#44A05B] tracking-wide mb-2" 
-          initial="hidden" 
-          whileInView="visible" 
-          variants={fadeInUp} 
+        <motion.h1
+          className="text-5xl font-semibold text-[#44A05B] tracking-wide mb-2"
+          initial="hidden"
+          whileInView="visible"
+          variants={fadeInUp}
           transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
         >
           What People Say
           {/* <GiPlantSeed className="inline-block text-4xl text-[#388D4B]" /> */}
         </motion.h1>
-        <motion.p 
-          className="text-lg text-gray-600" 
-          initial="hidden" 
-          whileInView="visible" 
-          variants={fadeInUp} 
+        <motion.p
+          className="text-lg text-gray-600"
+          initial="hidden"
+          whileInView="visible"
+          variants={fadeInUp}
           transition={{ duration: 0.6, delay: 0.2 }}
+          viewport={{ once: true }}
         >
           Hear what our community has to say about our practices!
         </motion.p>
@@ -67,7 +69,8 @@ export function Testimonials() {
             initial="hidden"
             whileInView="visible"
             variants={fadeInUp}
-            transition={{ duration: 0.6, delay: 0.4 + index * 0.2 }} // Staggered effect
+            transition={{ duration: 0.6, delay: 0.4 + index * 0.2 }}
+            viewport={{ once: true }}
           >
             <a
               href={video.youtubeLink}

@@ -25,7 +25,8 @@ const ServiceInfoPage = () => {
               initial="hidden"
               whileInView="visible"
               variants={fadeInScaleUp}
-              transition={{ duration: 0.8 }} // Adjust duration for a smoother effect
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
             >
               Trellis Infrastructure
             </motion.h1>
@@ -36,7 +37,8 @@ const ServiceInfoPage = () => {
               initial="hidden"
               whileInView="visible"
               variants={fadeInScaleUp}
-              transition={{ duration: 0.8, delay: 0.2 }} // Add delay for smooth entry
+              transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true }}
             >
               Trellis infrastructure plays a crucial role in modern orchard
               management, offering a strategic framework to support the growth,
@@ -72,6 +74,7 @@ const ServiceInfoPage = () => {
               whileInView="visible"
               variants={fadeInScaleUp}
               transition={{ duration: 0.8, delay: 0.4 }}
+              viewport={{ once: true }}
             >
               Benefits
             </motion.h2>
@@ -88,7 +91,8 @@ const ServiceInfoPage = () => {
                     initial="hidden"
                     whileInView="visible"
                     variants={fadeInScaleUp}
-                    transition={{ duration: 0.8, delay: 0.6 + index * 0.1 }} // Delay for each item
+                    transition={{ duration: 0.8, delay: 0.6 + index * 0.1 }}
+                    viewport={{ once: true }}
                   >
                     {benefit}
                   </motion.span>
@@ -120,7 +124,8 @@ const ServiceInfoPage = () => {
                     initial="hidden"
                     whileInView="visible"
                     variants={fadeInScaleUp}
-                    transition={{ duration: 0.8, delay: 0.6 + index * 0.1 }} // Delay for each item
+                    transition={{ duration: 0.8, delay: 0.6 + index * 0.1 }}
+                    viewport={{ once: true }}
                   >
                     {process}
                   </motion.span>

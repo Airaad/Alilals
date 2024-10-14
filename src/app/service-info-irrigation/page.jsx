@@ -25,9 +25,10 @@ const ServiceInfoPage = () => {
               initial="hidden"
               whileInView="visible"
               variants={fadeInScaleUp}
-              transition={{ duration: 0.8 }} // Adjust duration for a smoother effect
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
             >
-             Drip Irrigation
+              Drip Irrigation
             </motion.h1>
 
             {/* Full Information Paragraph */}
@@ -36,7 +37,8 @@ const ServiceInfoPage = () => {
               initial="hidden"
               whileInView="visible"
               variants={fadeInScaleUp}
-              transition={{ duration: 0.8, delay: 0.2 }} // Add delay for smooth entry
+              transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true }}
             >
               Drip irrigation is one of the most efficient methods of watering
               an orchard, designed to deliver water directly to the plant’s root
@@ -64,6 +66,7 @@ const ServiceInfoPage = () => {
               whileInView="visible"
               variants={fadeInScaleUp}
               transition={{ duration: 0.8, delay: 0.4 }}
+              viewport={{ once: true }}
             >
               Benefits
             </motion.h2>
@@ -80,7 +83,8 @@ const ServiceInfoPage = () => {
                     initial="hidden"
                     whileInView="visible"
                     variants={fadeInScaleUp}
-                    transition={{ duration: 0.8, delay: 0.6 + index * 0.1 }} // Delay for each item
+                    transition={{ duration: 0.8, delay: 0.6 + index * 0.1 }}
+                    viewport={{ once: true }}
                   >
                     {benefit}
                   </motion.span>
@@ -95,6 +99,7 @@ const ServiceInfoPage = () => {
               whileInView="visible"
               variants={fadeInScaleUp}
               transition={{ duration: 0.8, delay: 0.6 }}
+              viewport={{ once: true }}
             >
               Our Process
             </motion.h2>
@@ -112,7 +117,8 @@ const ServiceInfoPage = () => {
                     initial="hidden"
                     whileInView="visible"
                     variants={fadeInScaleUp}
-                    transition={{ duration: 0.8, delay: 0.6 + index * 0.1 }} // Delay for each item
+                    transition={{ duration: 0.8, delay: 0.6 + index * 0.1 }}
+                    viewport={{ once: true }}
                   >
                     {process}
                   </motion.span>

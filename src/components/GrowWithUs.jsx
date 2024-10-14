@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
@@ -12,20 +12,20 @@ export default function GrowWithUs() {
     <section className="bg-[#F6F2EF] py-12 px-10">
       <div className="container mx-auto text-center">
         <div className="mb-20 flex flex-col gap-2">
-          <motion.h2 
-            className="text-5xl font-semibold text-[#44A05B] tracking-wide" 
-            initial="hidden" 
-            whileInView="visible" 
-            variants={fadeInUp} 
+          <motion.h2
+            className="text-5xl font-semibold text-[#44A05B] tracking-wide"
+            initial="hidden"
+            whileInView="visible"
+            variants={fadeInUp}
             transition={{ duration: 0.6 }}
           >
             Grow With Us
           </motion.h2>
-          <motion.p 
-            className="text-lg text-gray-600" 
-            initial="hidden" 
-            whileInView="visible" 
-            variants={fadeInUp} 
+          <motion.p
+            className="text-lg text-gray-600"
+            initial="hidden"
+            whileInView="visible"
+            variants={fadeInUp}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             Unlock the full potential of your orchard with our expert services.
@@ -41,7 +41,8 @@ export default function GrowWithUs() {
             initial="hidden"
             whileInView="visible"
             variants={fadeInUp}
-            transition={{ duration: 0.6, delay: 0.4 }} // Delay for the first card
+            transition={{ duration: 0.6, delay: 0.4 }}
+            viewport={{ once: true }}
           >
             <div
               className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-500 group-hover:scale-110"
@@ -77,7 +78,8 @@ export default function GrowWithUs() {
             initial="hidden"
             whileInView="visible"
             variants={fadeInUp}
-            transition={{ duration: 0.6, delay: 0.6 }} // Delay for the second card
+            transition={{ duration: 0.6, delay: 0.6 }}
+            viewport={{ once: true }}
           >
             <div
               className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-500 group-hover:scale-110"
@@ -114,7 +116,8 @@ export default function GrowWithUs() {
             initial="hidden"
             whileInView="visible"
             variants={fadeInUp}
-            transition={{ duration: 0.6, delay: 0.8 }} // Delay for the third card
+            transition={{ duration: 0.6, delay: 0.8 }}
+            viewport={{ once: true }}
           >
             <div
               className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-500 group-hover:scale-110"

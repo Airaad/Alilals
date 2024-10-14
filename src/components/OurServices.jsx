@@ -16,21 +16,21 @@ const OurServices = () => {
       description:
         "Start your journey with our high-quality plants and expert guidance for a thriving orchard.",
       imgSrc: "/assets/images/pexels-alejandro-barron-21404-96715.jpg",
-      link: 'service-info-plantation'
+      link: "service-info-plantation",
     },
     {
       title: "Trellis Infrastructure",
       description:
         "Enhance your orchard's productivity with our durable and efficient trellis systems designed for optimal growth.",
       imgSrc: "/assets/images/pexels-quang-nguyen-vinh-222549-2132250.jpg",
-      link: 'service-info-trellis'
+      link: "service-info-trellis",
     },
     {
       title: "Drip Irrigation",
       description:
         "Optimize water usage and ensure healthy plants with our advanced drip irrigation solutions tailored for your needs.",
       imgSrc: "/assets/images/irrigation.jpeg",
-      link: 'service-info-irrigation'
+      link: "service-info-irrigation",
     },
   ];
 
@@ -38,23 +38,26 @@ const OurServices = () => {
     <div className="px-12 py-16 bg-[#142827]">
       <div className="flex flex-col justify-center items-center gap-5 mb-16">
         <div className="text-center">
-          <motion.h1 
-            className="text-5xl font-semibold text-[#44A05B] tracking-wide mb-2" 
-            initial="hidden" 
-            whileInView="visible" 
-            variants={fadeInUp} 
+          <motion.h1
+            className="text-5xl font-semibold text-[#44A05B] tracking-wide mb-2"
+            initial="hidden"
+            whileInView="visible"
+            variants={fadeInUp}
             transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
           >
             Our Services
           </motion.h1>
-          <motion.p 
-            className="text-lg text-gray-300 font-light" 
-            initial="hidden" 
-            whileInView="visible" 
-            variants={fadeInUp} 
+          <motion.p
+            className="text-lg text-gray-300 font-light"
+            initial="hidden"
+            whileInView="visible"
+            variants={fadeInUp}
             transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
           >
-            Delivering sustainability through innovation in orchard care and farming.
+            Delivering sustainability through innovation in orchard care and
+            farming.
           </motion.p>
         </div>
       </div>
@@ -67,7 +70,8 @@ const OurServices = () => {
             initial="hidden"
             whileInView="visible"
             variants={fadeInUp}
-            transition={{ duration: 0.6, delay: 0.4 + index * 0.2 }} // Delay for each section
+            transition={{ duration: 0.6, delay: 0.4 + index * 0.2 }}
+            viewport={{ once: true }}
           >
             <div className="flex flex-col gap-4 items-center text-center">
               <Image

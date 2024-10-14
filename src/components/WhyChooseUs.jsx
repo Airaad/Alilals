@@ -4,6 +4,12 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { TreePalm, Pickaxe, Apple, ClipboardCheck } from "lucide-react";
+import { motion } from "framer-motion";
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 },
+};
 
 export function WhyChooseUs() {
   const statsData = [
@@ -73,7 +79,14 @@ export function WhyChooseUs() {
       <div className="bg-[#F6F2EF] grid grid-col-1 lg:grid-cols-[40%_58%] gap-10 pt-10 px-10 md:px-16 md:pt-16">
         {/* Left Section with Images */}
         <div className="w-full flex justify-center relative space-x-4">
-          <div className="flex flex-col space-y-4">
+          <motion.div
+            className="flex flex-col space-y-4"
+            initial="hidden"
+            whileInView="visible"
+            variants={fadeInUp}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
             <Image
               src="/assets/images/pexels-nc-farm-bureau-mark-8287350.jpg"
               alt="Plant Image"
@@ -81,10 +94,17 @@ export function WhyChooseUs() {
               height={900}
               className="rounded-lg shadow-lg object-cover"
             />
-          </div>
+          </motion.div>
         </div>
         {/* Right Section with Text and Progress Bars */}
-        <div className="mt-10 md:mt-0 flex flex-col justify-center">
+        <motion.div
+          className="mt-10 md:mt-0 flex flex-col justify-center"
+          initial="hidden"
+          whileInView="visible"
+          variants={fadeInUp}
+          transition={{ duration: 1, delay: 0.5 }}
+          viewport={{ once: true }}
+        >
           <h3 className="text-[#44A05B] uppercase text-lg font-semibold mb-2">
             Why Choose Us
           </h3>
@@ -120,7 +140,7 @@ export function WhyChooseUs() {
               Read More →
             </button>
           </Link>
-        </div>
+        </motion.div>
       </div>
 
       <section
