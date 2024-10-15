@@ -18,11 +18,11 @@ const BlogHero = () => {
 
       <div className="relative flex flex-col justify-center items-center h-full">
         <h1 className="text-white text-4xl md:text-6xl font-semibold tracking-wide mb-6">
-          Welcome To Blogs
+          Knowledge
         </h1>
         <p className="text-white text-lg w-[90%] lg:w-[50%] text-center font-light tracking-wide mb-6">
           Discover the latest insights, trends, and tips from our expert
-          writers. Our blog covers a range of topics to keep you informed and
+          writers. Our knowledge section covers a range of topics to keep you informed and
           inspired.
         </p>
 

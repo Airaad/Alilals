@@ -76,19 +76,20 @@ const ServiceInfoPage = () => {
                 "Improved Plant Health - By ensuring that the roots receive a consistent supply of water, drip irrigation promotes healthier root development.",
                 "Reduced Weed Growth - Since water is delivered only to the intended plants, the surrounding areas remain dry, minimizing weed growth.",
               ].map((benefit, index) => (
-                <li key={index} className="flex items-center space-x-3">
-                  <FaLeaf className="text-[#44A05B] text-2xl" />
-                  <motion.span
-                    className="text-gray-300 text-lg lg:text-justify"
-                    initial="hidden"
-                    whileInView="visible"
-                    variants={fadeInScaleUp}
-                    transition={{ duration: 0.8, delay: 0.6 + index * 0.1 }}
-                    viewport={{ once: true }}
-                  >
+                <motion.span
+                  className="text-gray-300 text-lg lg:text-justify"
+                  initial="hidden"
+                  whileInView="visible"
+                  variants={fadeInScaleUp}
+                  transition={{ duration: 0.8, delay: 0.6 + index * 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  <li key={index} className="flex items-center space-x-3">
+                    <FaLeaf className="text-[#44A05B] text-2xl mr-3" />
+
                     {benefit}
-                  </motion.span>
-                </li>
+                  </li>
+                </motion.span>
               ))}
             </ul>
 
@@ -110,19 +111,20 @@ const ServiceInfoPage = () => {
                 "Soil & Irrigation Planning - Comprehensive support for soil preparation and irrigation strategies.",
                 "Ongoing Support - We assist you in maintaining tree health, pest control, and seasonal adjustments.",
               ].map((process, index) => (
-                <li key={index} className="flex items-center space-x-3">
-                  <FaLeaf className="text-[#44A05B] text-2xl" />
-                  <motion.span
-                    className="text-gray-300 text-lg lg:text-justify"
-                    initial="hidden"
-                    whileInView="visible"
-                    variants={fadeInScaleUp}
-                    transition={{ duration: 0.8, delay: 0.6 + index * 0.1 }}
-                    viewport={{ once: true }}
-                  >
+                <motion.span
+                  className="text-gray-300 text-lg lg:text-justify"
+                  initial="hidden"
+                  whileInView="visible"
+                  variants={fadeInScaleUp}
+                  transition={{ duration: 0.8, delay: 0.6 + index * 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  <li key={index} className="flex items-center space-x-3">
+                    <FaLeaf className="text-[#44A05B] text-2xl mr-3" />
+
                     {process}
-                  </motion.span>
-                </li>
+                  </li>
+                </motion.span>
               ))}
             </ul>
           </div>

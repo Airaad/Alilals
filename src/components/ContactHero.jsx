@@ -6,7 +6,7 @@ const ContactHero = () => {
       <div className="absolute inset-0 bg-black bg-opacity-50"></div>
 
       <div className="relative z-10 flex justify-center items-center h-full">
-        <h1 className="text-white text-4xl md:text-6xl font-bold">
+        <h1 className="text-white text-4xl md:text-6xl font-semibold">
           Contact Us
         </h1>
       </div>

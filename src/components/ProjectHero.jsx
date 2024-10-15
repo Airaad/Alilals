@@ -2,12 +2,12 @@ import React from "react";
 
 const ProjectHero = () => {
   return (
-    <div className="relative h-[515px] bg-[url('/assets/images/projects_hero.jpg')] bg-cover bg-center">
+    <div className="relative h-[515px] bg-[url('/assets/images/modern-farming-8836926_1280.png')] bg-cover bg-top">
       <div className="absolute inset-0 bg-black bg-opacity-50"></div>
 
       <div className="relative z-10 flex justify-center items-center h-full">
-        <h1 className="text-white text-4xl md:text-6xl font-bold">
-          Featured Orchards
+        <h1 className="text-white text-4xl md:text-6xl font-semibold">
+          Orchard Projects
         </h1>
       </div>
 
