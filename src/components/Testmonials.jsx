@@ -1,9 +1,8 @@
 "use client";
 import React from "react";
 import { FaYoutube } from "react-icons/fa";
-import { GiPlantSeed } from "react-icons/gi"; // Importing an icon for a farming theme
 import { FaQuoteLeft, FaQuoteRight } from "react-icons/fa";
-import { motion } from "framer-motion"; // Importing motion
+import { motion } from "framer-motion";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
@@ -36,7 +35,7 @@ export function Testimonials() {
   ];
 
   return (
-    <section className="px-6 py-16 md:py-20 bg-[#F6F2EF]">
+    <section className="px-6 py-16 md:py-20 bg-[#142827]">
       <div className="text-center mb-14">
         <motion.h1
           className="text-5xl font-semibold text-[#44A05B] tracking-wide mb-2"
@@ -50,7 +49,7 @@ export function Testimonials() {
           {/* <GiPlantSeed className="inline-block text-4xl text-[#388D4B]" /> */}
         </motion.h1>
         <motion.p
-          className="text-lg text-gray-600"
+          className="text-lg text-gray-300"
           initial="hidden"
           whileInView="visible"
           variants={fadeInUp}

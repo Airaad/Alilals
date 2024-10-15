@@ -1,0 +1,134 @@
+[
+  {
+    "id": 1,
+    "title": "Apple Orchard Expansion",
+    "image": "https://cdn.pixabay.com/photo/2018/07/09/18/40/nature-3526840_1280.jpg",
+    "description": "This is the short dicription of the project that our company has built and i take proud in it. It is a very good project,This is the short dicription of the project that our company has built and i take proud in it. It is a very good project. This is the short dicription of the project that our company has built and i take proud in it. It is a very good project",
+    "name": "Olivia Garcia",
+    "address": "789 Farm Rd, Maplewood",
+    "cost": 41512.75,
+    "size": "18 Kanals",
+    "appleType": "Fuji"
+  },
+  {
+    "id": 2,
+    "title": "Soil Health Initiative",
+    "image": "https://cdn.pixabay.com/photo/2017/09/06/03/50/apple-2720105_1280.jpg",
+    "description": "This is the short dicription of the project that our company has built and i take proud in it. It is a very good project,This is the short dicription of the project that our company has built and i take proud in it. It is a very good project. This is the short dicription of the project that our company has built and i take proud in it. It is a very good project",
+    "name": "Emily Davis",
+    "address": "101 Fruit St, Pleasantville",
+    "cost": 99482.34,
+    "size": "13 Kanals",
+    "appleType": "Granny Smith"
+  },
+  {
+    "id": 3,
+    "title": "Sustainable Water Use",
+    "image": "https://cdn.pixabay.com/photo/2016/07/26/20/02/arbor-1543673_1280.jpg",
+    "description": "This is the short dicription of the project that our company has built and i take proud in it. It is a very good project,This is the short dicription of the project that our company has built and i take proud in it. It is a very good project. This is the short dicription of the project that our company has built and i take proud in it. It is a very good project",
+    "name": "Michael Brown",
+    "address": "202 Harvest Dr, Oakwood",
+    "cost": 72681.77,
+    "size": "9 Kanals",
+    "appleType": "McIntosh"
+  },
+  {
+    "id": 4,
+    "title": "Apple Orchard Expansion",
+    "image": "https://cdn.pixabay.com/photo/2018/03/02/23/37/ivy-3194557_960_720.jpg",
+    "description": "This is the short dicription of the project that our company has built and i take proud in it. It is a very good project,This is the short dicription of the project that our company has built and i take proud in it. It is a very good project. This is the short dicription of the project that our company has built and i take proud in it. It is a very good project",
+    "name": "John Doe",
+    "address": "789 Farm Rd, Maplewood",
+    "cost": 80051.59,
+    "size": "7 Kanals",
+    "appleType": "Granny Smith"
+  },
+  {
+    "id": 5,
+    "title": "Soil Health Initiative",
+    "image": "https://cdn.pixabay.com/photo/2014/08/08/20/53/ivy-413686_1280.jpg",
+    "description": "This is the short dicription of the project that our company has built and i take proud in it. It is a very good project,This is the short dicription of the project that our company has built and i take proud in it. It is a very good project. This is the short dicription of the project that our company has built and i take proud in it. It is a very good project",
+    "name": "Emily Davis",
+    "address": "202 Harvest Dr, Oakwood",
+    "cost": 66500.57,
+    "size": "14 Kanals",
+    "appleType": "Honeycrisp"
+  },
+  {
+    "id": 6,
+    "title": "Sustainable Water Use",
+    "image": "https://cdn.pixabay.com/photo/2020/04/04/16/29/common-ivy-5002946_960_720.jpg",
+    "description": "This is the short dicription of the project that our company has built and i take proud in it. It is a very good project,This is the short dicription of the project that our company has built and i take proud in it. It is a very good project. This is the short dicription of the project that our company has built and i take proud in it. It is a very good project",
+    "name": "Michael Brown",
+    "address": "303 Field Way, Riverside",
+    "cost": 9499.55,
+    "size": "14 Kanals",
+    "appleType": "Fuji"
+  },
+  {
+    "id": 7,
+    "title": "Apple Orchard Expansion",
+    "image": "https://cdn.pixabay.com/photo/2018/06/29/22/45/wheat-3506758_1280.jpg",
+    "description": "This is the short dicription of the project that our company has built and i take proud in it. It is a very good project,This is the short dicription of the project that our company has built and i take proud in it. It is a very good project. This is the short dicription of the project that our company has built and i take proud in it. It is a very good project",
+    "name": "James Wilson",
+    "address": "101 Fruit St, Pleasantville",
+    "cost": 7211.5,
+    "size": "17 Kanals",
+    "appleType": "Granny Smith"
+  },
+  {
+    "id": 8,
+    "title": "Soil Health Initiative",
+    "image": "https://cdn.pixabay.com/photo/2023/03/27/08/47/cows-7880154_1280.jpg",
+    "description": "This is the short dicription of the project that our company has built and i take proud in it. It is a very good project,This is the short dicription of the project that our company has built and i take proud in it. It is a very good project. This is the short dicription of the project that our company has built and i take proud in it. It is a very good project",
+    "name": "Olivia Garcia",
+    "address": "303 Field Way, Riverside",
+    "cost": 63472.19,
+    "size": "9 Kanals",
+    "appleType": "Ambrosia"
+  },
+  {
+    "id": 9,
+    "title": "Sustainable Water Use",
+    "image": "https://cdn.pixabay.com/photo/2022/05/16/13/49/cow-7200409_1280.jpg",
+    "description": "This is the short dicription of the project that our company has built and i take proud in it. It is a very good project,This is the short dicription of the project that our company has built and i take proud in it. It is a very good project. This is the short dicription of the project that our company has built and i take proud in it. It is a very good project",
+    "name": "Michael Brown",
+    "address": "123 Orchard Lane, Springfield",
+    "cost": 84346.05,
+    "size": "9 Kanals",
+    "appleType": "Granny Smith"
+  },
+  {
+    "id": 10,
+    "title": "Apple Orchard Expansion",
+    "image": "https://cdn.pixabay.com/photo/2018/07/20/14/01/grapes-3550729_1280.jpg",
+    "description": "This is the short dicription of the project that our company has built and i take proud in it. It is a very good project,This is the short dicription of the project that our company has built and i take proud in it. It is a very good project. This is the short dicription of the project that our company has built and i take proud in it. It is a very good project",
+    "name": "John Doe",
+    "address": "789 Farm Rd, Maplewood",
+    "cost": 55747.69,
+    "size": "6 Kanals",
+    "appleType": "Golden Delicious"
+  },
+  {
+    "id": 11,
+    "title": "Soil Health Initiative",
+    "image": "https://cdn.pixabay.com/photo/2017/12/29/16/34/fruit-3048001_1280.jpg",
+    "description": "This is the short dicription of the project that our company has built and i take proud in it. It is a very good project,This is the short dicription of the project that our company has built and i take proud in it. It is a very good project. This is the short dicription of the project that our company has built and i take proud in it. It is a very good project",
+    "name": "John Doe",
+    "address": "789 Farm Rd, Maplewood",
+    "cost": 55747.69,
+    "size": "6 Kanals",
+    "appleType": "Golden Delicious"
+  },
+  {
+    "id": 12,
+    "title": "Sustainable Water Use",
+    "image": "https://cdn.pixabay.com/photo/2015/02/14/18/10/pineapple-636562_1280.jpg",
+    "description": "This is the short dicription of the project that our company has built and i take proud in it. It is a very good project,This is the short dicription of the project that our company has built and i take proud in it. It is a very good project. This is the short dicription of the project that our company has built and i take proud in it. It is a very good project",
+    "name": "John Doe",
+    "address": "789 Farm Rd, Maplewood",
+    "cost": 55747.69,
+    "size": "6 Kanals",
+    "appleType": "Golden Delicious"
+  }
+]

@@ -103,13 +103,23 @@ export default function Nav() {
           </Link>
 
           <Link
+            href="/our-projects"
+            className={`text-md font-semibold leading-6 text-[#636363] hover:text-green-700 relative inline-block 
+              before:content-[''] before:absolute before:-bottom-1 before:left-0 before:right-0 
+              before:h-0.5 before:bg-green-700 before:scale-x-0 
+              hover:before:scale-x-100 transition-transform duration-300 ${pathname == "/our-projects" ? "text-green-700" : ""}`}
+          >
+            Orchards
+          </Link>
+
+          <Link
             href="/blog"
             className={`text-md font-semibold leading-6 text-[#636363] hover:text-green-700 relative inline-block 
               before:content-[''] before:absolute before:-bottom-1 before:left-0 before:right-0 
               before:h-0.5 before:bg-green-700 before:scale-x-0 
               hover:before:scale-x-100 transition-transform duration-300 ${pathname == "/blog" ? "text-green-700" : ""}`}
           >
-            Blogs
+            Knowledge
           </Link>
         </PopoverGroup>
       </nav>
@@ -171,11 +181,19 @@ export default function Nav() {
                   </Link>
                   <div className="h-[0.01rem] bg-gray-500 w-[80%] md:w-full " />
                   <Link
+                    href="/our-projects"
+                    className="-mx-3 block rounded-lg px-3 py-2 text-sm font-semibold leading-7 text-white hover:bg-gray-500"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Orchards
+                  </Link>
+                  <div className="h-[0.01rem] bg-gray-500 w-[80%] md:w-full " />
+                  <Link
                     href="/blog"
                     className="-mx-3 block rounded-lg px-3 py-2 text-sm font-semibold leading-7 text-white hover:bg-gray-500"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    Blogs
+                    Knowledge
                   </Link>
                   <div className="h-[0.01rem] bg-gray-500 w-[80%] md:w-full " />
                 </div>

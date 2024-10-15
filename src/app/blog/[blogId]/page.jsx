@@ -103,8 +103,8 @@ export default function BlogDetail() {
           </div>
 
           {/* Blog Content */}
-          <div className="prose lg:prose-xl max-w-none text-[#404040] leading-relaxed text-justify">
-            <div className="no-global-styles">
+          <div className="max-w-none text-[#404040] leading-relaxed text-justify">
+            <div className="no-global-style ql-editor">
               <div dangerouslySetInnerHTML={{ __html: blog?.content }}></div>
             </div>
             <blockquote className="bg-gray-100 p-4 border-l-4 border-[#44A05B] italic rounded-lg my-8">

@@ -6,7 +6,6 @@ import GrowWithUs from "@/components/GrowWithUs";
 import { WhyChooseUs } from "@/components/WhyChooseUs";
 import FeaturedWork from "@/components/FeaturedWork";
 
-
 const Home = () => {
   return (
     <main>
@@ -14,8 +13,8 @@ const Home = () => {
       <GrowWithUs />
       <WhyChooseUs />
       <OurServices />
-      <Testimonials />
       <FeaturedWork />
+      <Testimonials />
     </main>
   );
 };

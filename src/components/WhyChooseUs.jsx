@@ -5,29 +5,30 @@ import Image from "next/image";
 import Link from "next/link";
 import { TreePalm, Pickaxe, Apple, ClipboardCheck } from "lucide-react";
 import { motion } from "framer-motion";
+import { getAllStats } from "../../firebase/stats/read";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0 },
 };
 
-export function WhyChooseUs() {
-  const statsData = [
-    { label: "Orchards Installed", value: 86, icon: <Apple size={50} /> },
-    { label: "Kanals Developed", value: 1200, icon: <Pickaxe size={50} /> },
-    {
-      label: "Projects Completed",
-      value: 67,
-      icon: <ClipboardCheck size={50} />,
-    },
-    { label: "Trees Planted", value: 3580, icon: <TreePalm size={50} /> },
-  ];
+const icons = {
+  "Trees Planted": <TreePalm size={50} />,
+  "Kanals Developed": <Pickaxe size={50} />,
+  "Projects Completed": <ClipboardCheck size={50} />,
+  "Orchards Installed": <Apple size={50} />,
+};
 
+export function WhyChooseUs() {
+  const [statsData, setStatsData] = useState([]);
   const [hasAnimated, setHasAnimated] = useState(false);
   const [values, setValues] = useState(statsData.map(() => 0));
 
-  // Increment numbers when section is in view
   useEffect(() => {
+    getAllStats().then((data) => {
+      setStatsData(data);
+    });
+
     const handleScroll = () => {
       const statsSection = document.getElementById("stats-section");
 
@@ -84,7 +85,7 @@ export function WhyChooseUs() {
             initial="hidden"
             whileInView="visible"
             variants={fadeInUp}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
             viewport={{ once: true }}
           >
             <Image
@@ -102,7 +103,7 @@ export function WhyChooseUs() {
           initial="hidden"
           whileInView="visible"
           variants={fadeInUp}
-          transition={{ duration: 1, delay: 0.5 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
           viewport={{ once: true }}
         >
           <h3 className="text-[#44A05B] uppercase text-lg font-semibold mb-2">
@@ -153,11 +154,11 @@ export function WhyChooseUs() {
               <div key={index} className="group">
                 <div className="p-6 rounded-lg text-[#44A05B]">
                   <div className="flex gap-5 text-5xl items-center justify-center font-bold stat-number">
-                    <span>{stat.icon}</span>
+                    <span>{icons[stat.title]}</span>
                     {values[index]}
                   </div>
                   <hr className="my-4 border-[#44A05B]" />
-                  <p className="text-xl">{stat.label}</p>
+                  <p className="text-xl">{stat.title}</p>
                 </div>
               </div>
             ))}

@@ -64,7 +64,7 @@ export default function Blogs() {
         {currentBlogs.map((blog) => (
           <div
             key={blog.id}
-            className="max-w-[400px] w-full h-[600px] flex flex-col justify-between border rounded-lg shadow-lg bg-[#1c2d34] hover:bg-[#233842] transition duration-300"
+            className="max-w-[400px] w-full h-[600px] flex flex-col justify-between border rounded-lg shadow-lg bg-[#142827] hover:bg-[#1b3735] transition duration-300"
           >
             {/* Blog Image */}
             <div className="overflow-hidden rounded-t-lg">
