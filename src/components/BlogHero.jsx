@@ -22,8 +22,8 @@ const BlogHero = () => {
         </h1>
         <p className="text-white text-lg w-[90%] lg:w-[50%] text-center font-light tracking-wide mb-6">
           Discover the latest insights, trends, and tips from our expert
-          writers. Our knowledge section covers a range of topics to keep you informed and
-          inspired.
+          writers. Our knowledge section covers a range of topics to keep you
+          informed and inspired.
         </p>
 
         <button
