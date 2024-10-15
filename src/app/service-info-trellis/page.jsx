@@ -10,6 +10,19 @@ const fadeInScaleUp = {
   visible: { opacity: 1, scale: 1 }, // Fade in and scale to normal size
 };
 
+const benefits = [
+  "Improved Yield and Quality - Trellis systems maximize sunlight exposure and improve air circulation, both essential factors in fruit development.",
+  "Efficient Space Utilization - By guiding plants to grow vertically, trellises make the most of the available space, especially in small or densely planted orchards.",
+  "Enhanced Pest and Disease Control - Elevating the plants from the soil and organizing them in a structured way reduces the spread of diseases and pests.",
+];
+
+const process = [
+  "Initial Consultation - We start with understanding your goals, evaluating the land and environmental factors.",
+  "Customized Layout - Based on the analysis, we design an optimal layout to ensure healthy tree growth.",
+  "Soil & Irrigation Planning - Comprehensive support for soil preparation and irrigation strategies.",
+  "Ongoing Support - We assist you in maintaining tree health, pest control, and seasonal adjustments.",
+];
+
 const ServiceInfoPage = () => {
   return (
     <div>
@@ -79,11 +92,7 @@ const ServiceInfoPage = () => {
               Benefits
             </motion.h2>
             <ul className="space-y-4 mb-8">
-              {[
-                "Improved Yield and Quality - Trellis systems maximize sunlight exposure and improve air circulation, both essential factors in fruit development.",
-                "Efficient Space Utilization - By guiding plants to grow vertically, trellises make the most of the available space, especially in small or densely planted orchards.",
-                "Enhanced Pest and Disease Control - Elevating the plants from the soil and organizing them in a structured way reduces the spread of diseases and pests.",
-              ].map((benefit, index) => (
+              {benefits.map((benefit, index) => (
                 <motion.span
                   className="text-gray-300 text-lg lg:text-justify"
                   initial="hidden"
@@ -91,8 +100,9 @@ const ServiceInfoPage = () => {
                   variants={fadeInScaleUp}
                   transition={{ duration: 0.8, delay: 0.6 + index * 0.1 }}
                   viewport={{ once: true }}
+                  key={index}
                 >
-                  <li key={index} className="flex items-center space-x-3">
+                  <li className="flex items-center space-x-3">
                     <FaLeaf className="text-[#44A05B] text-2xl mr-3" />
 
                     {benefit}
@@ -112,12 +122,7 @@ const ServiceInfoPage = () => {
               Our Process
             </motion.h2>
             <ul className="space-y-6 mb-8">
-              {[
-                "Initial Consultation - We start with understanding your goals, evaluating the land and environmental factors.",
-                "Customized Layout - Based on the analysis, we design an optimal layout to ensure healthy tree growth.",
-                "Soil & Irrigation Planning - Comprehensive support for soil preparation and irrigation strategies.",
-                "Ongoing Support - We assist you in maintaining tree health, pest control, and seasonal adjustments.",
-              ].map((process, index) => (
+              {process.map((process, index) => (
                 <motion.span
                   className="text-gray-300 text-lg lg:text-justify"
                   initial="hidden"
@@ -125,8 +130,9 @@ const ServiceInfoPage = () => {
                   variants={fadeInScaleUp}
                   transition={{ duration: 0.8, delay: 0.6 + index * 0.1 }}
                   viewport={{ once: true }}
+                  key={index}
                 >
-                  <li key={index} className="flex items-center space-x-3">
+                  <li className="flex items-center space-x-3">
                     <FaLeaf className="text-[#44A05B] text-2xl mr-3" />
 
                     {process}
