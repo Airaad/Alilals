@@ -1,12 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import React from "react";
 import { useParams } from "next/navigation";
 import { motion } from "framer-motion";
 import projectsData from "../../../data/projects.json";
 
-const page = () => {
+const Page = () => {
   const { projectId } = useParams();
   const [project, setProject] = useState(null);
   const [loadingProject, setLoadingProject] = useState(true);
@@ -138,4 +137,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

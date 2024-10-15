@@ -40,9 +40,8 @@ const FeaturedWork = () => {
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map((project) => (
-              <Link href={`/our-projects/${project.id}`}>
+              <Link href={`/our-projects/${project.id}`} key={project.id}>
                 <ProjectCard
-                  key={project.id}
                   id={project.id}
                   title={project.title}
                   image={project.image}
