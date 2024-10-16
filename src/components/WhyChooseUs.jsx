@@ -25,11 +25,11 @@ export function WhyChooseUs() {
   const [values, setValues] = useState(statsData.map(() => 0));
 
   useEffect(() => {
-    if(!statsData.length){
+    if (!statsData.length) {
       getAllStats().then((data) => {
-      setStatsData(data);
-      console.log("setting ")
-    });
+        setStatsData(data);
+        console.log("setting ");
+      });
     }
 
     const handleScroll = () => {

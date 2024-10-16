@@ -10,7 +10,7 @@ import {
   FaAppleAlt,
 } from "react-icons/fa";
 import { motion } from "framer-motion";
-import projectsData from "../../../data/projects.json";
+import { getProject } from "../../../../firebase/projects/read";
 
 const Page = () => {
   const { projectId } = useParams();
@@ -18,13 +18,12 @@ const Page = () => {
   const [loadingProject, setLoadingProject] = useState(true);
 
   useEffect(() => {
-    const selectedProject = projectsData.find(
-      (proj) => proj.id === Number(projectId),
-    );
-    if (selectedProject) {
-      setProject(selectedProject);
+    if (!project) {
+      getProject(projectId).then((data) => {
+        setProject(data);
+        setLoadingProject(false);
+      });
     }
-    setLoadingProject(false);
   }, [projectId]);
 
   if (loadingProject) {
@@ -54,7 +53,7 @@ const Page = () => {
       >
         <div className=" mx-auto w-full sm:w-[90%] h-[500px] border-8 border-black rounded-lg">
           <img
-            src={project.image}
+            src={project.imageUrl}
             alt="Project Image"
             className="w-full mx-auto h-full object-cover rounded-lg"
           />
@@ -86,7 +85,7 @@ const Page = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            {project.description}
+            {project.brief}
           </motion.p>
 
           <motion.h2

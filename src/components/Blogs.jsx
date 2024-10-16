@@ -33,10 +33,10 @@ export default function Blogs() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-screen bg-[#142827]">
+      <div className="flex justify-center items-center min-h-screen bg-[#F6F2EF]">
         <div className="flex flex-col items-center">
           <div className="animate-spin rounded-full h-24 w-24 border-t-4 border-b-4 border-green-500 mb-4"></div>
-          <p className="text-lg text-gray-300">Loading blogs, please wait...</p>
+          <p className="text-lg text-gray-500">Loading blogs, please wait...</p>
         </div>
       </div>
     );
@@ -45,10 +45,10 @@ export default function Blogs() {
   if (!loading && blogs.length === 0) {
     return (
       <div className="flex flex-col justify-center items-center min-h-screen bg-[#142827]">
-        <h2 className="text-2xl font-semibold text-gray-300 mb-4">
+        <h2 className="text-2xl font-semibold text-gray-400 mb-4">
           No blogs found!
         </h2>
-        <p className="text-lg text-gray-400">
+        <p className="text-lg text-gray-500">
           Check back later for exciting content.
         </p>
       </div>

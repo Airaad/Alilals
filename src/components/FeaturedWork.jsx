@@ -4,13 +4,17 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import ProjectCard from "./ProjectCard";
-import projectsData from "../data/projects.json";
+import { getAllProjects } from "../../firebase/projects/read";
 
 const FeaturedWork = () => {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    setProjects(projectsData.slice(0, 3));
+    if (!projects.length) {
+      getAllProjects().then((data) => {
+        setProjects(data.slice(0, 3));
+      });
+    }
   }, []);
 
   return (
@@ -44,13 +48,29 @@ const FeaturedWork = () => {
                 <ProjectCard
                   id={project.id}
                   title={project.title}
-                  image={project.image}
+                  imageUrl={project.imageUrl}
                 />
               </Link>
             ))}
           </div>
         </div>
       </motion.div>
+
+      {!projects.length ? (
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.8, ease: "easeInOut" }}
+          viewport={{ once: true }}
+          className="flex flex-col justify-center items-center bg-[#F6F2EF]"
+        >
+          <h2 className="text-2xl font-semibold text-gray-400 mb-4">
+            No projects found!
+          </h2>
+        </motion.div>
+      ) : (
+        ""
+      )}
 
       <motion.div
         className="flex justify-center items-center mt-12"

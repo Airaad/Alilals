@@ -4,7 +4,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 
-const ProjectCard = ({ title, image, id }) => {
+const ProjectCard = ({ title, imageUrl, id }) => {
   const router = useRouter();
 
   const goToProject = () => {
@@ -15,7 +15,7 @@ const ProjectCard = ({ title, image, id }) => {
     <motion.div
       className="relative w-full h-64 rounded-md overflow-hidden shadow-lg cursor-pointer bg-white group"
       style={{
-        backgroundImage: `url(${image})`,
+        backgroundImage: `url(${imageUrl})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
