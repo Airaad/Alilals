@@ -118,6 +118,7 @@ const ServiceInfoPage = () => {
               whileInView="visible"
               variants={fadeInScaleUp}
               transition={{ duration: 0.8, delay: 0.6 }}
+              viewport={{ once: true }}
             >
               Our Process
             </motion.h2>

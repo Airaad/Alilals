@@ -28,6 +28,7 @@ export default function GrowWithUs() {
             whileInView="visible"
             variants={fadeInUp}
             transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
           >
             Unlock the full potential of your orchard with our expert services.
           </motion.p>
