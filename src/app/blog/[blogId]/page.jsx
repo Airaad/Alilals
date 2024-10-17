@@ -4,6 +4,7 @@ import { useParams } from "next/navigation";
 import { FaCalendarAlt, FaUserAlt } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import DOMPurify from "dompurify";
 import {
   FacebookShareButton,
   TwitterShareButton,
@@ -70,6 +71,7 @@ export default function BlogDetail() {
   }
 
   const blogUrl = `${window.location.origin}/blog/${blogId}`;
+  const sanitizedHTML = DOMPurify.sanitize(blog?.content);
 
   return (
     <div className="min-h-screen bg-[#f6f4ec] bg-[url('https://www.transparenttextures.com/patterns/groovepaper.png')] text-[#202221]">
@@ -103,12 +105,12 @@ export default function BlogDetail() {
           </div>
 
           {/* Blog Content */}
-          <div className="max-w-none text-[#404040] leading-relaxed text-justify">
+          <div className="max-w-none text-[#404040] leading-relaxed">
             <div className="no-global-style ql-editor">
-              <div dangerouslySetInnerHTML={{ __html: blog?.content }}></div>
+              <div dangerouslySetInnerHTML={{ __html: sanitizedHTML }}></div>
             </div>
             <blockquote className="bg-gray-100 p-4 border-l-4 border-[#44A05B] italic rounded-lg my-8">
-              "Farming is not just a job, its a way of life..."
+              "An orchard is more than a collection of trees—it's a living ecosystem that thrives through careful planning, rich soil, and sustainable practices."
             </blockquote>
           </div>
 
