@@ -1,6 +1,5 @@
 import React from "react";
 import { MapPinIcon, PhoneIcon, EnvelopeIcon } from "@heroicons/react/24/solid";
-import { RiLeafFill } from "react-icons/ri";
 
 const ContactInfo = () => {
   const offices = [
@@ -26,15 +25,8 @@ const ContactInfo = () => {
   ];
 
   return (
-    <div className="py-12 px-6 bg-[#F6F4EC] md:px-20">
-      <div className="flex gap-2 items-center">
-        <RiLeafFill className="text-[#44A05B]" />
-        <span className="text-[#44A05B]">Contact Us</span>
-      </div>
-      <h2 className="text-4xl font-bold text-[#202221] mb-4">Contact Info</h2>
-      <div className="h-[0.09rem] bg-[#44A05B] w-full mb-8" />
-
-      <div className="grid gap-8 md:grid-cols-2">
+    <div className="md:py-12 px-6 bg-[#F6F4EC] md:px-20">
+      <div className="grid gap-8">
         {offices.map((office, index) => (
           <div key={index} className="bg-white p-6 rounded-lg shadow-md">
             <h3 className="text-2xl font-semibold text-[#44A05B] mb-4">

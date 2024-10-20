@@ -33,6 +33,7 @@ import {
 import { FaWallet } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { ButtonComponent } from "./ButtonComponent";
+import { useSuccessDialog } from "@/context/DialogContext";
 
 const BookOrchid = () => {
   const basicPrices = {
@@ -49,6 +50,7 @@ const BookOrchid = () => {
 
   const { toast } = useToast();
   const router = useRouter();
+  const { openDialog } = useSuccessDialog();
 
   const [formStage, setFormStage] = useState(1);
   const [groverName, setGroverName] = useState("");
@@ -64,6 +66,12 @@ const BookOrchid = () => {
   const [open, setOpen] = useState(false);
   const [disableBookingBtn, setDisableBookingBtn] = useState(false);
 
+  //Errors
+  const [kanalsError, setKanalsError] = useState(false);
+  const [marlasError, setMarlasError] = useState(false);
+  const [nameError, setNameError] = useState(false);
+  const [phoneError, setPhoneError] = useState(false);
+
   const fillError = () => {
     toast({
       title: "Action required",
@@ -72,9 +80,54 @@ const BookOrchid = () => {
     });
   };
 
+  const checkName = () => {
+    const isValidName = /^[A-Za-z\s]+$/.test(groverName);
+    const isLengthValid = groverName.length >= 3;
+    if (isValidName && isLengthValid) {
+      return true;
+    }
+    setNameError(true);
+    return false;
+  };
+
+  const checkPhoneNumber = () => {
+    const isValidPhoneNumber = /^\d{10}$/.test(groverNumber);
+    if (isValidPhoneNumber) {
+      return true;
+    }
+    setPhoneError(true);
+    return false;
+  };
+
+  const checkKanal = () => {
+    if (Number(landSizeKanals) < 3) {
+      setKanalsError(true);
+      return false;
+    }
+    return true;
+  };
+
+  const checkMarla = () => {
+    if (Number(landSizeMarlas) > 19) {
+      setMarlasError(true);
+      return false;
+    }
+    return true;
+  };
+
   const goToNext = () => {
+    setNameError(false);
+    setPhoneError(false);
+    setKanalsError(false);
+    setMarlasError(false);
+    if (formStage === 1 && (!checkName() || !checkPhoneNumber())) {
+      return;
+    }
     if (formStage === 1 && (!groverAddress || !groverName || !groverNumber)) {
       fillError();
+      return;
+    }
+    if (formStage === 2 && (!checkKanal() || !checkMarla())) {
       return;
     }
     if (formStage === 2 && !landSizeKanals && !landSizeMarlas) {
@@ -91,7 +144,13 @@ const BookOrchid = () => {
     setFormStage((prevStep) => Math.min(prevStep + 1, 4));
   };
 
-  const goToPrev = () => setFormStage((prevStep) => Math.max(prevStep - 1, 1));
+  const goToPrev = () => {
+    setNameError(false);
+    setPhoneError(false);
+    setKanalsError(false);
+    setMarlasError(false);
+    setFormStage((prevStep) => Math.max(prevStep - 1, 1));
+  };
 
   const generateEstimation = () => {
     if (
@@ -244,12 +303,8 @@ const BookOrchid = () => {
     )
       .then(() => {
         setDisableBookingBtn(false);
+        openDialog();
         router.push("/");
-        toast({
-          title: "Booking Recorded",
-          description: "We will reach out to you soon.",
-          className: "bg-green-500 text-white border border-green-700",
-        });
       })
       .catch((err) => {
         setDisableBookingBtn(false);
@@ -303,13 +358,18 @@ const BookOrchid = () => {
             Name of Grover<span className="text-red-500">*</span>
           </label>
           <Input
-            className="bg-white mb-10 mt-2 lg:w-1/2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]"
+            className="bg-white my-2 lg:w-1/2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]"
             type="text"
             placeholder="Enter Name"
             id="groverName"
             value={groverName}
             onChange={(e) => setGroverName(e.target.value)}
           />
+          <p
+            className={`${nameError ? "" : "invisible"} mb-2 text-red-500 text-sm`}
+          >
+            Name should be greater than 3 characters and only contain alphabets
+          </p>
           <label htmlFor="groverAddress">
             Address<span className="text-red-500">*</span>
           </label>
@@ -325,13 +385,18 @@ const BookOrchid = () => {
             Phone Number<span className="text-red-500">*</span>
           </label>
           <Input
-            className="bg-white mb-40 md:mb-20 mt-2  lg:w-1/2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]"
-            type="text"
+            className="bg-white mb-2 mt-2  lg:w-1/2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]"
+            type="number"
             placeholder="Enter Phone Number"
             id="groverNumber"
             value={groverNumber}
             onChange={(e) => setGroverNumber(e.target.value)}
           />
+          <p
+            className={`${phoneError ? "" : "invisible"} mb-40 md:mb-20 text-red-500 text-sm`}
+          >
+            Enter valid 10 digit phone number
+          </p>
         </form>
 
         {/* Form step 2 */}
@@ -348,20 +413,29 @@ const BookOrchid = () => {
             value={landSizeKanals}
             onChange={(e) => setLandSizeKanals(e.target.value)}
           />
-          <p className="mb-10 text-red-500 text-sm">Minimum 3 kanals</p>
+          <p
+            className={`${kanalsError ? "" : "invisible"} mb-10 text-red-500 text-sm`}
+          >
+            Enter minimum 3 kanals
+          </p>
 
           <label htmlFor="landSizeMarlas">
             Land Size<span className="text-red-500">*</span>{" "}
             <span className="text-sm text-gray-500">(Marlas)</span>
           </label>
           <Input
-            className="bg-white mb-10 mt-2 lg:w-1/2  border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]"
+            className="bg-white mb-2 mt-2 lg:w-1/2  border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]"
             type="number"
             placeholder="Enter Land Size"
             id="landSizeMarlas"
             value={landSizeMarlas}
             onChange={(e) => setLandSizeMarlas(e.target.value)}
           />
+          <p
+            className={`${marlasError ? "" : "invisible"} mb-10 text-red-500 text-sm`}
+          >
+            Max 19 marlas allowed
+          </p>
           <div className="mb-40 md:mb-20 md:text-xl text-green-700">
             Total Land: {landSizeKanals ? `${landSizeKanals} Kanals ` : ""}
             {landSizeMarlas ? `${landSizeMarlas} Marlas` : ""}

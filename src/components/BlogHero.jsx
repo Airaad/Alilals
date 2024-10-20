@@ -11,8 +11,8 @@ const BlogHero = () => {
   };
 
   return (
-    <div className="relative h-screen">
-      <div className="absolute inset-0 bg-[url('/assets/images/pexels-vika-glitter-392079-1094071.jpg')] bg-cover bg-bottom">
+    <div className="relative h-[60vh] md:h-[70vh] lg:h-[80vh] xl:h-screen overflow-hidden">
+      <div className="absolute inset-0 bg-[url('/assets/images/pexels-vika-glitter-392079-1094071.jpg')] bg-cover bg-center bg-fixed">
         <div className="absolute inset-0 bg-black opacity-50"></div>
       </div>
 
@@ -20,7 +20,7 @@ const BlogHero = () => {
         <h1 className="text-white text-4xl md:text-6xl font-semibold tracking-wide mb-6">
           Knowledge
         </h1>
-        <p className="text-white text-lg w-[90%] lg:w-[50%] text-center font-light tracking-wide mb-6">
+        <p className="text-white text-lg w-[90%] lg:w-[60%] xl:w-[50%] text-center font-light tracking-wide mb-6">
           Discover the latest insights, trends, and tips from our expert
           writers. Our knowledge section covers a range of topics to keep you
           informed and inspired.

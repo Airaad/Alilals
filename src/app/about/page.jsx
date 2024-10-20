@@ -1,17 +1,19 @@
 import AboutCompany from "@/components/AboutCompany";
-import AboutHero from "@/components/AboutHero";
 import AboutHistory from "@/components/AboutHistory";
-import PageTitle from "@/components/PageTitle";
+import Banner from "@/components/Banner";
 import FAQ from "@/components/FAQ";
 import React from "react";
 
 const About = () => {
   return (
     <div>
-      <AboutHero />
+      <Banner
+        title="About Us"
+        backgroundImage="/assets/images/aboutus_hero.jpg"
+      />
       <AboutCompany />
-      <FAQ />
       <AboutHistory />
+      <FAQ />
     </div>
   );
 };

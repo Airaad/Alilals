@@ -3,8 +3,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-fade";
+import { useSuccessDialog } from "@/context/DialogContext";
+import SuccessDialog from "./SuccessDialog";
 
 const HeroVideo = () => {
+  const { isOpen, closeDialog } = useSuccessDialog();
+
   const slides = [
     {
       id: 1,
@@ -27,7 +31,7 @@ const HeroVideo = () => {
   ];
 
   return (
-    <div className="relative h-[80vh] md:h-[85vh] w-full">
+    <div className="relative w-full" style={{ aspectRatio: "16 / 9" }}>
       <video
         autoPlay
         muted
@@ -39,8 +43,10 @@ const HeroVideo = () => {
         Your browser does not support the video tag.
       </video>
 
+      {/* Overlay */}
       <div className="absolute top-0 left-0 w-full h-full bg-black opacity-40"></div>
 
+      <SuccessDialog isOpen={isOpen} onClose={closeDialog} />
       {/* <Swiper
         modules={[Autoplay, EffectFade]}
         effect="fade"

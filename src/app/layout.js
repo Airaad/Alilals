@@ -3,6 +3,7 @@ import "./globals.css";
 import Nav from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { Toaster } from "@/components/ui/toaster";
+import { SuccessDialogProvider } from "@/context/DialogContext";
 
 export const metadata = {
   title: "AlilalsAgrico",
@@ -17,11 +18,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" style={appFont}>
       <body>
-        <TopNav />
-        <Nav />
-        {children}
-        <Footer />
-        <Toaster />
+        <SuccessDialogProvider>
+          <TopNav />
+          <Nav />
+          {children}
+          <Footer />
+          <Toaster />
+        </SuccessDialogProvider>
       </body>
     </html>
   );

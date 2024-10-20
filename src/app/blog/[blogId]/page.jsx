@@ -96,11 +96,11 @@ export default function BlogDetail() {
           </div>
 
           {/* Blog Image */}
-          <div className="mb-8">
+          <div className="mb-8 relative w-full h-0 pb-[56.25%]">
             <img
               src={blog.imageUrl}
               alt={blog.title}
-              className="w-full h-[400px] object-cover rounded-lg shadow-lg"
+              className="absolute top-0 left-0 w-full h-full object-cover rounded-lg shadow-lg"
             />
           </div>
 
@@ -110,7 +110,9 @@ export default function BlogDetail() {
               <div dangerouslySetInnerHTML={{ __html: sanitizedHTML }}></div>
             </div>
             <blockquote className="bg-gray-100 p-4 border-l-4 border-[#44A05B] italic rounded-lg my-8">
-              "An orchard is more than a collection of trees—it's a living ecosystem that thrives through careful planning, rich soil, and sustainable practices."
+              "An orchard is more than a collection of trees—it's a living
+              ecosystem that thrives through careful planning, rich soil, and
+              sustainable practices."
             </blockquote>
           </div>
 

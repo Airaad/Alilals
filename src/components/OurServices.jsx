@@ -12,25 +12,25 @@ const fadeInUp = {
 const OurServices = () => {
   const sections = [
     {
-      title: "Plantation",
+      title: "Orchard Development",
       description:
         "Start your journey with our high-quality plants and expert guidance for a thriving orchard.",
       imgSrc: "/assets/images/pexels-alejandro-barron-21404-96715.jpg",
-      link: "service-info-plantation",
+      link: "services/orchard-development",
     },
     {
-      title: "Trellis Infrastructure",
+      title: "Soil Health Management",
       description:
-        "Enhance your orchard's productivity with our durable and efficient trellis systems designed for optimal growth.",
-      imgSrc: "/assets/images/pexels-quang-nguyen-vinh-222549-2132250.jpg",
-      link: "service-info-trellis",
+        "Optimize your orchard's growth with a comprehensive soil health analysis. Our tailored soil management solutions ensure your land is primed for success.",
+      imgSrc: "/assets/images/water-sprinkler-880970_1280.jpg",
+      link: "services/soil-health-management",
     },
     {
-      title: "Drip Irrigation",
+      title: "Expert Advice",
       description:
-        "Optimize water usage and ensure healthy plants with our advanced drip irrigation solutions tailored for your needs.",
-      imgSrc: "/assets/images/irrigation.jpeg",
-      link: "service-info-irrigation",
+        "Receive expert guidance on every aspect of orchard development. From planting to management, our seasoned professionals are here to help you thrive.",
+      imgSrc: "/assets/images/pexels-chokniti-khongchum-1197604-2280551.jpg",
+      link: "services/expert-advice",
     },
   ];
 

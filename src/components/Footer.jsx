@@ -52,33 +52,33 @@ export function Footer() {
                 <li className="mb-4">
                   <a
                     className="text-base font-medium text-white hover:text-gray-300"
-                    href="#"
+                    href="/"
                   >
-                    Features
+                    Home
                   </a>
                 </li>
                 <li className="mb-4">
                   <a
                     className="text-base font-medium text-white hover:text-gray-300"
-                    href="#"
+                    href="about"
                   >
-                    Pricing
+                    About
                   </a>
                 </li>
                 <li className="mb-4">
                   <a
                     className="text-base font-medium text-white hover:text-gray-300"
-                    href="#"
+                    href="contact"
                   >
-                    Affiliate Program
+                    Contact
                   </a>
                 </li>
                 <li>
                   <a
                     className="text-base font-medium text-white hover:text-gray-300"
-                    href="#"
+                    href="blog"
                   >
-                    Press Kit
+                    Blogs
                   </a>
                 </li>
               </ul>
@@ -95,15 +95,7 @@ export function Footer() {
                 <li className="mb-4">
                   <a
                     className="text-base font-medium text-white hover:text-gray-300"
-                    href="#"
-                  >
-                    Account
-                  </a>
-                </li>
-                <li className="mb-4">
-                  <a
-                    className="text-base font-medium text-white hover:text-gray-300"
-                    href="#"
+                    href="contact"
                   >
                     Help
                   </a>
@@ -111,7 +103,7 @@ export function Footer() {
                 <li className="mb-4">
                   <a
                     className="text-base font-medium text-white hover:text-gray-300"
-                    href="#"
+                    href="contact"
                   >
                     Contact Us
                   </a>
@@ -119,7 +111,7 @@ export function Footer() {
                 <li>
                   <a
                     className="text-base font-medium text-white hover:text-gray-300"
-                    href="#"
+                    href="contact"
                   >
                     Customer Support
                   </a>

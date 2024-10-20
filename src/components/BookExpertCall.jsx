@@ -24,17 +24,31 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { useSuccessDialog } from "@/context/DialogContext";
 
 const BookExpertCall = () => {
   const { toast } = useToast();
   const router = useRouter();
+  const { openDialog } = useSuccessDialog();
 
   const [formStage, setFormStage] = useState(1);
   const [groverName, setGroverName] = useState("");
   const [groverAddress, setGroverAddress] = useState("");
   const [groverNumber, setGroverNumber] = useState("");
   const [open, setOpen] = useState(false);
+  const [expertType, setExpertType] = useState("");
   const [disableBookingBtn, setDisableBookingBtn] = useState(false);
+
+  //Errors
+  const [nameError, setNameError] = useState(false);
+  const [phoneError, setPhoneError] = useState(false);
 
   const fillError = () => {
     toast({
@@ -44,8 +58,35 @@ const BookExpertCall = () => {
     });
   };
 
+  const checkName = () => {
+    const isValidName = /^[A-Za-z\s]+$/.test(groverName);
+    const isLengthValid = groverName.length >= 3;
+    if (isValidName && isLengthValid) {
+      return true;
+    }
+    setNameError(true);
+    return false;
+  };
+
+  const checkPhoneNumber = () => {
+    const isValidPhoneNumber = /^\d{10}$/.test(groverNumber);
+    if (isValidPhoneNumber) {
+      return true;
+    }
+    setPhoneError(true);
+    return false;
+  };
+
   const bookTest = () => {
-    if (formStage === 1 && (!groverName || !groverNumber || !groverAddress)) {
+    setNameError(false);
+    setPhoneError(false);
+    if (formStage === 1 && (!checkName() || !checkPhoneNumber())) {
+      return;
+    }
+    if (
+      formStage === 1 &&
+      (!groverName || !groverNumber || !groverAddress || !expertType)
+    ) {
       setOpen(false);
       fillError();
       return;
@@ -66,12 +107,13 @@ const BookExpertCall = () => {
       Name: groverName,
       Address: groverAddress,
       Phone: groverNumber,
+      ExpertType: expertType,
     }).toString();
 
     setDisableBookingBtn(true);
 
     fetch(
-      "https://script.google.com/macros/s/AKfycbxVuzhc1nVKmtkDBorR_gyIUTA0XBQIZDWw3_TAuMypr70vnnojbEljz_amnTzSzJgc/exec",
+      "https://script.google.com/macros/s/AKfycbxB79ElsXSP2UZupaRDAo6sRfB_rV2ydF6N3C-p1niX0rqmHQeGpueem4YZ94xMxKpm/exec",
       {
         method: "POST",
         headers: {
@@ -82,12 +124,8 @@ const BookExpertCall = () => {
     )
       .then(() => {
         setDisableBookingBtn(false);
+        openDialog();
         router.push("/");
-        toast({
-          title: "Booking Recorded",
-          description: "We will reach out to you soon.",
-          className: "bg-green-500 text-white border border-green-700",
-        });
       })
       .catch((err) => {
         setDisableBookingBtn(false);
@@ -133,13 +171,18 @@ const BookExpertCall = () => {
             Name of Grover<span className="text-red-500">*</span>
           </label>
           <Input
-            className="bg-white mb-10 mt-2 lg:w-1/2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]"
+            className="bg-white my-2 lg:w-1/2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]"
             type="text"
             placeholder="Enter Name"
             id="groverName"
             value={groverName}
             onChange={(e) => setGroverName(e.target.value)}
           />
+          <p
+            className={`${nameError ? "" : "invisible"} mb-2 text-red-500 text-sm`}
+          >
+            Name should be greater than 3 characters and only contain alphabets
+          </p>
           <label htmlFor="groverAddress">
             Address<span className="text-red-500">*</span>
           </label>
@@ -155,13 +198,36 @@ const BookExpertCall = () => {
             Phone Number<span className="text-red-500">*</span>
           </label>
           <Input
-            className="bg-white mb-40 md:mb-20 mt-2  lg:w-1/2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]"
-            type="text"
+            className="bg-white mb-2 mt-2  lg:w-1/2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]"
+            type="number"
             placeholder="Enter Phone Number"
             id="groverNumber"
             value={groverNumber}
             onChange={(e) => setGroverNumber(e.target.value)}
           />
+          <p
+            className={`${phoneError ? "" : "invisible"} mb-4 md:mb-2 text-red-500 text-sm`}
+          >
+            Enter valid 10 digit phone number
+          </p>
+          <label htmlFor="cropType">
+            Select Expert<span className="text-red-500">*</span>{" "}
+          </label>
+          <Select value={expertType} onValueChange={setExpertType} required>
+            <SelectTrigger className="bg-white lg:w-1/3 mb-40 md:mb-20 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]">
+              <SelectValue placeholder="Select expert" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="Plant Disease Expert">
+                Plant Disease Expert
+              </SelectItem>
+              <SelectItem value="Plant Nutrition Expert">
+                Plant Nutrition Expert
+              </SelectItem>
+              <SelectItem value="Soil Expert">Soil Expert</SelectItem>
+              <SelectItem value="Other">Other</SelectItem>
+            </SelectContent>
+          </Select>
         </form>
         {/*Control Buttons*/}
         <div className="absolute bottom-32 md:bottom-16 right-12 md:left-12 flex justify-between">
@@ -228,6 +294,14 @@ const BookExpertCall = () => {
                       </TableCell>
                       <TableCell className="text-right text-green-700">
                         {groverNumber}
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell className="font-medium text-green-700">
+                        Expert Type
+                      </TableCell>
+                      <TableCell className="text-right text-green-700">
+                        {expertType}
                       </TableCell>
                     </TableRow>
                   </TableBody>

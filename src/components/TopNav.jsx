@@ -24,10 +24,6 @@ const TopNav = () => {
           </div>
         </div>
 
-        <div className="flex items-center justify-center">
-          <GiAppleCore className="text-[#44A05B] h-6 w-6" aria-hidden="true" />
-        </div>
-
         <div className="flex gap-8 items-center">
           <div className="flex items-center gap-1">
             <IoCallOutline className="text-[#44A05B]" />

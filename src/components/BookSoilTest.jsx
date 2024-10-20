@@ -25,10 +25,19 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { useSuccessDialog } from "@/context/DialogContext";
 
 const BookSoilTest = () => {
   const { toast } = useToast();
   const router = useRouter();
+  const { openDialog } = useSuccessDialog();
 
   const [formStage, setFormStage] = useState(1);
   const [groverName, setGroverName] = useState("");
@@ -41,6 +50,10 @@ const BookSoilTest = () => {
   const [open, setOpen] = useState(false);
   const [disableBookingBtn, setDisableBookingBtn] = useState(false);
 
+  //Errors
+  const [nameError, setNameError] = useState(false);
+  const [phoneError, setPhoneError] = useState(false);
+
   const fillError = () => {
     toast({
       title: "Action required",
@@ -49,7 +62,31 @@ const BookSoilTest = () => {
     });
   };
 
+  const checkName = () => {
+    const isValidName = /^[A-Za-z\s]+$/.test(groverName);
+    const isLengthValid = groverName.length >= 3;
+    if (isValidName && isLengthValid) {
+      return true;
+    }
+    setNameError(true);
+    return false;
+  };
+
+  const checkPhoneNumber = () => {
+    const isValidPhoneNumber = /^\d{10}$/.test(groverNumber);
+    if (isValidPhoneNumber) {
+      return true;
+    }
+    setPhoneError(true);
+    return false;
+  };
+
   const goToNext = () => {
+    setNameError(false);
+    setPhoneError(false);
+    if (formStage === 1 && (!checkName() || !checkPhoneNumber())) {
+      return;
+    }
     if (formStage === 1 && (!groverAddress || !groverName || !groverNumber)) {
       fillError();
       return;
@@ -58,17 +95,14 @@ const BookSoilTest = () => {
       fillError();
       return;
     }
-    if (formStage === 2 && Number(landSizeKanals) < 3) {
-      toast({
-        title: "Enter minimum 3 kanals",
-        className: "bg-red-500 text-white border border-red-700",
-      });
-      return;
-    }
     setFormStage((prevStep) => Math.min(prevStep + 1, 3));
   };
 
-  const goToPrev = () => setFormStage((prevStep) => Math.max(prevStep - 1, 1));
+  const goToPrev = () => {
+    setNameError(false);
+    setPhoneError(false);
+    setFormStage((prevStep) => Math.max(prevStep - 1, 1));
+  };
 
   const bookTest = () => {
     if (formStage === 3 && (!cropType || !fertilizerDate)) {
@@ -122,12 +156,8 @@ const BookSoilTest = () => {
     )
       .then(() => {
         setDisableBookingBtn(false);
+        openDialog();
         router.push("/");
-        toast({
-          title: "Booking Recorded",
-          description: "We will reach out to you soon.",
-          className: "bg-green-500 text-white border border-green-700",
-        });
       })
       .catch((err) => {
         setDisableBookingBtn(false);
@@ -177,7 +207,7 @@ const BookSoilTest = () => {
           <div
             className={`rounded-tr-xl text-xs md:text-sm px-5 py-3 border border-[#035803] ${formStage === 3 ? "bg-[#035803] text-white" : "bg-white"}`}
           >
-            Crop Type
+            Crop Details
           </div>
         </div>
           {/* Form step 1 */}
@@ -186,13 +216,18 @@ const BookSoilTest = () => {
             Name of Grover<span className="text-red-500">*</span>
           </label>
           <Input
-            className="bg-white mb-10 mt-2 lg:w-1/2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]"
+            className="bg-white my-2 lg:w-1/2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]"
             type="text"
             placeholder="Enter Name"
             id="groverName"
             value={groverName}
             onChange={(e) => setGroverName(e.target.value)}
           />
+          <p
+            className={`${nameError ? "" : "invisible"} mb-2 text-red-500 text-sm`}
+          >
+            Name should be greater than 3 characters and only contain alphabets
+          </p>
           <label htmlFor="groverAddress">
             Address<span className="text-red-500">*</span>
           </label>
@@ -208,13 +243,18 @@ const BookSoilTest = () => {
             Phone Number<span className="text-red-500">*</span>
           </label>
           <Input
-            className="bg-white mb-40 md:mb-20 mt-2  lg:w-1/2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]"
-            type="text"
+            className="bg-white mb-2 mt-2  lg:w-1/2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]"
+            type="number"
             placeholder="Enter Phone Number"
             id="groverNumber"
             value={groverNumber}
             onChange={(e) => setGroverNumber(e.target.value)}
           />
+          <p
+            className={`${phoneError ? "" : "invisible"} mb-40 md:mb-20 text-red-500 text-sm`}
+          >
+            Enter valid 10 digit phone number
+          </p>
         </form>
         {/* Form step 2 */}
         <form className={`py-10 px-10 ${formStage === 2 ? "" : "hidden"}`}>
@@ -223,14 +263,13 @@ const BookSoilTest = () => {
             <span className="text-sm text-gray-500">(Kanals)</span>
           </label>
           <Input
-            className="bg-white mb-2 mt-2 lg:w-1/2  border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]"
+            className="bg-white mb-10 mt-2 lg:w-1/2  border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]"
             type="number"
             placeholder="Enter Land Size"
             id="landSizeKanals"
             value={landSizeKanals}
             onChange={(e) => setLandSizeKanals(e.target.value)}
           />
-          <p className="mb-10 text-red-500 text-sm">Minimum 3 kanals</p>
 
           <label htmlFor="landSizeMarlas">
             Land Size<span className="text-red-500">*</span>{" "}
@@ -254,16 +293,23 @@ const BookSoilTest = () => {
           <label htmlFor="cropType">
             Crop Type<span className="text-red-500">*</span>{" "}
           </label>
-          <Input
-            className="bg-white mb-10 mt-2 lg:w-1/2  border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]"
-            type="text"
-            placeholder="Enter Crop Type"
-            id="cropType"
-            value={cropType}
-            onChange={(e) => setCropType(e.target.value)}
-          />
+          <Select value={cropType} onValueChange={setCropType} required>
+            <SelectTrigger className="bg-white lg:w-1/3 mb-10 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]">
+              <SelectValue placeholder="Select crop type" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="Barren Land">Barren Land</SelectItem>
+              <SelectItem value="Vegetable">Vegetable</SelectItem>
+              <SelectItem value="Cereals">Cereals</SelectItem>
+              <SelectItem value="Orchard">Orchard</SelectItem>
+              <SelectItem value="High Density Orchard">
+                High Density Orchard
+              </SelectItem>
+              <SelectItem value="Paddy">Paddy</SelectItem>
+            </SelectContent>
+          </Select>
           <label htmlFor="fertilizerDate">
-            Last Date of Fertilizer Applied
+            Last Fertilizer Application Date
             <span className="text-red-500">*</span>{" "}
           </label>
           <Input
@@ -375,7 +421,7 @@ const BookSoilTest = () => {
                     </TableRow>
                     <TableRow>
                       <TableCell className="font-medium text-green-700">
-                        Last Date of Fertilizer Applied
+                        Last Fertilizer Application Date
                       </TableCell>
                       <TableCell className="text-right text-green-700">
                         {fertilizerDate}{" "}
