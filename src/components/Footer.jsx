@@ -46,7 +46,7 @@ export function Footer() {
           <div className="w-full p-6 md:w-1/2 lg:w-2/12">
             <div className="h-full">
               <h3 className="tracking-px mb-9 text-xs font-semibold uppercase text-gray-400">
-                Company
+                Pages
               </h3>
               <ul>
                 <li className="mb-4">
@@ -89,23 +89,23 @@ export function Footer() {
           <div className="w-full p-6 md:w-1/2 lg:w-2/12">
             <div className="h-full">
               <h3 className="tracking-px mb-9 text-xs font-semibold uppercase text-gray-400">
-                Support
+                Company
               </h3>
               <ul>
                 <li className="mb-4">
                   <a
                     className="text-base font-medium text-white hover:text-gray-300"
-                    href="contact"
+                    href="#"
                   >
-                    Help
+                    Downloads
                   </a>
                 </li>
                 <li className="mb-4">
                   <a
                     className="text-base font-medium text-white hover:text-gray-300"
-                    href="contact"
+                    href="gallery"
                   >
-                    Contact Us
+                    Gallery
                   </a>
                 </li>
                 <li>
