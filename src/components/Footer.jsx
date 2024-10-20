@@ -60,7 +60,7 @@ export function Footer() {
                 <li className="mb-4">
                   <a
                     className="text-base font-medium text-white hover:text-gray-300"
-                    href="about"
+                    href="/about"
                   >
                     About
                   </a>
@@ -68,7 +68,7 @@ export function Footer() {
                 <li className="mb-4">
                   <a
                     className="text-base font-medium text-white hover:text-gray-300"
-                    href="contact"
+                    href="/contact"
                   >
                     Contact
                   </a>
@@ -76,7 +76,7 @@ export function Footer() {
                 <li>
                   <a
                     className="text-base font-medium text-white hover:text-gray-300"
-                    href="blog"
+                    href="/blog"
                   >
                     Blogs
                   </a>
@@ -103,7 +103,7 @@ export function Footer() {
                 <li className="mb-4">
                   <a
                     className="text-base font-medium text-white hover:text-gray-300"
-                    href="gallery"
+                    href="/gallery"
                   >
                     Gallery
                   </a>
@@ -111,7 +111,7 @@ export function Footer() {
                 <li>
                   <a
                     className="text-base font-medium text-white hover:text-gray-300"
-                    href="contact"
+                    href="/contact"
                   >
                     Customer Support
                   </a>
