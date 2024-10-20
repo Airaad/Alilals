@@ -18,14 +18,14 @@ const TrellisBooking = () => {
               title="High Density Orchard"
               description="Ready to start your own orchard? Secure your plot with us today and embark on your journey towards sustainable agriculture!"
               image="/assets/images/apples-1873078_1280.jpg"
-              link="orchard-development/book-orchard"
+              link="book-orchard"
               delay={0.4}
             />
             <ServiceCard
               title="Drip Irrigation"
               description="Save water and enhance crop health with drip irrigation, delivering precise watering directly to plant roots for optimal growth and efficiency."
               image="/assets/images/irrigation-2402568_1280.jpg"
-              link="orchard-development/book-drip-irrigation"
+              link="book-drip-irrigation"
               delay={0.6}
             />
           </div>

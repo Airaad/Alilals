@@ -18,14 +18,14 @@ const page = () => {
               title="High Density Orchard"
               description="Ready to start your own orchard? Secure your plot with us today and embark on your journey towards sustainable agriculture!"
               image="/assets/images/apples-1873078_1280.jpg"
-              link="services/orchard-development/book-orchard"
+              link="/services/orchard-development/book-orchard"
               delay={0.4}
             />
             <ServiceCard
               title="Expert Call"
               description="Get personalized advice from our seasoned experts on orchard management, soil health, and sustainable practices. Book your consultation today."
               image="/assets/images/call-center-8643477_1280.jpg"
-              link="services/expert-advice/expert"
+              link="/services/expert-advice/expert"
               delay={0.6}
             />
           </div>
