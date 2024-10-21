@@ -10,7 +10,7 @@ import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 const FeaturedWork = () => {
   const [projects, setProjects] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const itemsPerPage = 3; // Set the number of items for desktop
+  const [itemsPerPage, setItemsPerPage] = useState(3); // Default for desktop
 
   useEffect(() => {
     if (!projects.length) {
@@ -18,7 +18,25 @@ const FeaturedWork = () => {
         setProjects(data);
       });
     }
-  }, []);
+
+    // Function to handle screen resizing
+    const handleResize = () => {
+      if (window.innerWidth <= 640) {
+        setItemsPerPage(1); // Show 1 item on mobile
+      } else {
+        setItemsPerPage(3); // Show 3 items on larger screens
+      }
+    };
+
+    // Set itemsPerPage based on initial screen size
+    handleResize();
+
+    // Add resize event listener
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup event listener
+    return () => window.removeEventListener("resize", handleResize);
+  }, [projects]);
 
   const handleNext = () => {
     if (currentIndex < projects.length - itemsPerPage) {

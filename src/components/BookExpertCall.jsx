@@ -153,7 +153,7 @@ const BookExpertCall = () => {
       <div className="font-[Raleway] mb-10">
         <b>
           Before we book your call with our expert, we need to know a little
-          about your?
+          about you and your need!
         </b>{" "}
         Fill this form so that we can contact you later.
       </div>

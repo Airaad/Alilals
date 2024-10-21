@@ -15,7 +15,7 @@ const ExpertAdvice = () => {
       {/* Description Section */}
       <div className="my-8 px-4 md:px-16 text-justify">
         <h2 className="text-center text-4xl md:text-5xl font-semibold text-[#44A05B] tracking-wide my-14">
-          About Services
+          About Service
         </h2>
         <p className="text-gray-600">
           In addition to management practices, <b>expert advice</b> plays a

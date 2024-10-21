@@ -163,7 +163,7 @@ const ContactForm = () => {
               />
             </div>
           </div>
-          <div className="mb-4">
+          <div className="my-4">
             <label className="block text-[#636363] mb-2">Query</label>
             <textarea
               className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]"

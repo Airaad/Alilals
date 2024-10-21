@@ -19,7 +19,7 @@ const Contact = () => {
         <h2 className="text-4xl font-bold text-[#202221] mb-4">Contact Info</h2>
         <div className="h-[0.09rem] bg-[#44A05B] w-full mb-8" />
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-[40%,60%]">
+      <div className="grid grid-cols-1 lg:grid-cols-[40%,60%]">
         <ContactInfo />
         <ContactForm />
       </div>
