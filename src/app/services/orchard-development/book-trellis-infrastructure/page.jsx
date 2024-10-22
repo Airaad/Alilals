@@ -1,4 +1,4 @@
-import BookOrchid from "@/components/BookOrchid";
+import BookTrellis from "@/components/BookTrellis";
 import ServiceCard from "@/components/ServiceCard";
 import React from "react";
 
@@ -11,7 +11,7 @@ const TrellisBooking = () => {
         </h1>
         <div className="grid md:grid-cols-[70%_30%] gap-16">
           <div>
-            <BookOrchid />
+            <BookTrellis />
           </div>
           <div className="flex flex-col items-center gap-5 md:items-start">
             <ServiceCard

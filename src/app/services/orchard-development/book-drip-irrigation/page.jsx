@@ -1,4 +1,4 @@
-import BookOrchid from "@/components/BookOrchid";
+import BookDripIrrigation from "@/components/BookDripIrrigation";
 import ServiceCard from "@/components/ServiceCard";
 import React from "react";
 
@@ -7,11 +7,11 @@ const DripBooking = () => {
     <>
       <div className="relative w-full bg-white py-10 md:py-20 md:px-24 xl:px-48 px-5">
         <h1 className="text-3xl md:text-5xl text-center mb-10 md:mb-16 text-[#44A05B]">
-          Fill the form to book drip irrigation
+          Fill the form to book drip irrigation session
         </h1>
         <div className="grid md:grid-cols-[70%_30%] gap-16">
           <div>
-            <BookOrchid />
+            <BookDripIrrigation />
           </div>
           <div className="flex flex-col gap-5 items-center md:items-start">
             <ServiceCard

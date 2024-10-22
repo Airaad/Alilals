@@ -57,9 +57,9 @@ const ContactForm = () => {
     e.preventDefault();
     const formData = new FormData(e.target); // Extract form data
 
-    const name = formData.get("name");
-    const email = formData.get("email");
-    const phone = formData.get("phone");
+    const name = formData.get("Name");
+    const email = formData.get("Email");
+    const phone = formData.get("Phone");
     if (!checkName(name) || !checkEmail(email) || !checkPhoneNumber(phone)) {
       return;
     }
@@ -108,7 +108,7 @@ const ContactForm = () => {
               <label className="block text-[#636363] mb-2">Name</label>
               <input
                 type="text"
-                name="name"
+                name="Name"
                 className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]"
                 placeholder="Your Name"
                 required
@@ -124,7 +124,7 @@ const ContactForm = () => {
               <label className="block text-[#636363] mb-2">Email</label>
               <input
                 type="text"
-                name="email"
+                name="Email"
                 className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]"
                 placeholder="Your Email"
                 required
@@ -141,7 +141,7 @@ const ContactForm = () => {
               <label className="block text-[#636363] mb-2">Phone</label>
               <input
                 type="number"
-                name="phone"
+                name="Phone"
                 className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]"
                 placeholder="Your Phone"
                 required
