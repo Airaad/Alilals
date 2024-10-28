@@ -1,34 +1,23 @@
 "use client";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, EffectFade } from "swiper/modules";
+import { useState, useEffect } from "react";
 import "swiper/css";
 import "swiper/css/effect-fade";
 import { useSuccessDialog } from "@/context/DialogContext";
 import SuccessDialog from "./SuccessDialog";
+import AlertNotification from "./AlertNotification";
+import { getAlert } from "../../firebase/alert/read";
 
 const HeroVideo = () => {
-  const { isOpen, closeDialog } = useSuccessDialog();
+  const { isOpen, closeDialog, alertOpen, closeAlert } = useSuccessDialog();
+  const [alert, setAlert] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const slides = [
-    {
-      id: 1,
-      title: "Nurturing Growth, Cultivating Success",
-      description:
-        "Explore our comprehensive range of products and services designed to support every stage of your farming journey.",
-    },
-    {
-      id: 2,
-      title: "Cultivating the Future of Farming",
-      description:
-        "Explore innovative solutions and cutting-edge technologies designed to enhance your agricultural practices.",
-    },
-    {
-      id: 3,
-      title: "Grow Beyond Limits",
-      description:
-        "Discover resources and tools that empower farmers to achieve more. From modern farming techniques to expert advice.",
-    },
-  ];
+  useEffect(() => {
+    getAlert().then((data) => {
+      setAlert(data);
+      setLoading(false);
+    });
+  }, [alert]);
 
   return (
     <div className="relative w-full" style={{ aspectRatio: "16 / 9" }}>
@@ -47,26 +36,17 @@ const HeroVideo = () => {
       <div className="absolute top-0 left-0 w-full h-full bg-black opacity-40"></div>
 
       <SuccessDialog isOpen={isOpen} onClose={closeDialog} />
-      {/* <Swiper
-        modules={[Autoplay, EffectFade]}
-        effect="fade"
-        autoplay={{ delay: 3000, disableOnInteraction: false }}
-        fadeEffect={{ crossFade: true }}
-        loop={true}
-        className="relative z-10 h-full flex items-center justify-center"
-      >
-        {slides.map((slide) => (
-          <SwiperSlide key={slide.id}>
-            <div className="text-center text-white flex flex-col items-center h-full justify-center gap-4">
-              <h2 className="font-semibold text-lg md:text-xl">
-                WELCOME TO <span className="text-[#44A05B]">ALILALS!</span>
-              </h2>
-              <h3 className="text-4xl md:text-6xl font-bold">{slide.title}</h3>
-              <p className="text-md md:text-lg">{slide.description}</p>
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper> */}
+      {loading ? (
+        ""
+      ) : alert?.publish ? (
+        <AlertNotification
+          alert={alert}
+          isOpen={alertOpen}
+          onClose={closeAlert}
+        />
+      ) : (
+        ""
+      )}
     </div>
   );
 };

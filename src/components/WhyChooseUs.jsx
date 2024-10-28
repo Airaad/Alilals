@@ -28,7 +28,6 @@ export function WhyChooseUs() {
     if (!statsData.length) {
       getAllStats().then((data) => {
         setStatsData(data);
-        console.log("setting ");
       });
     }
 

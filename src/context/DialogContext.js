@@ -7,12 +7,25 @@ const SuccessDialogContext = createContext();
 // Create a provider component
 export const SuccessDialogProvider = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [alertOpen, setAlertOpen] = useState(true);
 
   const openDialog = () => setIsOpen(true);
   const closeDialog = () => setIsOpen(false);
 
+  const openAlert = () => setAlertOpen(true);
+  const closeAlert = () => setAlertOpen(false);
+
   return (
-    <SuccessDialogContext.Provider value={{ isOpen, openDialog, closeDialog }}>
+    <SuccessDialogContext.Provider
+      value={{
+        isOpen,
+        openDialog,
+        closeDialog,
+        alertOpen,
+        openAlert,
+        closeAlert,
+      }}
+    >
       {children}
     </SuccessDialogContext.Provider>
   );

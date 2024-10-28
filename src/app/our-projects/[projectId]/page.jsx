@@ -130,7 +130,7 @@ const Page = () => {
                     <FaClock className="mr-2 text-[#44A05B]" /> Project Duration
                   </td>
                   <td className="py-4 px-6">
-                    From {project.start} <br/> To {project.end}
+                    From {project.start} <br /> To {project.end}
                   </td>
                 </tr>
                 <tr className="hover:bg-gray-100 transition-all">
