@@ -8,19 +8,19 @@ const ContactInfo = () => {
       address:
         "56 Murad House, Pine Lane-8, Kursk Rajbagh, Srinagar-190008, Jammu & Kashmir",
       phone: "0194-796-1490",
-      email: "info@alilas.com",
+      email: "info@alilals.com",
     },
     {
       name: "Sub Office",
-      address: "Ziraat Orchards Circular Road, That Crossing, Pulwama",
+      address: "Aash Office Circular Road, Tahab Crossing, Pulwama",
       phone: "8899-888-983",
-      email: "info@alilas.com",
+      email: "info@alilals.com",
     },
     {
       name: "Soil Testing Lab",
-      address: "Alamdar Reoad, Chadora Near; Khyber Girls School",
+      address: "Alamdar Road, Chadoora, near Khyber Girls School",
       phone: "0195-146-4419",
-      email: "info@alilas.com",
+      email: "info@alilals.com",
     },
   ];
 

@@ -41,8 +41,8 @@ const BookDripIrrigation = () => {
   const [groverName, setGroverName] = useState("");
   const [groverAddress, setGroverAddress] = useState("");
   const [groverNumber, setGroverNumber] = useState("");
-  const [landSizeKanals, setLandSizeKanals] = useState("");
-  const [landSizeMarlas, setLandSizeMarlas] = useState("");
+  const [landSizeKanals, setLandSizeKanals] = useState("1");
+  const [landSizeMarlas, setLandSizeMarlas] = useState("0");
   const [open, setOpen] = useState(false);
   const [disableBookingBtn, setDisableBookingBtn] = useState(false);
 
@@ -80,15 +80,15 @@ const BookDripIrrigation = () => {
   };
 
   const checkKanal = () => {
-    // if (Number(landSizeKanals) < 3) {
-    //   setKanalsError(true);
-    //   return false;
-    // }
+    if (Number(landSizeKanals) < 1) {
+      setKanalsError(true);
+      return false;
+    }
     return true;
   };
 
   const checkMarla = () => {
-    if (Number(landSizeMarlas) > 19) {
+    if (Number(landSizeMarlas) > 19 || Number(landSizeMarlas) < 0) {
       setMarlasError(true);
       return false;
     }
@@ -138,8 +138,8 @@ const BookDripIrrigation = () => {
     setGroverName("");
     setGroverAddress("");
     setGroverNumber("");
-    setLandSizeKanals("");
-    setLandSizeMarlas("");
+    setLandSizeKanals("1");
+    setLandSizeMarlas("0");
     toast({
       title: "Form Resetted",
       className: "bg-red-500 text-white border border-red-700",
@@ -279,6 +279,7 @@ const BookDripIrrigation = () => {
             placeholder="Enter Phone Number"
             id="groverNumber"
             value={groverNumber}
+            min={1}
             onChange={(e) => setGroverNumber(e.target.value)}
           />
           <p
@@ -291,7 +292,7 @@ const BookDripIrrigation = () => {
         {/* Form step 2 */}
         <form className={`py-10 px-10 ${formStage === 2 ? "" : "hidden"}`}>
           <label htmlFor="landSizeKanals">
-            Land Size<span className="text-red-500">*</span>{" "}
+            Land Area<span className="text-red-500">*</span>{" "}
             <span className="text-sm text-gray-500">(Kanals)</span>
           </label>
           <Input
@@ -300,12 +301,13 @@ const BookDripIrrigation = () => {
             placeholder="Enter Land Size"
             id="landSizeKanals"
             value={landSizeKanals}
+            min={1}
             onChange={(e) => setLandSizeKanals(e.target.value)}
           />
           <p
             className={`${kanalsError ? "" : "invisible"} mb-10 text-red-500 text-sm`}
           >
-            Enter minimum 3 kanals
+            Enter minimum 1 kanals
           </p>
 
           <label htmlFor="landSizeMarlas">
@@ -318,12 +320,14 @@ const BookDripIrrigation = () => {
             placeholder="Enter Land Size"
             id="landSizeMarlas"
             value={landSizeMarlas}
+            min={0}
+            max={19}
             onChange={(e) => setLandSizeMarlas(e.target.value)}
           />
           <p
             className={`${marlasError ? "" : "invisible"} mb-10 text-red-500 text-sm`}
           >
-            Max 19 marlas allowed
+            Marlas should be between 0-19 only
           </p>
           <div className="mb-40 md:mb-20 md:text-xl text-green-700">
             Total Land: {landSizeKanals ? `${landSizeKanals} Kanals ` : ""}
@@ -444,13 +448,19 @@ const BookDripIrrigation = () => {
             </div>
             <ul className="list-disc list-inside space-y-2 text-gray-500 text-center md:text-start">
               <li className=" hover:text-[#035803] transition duration-300 ease-in-out">
-                JAIN irrigation fittings
+                JAIN irrigation fittings.
               </li>
               <li className=" hover:text-[#035803] transition duration-300 ease-in-out">
-                NETAFM Drip accessories
+                NETAFM Drip accessories.
               </li>
               <li className=" hover:text-[#035803] transition duration-300 ease-in-out">
-                APL Apollo uPVC hose
+                APL Apollo uPVC hose.
+              </li>
+              <li className=" hover:text-[#035803] transition duration-300 ease-in-out">
+                Transport charges extra.
+              </li>
+              <li className=" hover:text-[#035803] transition duration-300 ease-in-out">
+                GST @18% extra.
               </li>
             </ul>
             <div className="mt-3 text-sm text-gray-500">

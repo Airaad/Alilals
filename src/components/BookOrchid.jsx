@@ -56,8 +56,8 @@ const BookOrchid = () => {
   const [groverName, setGroverName] = useState("");
   const [groverAddress, setGroverAddress] = useState("");
   const [groverNumber, setGroverNumber] = useState("");
-  const [landSizeKanals, setLandSizeKanals] = useState("");
-  const [landSizeMarlas, setLandSizeMarlas] = useState("");
+  const [landSizeKanals, setLandSizeKanals] = useState("3");
+  const [landSizeMarlas, setLandSizeMarlas] = useState("0");
   const [rowToRowDistance, setRowToRowDistance] = useState("");
   const [poleToPoleDistance, setPoleToPoleDistance] = useState("");
   const [postType, setPostType] = useState("");
@@ -108,7 +108,7 @@ const BookOrchid = () => {
   };
 
   const checkMarla = () => {
-    if (Number(landSizeMarlas) > 19) {
+    if (Number(landSizeMarlas) > 19 || Number(landSizeMarlas) < 0) {
       setMarlasError(true);
       return false;
     }
@@ -169,8 +169,8 @@ const BookOrchid = () => {
     setGroverName("");
     setGroverAddress("");
     setGroverNumber("");
-    setLandSizeKanals("");
-    setLandSizeMarlas("");
+    setLandSizeKanals("3");
+    setLandSizeMarlas("0");
     setRowToRowDistance("");
     setPoleToPoleDistance("");
     setPostType("");
@@ -234,9 +234,9 @@ const BookOrchid = () => {
     const perWireCost = basicPrices.wire;
 
     const multipliers = {
-      8: { 4: 820, 5: 1025 },
-      9: { 4: 748, 5: 935 },
-      10: { 4: 640, 5: 800 },
+      8: { 4: 820, 5: 1025, 6: 1230 },
+      9: { 4: 748, 5: 935, 6: 1122 },
+      10: { 4: 640, 5: 800, 6: 960 },
     };
 
     const totalWireCost =
@@ -383,6 +383,7 @@ const BookOrchid = () => {
             placeholder="Enter Phone Number"
             id="groverNumber"
             value={groverNumber}
+            min={1}
             onChange={(e) => setGroverNumber(e.target.value)}
           />
           <p
@@ -395,7 +396,7 @@ const BookOrchid = () => {
         {/* Form step 2 */}
         <form className={`py-10 px-10 ${formStage === 2 ? "" : "hidden"}`}>
           <label htmlFor="landSizeKanals">
-            Land Size<span className="text-red-500">*</span>{" "}
+            Land Area<span className="text-red-500">*</span>{" "}
             <span className="text-sm text-gray-500">(Kanals)</span>
           </label>
           <Input
@@ -404,6 +405,7 @@ const BookOrchid = () => {
             placeholder="Enter Land Size"
             id="landSizeKanals"
             value={landSizeKanals}
+            min={3}
             onChange={(e) => setLandSizeKanals(e.target.value)}
           />
           <p
@@ -413,7 +415,7 @@ const BookOrchid = () => {
           </p>
 
           <label htmlFor="landSizeMarlas">
-            Land Size<span className="text-red-500">*</span>{" "}
+            Land Area<span className="text-red-500">*</span>{" "}
             <span className="text-sm text-gray-500">(Marlas)</span>
           </label>
           <Input
@@ -422,12 +424,14 @@ const BookOrchid = () => {
             placeholder="Enter Land Size"
             id="landSizeMarlas"
             value={landSizeMarlas}
+            min={0}
+            max={19}
             onChange={(e) => setLandSizeMarlas(e.target.value)}
           />
           <p
             className={`${marlasError ? "" : "invisible"} mb-10 text-red-500 text-sm`}
           >
-            Max 19 marlas allowed
+            Marlas should be between 0-19 only
           </p>
           <div className="mb-40 md:mb-20 md:text-xl text-green-700">
             Total Land: {landSizeKanals ? `${landSizeKanals} Kanals ` : ""}
@@ -517,6 +521,7 @@ const BookOrchid = () => {
             <SelectContent>
               <SelectItem value="4">4 line</SelectItem>
               <SelectItem value="5">5 line</SelectItem>
+              <SelectItem value="6">6 line</SelectItem>
             </SelectContent>
           </Select>
         </form>

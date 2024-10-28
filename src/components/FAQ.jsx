@@ -40,8 +40,8 @@ const FAQ = () => {
   ];
 
   return (
-    <div className="bg-[#142827] flex flex-col-reverse items-center lg:items-start md:justify-between md:px-12 lg:flex-row py-12">
-      <div className="w-full lg:w-1/2 px-6 pl-8">
+    <div className="bg-[#142827] py-12 px-6 md:px-12">
+      <div className="px-6 lg:pl-8">
         <div className="flex gap-2 items-center">
           <RiLeafFill className="text-[#44A05B]" />
           <span className="text-[#44A05B]">FAQ</span>
@@ -53,40 +53,30 @@ const FAQ = () => {
           Learn more about our agriculture company through these common
           questions.
         </p>
-        <div className="h-[0.09rem] bg-[#44A05B] w-full my-5" />
+        <div className="h-[0.09rem] bg-[#44A05B] my-5" />
 
-        {faqs.map((faq, index) => (
-          <div key={index} className="mb-4">
-            <button
-              onClick={() => toggleQuestion(index)}
-              className="w-full flex justify-between items-center py-3 px-4 text-left bg-[#F6F4EC] rounded-md hover:bg-gray-300 transition duration-300"
-            >
-              <span className="text-lg text-[#122F2A] font-medium">
-                {faq.question}
-              </span>
-              <ChevronDownIcon
-                className={`h-5 w-5 transition-transform ${
-                  activeIndex === index ? "rotate-180" : ""
-                }`}
-              />
-            </button>
-            <div
-              className={`overflow-hidden transition-all duration-500 ${
-                activeIndex === index ? "max-h-40" : "max-h-0"
-              }`}
-            >
-              <p className="p-4 text-white">{faq.answer}</p>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          {faqs.map((faq, index) => (
+            <div key={index} className="mb-4">
+              <button
+                onClick={() => toggleQuestion(index)}
+                className="w-full flex justify-between items-center py-3 px-4 text-left bg-[#F6F4EC] rounded-md hover:bg-gray-300 transition duration-300"
+              >
+                <span className="text-lg text-[#122F2A] font-medium">
+                  {faq.question}
+                </span>
+                <ChevronDownIcon
+                  className={`h-5 w-5 transition-transform ${activeIndex === index ? "rotate-180" : ""}`}
+                />
+              </button>
+              <div
+                className={`overflow-hidden transition-all duration-500 ${activeIndex === index ? "max-h-40" : "max-h-0"}`}
+              >
+                <p className="p-4 text-white">{faq.answer}</p>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
-
-      <div className="lg:w-[30%] md:w-[50%] w-full mb-6 md:mb-0 p-8">
-        <img
-          src="assets/images/pexels-pixabay-255501.jpg"
-          alt="Company Image"
-          className="lg:w-[600px] lg:h-[600px] object-cover rounded-lg shadow-md"
-        />
+          ))}
+        </div>
       </div>
     </div>
   );

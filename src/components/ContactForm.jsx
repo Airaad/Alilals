@@ -144,6 +144,7 @@ const ContactForm = () => {
                 name="Phone"
                 className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]"
                 placeholder="Your Phone"
+                min={0}
                 required
               />
               <p

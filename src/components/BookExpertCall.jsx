@@ -203,6 +203,7 @@ const BookExpertCall = () => {
             placeholder="Enter Phone Number"
             id="groverNumber"
             value={groverNumber}
+            min={1}
             onChange={(e) => setGroverNumber(e.target.value)}
           />
           <p

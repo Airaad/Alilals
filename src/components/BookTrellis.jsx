@@ -49,8 +49,8 @@ const BookTrellis = () => {
   const [groverName, setGroverName] = useState("");
   const [groverAddress, setGroverAddress] = useState("");
   const [groverNumber, setGroverNumber] = useState("");
-  const [landSizeKanals, setLandSizeKanals] = useState("");
-  const [landSizeMarlas, setLandSizeMarlas] = useState("");
+  const [landSizeKanals, setLandSizeKanals] = useState("1");
+  const [landSizeMarlas, setLandSizeMarlas] = useState("0");
   const [trellisType, setTrellisType] = useState("");
   const [open, setOpen] = useState(false);
   const [disableBookingBtn, setDisableBookingBtn] = useState(false);
@@ -89,15 +89,15 @@ const BookTrellis = () => {
   };
 
   const checkKanal = () => {
-    // if (Number(landSizeKanals) < 3) {
-    //   setKanalsError(true);
-    //   return false;
-    // }
+    if (Number(landSizeKanals) < 1) {
+      setKanalsError(true);
+      return false;
+    }
     return true;
   };
 
   const checkMarla = () => {
-    if (Number(landSizeMarlas) > 19) {
+    if (Number(landSizeMarlas) > 19 || Number(landSizeMarlas) < 0) {
       setMarlasError(true);
       return false;
     }
@@ -151,8 +151,8 @@ const BookTrellis = () => {
     setGroverName("");
     setGroverAddress("");
     setGroverNumber("");
-    setLandSizeKanals("");
-    setLandSizeMarlas("");
+    setLandSizeKanals("1");
+    setLandSizeMarlas("0");
     setTrellisType("");
     toast({
       title: "Form Resetted",
@@ -301,6 +301,7 @@ const BookTrellis = () => {
             placeholder="Enter Phone Number"
             id="groverNumber"
             value={groverNumber}
+            min={1}
             onChange={(e) => setGroverNumber(e.target.value)}
           />
           <p
@@ -313,7 +314,7 @@ const BookTrellis = () => {
         {/* Form step 2 */}
         <form className={`py-10 px-10 ${formStage === 2 ? "" : "hidden"}`}>
           <label htmlFor="landSizeKanals">
-            Land Size<span className="text-red-500">*</span>{" "}
+            Land Area<span className="text-red-500">*</span>{" "}
             <span className="text-sm text-gray-500">(Kanals)</span>
           </label>
           <Input
@@ -322,16 +323,17 @@ const BookTrellis = () => {
             placeholder="Enter Land Size"
             id="landSizeKanals"
             value={landSizeKanals}
+            min={1}
             onChange={(e) => setLandSizeKanals(e.target.value)}
           />
           <p
             className={`${kanalsError ? "" : "invisible"} mb-10 text-red-500 text-sm`}
           >
-            Enter minimum 3 kanals
+            Enter minimum 1 kanals
           </p>
 
           <label htmlFor="landSizeMarlas">
-            Land Size<span className="text-red-500">*</span>{" "}
+            Land Area<span className="text-red-500">*</span>{" "}
             <span className="text-sm text-gray-500">(Marlas)</span>
           </label>
           <Input
@@ -340,12 +342,14 @@ const BookTrellis = () => {
             placeholder="Enter Land Size"
             id="landSizeMarlas"
             value={landSizeMarlas}
+            min={0}
+            max={19}
             onChange={(e) => setLandSizeMarlas(e.target.value)}
           />
           <p
             className={`${marlasError ? "" : "invisible"} mb-10 text-red-500 text-sm`}
           >
-            Max 19 marlas allowed
+            Marlas should be between 0-19 only
           </p>
           <div className="mb-40 md:mb-20 md:text-xl text-green-700">
             Total Land: {landSizeKanals ? `${landSizeKanals} Kanals ` : ""}
@@ -356,8 +360,7 @@ const BookTrellis = () => {
         {/* Form step 3 */}
         <form className={`py-10 px-10 ${formStage === 3 ? "" : "hidden"}`}>
           <label htmlFor="landSizeKanals">
-            Land Size<span className="text-red-500">*</span>{" "}
-            <span className="text-sm text-gray-500">(Kanals)</span>
+            Trellis Type<span className="text-red-500">*</span>{" "}
           </label>
           <Select value={trellisType} onValueChange={setTrellisType} required>
             <SelectTrigger
@@ -387,9 +390,6 @@ const BookTrellis = () => {
                 Wire pattern (4 wires).
               </li>
               <li className=" hover:text-[#035803] transition duration-300 ease-in-out">
-                160m trellis length - 19 posts.
-              </li>
-              <li className=" hover:text-[#035803] transition duration-300 ease-in-out">
                 6 Hellex anchors.
               </li>
               <li className=" hover:text-[#035803] transition duration-300 ease-in-out">
@@ -412,9 +412,6 @@ const BookTrellis = () => {
               </li>
               <li className=" hover:text-[#035803] transition duration-300 ease-in-out">
                 Wire pattern (4 wires).
-              </li>
-              <li className=" hover:text-[#035803] transition duration-300 ease-in-out">
-                160m trellis length - 17 posts.
               </li>
               <li className=" hover:text-[#035803] transition duration-300 ease-in-out">
                 6 Hellex anchors.

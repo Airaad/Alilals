@@ -75,9 +75,9 @@ export default function BlogDetail() {
 
   return (
     <div className="min-h-screen bg-[#f6f4ec] bg-[url('https://www.transparenttextures.com/patterns/groovepaper.png')] text-[#202221]">
-      <div className="md:px-16 md:py-12">
-        <div className="container mx-auto py-12 px-6 lg:px-12">
-          {/* Blog Header */}
+      <div className="container mx-auto md:px-16 md:py-12 py-12 px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {/* Main Blog Content */}
+        <div className="lg:col-span-2">
           <div className="mb-12">
             <h1 className="text-4xl lg:text-5xl font-bold tracking-tight mb-4">
               {blog.title}
@@ -95,7 +95,6 @@ export default function BlogDetail() {
             <div className="h-[0.08rem] bg-[#44A05B] full my-8" />
           </div>
 
-          {/* Blog Image */}
           <div className="mb-8 relative w-full h-0 pb-[56.25%]">
             <img
               src={blog.imageUrl}
@@ -104,7 +103,6 @@ export default function BlogDetail() {
             />
           </div>
 
-          {/* Blog Content */}
           <div className="max-w-none text-[#404040] leading-relaxed">
             <div className="no-global-style ql-editor">
               <div dangerouslySetInnerHTML={{ __html: sanitizedHTML }}></div>
@@ -116,7 +114,6 @@ export default function BlogDetail() {
             </blockquote>
           </div>
 
-          {/* Share Section */}
           <div className="mt-8">
             <h3 className="text-2xl font-semibold mb-4">Share this blog:</h3>
             <div className="flex gap-4">
@@ -135,12 +132,10 @@ export default function BlogDetail() {
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Suggested Blogs */}
-      <div className="bg-[#142827] text-white py-8 mt-12">
-        <div className="container mx-auto px-6 lg:px-12">
-          <h3 className="text-2xl font-semibold">
+        {/* Suggested Blogs */}
+        <div className="bg-[#142827] text-white p-6 rounded-lg">
+          <h3 className="text-2xl font-semibold mb-4">
             Liked this blog? Check out more articles:
           </h3>
 
@@ -150,27 +145,25 @@ export default function BlogDetail() {
               <span className="ml-4 text-lg">Loading related blogs...</span>
             </div>
           ) : (
-            <div className="flex flex-col items-center gap-8 lg:flex-row mt-6">
-              {allBlogs.slice(0, 3).map((relatedBlog) => (
-                <div key={relatedBlog.id} className="w-full lg:w-1/3">
-                  <Link href={`/blog/${relatedBlog.id}`}>
-                    <div className="bg-[#F6F4EC] text-[#202221] rounded-lg shadow-lg overflow-hidden h-full">
-                      <img
-                        src={relatedBlog.imageUrl}
-                        alt={relatedBlog.title}
-                        className="w-full h-48 object-cover transform transition-transform duration-300 hover:scale-105"
-                      />
-                      <div className="p-4 lg:h-[325px] xl:h-[250px] 2xl:h-[205px] flex flex-col flex-grow">
-                        <h4 className="text-lg font-semibold mb-2">
-                          {relatedBlog.title}
-                        </h4>
-                        <p className="text-sm text-gray-600 text-justify">
-                          {relatedBlog.brief}
-                        </p>
-                      </div>
+            <div className="space-y-8">
+              {allBlogs.slice(0, 5).map((relatedBlog) => (
+                <Link href={`/blog/${relatedBlog.id}`} key={relatedBlog.id}>
+                  <div className="bg-[#F6F4EC] text-[#202221] rounded-lg my-6 shadow-lg overflow-hidden">
+                    <img
+                      src={relatedBlog.imageUrl}
+                      alt={relatedBlog.title}
+                      className="w-full h-48 object-cover transform transition-transform duration-300 hover:scale-105"
+                    />
+                    <div className="p-4">
+                      <h4 className="text-lg font-semibold mb-2">
+                        {relatedBlog.title}
+                      </h4>
+                      <p className="text-sm text-gray-600 text-justify">
+                        {relatedBlog.brief}
+                      </p>
                     </div>
-                  </Link>
-                </div>
+                  </div>
+                </Link>
               ))}
             </div>
           )}

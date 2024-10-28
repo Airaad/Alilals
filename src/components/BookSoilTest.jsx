@@ -43,8 +43,8 @@ const BookSoilTest = () => {
   const [groverName, setGroverName] = useState("");
   const [groverAddress, setGroverAddress] = useState("");
   const [groverNumber, setGroverNumber] = useState("");
-  const [landSizeKanals, setLandSizeKanals] = useState("");
-  const [landSizeMarlas, setLandSizeMarlas] = useState("");
+  const [landSizeKanals, setLandSizeKanals] = useState("1");
+  const [landSizeMarlas, setLandSizeMarlas] = useState("0");
   const [cropType, setCropType] = useState("");
   const [fertilizerDate, setFertilizerDate] = useState("");
   const [open, setOpen] = useState(false);
@@ -53,6 +53,8 @@ const BookSoilTest = () => {
   //Errors
   const [nameError, setNameError] = useState(false);
   const [phoneError, setPhoneError] = useState(false);
+  const [kanalsError, setKanalsError] = useState(false);
+  const [marlasError, setMarlasError] = useState(false);
 
   const fillError = () => {
     toast({
@@ -81,6 +83,22 @@ const BookSoilTest = () => {
     return false;
   };
 
+  const checkKanal = () => {
+    if (Number(landSizeKanals) < 1) {
+      setKanalsError(true);
+      return false;
+    }
+    return true;
+  };
+
+  const checkMarla = () => {
+    if (Number(landSizeMarlas) > 19 || Number(landSizeMarlas) < 0) {
+      setMarlasError(true);
+      return false;
+    }
+    return true;
+  };
+
   const goToNext = () => {
     setNameError(false);
     setPhoneError(false);
@@ -89,6 +107,9 @@ const BookSoilTest = () => {
     }
     if (formStage === 1 && (!groverAddress || !groverName || !groverNumber)) {
       fillError();
+      return;
+    }
+    if (formStage === 2 && (!checkKanal() || !checkMarla())) {
       return;
     }
     if (formStage === 2 && !landSizeKanals && !landSizeMarlas) {
@@ -101,6 +122,8 @@ const BookSoilTest = () => {
   const goToPrev = () => {
     setNameError(false);
     setPhoneError(false);
+    setKanalsError(false);
+    setMarlasError(false);
     setFormStage((prevStep) => Math.max(prevStep - 1, 1));
   };
 
@@ -174,8 +197,8 @@ const BookSoilTest = () => {
     setGroverName("");
     setGroverAddress("");
     setGroverNumber("");
-    setLandSizeKanals("");
-    setLandSizeMarlas("");
+    setLandSizeKanals("1");
+    setLandSizeMarlas("0");
     setCropType("");
     setFertilizerDate("");
     toast({
@@ -248,6 +271,7 @@ const BookSoilTest = () => {
             placeholder="Enter Phone Number"
             id="groverNumber"
             value={groverNumber}
+            min={1}
             onChange={(e) => setGroverNumber(e.target.value)}
           />
           <p
@@ -259,30 +283,43 @@ const BookSoilTest = () => {
         {/* Form step 2 */}
         <form className={`py-10 px-10 ${formStage === 2 ? "" : "hidden"}`}>
           <label htmlFor="landSizeKanals">
-            Land Size<span className="text-red-500">*</span>{" "}
+            Land Area<span className="text-red-500">*</span>{" "}
             <span className="text-sm text-gray-500">(Kanals)</span>
           </label>
           <Input
-            className="bg-white mb-10 mt-2 lg:w-1/2  border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]"
+            className="bg-white mb-2 mt-2 lg:w-1/2  border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]"
             type="number"
             placeholder="Enter Land Size"
             id="landSizeKanals"
             value={landSizeKanals}
+            min={1}
             onChange={(e) => setLandSizeKanals(e.target.value)}
           />
+          <p
+            className={`${kanalsError ? "" : "invisible"} mb-10 text-red-500 text-sm`}
+          >
+            Enter minimum 1 kanals
+          </p>
 
           <label htmlFor="landSizeMarlas">
-            Land Size<span className="text-red-500">*</span>{" "}
+            Land Area<span className="text-red-500">*</span>{" "}
             <span className="text-sm text-gray-500">(Marlas)</span>
           </label>
           <Input
-            className="bg-white mb-10 mt-2 lg:w-1/2  border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]"
+            className="bg-white mb-2 mt-2 lg:w-1/2  border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]"
             type="number"
             placeholder="Enter Land Size"
             id="landSizeMarlas"
             value={landSizeMarlas}
+            min={0}
+            max={19}
             onChange={(e) => setLandSizeMarlas(e.target.value)}
           />
+          <p
+            className={`${marlasError ? "" : "invisible"} mb-10 text-red-500 text-sm`}
+          >
+            Marlas should be between 0-19 only
+          </p>
           <div className="mb-40 md:mb-20 md:text-xl text-green-700">
             Total Land: {landSizeKanals ? `${landSizeKanals} Kanals ` : ""}
             {landSizeMarlas ? `${landSizeMarlas} Marlas` : ""}
@@ -425,9 +462,9 @@ const BookSoilTest = () => {
                       </TableCell>
                       <TableCell className="text-right text-green-700">
                         {fertilizerDate}{" "}
-                        <span className="text-xs text-gray-400">
+                        <div className="text-xs text-gray-400">
                           (YYYY/MM/DD)
-                        </span>
+                        </div>
                       </TableCell>
                     </TableRow>
                   </TableBody>
