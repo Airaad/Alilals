@@ -14,9 +14,9 @@ const fadeInUp = {
 
 const icons = {
   "Trees Planted": <TreePalm size={50} />,
-  "Kanals Developed": <Pickaxe size={50} />,
-  "Projects Completed": <ClipboardCheck size={50} />,
-  "Orchards Installed": <Apple size={50} />,
+  "Hectares Developed": <Pickaxe size={50} />,
+  "Projects Delivered": <ClipboardCheck size={50} />,
+  "Farmers Connected": <Apple size={50} />,
 };
 
 export function WhyChooseUs() {
