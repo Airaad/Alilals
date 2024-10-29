@@ -29,7 +29,7 @@ export function Testimonials() {
       id: 3,
       image: "https://img.youtube.com/vi/3laUBzq4TXo/hqdefault.jpg",
       description:
-        "Our Growers show utmost satisfaction about the services of Alilals Agrico in High Density Orchard Planing and Development.",
+        "Our growers express the utmost satisfaction with Alilals Agrico's exceptional services in High-Density Orchard Planning and Development, highlighting our commitment to innovation, precision, and productivity in every project.",
       youtubeLink: "https://youtu.be/3laUBzq4TXo?si=5oO9NiU7Uc2YCw9a",
     },
   ];

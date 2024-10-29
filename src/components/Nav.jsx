@@ -235,7 +235,7 @@ export default function Nav() {
                   <div className="flex justify-between items-center">
                     <button
                       onClick={() => setServicesAccordionOpen((prev) => !prev)}
-                      className="text-sm font-semibold text-gray-200 hover:text-white hover:bg-gray-700 px-3 py-2 rounded-lg w-full text-left"
+                      className="-mx-3 block rounded-lg px-3 py-2 text-sm font-semibold leading-7 text-gray-200 hover:bg-gray-700"
                     >
                       Services
                       <ChevronDownIcon
@@ -247,24 +247,24 @@ export default function Nav() {
                   </div>
 
                   {servicesAccordionOpen && (
-                    <div className="ml-6 space-y-1">
+                    <div className="ml-3 space-y-1">
                       <Link
                         href="/services/orchard-development"
-                        className="block text-sm font-semibold text-gray-200 hover:bg-gray-700 py-1 px-2 rounded-lg"
+                        className="block text-sm font-medium text-gray-200 hover:bg-gray-700 py-2  rounded-lg"
                         onClick={() => setMobileMenuOpen(false)}
                       >
                         Orchard Development
                       </Link>
                       <Link
                         href="/services/soil-health-management"
-                        className="block text-sm font-semibold text-gray-200 hover:bg-gray-700 py-1 px-2 rounded-lg"
+                        className="block text-sm font-medium text-gray-200 hover:bg-gray-700 py-2  rounded-lg"
                         onClick={() => setMobileMenuOpen(false)}
                       >
                         Soil Health Management
                       </Link>
                       <Link
                         href="/services/expert-advice"
-                        className="block text-sm font-semibold text-gray-200 hover:bg-gray-700 py-1 px-2 rounded-lg"
+                        className="block text-sm font-medium text-gray-200 hover:bg-gray-700 py-2  rounded-lg"
                         onClick={() => setMobileMenuOpen(false)}
                       >
                         Expert Advice
