@@ -9,7 +9,7 @@ const AboutCompany = () => {
     <div className="flex flex-col lg:flex-row items-center lg:items-start md:space-x-8 py-12 px-6 bg-[#F6F2EF] md:px-20">
       <div className="lg:w-[30%] md:w-[50%] w-full mb-6 lg:mb-0">
         <img
-          src="/assets/images/whoweare.jpg"
+          src="/assets/images/aboutus_hero.jpg"
           alt="Company Image"
           className="lg:w-[600px] lg:h-[600px] object-cover rounded-lg shadow-md"
         />
