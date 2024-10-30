@@ -9,7 +9,7 @@ const SoilHealthManagement = () => {
       {/* Banner Section */}
       <Banner
         title="Soil Health Management"
-        backgroundImage="/assets/images/water-sprinkler-880970_1280.jpg"
+        backgroundImage="/assets/images/plant-6151414_1280.jpg"
       />
 
       {/* Description Section */}
@@ -46,7 +46,7 @@ const SoilHealthManagement = () => {
           <ServiceCard
             title="Soil Test"
             description="Uncover your soil’s potential with detailed nutrient and composition analysis. Ensure your orchard thrives with our professional soil testing services."
-            image="/assets/images/ai-generated-8756079_1280.jpg"
+            image="/assets/images/20240423_135153.jpg"
             link="soil-health-management/soil-test"
             delay={0.4}
           />

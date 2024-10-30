@@ -15,14 +15,14 @@ const OurServices = () => {
       title: "Orchard Development",
       description:
         "Start your journey with our high-quality plants and expert guidance for a thriving orchard.",
-      imgSrc: "/assets/images/pexels-alejandro-barron-21404-96715.jpg",
+      imgSrc: "/assets/images/apples-7566512_1280.jpg",
       link: "services/orchard-development",
     },
     {
       title: "Soil Health Management",
       description:
         "Optimize your orchard's growth with a comprehensive soil health analysis. Our tailored soil management solutions ensure your land is primed for success.",
-      imgSrc: "/assets/images/water-sprinkler-880970_1280.jpg",
+      imgSrc: "/assets/images/soil-8166778_1280.jpg",
       link: "services/soil-health-management",
     },
     {

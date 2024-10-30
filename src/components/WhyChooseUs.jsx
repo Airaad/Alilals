@@ -91,7 +91,7 @@ export function WhyChooseUs() {
             viewport={{ once: true }}
           >
             <Image
-              src="/assets/images/pexels-nc-farm-bureau-mark-8287350.jpg"
+              src="/assets/images/whychooseus.jpg"
               alt="Plant Image"
               width={700}
               height={900}

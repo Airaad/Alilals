@@ -17,14 +17,14 @@ const DripBooking = () => {
             <ServiceCard
               title="High Density Orchard"
               description="Ready to start your own orchard? Secure your plot with us today and embark on your journey towards sustainable agriculture!"
-              image="/assets/images/apples-1873078_1280.jpg"
+              image="/assets/images/20240811_151341.jpg"
               link="book-orchard"
               delay={0.4}
             />
             <ServiceCard
               title="Trellis Infrastructure"
               description="Boost crop support with our trellis systems, designed to improve growth, maximize sunlight, and simplify maintenance for your orchard."
-              image="/assets/images/banana-plantation-2098723_1280.jpg"
+              image="/assets/images/trellis2.jpg"
               link="book-trellis-infrastructure"
               delay={0.6}
             />

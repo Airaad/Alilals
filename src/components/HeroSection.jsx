@@ -28,7 +28,7 @@ const HeroVideo = () => {
         playsInline
         className="absolute top-0 left-0 w-full h-full object-cover"
       >
-        <source src="/assets/videos/Website Video (1).mp4" />
+        <source src="/assets/videos/Website Video-2.mp4" />
         Your browser does not support the video tag.
       </video>
 

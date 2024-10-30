@@ -9,7 +9,7 @@ const About = () => {
     <div>
       <Banner
         title="About Us"
-        backgroundImage="/assets/images/aboutus_hero.jpg"
+        backgroundImage="/assets/images/aboutus.jpg"
       />
       <AboutCompany />
       <AboutHistory />

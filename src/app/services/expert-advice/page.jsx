@@ -44,9 +44,9 @@ const ExpertAdvice = () => {
         </p>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <ServiceCard
-            title="Expert Call"
+            title="Speak with an expert"
             description="Get personalized advice from our seasoned experts on orchard management, soil health, and sustainable practices. Book your consultation today."
-            image="/assets/images/call-center-8643477_1280.jpg"
+            image="/assets/images/expertspeak.jpg"
             link="expert-advice/expert"
             delay={0.4}
           />
