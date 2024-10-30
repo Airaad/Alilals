@@ -9,7 +9,7 @@ const Contact = () => {
     <div>
       <Banner
         title="Contact Us"
-        backgroundImage="/assets/images/contact_hero.jpg"
+        backgroundImage="/assets/images/contact.jpg"
       />
       <div className="px-8 md:px-12 py-10 bg-[#F6F4EC]">
         <div className="flex gap-2 items-center ">

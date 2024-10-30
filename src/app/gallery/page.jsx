@@ -4,9 +4,9 @@ import { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 
 const photos = [
-  "https://cdn.pixabay.com/photo/2018/07/09/18/40/nature-3526840_1280.jpg",
-  "https://cdn.pixabay.com/photo/2017/09/06/03/50/apple-2720105_1280.jpg",
-  "https://cdn.pixabay.com/photo/2016/07/26/20/02/arbor-1543673_1280.jpg",
+  "/assets/images/Gallery/20240811_151341.jpg",
+  "/assets/images/Gallery/aboutus.jpg",
+  "/assets/images/Gallery/drip.jpg",
   "/assets/images/Gallery/20230310_181728.jpg",
   "/assets/images/Gallery/20231205_133221.jpg",
   "/assets/images/Gallery/20231209_160301.jpg",
@@ -14,8 +14,8 @@ const photos = [
   "/assets/images/Gallery/20240331_143338.jpg",
   "/assets/images/Gallery/20240518_184433.jpg",
   "/assets/images/Gallery/20240613_155403.jpg",
-  "https://cdn.pixabay.com/photo/2017/12/29/16/34/fruit-3048001_1280.jpg",
-  "https://cdn.pixabay.com/photo/2015/02/14/18/10/pineapple-636562_1280.jpg",
+  "/assets/images/Gallery/expertspeak.jpg",
+  "/assets/images/Gallery/trellis2.jpg",
 ];
 
 const ImageCard = ({ image, onClick }) => (

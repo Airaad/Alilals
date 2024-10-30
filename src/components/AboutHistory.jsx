@@ -44,7 +44,7 @@ const AboutHistory = () => {
       <div className="relative border-[#1A3A32] ml-4">
         {/* Video for mobile */}
         <video autoPlay muted loop playsInline className="w-full md:hidden">
-          <source src="/assets/videos/VerticalInfoGraphic.mp4" />
+          <source src="/assets/videos/Mobile Video-Infographics.mp4" />
           Your browser does not support the video tag.
         </video>
 
@@ -56,7 +56,7 @@ const AboutHistory = () => {
           playsInline
           className="w-full hidden md:block"
         >
-          <source src="/assets/videos/HorizontalInfoGraphic.mp4" />
+          <source src="/assets/videos/New Video-Infographic Website.mp4" />
           Your browser does not support the video tag.
         </video>
       </div>
