@@ -7,10 +7,7 @@ import { RiLeafFill } from "react-icons/ri";
 const Contact = () => {
   return (
     <div>
-      <Banner
-        title="Contact Us"
-        backgroundImage="/assets/images/contact.jpg"
-      />
+      <Banner title="Contact Us" backgroundImage="/assets/images/contact.jpg" />
       <div className="px-8 md:px-12 py-10 bg-[#F6F4EC]">
         <div className="flex gap-2 items-center ">
           <RiLeafFill className="text-[#44A05B]" />

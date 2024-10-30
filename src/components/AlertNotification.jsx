@@ -20,14 +20,18 @@ const AlertNotification = ({ alert, onClose, isOpen }) => {
               className="object-cover"
             />
           </div>
-          <p className="text-gray-500 text-start mt-2">{alert.date}</p>
+          <p className="text-gray-500 text-start text-xs md:text-base">
+            {alert.date}
+          </p>
           <div className="mt-4 space-y-4">
             <DialogHeader>
-              <DialogTitle className="text-3xl font-bold text-green-700 text-center">
+              <DialogTitle className="md:text-3xl font-bold text-green-700 text-center">
                 Alert Notice: {alert.title}
               </DialogTitle>
             </DialogHeader>
-            <p className="text-gray-600 text-justify">{alert.brief}</p>
+            <p className="text-gray-600 text-justify text-xs md:text-base">
+              {alert.brief}
+            </p>
           </div>
         </>
       </DialogContent>

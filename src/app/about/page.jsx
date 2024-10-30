@@ -7,10 +7,7 @@ import React from "react";
 const About = () => {
   return (
     <div>
-      <Banner
-        title="About Us"
-        backgroundImage="/assets/images/aboutus.jpg"
-      />
+      <Banner title="About Us" backgroundImage="/assets/images/aboutus.jpg" />
       <AboutCompany />
       <AboutHistory />
       <FAQ />

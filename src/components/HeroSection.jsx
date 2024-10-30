@@ -14,6 +14,7 @@ const HeroVideo = () => {
 
   useEffect(() => {
     getAlert().then((data) => {
+      console.log("alert fetched");
       setAlert(data);
       setLoading(false);
     });

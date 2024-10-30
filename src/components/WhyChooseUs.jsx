@@ -27,6 +27,7 @@ export function WhyChooseUs() {
   useEffect(() => {
     if (!statsData.length) {
       getAllStats().then((data) => {
+        console.log("stats fetched");
         setStatsData(data);
       });
     }

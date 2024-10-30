@@ -21,6 +21,7 @@ const Page = () => {
   useEffect(() => {
     if (!project) {
       getProject(projectId).then((data) => {
+        console.log("project details fetched");
         setProject(data);
         setLoadingProject(false);
       });

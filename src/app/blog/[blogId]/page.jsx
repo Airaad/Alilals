@@ -30,6 +30,7 @@ export default function BlogDetail() {
       try {
         setLoadingBlog(true);
         const fetchedBlog = await getblog(blogId);
+        console.log("blog details fetched");
         setBlog(fetchedBlog);
         setLoadingBlog(false);
       } catch (err) {
@@ -40,6 +41,7 @@ export default function BlogDetail() {
       try {
         setLoadingAllBlogs(true);
         const fetchedAllBlogs = await getAllBlogs();
+        console.log("All blogs fetched inside");
         setAllBlogs(fetchedAllBlogs);
         setLoadingAllBlogs(false);
       } catch (err) {

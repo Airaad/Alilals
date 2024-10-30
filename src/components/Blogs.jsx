@@ -26,6 +26,7 @@ export default function Blogs() {
 
   useEffect(() => {
     getAllBlogs().then((data) => {
+      console.log("All blogs fetched");
       setBlogs(data);
       setLoading(false);
     });
