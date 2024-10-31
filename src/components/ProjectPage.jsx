@@ -1,14 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import ProjectCard from "./ProjectCard";
-import { getAllProjects } from "../../firebase/projects/read";
+import { useProjects } from "@/context/ProjectContext";
 
 const ProjectPage = () => {
-  const [projects, setProjects] = useState([]);
+  const { projects, loading, error } = useProjects();
   const [currentPage, setCurrentPage] = useState(1);
-  const [loading, setLoading] = useState(true);
 
   const cardsPerPage = 9;
   const totalPages = Math.ceil(projects.length / cardsPerPage);
@@ -18,16 +17,6 @@ const ProjectPage = () => {
     currentPage * cardsPerPage,
   );
 
-  useEffect(() => {
-    if (!projects.length) {
-      getAllProjects().then((data) => {
-        console.log("projects fetched");
-        setProjects(data);
-        setLoading(false);
-      });
-    }
-  }, []);
-
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen bg-[#F6F2EF]">
@@ -35,6 +24,18 @@ const ProjectPage = () => {
           <div className="animate-spin rounded-full h-24 w-24 border-t-4 border-b-4 border-green-500 mb-4"></div>
           <p className="text-lg text-gray-500">
             Loading projects, please wait...
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex justify-center items-center min-h-screen bg-[#F6F2EF]">
+        <div className="flex flex-col items-center">
+          <p className="text-lg text-gray-500">
+            Error fetching projects. Please try again later.
           </p>
         </div>
       </div>

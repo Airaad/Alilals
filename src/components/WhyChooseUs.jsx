@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { TreePalm, Pickaxe, Apple, ClipboardCheck } from "lucide-react";
 import { motion } from "framer-motion";
-import { getAllStats } from "../../firebase/stats/read";
+import { useStats } from "@/context/StatContext";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
@@ -20,16 +20,18 @@ const icons = {
 };
 
 export function WhyChooseUs() {
-  const [statsData, setStatsData] = useState([]);
+  const { stats, loading, error } = useStats();
+
   const [hasAnimated, setHasAnimated] = useState(false);
-  const [values, setValues] = useState(statsData.map(() => 0));
+  const [values, setValues] = useState(stats.map(() => 0));
 
   useEffect(() => {
-    if (!statsData.length) {
-      getAllStats().then((data) => {
-        console.log("stats fetched");
-        setStatsData(data);
-      });
+    if (loading) {
+      return;
+    }
+
+    if (error) {
+      return;
     }
 
     const handleScroll = () => {
@@ -48,7 +50,7 @@ export function WhyChooseUs() {
     };
 
     const animateNumbers = () => {
-      statsData.forEach((stat, index) => {
+      stats.forEach((stat, index) => {
         let currentValue = 0;
         const increment = Math.ceil(stat.value / 100);
         const duration = 1500; // Duration in milliseconds
@@ -76,7 +78,7 @@ export function WhyChooseUs() {
 
     // Clean up the event listener on unmount
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [hasAnimated, statsData]);
+  }, [hasAnimated, stats]);
 
   return (
     <>
@@ -153,7 +155,7 @@ export function WhyChooseUs() {
       >
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
-            {statsData.map((stat, index) => (
+            {stats.map((stat, index) => (
               <div key={index} className="group">
                 <div className="p-6 rounded-lg text-[#44A05B]">
                   <div className="flex gap-5 text-5xl items-center justify-center font-bold stat-number">

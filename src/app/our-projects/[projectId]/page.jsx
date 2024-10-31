@@ -10,29 +10,37 @@ import {
   FaAppleAlt,
 } from "react-icons/fa";
 import { motion } from "framer-motion";
-import { getProject } from "../../../../firebase/projects/read";
+import { useProjects } from "@/context/ProjectContext";
 import FeaturedWork from "@/components/FeaturedWork";
 
 const Page = () => {
+  const { projects, loading, error } = useProjects();
+
   const { projectId } = useParams();
   const [project, setProject] = useState(null);
-  const [loadingProject, setLoadingProject] = useState(true);
 
   useEffect(() => {
-    if (!project) {
-      getProject(projectId).then((data) => {
-        console.log("project details fetched");
-        setProject(data);
-        setLoadingProject(false);
-      });
+    if (!project && !loading && !error) {
+      const selectedProject = projects.find((pro) => pro.id == projectId);
+      setProject(selectedProject);
     }
-  }, [projectId]);
+  }, [projectId, loading, projects, error]);
 
-  if (loadingProject) {
+  if (loading) {
     return (
       <div className="bg-[#F6F2EF] flex justify-center items-center min-h-screen">
         <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-green-500"></div>
         <span className="ml-4 text-lg">Loading project...</span>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="bg-[#F6F2EF] flex justify-center items-center min-h-screen">
+        <span className="ml-4 text-lg">
+          Error fetching projects. Please try again later.
+        </span>
       </div>
     );
   }
@@ -63,7 +71,6 @@ const Page = () => {
             />
           </div>
         </div>
-
         {/* Right Column: Description & Table */}
         <div className="col-span-1 lg:col-span-2">
           <div className="text-gray-900">

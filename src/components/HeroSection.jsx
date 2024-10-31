@@ -1,24 +1,14 @@
 "use client";
-import { useState, useEffect } from "react";
 import "swiper/css";
 import "swiper/css/effect-fade";
 import { useSuccessDialog } from "@/context/DialogContext";
 import SuccessDialog from "./SuccessDialog";
 import AlertNotification from "./AlertNotification";
-import { getAlert } from "../../firebase/alert/read";
+import { useAlert } from "@/context/AlertContext";
 
 const HeroVideo = () => {
+  const { alert, loading, error } = useAlert();
   const { isOpen, closeDialog, alertOpen, closeAlert } = useSuccessDialog();
-  const [alert, setAlert] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    getAlert().then((data) => {
-      console.log("alert fetched");
-      setAlert(data);
-      setLoading(false);
-    });
-  }, [alert]);
 
   return (
     <div className="relative w-full" style={{ aspectRatio: "16 / 9" }}>

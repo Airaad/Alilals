@@ -15,47 +15,22 @@ import {
   LinkedinIcon,
   WhatsappIcon,
 } from "react-share";
-import { getblog, getAllBlogs } from "../../../../firebase/blogs/read";
+import { useBlogs } from "@/context/BlogContext";
 
 export default function BlogDetail() {
+  const { blogs, loading, error } = useBlogs();
+
   const { blogId } = useParams();
   const [blog, setBlog] = useState(null);
-  const [allBlogs, setAllBlogs] = useState([]);
-  const [loadingBlog, setLoadingBlog] = useState(true);
-  const [loadingAllBlogs, setLoadingAllBlogs] = useState(true);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        setLoadingBlog(true);
-        const fetchedBlog = await getblog(blogId);
-        console.log("blog details fetched");
-        setBlog(fetchedBlog);
-        setLoadingBlog(false);
-      } catch (err) {
-        setError("Failed to load the blog");
-        setLoadingBlog(false);
-      }
-
-      try {
-        setLoadingAllBlogs(true);
-        const fetchedAllBlogs = await getAllBlogs();
-        console.log("All blogs fetched inside");
-        setAllBlogs(fetchedAllBlogs);
-        setLoadingAllBlogs(false);
-      } catch (err) {
-        setError("Failed to load related blogs");
-        setLoadingAllBlogs(false);
-      }
+    if (!blog && !loading && !error) {
+      const selectedBlog = blogs.find((b) => b.id == blogId);
+      setBlog(selectedBlog);
     }
+  }, [blogId, blogs, loading, error]);
 
-    if (blogId) {
-      fetchData();
-    }
-  }, [blogId]);
-
-  if (loadingBlog) {
+  if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
         <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-green-500"></div>
@@ -65,7 +40,13 @@ export default function BlogDetail() {
   }
 
   if (error) {
-    return <div className="text-center text-red-600">{error}</div>;
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <span className="ml-4 text-lg">
+          Error fetching blog. Please try again later.
+        </span>
+      </div>
+    );
   }
 
   if (!blog) {
@@ -141,14 +122,14 @@ export default function BlogDetail() {
             Liked this blog? Check out more articles:
           </h3>
 
-          {loadingAllBlogs ? (
+          {loading ? (
             <div className="flex justify-center items-center mt-4">
               <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-green-500"></div>
               <span className="ml-4 text-lg">Loading related blogs...</span>
             </div>
           ) : (
             <div className="space-y-8">
-              {allBlogs.slice(0, 5).map((relatedBlog) => (
+              {blogs.slice(0, 5).map((relatedBlog) => (
                 <Link href={`/blog/${relatedBlog.id}`} key={relatedBlog.id}>
                   <div className="bg-[#F6F4EC] text-[#202221] rounded-lg my-6 shadow-lg overflow-hidden">
                     <img

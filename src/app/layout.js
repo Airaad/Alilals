@@ -4,6 +4,10 @@ import Nav from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { Toaster } from "@/components/ui/toaster";
 import { SuccessDialogProvider } from "@/context/DialogContext";
+import { AlertProvider } from "@/context/AlertContext";
+import { StatsProvider } from "@/context/StatContext";
+import { ProjectProvider } from "@/context/ProjectContext";
+import { BlogsProvider } from "@/context/BlogContext";
 
 export const metadata = {
   title: "AlilalsAgrico",
@@ -18,13 +22,21 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" style={appFont}>
       <body>
-        <SuccessDialogProvider>
-          <TopNav />
-          <Nav />
-          {children}
-          <Footer />
-          <Toaster />
-        </SuccessDialogProvider>
+        <AlertProvider>
+          <StatsProvider>
+            <ProjectProvider>
+              <BlogsProvider>
+                <SuccessDialogProvider>
+                  <TopNav />
+                  <Nav />
+                  {children}
+                  <Footer />
+                  <Toaster />
+                </SuccessDialogProvider>
+              </BlogsProvider>
+            </ProjectProvider>
+          </StatsProvider>
+        </AlertProvider>
       </body>
     </html>
   );

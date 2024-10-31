@@ -1,12 +1,12 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { getAllBlogs } from "../../firebase/blogs/read";
+import { useState } from "react";
+import { useBlogs } from "@/context/BlogContext";
 import { FaCalendarAlt, FaUserAlt } from "react-icons/fa";
 
 export default function Blogs() {
-  const [blogs, setBlogs] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { blogs, loading, error } = useBlogs();
+
   const [currentPage, setCurrentPage] = useState(1);
   const blogsPerPage = 8; // Show more blogs per page
 
@@ -24,20 +24,25 @@ export default function Blogs() {
     if (currentPage > 1) setCurrentPage(currentPage - 1);
   };
 
-  useEffect(() => {
-    getAllBlogs().then((data) => {
-      console.log("All blogs fetched");
-      setBlogs(data);
-      setLoading(false);
-    });
-  }, []);
-
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen bg-[#F6F2EF]">
         <div className="flex flex-col items-center">
           <div className="animate-spin rounded-full h-24 w-24 border-t-4 border-b-4 border-green-500 mb-4"></div>
           <p className="text-lg text-gray-500">Loading blogs, please wait...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex justify-center items-center min-h-screen bg-[#F6F2EF]">
+        <div className="flex flex-col items-center">
+          <div className="animate-spin rounded-full h-24 w-24 border-t-4 border-b-4 border-green-500 mb-4"></div>
+          <p className="text-lg text-gray-500">
+            Error fetching blogs. Please try again later.
+          </p>
         </div>
       </div>
     );
