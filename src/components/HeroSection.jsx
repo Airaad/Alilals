@@ -29,7 +29,7 @@ const HeroVideo = () => {
       <SuccessDialog isOpen={isOpen} onClose={closeDialog} />
       {loading ? (
         ""
-      ) : alert?.publish ? (
+      ) : alert?.publish && !isOpen ? (
         <AlertNotification
           alert={alert}
           isOpen={alertOpen}
