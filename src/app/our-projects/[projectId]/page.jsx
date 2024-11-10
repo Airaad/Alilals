@@ -127,7 +127,7 @@ const Page = () => {
                   </td>
                   <td className="py-4 px-6">{project.name}</td>
                 </tr>
-                <tr className="hover:bg-gray-100 transition-all">
+                <tr className="hover:bg-gray-200 transition-all">
                   <td className="py-4 px-6 font-semibold text-green-800 flex items-center">
                     <FaMapMarkerAlt className="mr-2 text-[#44A05B]" /> Address
                   </td>
@@ -138,10 +138,10 @@ const Page = () => {
                     <FaClock className="mr-2 text-[#44A05B]" /> Project Duration
                   </td>
                   <td className="py-4 px-6">
-                    From {project.start} <br /> To {project.end}
+                    {project.start} to {project.end}
                   </td>
                 </tr>
-                <tr className="hover:bg-gray-100 transition-all">
+                <tr className="hover:bg-gray-200 transition-all">
                   <td className="py-4 px-6 font-semibold text-green-800 flex items-center">
                     <FaRulerCombined className="mr-2 text-[#44A05B]" /> Orchard
                     Size
