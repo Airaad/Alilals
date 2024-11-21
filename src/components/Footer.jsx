@@ -8,7 +8,7 @@ export function Footer() {
       className="relative overflow-hidden py-10 bg-cover bg-center"
       style={{
         backgroundImage:
-          "linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/assets/images/pexels-nc-farm-bureau-mark-8877368.jpg')",
+          "linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.pexels.com/photos/28387797/pexels-photo-28387797/free-photo-of-a-tree-with-many-apples-on-it.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')",
       }}
     >
       <div className="relative z-10 mx-auto max-w-7xl px-4">

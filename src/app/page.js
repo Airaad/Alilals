@@ -5,6 +5,7 @@ import { Testimonials } from "@/components/Testmonials";
 import GrowWithUs from "@/components/GrowWithUs";
 import { WhyChooseUs } from "@/components/WhyChooseUs";
 import FeaturedWork from "@/components/FeaturedWork";
+import Ribbon from "@/components/Ribbon";
 
 const Home = () => {
   return (
@@ -15,6 +16,7 @@ const Home = () => {
       <OurServices />
       <FeaturedWork />
       <Testimonials />
+      <Ribbon/>
     </main>
   );
 };
