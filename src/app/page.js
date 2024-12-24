@@ -16,7 +16,7 @@ const Home = () => {
       <OurServices />
       <FeaturedWork />
       <Testimonials />
-      <Ribbon/>
+      <Ribbon />
     </main>
   );
 };

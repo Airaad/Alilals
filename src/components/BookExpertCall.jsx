@@ -32,6 +32,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useSuccessDialog } from "@/context/DialogContext";
+import { generatePDF } from "@/utils/generatePDF";
 
 const BookExpertCall = () => {
   const { toast } = useToast();
@@ -110,6 +111,14 @@ const BookExpertCall = () => {
       ExpertType: expertType,
     }).toString();
 
+    // For creating PDF
+    const pdfData = [
+      { label: "Name", value: groverName },
+      { label: "Address", value: groverAddress },
+      { label: "Phone", value: groverNumber },
+      { label: "Expert Type", value: expertType },
+    ];
+
     setDisableBookingBtn(true);
 
     fetch(
@@ -124,6 +133,17 @@ const BookExpertCall = () => {
     )
       .then(() => {
         setDisableBookingBtn(false);
+
+        generatePDF({
+          title: "Alilals Expert Call Booking Details",
+          filename: `ExpertCall_${groverName.replace(/\s+/g, "_")}.pdf`,
+          data: pdfData,
+          footerText: "Thank you for choosing our services!",
+          additionalInfo: {
+            "Booking Reference": `EXPERT-${Date.now().toString().slice(-6)}`,
+          },
+        });
+
         openDialog();
         router.push("/");
       })
@@ -199,11 +219,10 @@ const BookExpertCall = () => {
           </label>
           <Input
             className="bg-white mb-2 mt-2  lg:w-1/2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]"
-            type="number"
+            type="text"
             placeholder="Enter Phone Number"
             id="groverNumber"
             value={groverNumber}
-            min={1}
             onChange={(e) => setGroverNumber(e.target.value)}
           />
           <p

@@ -34,18 +34,15 @@ import { FaWallet } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { ButtonComponent } from "./ButtonComponent";
 import { useSuccessDialog } from "@/context/DialogContext";
+import { generatePDF } from "@/utils/generatePDF";
 
 const BookOrchid = () => {
   const basicPrices = {
-    steelPost: 1450,
-    concretePost: 1650,
-    wire: 15,
-    plant: 670,
-    anchor: 2700,
-    guyWire: 1550,
-    labor: 10000,
-    transportation: 10000,
-    annualSubscription: 3600,
+    steelPost: 1400,
+    concretePost: 1500,
+    wire: 13,
+    plant: 720,
+    otherCost: 1830,
   };
 
   const { toast } = useToast();
@@ -56,12 +53,11 @@ const BookOrchid = () => {
   const [groverName, setGroverName] = useState("");
   const [groverAddress, setGroverAddress] = useState("");
   const [groverNumber, setGroverNumber] = useState("");
-  const [landSizeKanals, setLandSizeKanals] = useState("3");
+  const [landSizeKanals, setLandSizeKanals] = useState("1");
   const [landSizeMarlas, setLandSizeMarlas] = useState("0");
-  const [rowToRowDistance, setRowToRowDistance] = useState("");
-  const [poleToPoleDistance, setPoleToPoleDistance] = useState("");
+  const [rowGap, setRowGap] = useState("");
+  const [postGap, setPostGap] = useState("");
   const [postType, setPostType] = useState("");
-  const [plantToPlantDistance, setPlantToPlantDistance] = useState("");
   const [wirePattern, setWirePattern] = useState("");
   const [open, setOpen] = useState(false);
   const [disableBookingBtn, setDisableBookingBtn] = useState(false);
@@ -100,7 +96,7 @@ const BookOrchid = () => {
   };
 
   const checkKanal = () => {
-    if (Number(landSizeKanals) < 3) {
+    if (Number(landSizeKanals) < 1) {
       setKanalsError(true);
       return false;
     }
@@ -146,14 +142,7 @@ const BookOrchid = () => {
   };
 
   const generateEstimation = () => {
-    if (
-      formStage === 3 &&
-      (!rowToRowDistance ||
-        !poleToPoleDistance ||
-        !plantToPlantDistance ||
-        !wirePattern ||
-        !postType)
-    ) {
+    if (formStage === 3 && (!rowGap || !postGap || !wirePattern || !postType)) {
       fillError();
       return;
     }
@@ -171,10 +160,9 @@ const BookOrchid = () => {
     setGroverNumber("");
     setLandSizeKanals("3");
     setLandSizeMarlas("0");
-    setRowToRowDistance("");
-    setPoleToPoleDistance("");
+    setRowGap("");
+    setPostGap("");
     setPostType("");
-    setPlantToPlantDistance("");
     setWirePattern("");
     toast({
       title: "Form Resetted",
@@ -197,65 +185,56 @@ const BookOrchid = () => {
     return Number(landSizeKanals) + marlaToKanal;
   };
 
-  const CalculatePoleCost = () => {
-    const perPostCost =
-      postType === "concrete"
-        ? basicPrices.concretePost
-        : basicPrices.steelPost;
-
+  const getTotalPlants = () => {
     const multipliers = {
-      8: { 9: 24, 10: 22, 11: 20 },
-      9: { 9: 22, 10: 20, 11: 18 },
-      10: { 9: 19, 10: 17, 11: 15 },
+      9: { 8: 186, 9: 168, 10: 150 },
+      10: { 8: 196, 9: 186, 10: 156 },
     };
 
-    const totalPostCost =
-      multipliers[rowToRowDistance]?.[poleToPoleDistance] * perPostCost || 0;
-
-    return totalPostCost;
+    return multipliers[postGap]?.[rowGap];
   };
 
-  const CalculatePlantCost = () => {
+  const getTotalPosts = () => {
+    const multipliers = {
+      9: { 8: 23, 9: 21, 10: 19 },
+      10: { 8: 22, 9: 20, 10: 18 },
+    };
+
+    return multipliers[postGap]?.[rowGap];
+  };
+
+  const CalculatePlantAmount = () => {
     const perPlantCost = basicPrices.plant;
 
-    const multipliers = {
-      8: { 0.92: 222, 1: 205, 1.5: 136 },
-      9: { 0.92: 203, 1: 187, 1.5: 124 },
-      10: { 0.92: 178, 1: 164, 1.5: 109 },
-    };
-
-    const totalPlantCost =
-      multipliers[rowToRowDistance]?.[plantToPlantDistance] * perPlantCost || 0;
-
-    return totalPlantCost;
+    return getTotalPlants() * perPlantCost;
   };
 
-  const CalculateWireCost = () => {
+  const CalculatePostAmount = () => {
+    const perPostCost =
+      postType === "steel" ? basicPrices.steelPost : basicPrices.concretePost;
+
+    return getTotalPosts() * perPostCost;
+  };
+
+  const CalculateWireAmount = () => {
     const perWireCost = basicPrices.wire;
 
-    const multipliers = {
-      8: { 4: 820, 5: 1025, 6: 1230 },
-      9: { 4: 748, 5: 935, 6: 1122 },
-      10: { 4: 640, 5: 800, 6: 960 },
-    };
+    return getTotalPlants() * perWireCost * wirePattern;
+  };
 
-    const totalWireCost =
-      multipliers[rowToRowDistance]?.[wirePattern] * perWireCost || 0;
+  const CalculateOtherAmount = () => {
+    const perPostOtherCost = basicPrices.otherCost;
 
-    return totalWireCost;
+    return getTotalPosts() * perPostOtherCost;
   };
 
   const totalPrice = () => {
     return (
-      (CalculatePoleCost() +
-        CalculatePlantCost() +
-        CalculateWireCost() +
-        basicPrices.guyWire +
-        basicPrices.anchor) *
-        totalLand() +
-      basicPrices.labor +
-      basicPrices.transportation +
-      basicPrices.annualSubscription
+      (CalculatePlantAmount() +
+        CalculatePostAmount() +
+        CalculateWireAmount() +
+        CalculateOtherAmount()) *
+      totalLand()
     );
   };
 
@@ -274,13 +253,28 @@ const BookOrchid = () => {
       Address: groverAddress,
       Phone: groverNumber,
       TotalLand: `${landSizeKanals} Kanals ${landSizeMarlas} Marlas`,
-      RowToRowDistance: rowToRowDistance,
-      PoleToPoleDistance: poleToPoleDistance,
+      rowGap: rowGap,
+      postGap: postGap,
       PostType: postType,
-      PlantToPlantDistance: plantToPlantDistance,
       WirePattern: wirePattern,
       TotalCost: formatAmount(totalPrice()),
     }).toString();
+
+    // For creating PDF
+    const pdfData = [
+      { label: "Name", value: groverName },
+      { label: "Address", value: groverAddress },
+      { label: "Phone", value: groverNumber },
+      {
+        label: "Total Land",
+        value: `${landSizeKanals} Kanals ${landSizeMarlas} Marlas`,
+      },
+      { label: "Row Gap", value: `${rowGap} ft` },
+      { label: "Post Gap", value: `${postGap} m` },
+      { label: "Post Type", value: postType },
+      { label: "Wire Pattern", value: `${wirePattern} lines` },
+      { label: "Total Cost", value: formatAmount(totalPrice()) },
+    ];
 
     setDisableBookingBtn(true);
 
@@ -296,6 +290,17 @@ const BookOrchid = () => {
     )
       .then(() => {
         setDisableBookingBtn(false);
+
+        generatePDF({
+          title: "Alilals Orchard Booking Details",
+          filename: `Orchard_Booking_${groverName.replace(/\s+/g, "_")}.pdf`,
+          data: pdfData,
+          footerText: "Thank you for choosing our services!",
+          additionalInfo: {
+            "Booking Reference": `ORCHARD-${Date.now().toString().slice(-6)}`,
+          },
+        });
+
         openDialog();
         router.push("/");
       })
@@ -379,11 +384,10 @@ const BookOrchid = () => {
           </label>
           <Input
             className="bg-white mb-2 mt-2  lg:w-1/2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]"
-            type="number"
+            type="text"
             placeholder="Enter Phone Number"
             id="groverNumber"
             value={groverNumber}
-            min={1}
             onChange={(e) => setGroverNumber(e.target.value)}
           />
           <p
@@ -405,13 +409,13 @@ const BookOrchid = () => {
             placeholder="Enter Land Size"
             id="landSizeKanals"
             value={landSizeKanals}
-            min={3}
+            min={1}
             onChange={(e) => setLandSizeKanals(e.target.value)}
           />
           <p
             className={`${kanalsError ? "" : "invisible"} mb-10 text-red-500 text-sm`}
           >
-            Enter minimum 3 kanals
+            Enter minimum 1 kanal
           </p>
 
           <label htmlFor="landSizeMarlas">
@@ -441,15 +445,11 @@ const BookOrchid = () => {
 
         {/* Form step 3 */}
         <form className={`py-10 px-10 ${formStage === 3 ? "" : "hidden"}`}>
-          <label htmlFor="rowToRowDistance">
-            Row to Row Distance<span className="text-red-500">*</span>{" "}
+          <label htmlFor="rowGap">
+            Row Gap<span className="text-red-500">*</span>{" "}
             <span className="text-sm text-gray-500">(ft)</span>
           </label>
-          <Select
-            value={rowToRowDistance}
-            onValueChange={setRowToRowDistance}
-            required
-          >
+          <Select value={rowGap} onValueChange={setRowGap} required>
             <SelectTrigger className="bg-white lg:w-1/3 mb-10 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]">
               <SelectValue placeholder="Select row to row distance" />
             </SelectTrigger>
@@ -460,22 +460,17 @@ const BookOrchid = () => {
             </SelectContent>
           </Select>
 
-          <label htmlFor="poleToPoleDistance">
-            Pole to Pole Distance<span className="text-red-500">*</span>{" "}
+          <label htmlFor="postGap">
+            Post Gap<span className="text-red-500">*</span>{" "}
             <span className="text-sm text-gray-500">(m)</span>
           </label>
-          <Select
-            value={poleToPoleDistance}
-            onValueChange={setPoleToPoleDistance}
-            required
-          >
+          <Select value={postGap} onValueChange={setPostGap} required>
             <SelectTrigger className="bg-white lg:w-1/3 mb-10 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]">
               <SelectValue placeholder="Select pole to pole distance" />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="9">9m</SelectItem>
               <SelectItem value="10">10m</SelectItem>
-              <SelectItem value="11">11m</SelectItem>
             </SelectContent>
           </Select>
 
@@ -489,25 +484,6 @@ const BookOrchid = () => {
             <SelectContent>
               <SelectItem value="steel">Steel</SelectItem>
               <SelectItem value="concrete">Concrete</SelectItem>
-            </SelectContent>
-          </Select>
-
-          <label htmlFor="plantToPlantDistance">
-            Plant to Plant Distance<span className="text-red-500">*</span>{" "}
-            <span className="text-sm text-gray-500">(m)</span>
-          </label>
-          <Select
-            value={plantToPlantDistance}
-            onValueChange={setPlantToPlantDistance}
-            required
-          >
-            <SelectTrigger className="bg-white lg:w-1/3 mb-10 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]">
-              <SelectValue placeholder="Select plant to plant distance" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="0.92">0.92m</SelectItem>
-              <SelectItem value="1">1m</SelectItem>
-              <SelectItem value="1.5">1.5m</SelectItem>
             </SelectContent>
           </Select>
 
@@ -611,18 +587,18 @@ const BookOrchid = () => {
                   </TableRow>
                   <TableRow>
                     <TableCell className="font-medium text-green-700">
-                      Row to Row Distance
+                      Row Gap
                     </TableCell>
                     <TableCell className="text-right text-green-700">
-                      {rowToRowDistance} ft
+                      {rowGap} ft
                     </TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell className="font-medium text-green-700">
-                      Pole to pole distance
+                      Post Gap
                     </TableCell>
                     <TableCell className="text-right text-green-700">
-                      {poleToPoleDistance} m
+                      {postGap} m
                     </TableCell>
                   </TableRow>
                   <TableRow>
@@ -631,14 +607,6 @@ const BookOrchid = () => {
                     </TableCell>
                     <TableCell className="text-right text-green-700">
                       {postType}
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium text-green-700">
-                      Plant to Plant Distance
-                    </TableCell>
-                    <TableCell className="text-right text-green-700">
-                      {plantToPlantDistance} m
                     </TableCell>
                   </TableRow>
                   <TableRow>

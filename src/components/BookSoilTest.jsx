@@ -33,6 +33,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useSuccessDialog } from "@/context/DialogContext";
+import { generatePDF } from "@/utils/generatePDF";
 
 const BookSoilTest = () => {
   const { toast } = useToast();
@@ -165,6 +166,19 @@ const BookSoilTest = () => {
       LastFertilizerDate: fertilizerDate,
     }).toString();
 
+    // For creating PDF
+    const pdfData = [
+      { label: "Name", value: groverName },
+      { label: "Address", value: groverAddress },
+      { label: "Phone", value: groverNumber },
+      {
+        label: "Total Land",
+        value: `${landSizeKanals} Kanals ${landSizeMarlas} Marlas`,
+      },
+      { label: "Crop Type", value: cropType },
+      { label: "Last Fertilizer Application Date", value: fertilizerDate },
+    ];
+
     setDisableBookingBtn(true);
 
     fetch(
@@ -179,6 +193,17 @@ const BookSoilTest = () => {
     )
       .then(() => {
         setDisableBookingBtn(false);
+
+        generatePDF({
+          title: "Alilals Soil Test Booking Details",
+          filename: `SoilTest_Booking_${groverName.replace(/\s+/g, "_")}.pdf`,
+          data: pdfData,
+          footerText: "Thank you for choosing our services!",
+          additionalInfo: {
+            "Booking Reference": `SOIL-${Date.now().toString().slice(-6)}`,
+          },
+        });
+
         openDialog();
         router.push("/");
       })
@@ -267,11 +292,10 @@ const BookSoilTest = () => {
           </label>
           <Input
             className="bg-white mb-2 mt-2  lg:w-1/2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]"
-            type="number"
+            type="text"
             placeholder="Enter Phone Number"
             id="groverNumber"
             value={groverNumber}
-            min={1}
             onChange={(e) => setGroverNumber(e.target.value)}
           />
           <p

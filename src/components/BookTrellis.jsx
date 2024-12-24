@@ -34,11 +34,12 @@ import { FaWallet } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { ButtonComponent } from "./ButtonComponent";
 import { useSuccessDialog } from "@/context/DialogContext";
+import { generatePDF } from "@/utils/generatePDF";
 
 const BookTrellis = () => {
   const basicPrices = {
-    steel: 55000,
-    concrete: 60000,
+    steel: 58383,
+    concrete: 65000,
   };
 
   const { toast } = useToast();
@@ -200,6 +201,19 @@ const BookTrellis = () => {
       TotalCost: formatAmount(totalPrice()),
     }).toString();
 
+    // For creating PDF
+    const pdfData = [
+      { label: "Name", value: groverName },
+      { label: "Address", value: groverAddress },
+      { label: "Phone", value: groverNumber },
+      {
+        label: "Total Land",
+        value: `${landSizeKanals} Kanals ${landSizeMarlas} Marlas`,
+      },
+      { label: "Trellis Type", value: trellisType },
+      { label: "Total Cost", value: formatAmount(totalPrice()) },
+    ];
+
     setDisableBookingBtn(true);
 
     fetch(
@@ -214,6 +228,17 @@ const BookTrellis = () => {
     )
       .then(() => {
         setDisableBookingBtn(false);
+
+        generatePDF({
+          title: "Alilals Trellis Booking Details",
+          filename: `Trellis_Booking_${groverName.replace(/\s+/g, "_")}.pdf`,
+          data: pdfData,
+          footerText: "Thank you for choosing our services!",
+          additionalInfo: {
+            "Booking Reference": `TRELLIS-${Date.now().toString().slice(-6)}`,
+          },
+        });
+
         openDialog();
         router.push("/");
       })
@@ -297,11 +322,10 @@ const BookTrellis = () => {
           </label>
           <Input
             className="bg-white mb-2 mt-2  lg:w-1/2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]"
-            type="number"
+            type="text"
             placeholder="Enter Phone Number"
             id="groverNumber"
             value={groverNumber}
-            min={1}
             onChange={(e) => setGroverNumber(e.target.value)}
           />
           <p
