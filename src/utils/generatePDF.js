@@ -3,6 +3,25 @@ import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
 /**
+ * Checks if the device is running iOS
+ * @returns {boolean}
+ */
+const isIOS = () => {
+  return (
+    [
+      "iPad Simulator",
+      "iPhone Simulator",
+      "iPod Simulator",
+      "iPad",
+      "iPhone",
+      "iPod",
+    ].includes(navigator.platform) ||
+    // iPad on iOS 13 detection
+    (navigator.userAgent.includes("Mac") && "ontouchend" in document)
+  );
+};
+
+/**
  * Configuration object for PDF generation
  * @typedef {Object} PDFConfig
  * @property {string} title - PDF document title
@@ -17,11 +36,6 @@ import autoTable from "jspdf-autotable";
  * @property {Object} [additionalInfo] - Any additional information to display before the table
  */
 
-/**
- * Converts hex color to RGB array
- * @param {string} hex - Hex color code
- * @returns {number[]} RGB array
- */
 const hexToRGB = (hex) => {
   const r = parseInt(hex.slice(1, 3), 16);
   const g = parseInt(hex.slice(3, 5), 16);
@@ -30,7 +44,7 @@ const hexToRGB = (hex) => {
 };
 
 /**
- * Generates a downloadable PDF with the provided data
+ * Generates a PDF with the provided data and handles device-specific output
  * @param {PDFConfig} config - Configuration object for PDF generation
  */
 export const generatePDF = ({
@@ -52,7 +66,7 @@ export const generatePDF = ({
 
   // Initialize PDF document
   const doc = new jsPDF();
-  let currentY = 20; // Track vertical position
+  let currentY = 20;
 
   // Add title
   doc.setFontSize(20);
@@ -112,14 +126,21 @@ export const generatePDF = ({
     doc.text(footerText, 14, pageHeight - 10);
   }
 
-  // Save the PDF
-  doc.save(filename);
+  // Handle PDF output based on device type
+  if (!isIOS()) {
+    // For iOS devices, open in new tab
+    const pdfOutput = doc.output("bloburl");
+    window.open(pdfOutput, "_blank");
+  } else {
+    // For other devices, trigger download
+    doc.save(filename);
+  }
 };
 
-// Example usage with TypeScript type definition:
+// Example usage in a component:
 /**
  * @example
- * // Basic usage
+ * // Basic usage with iOS handling
  * generatePDF({
  *   title: "Booking Details",
  *   filename: "booking_details.pdf",
@@ -130,24 +151,11 @@ export const generatePDF = ({
  *   footerText: "Thank you for your business!"
  * });
  *
- * // Advanced usage with custom styling
- * generatePDF({
+ * // Advanced usage with custom blob URL handling
+ * const pdfURL = getPDFBlobURL({
  *   title: "Invoice",
  *   filename: "invoice_123.pdf",
- *   data: [
- *     { label: "Invoice Number", value: "INV-123" },
- *     { label: "Amount", value: "$500" }
- *   ],
- *   styling: {
- *     titleColor: "#000000",
- *     headerColor: "#4a90e2",
- *     alternateRowColor: "#f5f5f5"
- *   },
- *   additionalInfo: {
- *     "Customer ID": "CUST-456",
- *     "Payment Status": "Paid"
- *   },
- *   footerText: "Payment is due within 30 days",
- *   includeDateTime: true
+ *   data: pdfData
  * });
+ * // Use pdfURL as needed (e.g., in an iframe or custom download logic)
  */
