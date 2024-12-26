@@ -5,8 +5,8 @@ import Link from "next/link";
 import {
   FaFacebookF,
   FaInstagram,
-  FaTwitter,
-  FaPinterest,
+  FaYoutube,
+  FaLinkedinIn,
 } from "react-icons/fa";
 import { IoCall, IoMail } from "react-icons/io5";
 import {
@@ -294,43 +294,47 @@ export default function Nav() {
                   <ul className="flex space-x-4">
                     <li>
                       <Link
-                        href="/"
+                        href="https://www.facebook.com/ALILALSAGRICO/"
                         className="inline-block text-sm font-medium text-gray-400 hover:text-green-500"
+                        target="_blank"
                       >
                         <FaFacebookF size={16} />
                       </Link>
                     </li>
                     <li>
                       <Link
-                        href="/"
+                        href="https://www.instagram.com/alilalsagrico/"
                         className="inline-block text-sm font-medium text-gray-400 hover:text-green-500"
+                        target="_blank"
                       >
                         <FaInstagram size={16} />
                       </Link>
                     </li>
                     <li>
                       <Link
-                        href="/"
+                        href="https://www.youtube.com/@AlilalsAgricoPvtLtd"
                         className="inline-block text-sm font-medium text-gray-400 hover:text-green-500"
+                        target="_blank"
                       >
-                        <FaTwitter size={16} />
+                        <FaYoutube size={16} />
                       </Link>
                     </li>
                     <li>
                       <Link
-                        href="/"
+                        href="https://www.linkedin.com/company/alilalsagrico/"
                         className="inline-block text-sm font-medium text-gray-400 hover:text-green-500"
+                        target="_blank"
                       >
-                        <FaPinterest size={16} />
+                        <FaLinkedinIn size={16} />
                       </Link>
                     </li>
                   </ul>
                   <div className="mt-2">
                     <p className="text-sm text-gray-400 flex items-center gap-x-1">
-                      <IoCall size={14} /> +91 78903 60043
+                      <IoCall size={14} /> 0194-796-1490
                     </p>
                     <p className="text-sm text-gray-400 flex items-center gap-x-1">
-                      <IoMail size={14} /> hello@alilalsagrico.com
+                      <IoMail size={14} /> info@alilals.com
                     </p>
                   </div>
                 </div>

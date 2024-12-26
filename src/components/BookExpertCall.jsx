@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Input } from "@/components/ui/input";
 import { ButtonComponent } from "./ButtonComponent";
 import { useToast } from "@/hooks/use-toast";
@@ -38,6 +38,8 @@ const BookExpertCall = () => {
   const { toast } = useToast();
   const router = useRouter();
   const { openDialog } = useSuccessDialog();
+
+  const formRef = useRef(null);
 
   const [formStage, setFormStage] = useState(1);
   const [groverName, setGroverName] = useState("");
@@ -133,9 +135,11 @@ const BookExpertCall = () => {
     )
       .then(() => {
         setDisableBookingBtn(false);
+        openDialog();
+        router.push("/");
 
         generatePDF({
-          title: "Alilals Expert Call Booking Details",
+          title: "Expert Call Booking Receipt",
           filename: `ExpertCall_${groverName.replace(/\s+/g, "_")}.pdf`,
           data: pdfData,
           footerText: "Thank you for choosing our services!",
@@ -143,9 +147,6 @@ const BookExpertCall = () => {
             "Booking Reference": `EXPERT-${Date.now().toString().slice(-6)}`,
           },
         });
-
-        openDialog();
-        router.push("/");
       })
       .catch((err) => {
         setDisableBookingBtn(false);
@@ -159,6 +160,7 @@ const BookExpertCall = () => {
 
   const handleReset = () => {
     setFormStage(1);
+    formRef.current?.scrollIntoView({ behavior: "smooth" });
     setGroverName("");
     setGroverAddress("");
     setGroverNumber("");
@@ -170,7 +172,7 @@ const BookExpertCall = () => {
 
   return (
     <div>
-      <div className="font-[Raleway] mb-10">
+      <div ref={formRef} className="font-[Raleway] mb-10">
         <b>
           Before we book your call with our expert, we need to know a little
           about you and your need!

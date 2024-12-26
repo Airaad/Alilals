@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Input } from "@/components/ui/input";
 import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
 import { useToast } from "@/hooks/use-toast";
@@ -48,6 +48,8 @@ const BookOrchid = () => {
   const { toast } = useToast();
   const router = useRouter();
   const { openDialog } = useSuccessDialog();
+
+  const formRef = useRef(null);
 
   const [formStage, setFormStage] = useState(1);
   const [groverName, setGroverName] = useState("");
@@ -131,6 +133,7 @@ const BookOrchid = () => {
       return;
     }
     setFormStage((prevStep) => Math.min(prevStep + 1, 4));
+    formRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   const goToPrev = () => {
@@ -139,6 +142,7 @@ const BookOrchid = () => {
     setKanalsError(false);
     setMarlasError(false);
     setFormStage((prevStep) => Math.max(prevStep - 1, 1));
+    formRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   const generateEstimation = () => {
@@ -147,6 +151,7 @@ const BookOrchid = () => {
       return;
     }
     goToNext();
+    formRef.current?.scrollIntoView({ behavior: "smooth" });
     toast({
       title: "Cost Calculated",
       className: "bg-green-500 text-white border border-green-700",
@@ -155,6 +160,7 @@ const BookOrchid = () => {
 
   const handleReset = () => {
     setFormStage(1);
+    formRef.current?.scrollIntoView({ behavior: "smooth" });
     setGroverName("");
     setGroverAddress("");
     setGroverNumber("");
@@ -188,7 +194,7 @@ const BookOrchid = () => {
   const getTotalPlants = () => {
     const multipliers = {
       9: { 8: 186, 9: 168, 10: 150 },
-      10: { 8: 196, 9: 186, 10: 156 },
+      10: { 8: 186, 9: 166, 10: 146 },
     };
 
     return multipliers[postGap]?.[rowGap];
@@ -197,7 +203,7 @@ const BookOrchid = () => {
   const getTotalPosts = () => {
     const multipliers = {
       9: { 8: 23, 9: 21, 10: 19 },
-      10: { 8: 22, 9: 20, 10: 18 },
+      10: { 8: 21, 9: 19, 10: 17 },
     };
 
     return multipliers[postGap]?.[rowGap];
@@ -273,6 +279,8 @@ const BookOrchid = () => {
       { label: "Post Gap", value: `${postGap} m` },
       { label: "Post Type", value: postType },
       { label: "Wire Pattern", value: `${wirePattern} lines` },
+      { label: "Total Posts", value: `${getTotalPosts()} lines` },
+      { label: "Total Plants", value: `${getTotalPlants()} lines` },
       { label: "Total Cost", value: formatAmount(totalPrice()) },
     ];
 
@@ -290,19 +298,20 @@ const BookOrchid = () => {
     )
       .then(() => {
         setDisableBookingBtn(false);
+        openDialog();
+        router.push("/");
 
         generatePDF({
-          title: "Alilals Orchard Booking Details",
+          title: "Orchard Booking Receipt",
           filename: `Orchard_Booking_${groverName.replace(/\s+/g, "_")}.pdf`,
           data: pdfData,
           footerText: "Thank you for choosing our services!",
           additionalInfo: {
             "Booking Reference": `ORCHARD-${Date.now().toString().slice(-6)}`,
           },
+          showTerms: true,
+          showBankDetails: true,
         });
-
-        openDialog();
-        router.push("/");
       })
       .catch((err) => {
         setDisableBookingBtn(false);
@@ -316,7 +325,7 @@ const BookOrchid = () => {
 
   return (
     <div>
-      <div className="font-[Raleway] mb-10">
+      <div ref={formRef} className="font-[Raleway] mb-10">
         <b>
           Before we book your orchid, you must be curious about the cost to set
           up your agricultural field?
@@ -615,6 +624,22 @@ const BookOrchid = () => {
                     </TableCell>
                     <TableCell className="text-right text-green-700">
                       {wirePattern} lines
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-medium text-green-700">
+                      Total Posts
+                    </TableCell>
+                    <TableCell className="text-right text-green-700">
+                      {Math.floor(getTotalPosts() * totalLand())}
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-medium text-green-700">
+                      Total Plants
+                    </TableCell>
+                    <TableCell className="text-right text-green-700">
+                      {Math.floor(getTotalPlants() * totalLand())}
                     </TableCell>
                   </TableRow>
                   <TableRow className="text-2xl font-bold">

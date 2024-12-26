@@ -63,7 +63,7 @@ const Page = () => {
       >
         {/* Left Column: Image */}
         <div className="col-span-1 lg:col-span-3 my-auto">
-          <div className="w-full h-auto border-8 border-black rounded-lg">
+          <div className="w-full h-auto rounded-lg">
             <img
               src={project.imageUrl}
               alt="Project Image"

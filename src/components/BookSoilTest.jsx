@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Input } from "@/components/ui/input";
 import { ButtonComponent } from "./ButtonComponent";
 import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
@@ -39,6 +39,8 @@ const BookSoilTest = () => {
   const { toast } = useToast();
   const router = useRouter();
   const { openDialog } = useSuccessDialog();
+
+  const formRef = useRef(null);
 
   const [formStage, setFormStage] = useState(1);
   const [groverName, setGroverName] = useState("");
@@ -118,6 +120,7 @@ const BookSoilTest = () => {
       return;
     }
     setFormStage((prevStep) => Math.min(prevStep + 1, 3));
+    formRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   const goToPrev = () => {
@@ -126,6 +129,7 @@ const BookSoilTest = () => {
     setKanalsError(false);
     setMarlasError(false);
     setFormStage((prevStep) => Math.max(prevStep - 1, 1));
+    formRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   const bookTest = () => {
@@ -193,9 +197,11 @@ const BookSoilTest = () => {
     )
       .then(() => {
         setDisableBookingBtn(false);
+        openDialog();
+        router.push("/");
 
         generatePDF({
-          title: "Alilals Soil Test Booking Details",
+          title: "Soil Test Booking Receipt",
           filename: `SoilTest_Booking_${groverName.replace(/\s+/g, "_")}.pdf`,
           data: pdfData,
           footerText: "Thank you for choosing our services!",
@@ -203,9 +209,6 @@ const BookSoilTest = () => {
             "Booking Reference": `SOIL-${Date.now().toString().slice(-6)}`,
           },
         });
-
-        openDialog();
-        router.push("/");
       })
       .catch((err) => {
         setDisableBookingBtn(false);
@@ -219,6 +222,7 @@ const BookSoilTest = () => {
 
   const handleReset = () => {
     setFormStage(1);
+    formRef.current?.scrollIntoView({ behavior: "smooth" });
     setGroverName("");
     setGroverAddress("");
     setGroverNumber("");
@@ -234,7 +238,7 @@ const BookSoilTest = () => {
 
   return (
     <div>
-      <div className="font-[Raleway] mb-10">
+      <div ref={formRef} className="font-[Raleway] mb-10">
         <b>
           Before we book your soil test, we need to know about your orchard?
         </b>{" "}

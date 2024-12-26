@@ -1,6 +1,12 @@
 import React from "react";
 import Link from "next/link";
-import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
+import {
+  FaFacebookF,
+  FaHeart,
+  FaInstagram,
+  FaLinkedin,
+  FaYoutube,
+} from "react-icons/fa";
 
 export function Footer() {
   return (
@@ -29,15 +35,39 @@ export function Footer() {
                   Alilals Agrico Private Limited.
                 </p>
                 <div className="flex gap-6 mt-5">
-                  <FaFacebookF className="text-white" />
-                  <FaInstagram className="text-white" />
-                  <FaTwitter className="text-white" />
+                  <a
+                    href="https://www.facebook.com/ALILALSAGRICO/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <FaFacebookF className="text-white hover:text-gray-400 transition-transform duration-300 hover:scale-150" />
+                  </a>
+                  <a
+                    href="https://www.instagram.com/alilalsagrico/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <FaInstagram className="text-white hover:text-gray-400 transition-transform duration-300 hover:scale-150" />
+                  </a>
+                  <a
+                    href="https://www.youtube.com/@AlilalsAgricoPvtLtd"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <FaYoutube className="text-white hover:text-gray-400 transition-transform duration-300 hover:scale-150" />
+                  </a>
                 </div>
-                <Link href="https://harudstudios.framer.website">
-                  <p className="text-sm text-white my-5">
-                    Website Designed by Harud Studios
-                  </p>
-                </Link>
+
+                <div className="flex text-sm text-white  my-5">
+                  <p>Website Designed by</p>
+                  <Link
+                    className="flex items-center ml-1 hover:text-green-200 underline"
+                    href="https://www.instagram.com/harudstudios/"
+                  >
+                    <FaHeart className="text-red-500" />
+                    <p className="ml-1">Harud Studios</p>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
@@ -130,7 +160,7 @@ export function Footer() {
                 <li className="mb-4">
                   <a
                     className="text-base font-medium text-white hover:text-gray-300"
-                    href="#"
+                    href="/terms-and-conditions"
                   >
                     Terms &amp; Conditions
                   </a>
@@ -138,7 +168,7 @@ export function Footer() {
                 <li className="mb-4">
                   <a
                     className="text-base font-medium text-white hover:text-gray-300"
-                    href="#"
+                    href="/privacy-policy"
                   >
                     Privacy Policy
                   </a>
@@ -146,7 +176,7 @@ export function Footer() {
                 <li>
                   <a
                     className="text-base font-medium text-white hover:text-gray-300"
-                    href="#"
+                    href="/licensing"
                   >
                     Licensing
                   </a>

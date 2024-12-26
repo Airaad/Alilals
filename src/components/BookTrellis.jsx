@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Input } from "@/components/ui/input";
 import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
 import { useToast } from "@/hooks/use-toast";
@@ -45,6 +45,8 @@ const BookTrellis = () => {
   const { toast } = useToast();
   const router = useRouter();
   const { openDialog } = useSuccessDialog();
+
+  const formRef = useRef(null);
 
   const [formStage, setFormStage] = useState(1);
   const [groverName, setGroverName] = useState("");
@@ -125,6 +127,7 @@ const BookTrellis = () => {
       return;
     }
     setFormStage((prevStep) => Math.min(prevStep + 1, 4));
+    formRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   const goToPrev = () => {
@@ -133,6 +136,7 @@ const BookTrellis = () => {
     setKanalsError(false);
     setMarlasError(false);
     setFormStage((prevStep) => Math.max(prevStep - 1, 1));
+    formRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   const generateEstimation = () => {
@@ -141,6 +145,7 @@ const BookTrellis = () => {
       return;
     }
     goToNext();
+    formRef.current?.scrollIntoView({ behavior: "smooth" });
     toast({
       title: "Cost Calculated",
       className: "bg-green-500 text-white border border-green-700",
@@ -149,6 +154,7 @@ const BookTrellis = () => {
 
   const handleReset = () => {
     setFormStage(1);
+    formRef.current?.scrollIntoView({ behavior: "smooth" });
     setGroverName("");
     setGroverAddress("");
     setGroverNumber("");
@@ -228,19 +234,20 @@ const BookTrellis = () => {
     )
       .then(() => {
         setDisableBookingBtn(false);
+        openDialog();
+        router.push("/");
 
         generatePDF({
-          title: "Alilals Trellis Booking Details",
+          title: "Trellis Installation Booking Receipt",
           filename: `Trellis_Booking_${groverName.replace(/\s+/g, "_")}.pdf`,
           data: pdfData,
           footerText: "Thank you for choosing our services!",
           additionalInfo: {
             "Booking Reference": `TRELLIS-${Date.now().toString().slice(-6)}`,
           },
+          showTerms: true,
+          showBankDetails: true,
         });
-
-        openDialog();
-        router.push("/");
       })
       .catch((err) => {
         setDisableBookingBtn(false);
@@ -254,7 +261,7 @@ const BookTrellis = () => {
 
   return (
     <div>
-      <div className="font-[Raleway] mb-10">
+      <div ref={formRef} className="font-[Raleway] mb-10">
         <b>
           Before we book trellis installation for your orchid, you must be
           curious about the cost?
