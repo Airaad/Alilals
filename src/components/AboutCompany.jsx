@@ -11,7 +11,7 @@ const AboutCompany = () => {
         <img
           src="/assets/images/aboutus_hero.jpg"
           alt="Company Image"
-          className="lg:w-[600px] lg:h-[600px] object-cover rounded-lg shadow-md"
+          className="lg:w-[600px] lg:h-[700px] object-cover rounded-lg shadow-md"
         />
       </div>
 
@@ -25,17 +25,30 @@ const AboutCompany = () => {
         </h2>
         <div className="mb-6">
           <p className="text-md text-[#636363] mb-4 text-justify">
-            Our company is an agri-tech and innovations startup based in Jammu &
-            Kashmir. We are focused on transforming the template horticulture
-            landscape of the region through innovations and sustainable
-            development. Specialising in sustainable orchards and precision
-            farming, we provide farmers with tech support to increase yields,
-            increase profitability and encourage environment friendly practices
-            in farming. With a strong commitment to devlop rural communities,
-            Alilas Agrico is setting new standards for modern and sustainable
-            agriculture in J&K. Since inception in 2022, Alilas Agrico has saved
-            over 100 growers in last two years with state of the art Orchard
-            development and management services.
+            We are an agriculture company based in the heart of Jammu and
+            Kashmir, dedicated to transforming the region's agricultural
+            landscape through innovation, sustainability, and farmer
+            empowerment. Established with a vision to uplift rural communities
+            and modernize traditional farming practices, the company specializes
+            in high-density orchard development, precision farming, and advanced
+            technological interventions tailored to the unique needs of farmers.
+            <br />
+            Driven by the mission to optimise yields, enhance profitability, and
+            minimize environmental impact, Alilals Agrico integrates
+            cutting-edge techniques with a deep respect for nature. Its flagship
+            brand, AASHTM (Alilals Agrico's Sustainable Harvests), embodies the
+            company's commitment to delivering excellence in orchard care
+            services. Additionally, Alilals Agrico extends its reach through
+            initiatives like ZIRAAT, providing quality fertilizers and plant
+            nutritional supplements, backed by expert guidance and data-driven
+            solutions.
+            <br />
+            At its core, Alilals Agrico is more than a business—it is a movement
+            toward sustainable farming and a prosperous future for Indian
+            agriculture industry. By empowering farmers with knowledge, tools,
+            and resources, the company envisions a thriving agricultural
+            ecosystem that balances innovation with tradition, ensuring
+            long-term growth for its people.
           </p>
           <div className="h-[0.09rem] bg-[#44A05B] w-full " />
         </div>
@@ -45,26 +58,23 @@ const AboutCompany = () => {
           <div className="flex flex-col gap-3">
             <div className="flex items-center gap-2">
               <FaCheckCircle />
-              <p>Outstanding customer service and support</p>
+              <p>Unmatched quality matches excellence in Services.</p>
             </div>
             <div className="flex items-center gap-2">
               <FaCheckCircle />
-              <p>Innovative and customized solutions for your business.</p>
+              <p>Precession Farming for Sustainable Future.</p>
             </div>
             <div className="flex items-center gap-2">
               <FaCheckCircle />
-              <p>Commitment to sustainability and eco-friendly practices.</p>
+              <p>Farmer Centric Interventions with ease of doing farming.</p>
             </div>
             <div className="flex items-center gap-2">
               <FaCheckCircle />
-              <p>
-                Strong partnerships and collaborative efforts to achieve
-                success.
-              </p>
+              <p>After care services with expert backed support system.</p>
             </div>
           </div>
 
-          <div className="mx-auto lg:mx-0 lg:mt-[80px]">
+          <div className="mx-auto lg:mx-0">
             <Link href="/contact">
               <ButtonComponent text="Contact Us" />
             </Link>

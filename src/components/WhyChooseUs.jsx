@@ -115,28 +115,42 @@ export function WhyChooseUs() {
             Why Choose Us
           </h3>
           <h1 className="text-5xl font-bold text-gray-800 leading-snug">
-            Farming with passion, feeding with purpose
+            Cultivating Sustainability, Impacting Lives.
           </h1>
           <p className="text-gray-500 mt-4 mb-8">
-            Lorem ipsum dolor sit amet consectetur. Amet lectus mi ultricies
-            dictum facilisis sem. Imperdiet massa turpis sit Lorem ipsum dolor
-            sit amet consectetur. Amet the lectus mi ultricies dictum facilisis
-            sem.
+            We are transforming agriculture in Kashmir with a focus on
+            sustainability and innovation. By combining precision farming,
+            modern technology, and eco-friendly practices, the company empowers
+            farmers to optimize yields while protecting the environment.
+            Committed to uplifting rural communities, Alilals Agrico is shaping
+            a resilient and prosperous future for Kashmir's agricultural
+            landscape.
           </p>
           {/* Progress Bars */}
           <div className="mb-4">
             <p className="text-gray-800 font-medium mb-1">
-              FarmSmart Innovations
+              Smart Farming and innovations
             </p>
             <div className="w-full bg-gray-200 rounded-full h-2.5">
-              <div className="bg-[#44A05B] h-2.5 rounded-full w-3/4"></div>
+              <div className="bg-[#44A05B] h-2.5 rounded-full w-11/12"></div>
+            </div>
+          </div>
+
+          <div className="mb-4">
+            <p className="text-gray-800 font-medium mb-1">
+              Precession farmings
+            </p>
+            <div className="w-full bg-gray-200 rounded-full h-2.5">
+              <div className="bg-[#44A05B] h-2.5 rounded-full w-10/12"></div>
             </div>
           </div>
 
           <div className="mb-6">
-            <p className="text-gray-800 font-medium mb-1">CropCare Solutions</p>
+            <p className="text-gray-800 font-medium mb-1">
+              Eco friendly and sustainable practices
+            </p>
             <div className="w-full bg-gray-200 rounded-full h-2.5">
-              <div className="bg-[#44A05B] h-2.5 rounded-full w-2/3"></div>
+              <div className="bg-[#44A05B] h-2.5 rounded-full w-10/12"></div>
             </div>
           </div>
 

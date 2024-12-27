@@ -14,8 +14,8 @@ const OurServices = () => {
     {
       title: "Orchard Development",
       description:
-        "Start your journey with our high-quality plants and expert guidance for a thriving orchard.",
-      imgSrc: "/assets/images/apples-7566512_1280.jpg",
+        "We oﬀer High Density Orchard Development services with most authentic plant material acquired from Europ’s internationally recognised fruit tree nurseries. We use standard grade materials for Trellis and Irrigation installations having greater strength and longer durability.",
+      imgSrc: "/assets/images/OrchardDevelopment.png",
       link: "services/orchard-development",
     },
     {
@@ -56,8 +56,8 @@ const OurServices = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            Delivering sustainability through innovation in orchard care and
-            farming.
+            Delivering sustainability through innovation in Orchard Designing
+            and after care.
           </motion.p>
         </div>
       </div>

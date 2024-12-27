@@ -20,7 +20,7 @@ export default function GrowWithUs() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            Popular Services
+            Quick Access Tools
           </motion.h2>
           <motion.p
             className="text-lg text-gray-600"
@@ -30,22 +30,25 @@ export default function GrowWithUs() {
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            Unlock the full potential of your orchard with our most popular
-            services
+            Our cost estimation tool oﬀers you a wide range of choices in
+            designing your dream High Density apple orchard. Select from various
+            drop-down options your desired inputs and generate an estimate, Book
+            Service and feel the diﬀerence!
           </motion.p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <ServiceCard
-            title="High Density Orchard"
-            description="Ready to start your own orchard? Secure your plot with us today and embark on your journey towards sustainable agriculture!"
+            title="Orchard Cost Calculator"
+            description="Generate ESTIMATE based on your desired material, spacing and land area. Download Estimate and Book Your Orchard online."
             image="/assets/images/20240811_151341.jpg"
             link="services/orchard-development/book-orchard"
             delay={0.4}
+            bookText="Calculate Cost"
           />
           <ServiceCard
-            title="Soil Test"
-            description="Uncover your soil’s potential with detailed nutrient and composition analysis. Ensure your orchard thrives with our professional soil testing services."
+            title="Book a Soil Test"
+            description="Before investing you earnings into soil, we let you know the properties and composition your soil carries. Book soil Sample collection and testing services here."
             image="/assets/images/20240423_135153.jpg"
             link="services/soil-health-management/soil-test"
             delay={0.6}

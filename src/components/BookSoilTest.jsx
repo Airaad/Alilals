@@ -34,6 +34,7 @@ import {
 } from "@/components/ui/select";
 import { useSuccessDialog } from "@/context/DialogContext";
 import { generatePDF } from "@/utils/generatePDF";
+import { addBooking, checkBookingExists } from "@/utils/BookSoilTest";
 
 const BookSoilTest = () => {
   const { toast } = useToast();
@@ -102,10 +103,33 @@ const BookSoilTest = () => {
     return true;
   };
 
-  const goToNext = () => {
+  const goToNext = async () => {
     setNameError(false);
     setPhoneError(false);
-    if (formStage === 1 && (!checkName() || !checkPhoneNumber())) {
+    try {
+      if (formStage === 1) {
+        if (!checkName() || !checkPhoneNumber()) {
+          return;
+        }
+        const numberExists = await checkBookingExists(groverNumber);
+
+        if (numberExists) {
+          toast({
+            title: "Phone number already exists",
+            description:
+              "A booking with this phone number already exists. Choose another number",
+            className: "bg-red-500 text-white border border-red-700",
+          });
+          return;
+        }
+      }
+    } catch (err) {
+      console.error(err);
+      toast({
+        title: "Error checking phone number",
+        description: "An error occurred while checking phone number.",
+        className: "bg-red-500 text-white border border-red-700",
+      });
       return;
     }
     if (formStage === 1 && (!groverAddress || !groverName || !groverNumber)) {
@@ -160,15 +184,18 @@ const BookSoilTest = () => {
       className: "bg-yellow-500 text-white border border-yellow-700",
     });
 
-    // Create URL-encoded data
-    const formData = new URLSearchParams({
-      Name: groverName,
-      Address: groverAddress,
-      Phone: groverNumber,
-      TotalLand: `${landSizeKanals} Kanals ${landSizeMarlas} Marlas`,
-      CropType: cropType,
-      LastFertilizerDate: fertilizerDate,
-    }).toString();
+    const referenceNo = `SOIL-${Date.now().toString().slice(-6)}`;
+
+    // For storing in firestore
+    const bookingData = {
+      name: groverName,
+      address: groverAddress,
+      phone: groverNumber,
+      totalLand: `${landSizeKanals} Kanals ${landSizeMarlas} Marlas`,
+      cropType: cropType,
+      lastFertilizerDate: fertilizerDate,
+      referenceNo: referenceNo,
+    };
 
     // For creating PDF
     const pdfData = [
@@ -185,16 +212,7 @@ const BookSoilTest = () => {
 
     setDisableBookingBtn(true);
 
-    fetch(
-      "https://script.google.com/macros/s/AKfycbwnTRSfJlx_6rXgX3pYsPOMyOtErScLD4H_pgKcqDNGRbNWhRU2mENmCjqGVfBRYKKY/exec",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: formData,
-      },
-    )
+    addBooking(bookingData)
       .then(() => {
         setDisableBookingBtn(false);
         openDialog();
@@ -206,7 +224,7 @@ const BookSoilTest = () => {
           data: pdfData,
           footerText: "Thank you for choosing our services!",
           additionalInfo: {
-            "Booking Reference": `SOIL-${Date.now().toString().slice(-6)}`,
+            "Booking Reference": referenceNo,
           },
         });
       })

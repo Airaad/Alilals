@@ -9,7 +9,7 @@ const SoilHealthManagement = () => {
       {/* Banner Section */}
       <Banner
         title="Soil Health Management"
-        backgroundImage="/assets/images/plant-6151414_1280.jpg"
+        backgroundImage="/assets/images/soil-8166778_1280.jpg"
       />
 
       {/* Description Section */}

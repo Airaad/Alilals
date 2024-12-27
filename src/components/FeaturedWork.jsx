@@ -4,21 +4,15 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import ProjectCard from "./ProjectCard";
-import { getAllProjects } from "../../firebase/projects/read";
+import { useProjects } from "@/context/ProjectContext";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 const FeaturedWork = () => {
-  const [projects, setProjects] = useState([]);
+  const { projects } = useProjects();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(3); // Default for desktop
 
   useEffect(() => {
-    if (!projects.length) {
-      getAllProjects().then((data) => {
-        setProjects(data);
-      });
-    }
-
     // Function to handle screen resizing
     const handleResize = () => {
       if (window.innerWidth <= 640) {

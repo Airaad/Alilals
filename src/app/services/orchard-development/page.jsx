@@ -9,7 +9,7 @@ const OrchardDevelopment = () => {
       {/* Banner Section */}
       <Banner
         title="Orchard Development"
-        backgroundImage="/assets/images/apples-1873078_1280.jpg"
+        backgroundImage="/assets/images/OrchardDevelopment.png"
       />
 
       {/* Description Section */}

@@ -35,6 +35,7 @@ import { useRouter } from "next/navigation";
 import { ButtonComponent } from "./ButtonComponent";
 import { useSuccessDialog } from "@/context/DialogContext";
 import { generatePDF } from "@/utils/generatePDF";
+import { addBooking, checkBookingExists } from "@/utils/BookTrellis";
 
 const BookTrellis = () => {
   const basicPrices = {
@@ -107,12 +108,35 @@ const BookTrellis = () => {
     return true;
   };
 
-  const goToNext = () => {
+  const goToNext = async () => {
     setNameError(false);
     setPhoneError(false);
     setKanalsError(false);
     setMarlasError(false);
-    if (formStage === 1 && (!checkName() || !checkPhoneNumber())) {
+    try {
+      if (formStage === 1) {
+        if (!checkName() || !checkPhoneNumber()) {
+          return;
+        }
+        const numberExists = await checkBookingExists(groverNumber);
+
+        if (numberExists) {
+          toast({
+            title: "Phone number already exists",
+            description:
+              "A booking with this phone number already exists. Choose another number",
+            className: "bg-red-500 text-white border border-red-700",
+          });
+          return;
+        }
+      }
+    } catch (err) {
+      console.error(err);
+      toast({
+        title: "Error checking phone number",
+        description: "An error occurred while checking phone number.",
+        className: "bg-red-500 text-white border border-red-700",
+      });
       return;
     }
     if (formStage === 1 && (!groverAddress || !groverName || !groverNumber)) {
@@ -197,15 +221,18 @@ const BookTrellis = () => {
       className: "bg-yellow-500 text-white border border-yellow-700",
     });
 
-    // Create URL-encoded data
-    const formData = new URLSearchParams({
-      Name: groverName,
-      Address: groverAddress,
-      Phone: groverNumber,
-      TotalLand: `${landSizeKanals} Kanals ${landSizeMarlas} Marlas`,
+    const referenceNo = `TRELLIS-${Date.now().toString().slice(-6)}`;
+
+    // For storing in firestore
+    const bookingData = {
+      name: groverName,
+      address: groverAddress,
+      phone: groverNumber,
+      totalLand: `${landSizeKanals} Kanals ${landSizeMarlas} Marlas`,
       trellisType: trellisType,
-      TotalCost: formatAmount(totalPrice()),
-    }).toString();
+      totalCost: formatAmount(totalPrice()),
+      referenceNo: referenceNo,
+    };
 
     // For creating PDF
     const pdfData = [
@@ -222,16 +249,7 @@ const BookTrellis = () => {
 
     setDisableBookingBtn(true);
 
-    fetch(
-      "https://script.google.com/macros/s/AKfycbwztJmBcZKdJ3BeWQ07wUPOqJCcyS1-sBp7lm3QT0onV3IVDlNparDxmmjZoXNdgWHRyA/exec",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: formData,
-      },
-    )
+    addBooking(bookingData)
       .then(() => {
         setDisableBookingBtn(false);
         openDialog();
@@ -243,7 +261,7 @@ const BookTrellis = () => {
           data: pdfData,
           footerText: "Thank you for choosing our services!",
           additionalInfo: {
-            "Booking Reference": `TRELLIS-${Date.now().toString().slice(-6)}`,
+            "Booking Reference": referenceNo,
           },
           showTerms: true,
           showBankDetails: true,

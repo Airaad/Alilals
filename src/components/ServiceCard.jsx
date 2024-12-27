@@ -9,7 +9,14 @@ const fadeInUp = {
   visible: { opacity: 1, y: 0 },
 };
 
-const ServiceCard = ({ title, description, image, link, delay }) => {
+const ServiceCard = ({
+  title,
+  description,
+  image,
+  link,
+  delay,
+  bookText = "Book Service",
+}) => {
   return (
     <motion.div
       className="relative bg-cover bg-center bg-no-repeat h-[350px] md:h-[400px] rounded-lg shadow-lg hover:shadow-xl transition-shadow overflow-hidden group"
@@ -34,7 +41,7 @@ const ServiceCard = ({ title, description, image, link, delay }) => {
         <p className="text-gray-200 mb-6">{description}</p>
         <Link href={link}>
           <button className="bg-[#44A05B] text-white font-medium py-2 px-5 rounded-full shadow-lg hover:bg-white hover:text-[#44A05B] transition-colors self-start">
-            Book Service
+            {bookText}
           </button>
         </Link>
       </div>

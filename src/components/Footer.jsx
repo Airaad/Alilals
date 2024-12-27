@@ -108,7 +108,7 @@ export function Footer() {
                     className="text-base font-medium text-white hover:text-gray-300"
                     href="/blog"
                   >
-                    Blogs
+                    Knowledge
                   </a>
                 </li>
               </ul>

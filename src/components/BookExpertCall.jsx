@@ -33,6 +33,7 @@ import {
 } from "@/components/ui/select";
 import { useSuccessDialog } from "@/context/DialogContext";
 import { generatePDF } from "@/utils/generatePDF";
+import { addBooking, checkBookingExists } from "@/utils/BookExpert";
 
 const BookExpertCall = () => {
   const { toast } = useToast();
@@ -80,10 +81,33 @@ const BookExpertCall = () => {
     return false;
   };
 
-  const bookTest = () => {
+  const bookTest = async () => {
     setNameError(false);
     setPhoneError(false);
-    if (formStage === 1 && (!checkName() || !checkPhoneNumber())) {
+    try {
+      if (formStage === 1) {
+        if (!checkName() || !checkPhoneNumber()) {
+          return;
+        }
+        const numberExists = await checkBookingExists(groverNumber);
+
+        if (numberExists) {
+          toast({
+            title: "Phone number already exists",
+            description:
+              "A booking with this phone number already exists. Choose another number",
+            className: "bg-red-500 text-white border border-red-700",
+          });
+          return;
+        }
+      }
+    } catch (err) {
+      console.error(err);
+      toast({
+        title: "Error checking phone number",
+        description: "An error occurred while checking phone number.",
+        className: "bg-red-500 text-white border border-red-700",
+      });
       return;
     }
     if (
@@ -105,13 +129,16 @@ const BookExpertCall = () => {
       className: "bg-yellow-500 text-white border border-yellow-700",
     });
 
+    const referenceNo = `EXPERT-${Date.now().toString().slice(-6)}`;
+
     // Create URL-encoded data
-    const formData = new URLSearchParams({
-      Name: groverName,
-      Address: groverAddress,
-      Phone: groverNumber,
-      ExpertType: expertType,
-    }).toString();
+    const bookingData = {
+      name: groverName,
+      address: groverAddress,
+      phone: groverNumber,
+      expertType: expertType,
+      referenceNo: referenceNo,
+    };
 
     // For creating PDF
     const pdfData = [
@@ -123,16 +150,7 @@ const BookExpertCall = () => {
 
     setDisableBookingBtn(true);
 
-    fetch(
-      "https://script.google.com/macros/s/AKfycbxB79ElsXSP2UZupaRDAo6sRfB_rV2ydF6N3C-p1niX0rqmHQeGpueem4YZ94xMxKpm/exec",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: formData,
-      },
-    )
+    addBooking(bookingData)
       .then(() => {
         setDisableBookingBtn(false);
         openDialog();
@@ -144,7 +162,7 @@ const BookExpertCall = () => {
           data: pdfData,
           footerText: "Thank you for choosing our services!",
           additionalInfo: {
-            "Booking Reference": `EXPERT-${Date.now().toString().slice(-6)}`,
+            "Booking Reference": referenceNo,
           },
         });
       })

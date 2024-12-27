@@ -50,8 +50,8 @@ const FAQ = () => {
           Frequently Asked Questions
         </h2>
         <p className="mb-8 text-lg text-white">
-          Learn more about our agriculture company through these common
-          questions.
+          Know more about High Density farming in apple and other best practices
+          in Horticulture.
         </p>
         <div className="h-[0.09rem] bg-[#44A05B] my-5" />
 

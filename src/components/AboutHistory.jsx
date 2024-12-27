@@ -43,20 +43,14 @@ const AboutHistory = () => {
 
       <div className="relative border-[#1A3A32] ml-4">
         {/* Video for mobile */}
-        <video autoPlay muted loop playsInline className="w-full md:hidden">
-          <source src="/assets/videos/Mobile Video-Infographics.mp4" />
+        <video autoPlay muted playsInline className="w-full md:hidden">
+          <source src="/assets/videos/historyMobile.mp4" />
           Your browser does not support the video tag.
         </video>
 
         {/* Video for desktop */}
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="w-full hidden md:block"
-        >
-          <source src="/assets/videos/New Video-Infographic Website.mp4" />
+        <video autoPlay muted playsInline className="w-full hidden md:block">
+          <source src="/assets/videos/historyDesktop.mp4" />
           Your browser does not support the video tag.
         </video>
       </div>

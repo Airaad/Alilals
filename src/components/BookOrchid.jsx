@@ -35,6 +35,7 @@ import { useRouter } from "next/navigation";
 import { ButtonComponent } from "./ButtonComponent";
 import { useSuccessDialog } from "@/context/DialogContext";
 import { generatePDF } from "@/utils/generatePDF";
+import { addBooking, checkBookingExists } from "@/utils/BookOrchard";
 
 const BookOrchid = () => {
   const basicPrices = {
@@ -113,12 +114,35 @@ const BookOrchid = () => {
     return true;
   };
 
-  const goToNext = () => {
+  const goToNext = async () => {
     setNameError(false);
     setPhoneError(false);
     setKanalsError(false);
     setMarlasError(false);
-    if (formStage === 1 && (!checkName() || !checkPhoneNumber())) {
+    try {
+      if (formStage === 1) {
+        if (!checkName() || !checkPhoneNumber()) {
+          return;
+        }
+        const numberExists = await checkBookingExists(groverNumber);
+
+        if (numberExists) {
+          toast({
+            title: "Phone number already exists",
+            description:
+              "A booking with this phone number already exists. Choose another number",
+            className: "bg-red-500 text-white border border-red-700",
+          });
+          return;
+        }
+      }
+    } catch (err) {
+      console.error(err);
+      toast({
+        title: "Error checking phone number",
+        description: "An error occurred while checking phone number.",
+        className: "bg-red-500 text-white border border-red-700",
+      });
       return;
     }
     if (formStage === 1 && (!groverAddress || !groverName || !groverNumber)) {
@@ -253,18 +277,21 @@ const BookOrchid = () => {
       className: "bg-yellow-500 text-white border border-yellow-700",
     });
 
-    // Create URL-encoded data
-    const formData = new URLSearchParams({
-      Name: groverName,
-      Address: groverAddress,
-      Phone: groverNumber,
-      TotalLand: `${landSizeKanals} Kanals ${landSizeMarlas} Marlas`,
+    const referenceNo = `ORCHARD-${Date.now().toString().slice(-6)}`;
+
+    // For Storing to firestore
+    const orchardData = {
+      name: groverName,
+      address: groverAddress,
+      phone: groverNumber,
+      totalLand: `${landSizeKanals} Kanals ${landSizeMarlas} Marlas`,
       rowGap: rowGap,
       postGap: postGap,
-      PostType: postType,
-      WirePattern: wirePattern,
-      TotalCost: formatAmount(totalPrice()),
-    }).toString();
+      postType: postType,
+      wirePattern: wirePattern,
+      totalCost: formatAmount(totalPrice()),
+      referenceNo: referenceNo,
+    };
 
     // For creating PDF
     const pdfData = [
@@ -279,23 +306,14 @@ const BookOrchid = () => {
       { label: "Post Gap", value: `${postGap} m` },
       { label: "Post Type", value: postType },
       { label: "Wire Pattern", value: `${wirePattern} lines` },
-      { label: "Total Posts", value: `${getTotalPosts()} lines` },
-      { label: "Total Plants", value: `${getTotalPlants()} lines` },
+      { label: "Total Posts", value: `${getTotalPosts()} posts` },
+      { label: "Total Plants", value: `${getTotalPlants()} plants` },
       { label: "Total Cost", value: formatAmount(totalPrice()) },
     ];
 
     setDisableBookingBtn(true);
 
-    fetch(
-      "https://script.google.com/macros/s/AKfycbw9wGaIkKb-opX2UzflE640b1LCNc61AAVwVdNpb3pc_X3g64vFI-5nNssZBilnvbRVmg/exec",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: formData,
-      },
-    )
+    addBooking(orchardData)
       .then(() => {
         setDisableBookingBtn(false);
         openDialog();
@@ -307,7 +325,7 @@ const BookOrchid = () => {
           data: pdfData,
           footerText: "Thank you for choosing our services!",
           additionalInfo: {
-            "Booking Reference": `ORCHARD-${Date.now().toString().slice(-6)}`,
+            "Booking Reference": referenceNo,
           },
           showTerms: true,
           showBankDetails: true,
