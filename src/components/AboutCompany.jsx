@@ -21,7 +21,7 @@ const AboutCompany = () => {
           <span className="text-[#44A05B]">Who We Are</span>
         </div>
         <h2 className="text-4xl font-bold text-[#1A3A32] mb-4">
-          Welcome to AlilasAgrico Pvt. Ltd
+          Welcome to AlilalsAgrico Pvt. Ltd
         </h2>
         <div className="mb-6">
           <p className="text-md text-[#636363] mb-4 text-justify">
