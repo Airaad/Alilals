@@ -29,17 +29,11 @@ const addBooking = async (bookingData) => {
     // Generate a unique document ID based on phone number
     const bookingRef = doc(collection(db, "SoilTestBooking"), phone);
 
-    const timestamp = new Date().toLocaleDateString("en-GB", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-
     // Add the booking to the Firestore collection
     await setDoc(bookingRef, {
       ...restData,
       phone,
-      createdAt: timestamp,
+      createdAt: Date.now(),
     });
 
     return { success: true, message: "Booking successfully added." };
