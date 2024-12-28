@@ -62,7 +62,7 @@ const Page = () => {
         transition={{ duration: 0.5 }}
       >
         {/* Left Column: Image */}
-        <div className="col-span-1 lg:col-span-3 my-auto">
+        <div className="col-span-1 lg:col-span-3">
           <div className="w-full h-auto rounded-lg">
             <img
               src={project.imageUrl}

@@ -36,12 +36,12 @@ const AboutCompany = () => {
             Driven by the mission to optimise yields, enhance profitability, and
             minimize environmental impact, Alilals Agrico integrates
             cutting-edge techniques with a deep respect for nature. Its flagship
-            brand, AASHTM (Alilals Agrico's Sustainable Harvests), embodies the
-            company's commitment to delivering excellence in orchard care
-            services. Additionally, Alilals Agrico extends its reach through
-            initiatives like ZIRAAT, providing quality fertilizers and plant
-            nutritional supplements, backed by expert guidance and data-driven
-            solutions.
+            brand, AASH<sup>TM</sup> (Alilals Agrico's Sustainable Harvests),
+            embodies the company's commitment to delivering excellence in
+            orchard care services. Additionally, Alilals Agrico extends its
+            reach through initiatives like ZIRAAT<sup>TM</sup>, providing
+            quality fertilizers and plant nutritional supplements, backed by
+            expert guidance and data-driven solutions.
             <br />
             At its core, Alilals Agrico is more than a business—it is a movement
             toward sustainable farming and a prosperous future for Indian
