@@ -36,6 +36,7 @@ import { ButtonComponent } from "./ButtonComponent";
 import { useSuccessDialog } from "@/context/DialogContext";
 import { generateInvoice } from "@/utils/generatePDF";
 import { addBooking, checkBookingExists } from "@/utils/BookOrchard";
+import { generateId } from "@/utils/GenerateId";
 
 const BookOrchid = () => {
   const basicPrices = {
@@ -277,7 +278,7 @@ const BookOrchid = () => {
       className: "bg-yellow-500 text-white border border-yellow-700",
     });
 
-    const referenceNo = `ORCHARD-${Date.now().toString().slice(-6)}`;
+    const referenceNo = `ORCHARD-${generateId()}`;
 
     // For Storing to firestore
     const orchardData = {
@@ -289,7 +290,7 @@ const BookOrchid = () => {
       postGap: postGap,
       postType: postType,
       wirePattern: wirePattern,
-      totalCost: formatAmount(totalPrice()),
+      estimatedCost: formatAmount(totalPrice()),
       referenceNo: referenceNo,
     };
 
@@ -305,7 +306,7 @@ const BookOrchid = () => {
       { label: "Wire Pattern", value: `${wirePattern} lines` },
       { label: "Total Posts", value: `${getTotalPosts()} posts` },
       { label: "Total Plants", value: `${getTotalPlants()} plants` },
-      { label: "Total Cost", value: formatAmount(totalPrice()).slice(1) },
+      { label: "Estimated Cost", value: formatAmount(totalPrice()).slice(1) },
     ];
 
     setDisableBookingBtn(true);
@@ -317,7 +318,7 @@ const BookOrchid = () => {
         router.push("/");
 
         generateInvoice({
-          title: "Orchard Booking Receipt",
+          title: "Orchard Estimation",
           filename: `Orchard_Booking_${referenceNo}.pdf`,
           data: pdfData,
           referenceNo: referenceNo,
@@ -344,7 +345,7 @@ const BookOrchid = () => {
     <div>
       <div ref={formRef} className="font-[Raleway] mb-10">
         <b>
-          Before we book your orchid, you must be curious about the cost to set
+          Before we book your orchard, you must be curious about the cost to set
           up your agricultural field?
         </b>{" "}
         Our easy-to-use cost estimator tool helps you get an instant estimate
@@ -372,7 +373,7 @@ const BookOrchid = () => {
           <div
             className={`rounded-tr-xl text-xs md:text-sm px-5 py-3 border border-[#035803] ${formStage === 4 ? "bg-[#035803] text-white" : "bg-white"}`}
           >
-            Total Cost
+            Estimated Cost
           </div>
         </div>
 
@@ -548,10 +549,6 @@ const BookOrchid = () => {
                   text={"Book Orchard"}
                   disabled={disableBookingBtn}
                 />
-
-                <p className="mt-4 mb-64 md:mb-20 md:text-lg text-gray-600">
-                  Click the button to book your orchid today!
-                </p>
               </div>
             </AlertDialogTrigger>
 
@@ -661,7 +658,7 @@ const BookOrchid = () => {
                   </TableRow>
                   <TableRow className="text-2xl font-bold">
                     <TableCell className="font-medium text-green-700">
-                      Total Cost
+                      Estimated Cost
                     </TableCell>
                     <TableCell className="text-right text-green-700">
                       {formatAmount(totalPrice())}

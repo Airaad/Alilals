@@ -34,6 +34,7 @@ import {
 import { useSuccessDialog } from "@/context/DialogContext";
 import { generateInvoice } from "@/utils/generatePDF";
 import { addBooking, checkBookingExists } from "@/utils/BookExpert";
+import { generateId } from "@/utils/GenerateId";
 
 const BookExpertCall = () => {
   const { toast } = useToast();
@@ -129,7 +130,7 @@ const BookExpertCall = () => {
       className: "bg-yellow-500 text-white border border-yellow-700",
     });
 
-    const referenceNo = `EXPERT-${Date.now().toString().slice(-6)}`;
+    const referenceNo = `EXPERT-${generateId()}`;
 
     // Create URL-encoded data
     const bookingData = {
@@ -152,7 +153,7 @@ const BookExpertCall = () => {
         router.push("/");
 
         generateInvoice({
-          title: "Expert Call Booking Receipt",
+          title: "Expert Call Booking Details",
           filename: `ExpertCall_${referenceNo}.pdf`,
           data: pdfData,
           referenceNo: referenceNo,

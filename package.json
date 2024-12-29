@@ -39,7 +39,8 @@
     "sonner": "^1.5.0",
     "swiper": "^11.1.12",
     "tailwind-merge": "^2.5.2",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "uuid": "^11.0.3"
   },
   "devDependencies": {
     "eslint": "^8",

@@ -35,6 +35,7 @@ import {
 import { useSuccessDialog } from "@/context/DialogContext";
 import { generateInvoice } from "@/utils/generatePDF";
 import { addBooking, checkBookingExists } from "@/utils/BookSoilTest";
+import { generateId } from "@/utils/GenerateId";
 
 const BookSoilTest = () => {
   const { toast } = useToast();
@@ -184,7 +185,7 @@ const BookSoilTest = () => {
       className: "bg-yellow-500 text-white border border-yellow-700",
     });
 
-    const referenceNo = `SOIL-${Date.now().toString().slice(-6)}`;
+    const referenceNo = `SOIL-${generateId()}`;
 
     // For storing in firestore
     const bookingData = {
@@ -216,7 +217,7 @@ const BookSoilTest = () => {
         router.push("/");
 
         generateInvoice({
-          title: "Soil Test Booking Receipt",
+          title: "Soil Test Booking Details",
           filename: `SoilTest_Booking_${referenceNo}.pdf`,
           data: pdfData,
           referenceNo: referenceNo,

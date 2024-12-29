@@ -107,7 +107,7 @@ export const generateInvoice = ({
   const companyNameColor = [255, 255, 255];
   const bgColor = hexToRGB("#035803");
 
-  // Set the green background (190 width and 30 height to accommodate both the logo and company name)
+  // Set the green background
   doc.setFillColor(...bgColor);
   doc.rect(10, 10, 190, 20, "F"); // Green rectangle background
 
@@ -118,14 +118,13 @@ export const generateInvoice = ({
   doc.setFontSize(14);
   doc.setFont("helvetica", "bold");
   doc.setTextColor(...companyNameColor);
-  doc.text(companyName, 30, 22); // Position the company name next to the logo
+  doc.text(companyName, 30, 22);
 
   // Add static company details below the green background
   doc.setFontSize(8);
   doc.setFont("helvetica", "normal");
   doc.setTextColor(0, 0, 0); // Black text for details
 
-  // First line: Address, Email, Phone
   currentY = 35; // Start below the green background
   doc.text(
     "address: H.O: Murad House-56, Pine Lane, Rajbagh Srinagar-190008 J&K",
@@ -263,9 +262,12 @@ export const generateInvoice = ({
     doc.rect(14, currentY, 182, 0.5, "F");
     currentY += 10;
 
+    // Add bank details
+    const qr = "/assets/images/alilalsQR.png";
     doc.setFontSize(10);
     doc.setFont("helvetica", "normal");
     doc.setTextColor(...hexToRGB(defaultStyling.titleColor));
+    doc.addImage(qr, "PNG", 14, currentY - 3, 30, 30);
     doc.text(BANK_DETAILS.title, 50, currentY);
     doc.setFontSize(8);
     doc.text(BANK_DETAILS.desc, 150, currentY);

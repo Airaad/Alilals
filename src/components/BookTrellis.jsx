@@ -36,6 +36,7 @@ import { ButtonComponent } from "./ButtonComponent";
 import { useSuccessDialog } from "@/context/DialogContext";
 import { generateInvoice } from "@/utils/generatePDF";
 import { addBooking, checkBookingExists } from "@/utils/BookTrellis";
+import { generateId } from "@/utils/GenerateId";
 
 const BookTrellis = () => {
   const basicPrices = {
@@ -221,7 +222,7 @@ const BookTrellis = () => {
       className: "bg-yellow-500 text-white border border-yellow-700",
     });
 
-    const referenceNo = `TRELLIS-${Date.now().toString().slice(-6)}`;
+    const referenceNo = `TRELLIS-${generateId()}`;
 
     // For storing in firestore
     const bookingData = {
@@ -230,7 +231,7 @@ const BookTrellis = () => {
       phone: groverNumber,
       totalLand: `${landSizeKanals} Kanals ${landSizeMarlas} Marlas`,
       trellisType: trellisType,
-      totalCost: formatAmount(totalPrice()),
+      estimatedCost: formatAmount(totalPrice()),
       referenceNo: referenceNo,
     };
 
@@ -241,7 +242,7 @@ const BookTrellis = () => {
         value: `${landSizeKanals} Kanals ${landSizeMarlas} Marlas`,
       },
       { label: "Trellis Type", value: trellisType },
-      { label: "Total Cost", value: formatAmount(totalPrice()).slice(1) },
+      { label: "Estimated Cost", value: formatAmount(totalPrice()).slice(1) },
     ];
 
     setDisableBookingBtn(true);
@@ -253,7 +254,7 @@ const BookTrellis = () => {
         router.push("/");
 
         generateInvoice({
-          title: "Trellis Installation Booking Receipt",
+          title: "Trellis Installation Estimation",
           filename: `Trellis_Booking_${referenceNo}.pdf`,
           data: pdfData,
           referenceNo: referenceNo,
@@ -308,7 +309,7 @@ const BookTrellis = () => {
           <div
             className={`rounded-tr-xl text-xs md:text-sm px-5 py-3 border border-[#035803] ${formStage === 4 ? "bg-[#035803] text-white" : "bg-white"}`}
           >
-            Total Cost
+            Estimated Cost
           </div>
         </div>
 
@@ -560,7 +561,7 @@ const BookTrellis = () => {
                   </TableRow>
                   <TableRow className="text-2xl font-bold">
                     <TableCell className="font-medium text-green-700">
-                      Total Cost
+                      Estimated Cost
                     </TableCell>
                     <TableCell className="text-right text-green-700">
                       {formatAmount(totalPrice())}

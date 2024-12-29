@@ -29,6 +29,7 @@ import { ButtonComponent } from "./ButtonComponent";
 import { useSuccessDialog } from "@/context/DialogContext";
 import { generateInvoice } from "@/utils/generatePDF";
 import { addBooking, checkBookingExists } from "@/utils/BookDrip";
+import { generateId } from "@/utils/GenerateId";
 
 const BookDripIrrigation = () => {
   const basicPrices = {
@@ -205,7 +206,7 @@ const BookDripIrrigation = () => {
       className: "bg-yellow-500 text-white border border-yellow-700",
     });
 
-    const referenceNo = `DRIP-${Date.now().toString().slice(-6)}`;
+    const referenceNo = `DRIP-${generateId()}`;
 
     // for storing in firestore
     const bookingData = {
@@ -213,7 +214,7 @@ const BookDripIrrigation = () => {
       address: groverAddress,
       phone: groverNumber,
       totalLand: `${landSizeKanals} Kanals ${landSizeMarlas} Marlas`,
-      totalCost: formatAmount(totalPrice()),
+      estimatedCost: formatAmount(totalPrice()),
       referenceNo: referenceNo,
     };
 
@@ -223,7 +224,7 @@ const BookDripIrrigation = () => {
         label: "Total Land",
         value: `${landSizeKanals} Kanals ${landSizeMarlas} Marlas`,
       },
-      { label: "Total Cost", value: formatAmount(totalPrice()).slice(1) },
+      { label: "Estimated Cost", value: formatAmount(totalPrice()).slice(1) },
     ];
 
     setDisableBookingBtn(true);
@@ -235,7 +236,7 @@ const BookDripIrrigation = () => {
         router.push("/");
 
         generateInvoice({
-          title: "Drip Irrigation Booking Receipt",
+          title: "Drip Irrigation Estimation",
           filename: `DripIrrigation_Booking_${referenceNo}.pdf`,
           data: pdfData,
           referenceNo: referenceNo,
@@ -285,7 +286,7 @@ const BookDripIrrigation = () => {
           <div
             className={`rounded-tr-xl text-xs md:text-sm px-5 py-3 border border-[#035803] ${formStage === 3 ? "bg-[#035803] text-white" : "bg-white"}`}
           >
-            Total Cost
+            Estimated Cost
           </div>
         </div>
 
@@ -463,7 +464,7 @@ const BookDripIrrigation = () => {
                   </TableRow>
                   <TableRow className="text-2xl font-bold">
                     <TableCell className="font-medium text-green-700">
-                      Total Cost
+                      Estimated Cost
                     </TableCell>
                     <TableCell className="text-right text-green-700">
                       {formatAmount(totalPrice())}

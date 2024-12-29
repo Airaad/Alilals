@@ -61,7 +61,7 @@ const Ribbon = () => {
             <img
               src={partner.logo}
               alt={partner.alt}
-              className="w-[180px] h-[180px] object-contain bg-transparent"
+              className="w-[180px] h-[120px] md:h-[180px] object-contain bg-transparent"
             />
           </div>
         ))}

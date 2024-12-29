@@ -1,19 +1,18 @@
 import {
   getFirestore,
   collection,
-  doc,
-  getDoc,
   setDoc,
   query,
   where,
   getDocs,
+  doc,
 } from "firebase/firestore";
 import { UserApp } from "../../firebase/firebase2";
 
 const db = getFirestore(UserApp);
 
 const addBooking = async (bookingData) => {
-  const { phone, ...restData } = bookingData;
+  const { phone, referenceNo, ...restData } = bookingData;
 
   try {
     // Check if the booking already exists with the same phone number
@@ -26,17 +25,19 @@ const addBooking = async (bookingData) => {
       };
     }
 
-    // Generate a unique document ID based on phone number
-    const bookingRef = doc(collection(db, "TrellisBooking"), phone);
-
-    // Add the booking to the Firestore collection
-    await setDoc(bookingRef, {
+    // Use the referenceNo as the document ID in the collection
+    await setDoc(doc(db, "TrellisBooking", referenceNo), {
       ...restData,
       phone,
       createdAt: Date.now(),
+      referenceNo,
     });
 
-    return { success: true, message: "Booking successfully added." };
+    return {
+      success: true,
+      message: "Booking successfully added.",
+      id: referenceNo, // Return the referenceNo as the ID
+    };
   } catch (error) {
     console.error("Error adding booking:", error);
     return {
@@ -48,14 +49,19 @@ const addBooking = async (bookingData) => {
 
 const checkBookingExists = async (phone) => {
   try {
-    // Query the Firestore collection to check for existing booking
-    const bookingRef = doc(collection(db, "TrellisBooking"), phone);
-    const docSnapshot = await getDoc(bookingRef);
+    // Query the Firestore collection to find a document with the matching phone field
+    const bookingsCollection = collection(db, "TrellisBooking");
+    const q = query(bookingsCollection, where("phone", "==", phone));
 
-    return docSnapshot.exists();
+    const querySnapshot = await getDocs(q);
+
+    // Check if any documents match the query
+    return !querySnapshot.empty;
   } catch (error) {
     console.error("Error checking booking existence:", error);
-    throw new Error("Error while checking booking existence.");
+    throw new Error(
+      "Error while checking booking existence with this phone number.",
+    );
   }
 };
 
