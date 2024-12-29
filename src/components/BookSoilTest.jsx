@@ -33,7 +33,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useSuccessDialog } from "@/context/DialogContext";
-import { generatePDF } from "@/utils/generatePDF";
+import { generateInvoice } from "@/utils/generatePDF";
 import { addBooking, checkBookingExists } from "@/utils/BookSoilTest";
 
 const BookSoilTest = () => {
@@ -199,9 +199,6 @@ const BookSoilTest = () => {
 
     // For creating PDF
     const pdfData = [
-      { label: "Name", value: groverName },
-      { label: "Address", value: groverAddress },
-      { label: "Phone", value: groverNumber },
       {
         label: "Total Land",
         value: `${landSizeKanals} Kanals ${landSizeMarlas} Marlas`,
@@ -218,13 +215,16 @@ const BookSoilTest = () => {
         openDialog();
         router.push("/");
 
-        generatePDF({
+        generateInvoice({
           title: "Soil Test Booking Receipt",
-          filename: `SoilTest_Booking_${groverName.replace(/\s+/g, "_")}.pdf`,
+          filename: `SoilTest_Booking_${referenceNo}.pdf`,
           data: pdfData,
-          footerText: "Thank you for choosing our services!",
-          additionalInfo: {
-            "Booking Reference": referenceNo,
+          referenceNo: referenceNo,
+          includeDateTime: true,
+          customerDetails: {
+            name: groverName,
+            address: groverAddress,
+            phone: groverNumber,
           },
         });
       })

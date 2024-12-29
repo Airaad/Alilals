@@ -27,7 +27,7 @@ import { FaWallet } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { ButtonComponent } from "./ButtonComponent";
 import { useSuccessDialog } from "@/context/DialogContext";
-import { generatePDF } from "@/utils/generatePDF";
+import { generateInvoice } from "@/utils/generatePDF";
 import { addBooking, checkBookingExists } from "@/utils/BookDrip";
 
 const BookDripIrrigation = () => {
@@ -219,14 +219,11 @@ const BookDripIrrigation = () => {
 
     // For creating PDF
     const pdfData = [
-      { label: "Name", value: groverName },
-      { label: "Address", value: groverAddress },
-      { label: "Phone", value: groverNumber },
       {
         label: "Total Land",
         value: `${landSizeKanals} Kanals ${landSizeMarlas} Marlas`,
       },
-      { label: "Total Cost", value: formatAmount(totalPrice()) },
+      { label: "Total Cost", value: formatAmount(totalPrice()).slice(1) },
     ];
 
     setDisableBookingBtn(true);
@@ -237,16 +234,18 @@ const BookDripIrrigation = () => {
         openDialog();
         router.push("/");
 
-        generatePDF({
+        generateInvoice({
           title: "Drip Irrigation Booking Receipt",
-          filename: `DripIrrigation_Booking_${groverName.replace(/\s+/g, "_")}.pdf`,
+          filename: `DripIrrigation_Booking_${referenceNo}.pdf`,
           data: pdfData,
-          footerText: "Thank you for choosing our services!",
-          additionalInfo: {
-            "Booking Reference": referenceNo,
+          referenceNo: referenceNo,
+          includeDateTime: true,
+          includeTerms: true,
+          customerDetails: {
+            name: groverName,
+            address: groverAddress,
+            phone: groverNumber,
           },
-          showTerms: true,
-          showBankDetails: true,
         });
       })
       .catch((err) => {

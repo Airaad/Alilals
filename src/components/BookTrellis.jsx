@@ -34,7 +34,7 @@ import { FaWallet } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { ButtonComponent } from "./ButtonComponent";
 import { useSuccessDialog } from "@/context/DialogContext";
-import { generatePDF } from "@/utils/generatePDF";
+import { generateInvoice } from "@/utils/generatePDF";
 import { addBooking, checkBookingExists } from "@/utils/BookTrellis";
 
 const BookTrellis = () => {
@@ -236,15 +236,12 @@ const BookTrellis = () => {
 
     // For creating PDF
     const pdfData = [
-      { label: "Name", value: groverName },
-      { label: "Address", value: groverAddress },
-      { label: "Phone", value: groverNumber },
       {
         label: "Total Land",
         value: `${landSizeKanals} Kanals ${landSizeMarlas} Marlas`,
       },
       { label: "Trellis Type", value: trellisType },
-      { label: "Total Cost", value: formatAmount(totalPrice()) },
+      { label: "Total Cost", value: formatAmount(totalPrice()).slice(1) },
     ];
 
     setDisableBookingBtn(true);
@@ -255,16 +252,18 @@ const BookTrellis = () => {
         openDialog();
         router.push("/");
 
-        generatePDF({
+        generateInvoice({
           title: "Trellis Installation Booking Receipt",
-          filename: `Trellis_Booking_${groverName.replace(/\s+/g, "_")}.pdf`,
+          filename: `Trellis_Booking_${referenceNo}.pdf`,
           data: pdfData,
-          footerText: "Thank you for choosing our services!",
-          additionalInfo: {
-            "Booking Reference": referenceNo,
+          referenceNo: referenceNo,
+          includeDateTime: true,
+          includeTerms: true,
+          customerDetails: {
+            name: groverName,
+            address: groverAddress,
+            phone: groverNumber,
           },
-          showTerms: true,
-          showBankDetails: true,
         });
       })
       .catch((err) => {

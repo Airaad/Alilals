@@ -32,9 +32,9 @@ const isIOS = () => {
  * @property {string} [styling.alternateRowColor] - Alternate row background color in hex
  * @property {string} [footerText] - Optional footer text
  * @property {boolean} [includeDateTime] - Whether to include date and time in the PDF
- * @property {Object} [additionalInfo] - Any additional information to display before the table
- * @property {boolean} [showTerms] - Whether to show terms and conditions below the table
- * @property {boolean} [showBankDetails] - Whether to show bank details table
+ * @property {boolean} [includeTerms] - Whether to include t&c in the PDF
+ * @property {Object} customerDetails - Customer details (name, address, phone)
+ * @property {string} referenceNo - Reference number
  */
 
 /**
@@ -63,16 +63,15 @@ const TERMS_AND_CONDITIONS = {
   ],
 };
 
-// Bank details configuration
+// Static bank details
 const BANK_DETAILS = {
-  title: "Bank Transfer Details for Booking:",
-  amount: "Booking Amount Rs. 10,000/- per site",
+  title: "Bank Details for Booking",
+  desc: "Booking Amount Rs. 10000/- per site",
   details: [
-    { label: "Bank Name", value: "J&K Bank Ltd" },
-    { label: "Branch", value: "Chadoora, Budgam-191113" },
-    { label: "Account No", value: "0008 0101 0000 4555" },
-    { label: "Title", value: "Alilals Agrico Pvt. Ltd." },
-    { label: "IFSC", value: "JAKA0CHADUR" },
+    "Bank Name: Jammu & Kashmir Bank Limited, Chadura",
+    "Account Number: 0008010100004555",
+    "IFSC Code: JAKA0CHADUR",
+    "Account Holder : Alilals Agrico Pvt Ltd",
   ],
 };
 
@@ -80,16 +79,15 @@ const BANK_DETAILS = {
  * Generates a PDF with the provided data and handles device-specific output
  * @param {PDFConfig} config - Configuration object for PDF generation
  */
-export const generatePDF = ({
+export const generateInvoice = ({
   title,
   filename,
   data,
   styling = {},
-  footerText,
   includeDateTime = true,
-  additionalInfo = {},
-  showTerms = false,
-  showBankDetails = false,
+  includeTerms = false,
+  customerDetails,
+  referenceNo,
 }) => {
   // Initialize default styling
   const defaultStyling = {
@@ -103,51 +101,108 @@ export const generatePDF = ({
   const doc = new jsPDF();
   let currentY = 20;
 
-  // Add logo and company name
-  const companyName = "Alilals Agrico";
+  // Add green background with logo
   const logoUrl = "/assets/logo/logo.png";
-  const companyNameColor = hexToRGB("#035803");
+  const companyName = "Alilals Agrico Pvt. Ltd";
+  const companyNameColor = [255, 255, 255];
+  const bgColor = hexToRGB("#035803");
 
-  doc.addImage(logoUrl, "PNG", 14, 10, 30, 30);
-  doc.setFontSize(24);
+  // Set the green background (190 width and 30 height to accommodate both the logo and company name)
+  doc.setFillColor(...bgColor);
+  doc.rect(10, 10, 190, 20, "F"); // Green rectangle background
+
+  // Add logo inside the green background
+  doc.addImage(logoUrl, "PNG", 12, 12, 14, 14); // Logo inside green background
+
+  // Add company name inside the green background, aligned next to the logo
+  doc.setFontSize(14);
+  doc.setFont("helvetica", "bold");
   doc.setTextColor(...companyNameColor);
-  doc.text(companyName, 50, 25);
-  currentY += 35;
+  doc.text(companyName, 30, 22); // Position the company name next to the logo
+
+  // Add static company details below the green background
+  doc.setFontSize(8);
+  doc.setFont("helvetica", "normal");
+  doc.setTextColor(0, 0, 0); // Black text for details
+
+  // First line: Address, Email, Phone
+  currentY = 35; // Start below the green background
+  doc.text(
+    "address: H.O: Murad House-56, Pine Lane, Rajbagh Srinagar-190008 J&K",
+    14,
+    currentY,
+  );
+  doc.text("Email: info@alilals.com", 120, currentY);
+  doc.text("Phone: +91 88998 88983", 160, currentY);
+  currentY += 5;
+  doc.text(
+    "Sub Office: Circular Road, Pulwama, Near Tahab Crossing",
+    25,
+    currentY,
+  );
+  doc.text("Website: www.alilals.com", 120, currentY);
+  doc.text("GSTIN: 01AAXCA5112D1Z4", 160, currentY);
+  currentY += 5;
+  doc.text(
+    "B.O: Chadoora, Srinagar Road, Opp. Khyber Girls School-191113",
+    25,
+    currentY,
+  );
+
+  currentY += 5;
+  doc.setFillColor(...bgColor);
+  doc.rect(14, currentY, 182, 0.5, "F");
+  currentY += 10;
+
+  // Add customer details
+  doc.setFontSize(12);
+  doc.setTextColor(...hexToRGB(defaultStyling.titleColor));
+  doc.setFont("helvetica", "bold");
+  doc.text("Customer Details:", 14, currentY);
+
+  doc.setFontSize(8);
+  doc.setFont("helvetica", "normal");
+  doc.setTextColor(0, 0, 0);
+  currentY += 7;
+  doc.text(`Name: ${customerDetails.name}`, 14, currentY);
+
+  currentY += 7;
+  doc.text(`Address: ${customerDetails.address}`, 14, currentY);
+
+  currentY += 7;
+  doc.text(`Phone: ${customerDetails.phone}`, 14, currentY);
+
+  currentY += 7;
+  doc.text(`Reference No: ${referenceNo}`, 14, currentY);
+
+  // Add reference number and date/time
+  if (includeDateTime) {
+    doc.text(`Date: ${new Date().toLocaleString()}`, 140, currentY);
+  }
+
+  currentY += 5;
+  doc.setFillColor(...bgColor);
+  doc.rect(14, currentY, 182, 0.5, "F");
+  currentY += 10;
 
   // Add title
-  doc.setFontSize(20);
+  doc.setFontSize(12);
   doc.setTextColor(...hexToRGB(defaultStyling.titleColor));
+  doc.setFont("helvetica", "bold");
   doc.text(title, 14, currentY);
-  currentY += 15;
+  currentY += 5;
 
-  // Add date and time if requested
-  if (includeDateTime) {
-    doc.setFontSize(10);
-    doc.setTextColor(100, 100, 100);
-    doc.text(`Booked on: ${new Date().toLocaleString()}`, 14, currentY);
-    currentY += 10;
-  }
+  // Prepare data for the table
+  const labels = data.map((item) => item.label);
+  const values = data.map((item) => item.value);
 
-  // Add additional info if provided
-  if (Object.keys(additionalInfo).length > 0) {
-    doc.setFontSize(10);
-    doc.setTextColor(60, 60, 60);
-
-    Object.entries(additionalInfo).forEach(([key, value]) => {
-      doc.text(`${key}: ${value}`, 14, currentY);
-      currentY += 7;
-    });
-    currentY += 5;
-  }
-
-  // Prepare data for table
-  const tableData = data.map((item) => [item.label, item.value]);
-
-  // Add main data table
+  // Add main data table with two rows (one for labels, one for values)
   autoTable(doc, {
     startY: currentY,
-    head: [["Detail", "Value"]],
-    body: tableData,
+    body: [
+      labels, // First row: labels
+      values, // Second row: corresponding values
+    ],
     theme: "grid",
     headStyles: {
       fillColor: hexToRGB(defaultStyling.headerColor),
@@ -155,135 +210,94 @@ export const generatePDF = ({
       fontStyle: "bold",
     },
     styles: {
-      fontSize: 10,
-      cellPadding: 5,
+      fontSize: 8,
+      cellPadding: 3,
     },
     alternateRowStyles: {
       fillColor: hexToRGB(defaultStyling.alternateRowColor),
     },
     margin: { top: 10 },
     didDrawPage: (data) => {
-      currentY = data.cursor.y + 10;
+      currentY = data.cursor.y + 5;
     },
   });
 
-  // Handle content overflow to additional pages
-  const pageHeight = doc.internal.pageSize.height;
-  if (currentY + 20 > pageHeight) {
+  doc.setFillColor(...bgColor);
+  doc.rect(14, currentY, 182, 0.5, "F");
+  currentY += 10;
+
+  // Add terms and conditions
+  if (currentY + 30 > doc.internal.pageSize.height) {
     doc.addPage();
     currentY = 20;
   }
 
-  // Add terms and conditions if requested
-  if (showTerms) {
-    const tableEndY = doc.lastAutoTable.finalY || currentY;
-    let termsStartY = tableEndY + 15;
-
-    if (termsStartY + TERMS_AND_CONDITIONS.terms.length * 15 > pageHeight) {
-      doc.addPage();
-      termsStartY = 20;
-    }
-
-    // Add terms title
+  if (includeTerms) {
     doc.setFontSize(12);
     doc.setFont("helvetica", "bold");
-    doc.setTextColor(0, 0, 0);
-    doc.text(TERMS_AND_CONDITIONS.title, 14, termsStartY);
-    currentY = termsStartY + 10;
+    doc.setTextColor(...hexToRGB(defaultStyling.titleColor));
+    doc.text(TERMS_AND_CONDITIONS.title, 12, currentY);
 
-    // Add terms content with increased spacing
-    doc.setFontSize(10);
+    currentY += 7;
+    doc.setFontSize(8);
     doc.setFont("helvetica", "normal");
     doc.setTextColor(80, 80, 80);
 
     TERMS_AND_CONDITIONS.terms.forEach((term, index) => {
-      if (currentY + 15 > pageHeight) {
-        doc.addPage();
-        currentY = 20;
-      }
-      if (term) {
-        doc.text(`${index + 1}. ${term}`, 14, currentY, { maxWidth: 180 });
-        currentY += 15; // Increased spacing between terms
-      }
+      const lines = doc.splitTextToSize(`${index + 1}. ${term}`, 180); // Automatically wrap the text to fit the width
+
+      // Check if the currentY position can accommodate all lines for this term
+      lines.forEach((line, lineIndex) => {
+        if (currentY + 7 > doc.internal.pageSize.height) {
+          doc.addPage();
+          currentY = 20;
+        }
+
+        // Add the line of the term
+        doc.text(line, 14, currentY);
+        currentY += 5;
+      });
     });
-  }
 
-  // Add bank details if requested
-  if (showBankDetails) {
-    if (currentY + 80 > pageHeight) {
-      doc.addPage();
-      currentY = 20;
-    }
-
-    // Add title with green background
-    const borderColor = hexToRGB("#035803");
-    doc.setFillColor(...borderColor);
-    doc.rect(14, currentY, 182, 10, "F");
-    doc.setFontSize(12);
-    doc.setTextColor(255, 255, 255);
-    doc.text(
-      BANK_DETAILS.title,
-      doc.internal.pageSize.width / 2,
-      currentY + 7,
-      { align: "center" },
-    );
-
-    // Add booking amount
-    currentY += 20;
-    doc.setTextColor(0, 0, 0);
-    doc.setFontSize(11);
-    doc.setFont("helvetica", "bold");
-    doc.text(BANK_DETAILS.amount, doc.internal.pageSize.width / 2, currentY, {
-      align: "center",
-    });
+    doc.setFillColor(...bgColor);
+    doc.rect(14, currentY, 182, 0.5, "F");
     currentY += 10;
 
-    // Add simplified bank details table
-    autoTable(doc, {
-      startY: currentY,
-      head: [["Field", "Details"]],
-      body: BANK_DETAILS.details.map((item) => [item.label, item.value]),
-      theme: "striped",
-      styles: {
-        fontSize: 10,
-        cellPadding: 6,
-        lineColor: [3, 88, 3],
-        lineWidth: 0.2,
-      },
-      headStyles: {
-        fillColor: [240, 240, 240],
-        textColor: [0, 0, 0],
-        fontStyle: "bold",
-      },
-      columnStyles: {
-        0: {
-          fontStyle: "bold",
-          cellWidth: 60,
-        },
-        1: {
-          cellWidth: "auto",
-        },
-      },
-      margin: { left: 14, right: 14 },
+    doc.setFontSize(10);
+    doc.setFont("helvetica", "normal");
+    doc.setTextColor(...hexToRGB(defaultStyling.titleColor));
+    doc.text(BANK_DETAILS.title, 50, currentY);
+    doc.setFontSize(8);
+    doc.text(BANK_DETAILS.desc, 150, currentY);
+    currentY += 7;
+    doc.setTextColor(0, 0, 0);
+    BANK_DETAILS.details.forEach((line) => {
+      doc.text(line, 50, currentY);
+      currentY += 5;
     });
   }
 
-  // Add footer if provided
-  if (footerText) {
-    const footerY = pageHeight - 10;
-    if (currentY + 10 > footerY) {
-      doc.addPage();
-      currentY = 20;
-    }
-    doc.setFontSize(8);
-    doc.setTextColor(128, 128, 128);
-    doc.text(footerText, 14, footerY);
-  }
+  // footer
+  // Get the page height and calculate the footer position
+  const pageHeight = doc.internal.pageSize.height;
+  const footerY = pageHeight - 10; // Position it 10 units above the page bottom
+
+  // Add footer text at the bottom center of the page
+  const footerText = "This is an auto generated document";
+  const footerX = doc.internal.pageSize.width / 2; // Centered horizontally
+
+  doc.setFontSize(8);
+  doc.setFont("helvetica", "normal");
+  doc.setTextColor(150, 150, 150); // Light gray color for the footer
+
+  // Add the footer text
+  doc.text(footerText, footerX, footerY, { align: "center" });
 
   // Handle PDF output based on device type
   if (!isIOS()) {
     const pdfOutput = doc.output("bloburl");
     window.open(pdfOutput, "_blank");
+    doc.name = filename;
   } else {
     doc.save(filename);
   }
