@@ -559,7 +559,7 @@ const BookOrchid = () => {
                 </AlertDialogTitle>
               </AlertDialogHeader>
 
-              <Table className="bg-white">
+              <Table className="bg-white ">
                 <TableCaption className="text-green-700">
                   Are you sure you want to book your orchard? Please review all
                   details before confirming.
@@ -574,7 +574,7 @@ const BookOrchid = () => {
                     </TableHead>
                   </TableRow>
                 </TableHeader>
-                <TableBody>
+                <TableBody className="overflow-scroll">
                   <TableRow>
                     <TableCell className="font-medium text-green-700">
                       Name
@@ -680,6 +680,9 @@ const BookOrchid = () => {
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>
+          <p className="mt-4 mb-64 md:mb-20 md:text-lg text-gray-600 text-center">
+            Click the button to book your orchard today!
+          </p>
         </div>
 
         <div className="absolute bottom-32 md:bottom-16 right-12 md:left-12 flex justify-between">
