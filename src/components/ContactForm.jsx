@@ -11,6 +11,8 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
+import { generateId } from "@/utils/GenerateId";
+import { addQuery } from "@/utils/QueryBooking";
 
 const ContactForm = () => {
   const { toast } = useToast();
@@ -60,6 +62,11 @@ const ContactForm = () => {
     const name = formData.get("Name");
     const email = formData.get("Email");
     const phone = formData.get("Phone");
+    const address = formData.get("Address");
+    const query = formData.get("Query");
+
+    const referenceNo = `QUERY-${generateId()}`;
+
     if (!checkName(name) || !checkEmail(email) || !checkPhoneNumber(phone)) {
       return;
     }
@@ -69,13 +76,17 @@ const ContactForm = () => {
       description: "Please wait for a moment.",
       className: "bg-yellow-500 text-white border border-yellow-700",
     });
-    fetch(
-      "https://script.google.com/macros/s/AKfycbzu6h31268WCBXuYYphOtFDl5ini7Ohp9OzuVNdNZQpA5D_SArUP4r6tQBQQhcpMyvmmg/exec",
-      {
-        method: "POST",
-        body: formData,
-      },
-    )
+
+    const queryData = {
+      name,
+      email,
+      phone,
+      address,
+      query,
+      referenceNo,
+    };
+
+    addQuery(queryData)
       .then(() => {
         setOpen(true);
         e.target.reset();
