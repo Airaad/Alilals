@@ -31,6 +31,7 @@ const addBooking = async (bookingData) => {
       phone,
       createdAt: Date.now(),
       referenceNo,
+      checked: false,
     });
 
     return {
@@ -49,9 +50,13 @@ const addBooking = async (bookingData) => {
 
 const checkBookingExists = async (phone) => {
   try {
-    // Query the Firestore collection to find a document with the matching phone field
+    // Query the Firestore collection to find a document with the matching phone field and checked equal to false
     const bookingsCollection = collection(db, "ExpertBooking");
-    const q = query(bookingsCollection, where("phone", "==", phone));
+    const q = query(
+      bookingsCollection,
+      where("phone", "==", phone),
+      where("checked", "==", false),
+    );
 
     const querySnapshot = await getDocs(q);
 
@@ -60,7 +65,7 @@ const checkBookingExists = async (phone) => {
   } catch (error) {
     console.error("Error checking booking existence:", error);
     throw new Error(
-      "Error while checking booking existence with this phone number.",
+      "Error while checking booking existence with this phone number and checked property.",
     );
   }
 };
