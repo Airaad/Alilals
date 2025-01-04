@@ -99,9 +99,34 @@
     padding: revert;
     font-size: revert;
     font-weight: revert;
+    font-family: revert;
 
     list-style: revert;
     text-decoration: revert;
     color: revert;
   }
+}
+
+/* globals.css */
+html {
+  font-family: var(--font-body), sans-serif;
+  background-color: #f6f2ef;
+  color: #333;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading), serif;
+  margin: 0;
+}
+
+p,
+span,
+div {
+  font-family: var(--font-body), sans-serif;
+  line-height: 1.6;
 }

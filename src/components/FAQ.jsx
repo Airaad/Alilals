@@ -18,16 +18,14 @@ const FAQ = () => {
         "We offer a range of services including High Density Orchard Installation, Soil Testing and Soil Health Management, Trellis infrastructure services, Micro Irrigation Services, Sale of Plants and Technical services for Orchard Management and Precision Farming in Jammu & Kashmir.",
     },
     {
-      question:
-        "What are rootstock plants and how are they different from seedling plants?",
+      question: "How do you ensure quality?",
       answer:
-        "Rootstock plants in apples are essential for modern orchard practices. They are specially developed plants used as the foundation for grafting desired apple varieties. Rootstocks influence tree size, disease resistance, cold tolerance, and adaptability to soil conditions, ensuring consistent performance. Unlike seedling-based plants, which are grown from seeds and exhibit genetic variation, rootstock plants guarantee uniformity, making orchard management more efficient. Rootstocks allow precise control of tree vigor, enabling high-density planting and easier pruning, harvesting, and maintenance. By combining the best traits of rootstocks and scion varieties, growers achieve better yields, superior fruit quality, and sustainability in commercial apple production.",
+        "We believe in a mantra that Quality never comes cheap. We outrightly reject any material offering more profit margins. We believe that any material used for orchard development, disease and nutrition management, if it comes cheap, can never deliver quality. We acquire material of a specific standard which is backed by reasonable certification. Our technical experts discuss thread bare with the suppliers and manufacturers about the product specifications and quality. Any material that comes to us an does not stand our quality test has to be dropped. This is the reason you see our products and services differently perform and are differently priced too.",
     },
     {
-      question:
-        "It takes almost 7 years an apple tree to bear fruit. How can we achieve next year fruiting in Apple?",
+      question: "Are imported plants better than homegrown plants?",
       answer:
-        "Achieving fruiting in apples within a year is possible by using precocious dwarf rootstocks and advanced cultivation techniques. Here's how:\n • Dwarf Rootstocks: Use dwarfing or semi-dwarfing rootstocks (e.g., M9, M26 Or G Series Rootstock) that promote early fruiting and control tree size.\n • High-Density Planting: Plant trees at higher densities to optimize sunlight, space, and resources.\n • Pre-Grafted Saplings: Plant pre-grafted, 2-3 year-old saplings with well-developed root systems.\n • Precision Farming: Implement fertigation, optimal irrigation, and nutrient management to accelerate growth and flowering.\n • Plant Growth Regulators: Apply gibberellins or other hormones to promote flowering.\n • Pruning & Training: Use specialized pruning and training systems (e.g., trellis) to encourage productive growth. These methods ensure early productivity and profitability.",
+        "There is no physiological or genetic superiority of imported apple plants over homegrown plants. If we acquire rootstock from authentic sources, graft them with the desired variety (Scion) for which we have set up budwood bank locally, we will produce similar plants as we import from Europe.The only difference in an imported plant and a local one is price difference. Imported plants are exorbitantly costly.",
     },
     {
       question: "Is Drip Irrigation important for High Density Plants?",
@@ -41,9 +39,10 @@ const FAQ = () => {
         "No! MM111 is relatively a drought resistant rootstock than M9. It can resist longer rainfall shortage periods, but that doesn't make MM111 a no-irrigation plant. It also requires an adequate amount of water to help transport nutrients in a plant. Drip-irrigation has nothing to do with the Rootstock type. It has its own essence, like; it saves water, ensures precession irrigation, saves on labour and is easy to operate. Rather, we need Drip-irrigation in seedling plants, which are more drought resistant than MM111 plants. This is why we irrigate our traditional apple tree orchards during Jun, July and August months. Irrigation also has very important role in transporting calcium in a plant. In absence of adequate water in hot summer days, we supply calcium to a plant through leaves by spraying calcium, while as same is available is almost every soil. What makes Calcium unavailable to a plant is non-availability of water. Hence, Drip-irrigation is an important component of modern farming in Apple.",
     },
     {
-      question: "Are imported plants better than homegrown plants?",
+      question:
+        "It takes almost 7 years an apple tree to bear fruit. How can we achieve next year fruiting in Apple?",
       answer:
-        "There is no physiological or genetic superiority of imported apple plants over homegrown plants. If we acquire rootstock from authentic sources, graft them with the desired variety (Scion) for which we have set up budwood bank locally, we will produce similar plants as we import from Europe.The only difference in an imported plant and a local one is price difference. Imported plants are exorbitantly costly.",
+        "Achieving fruiting in apples within a year is possible by using precocious dwarf rootstocks and advanced cultivation techniques. Here's how:\n • Dwarf Rootstocks: Use dwarfing or semi-dwarfing rootstocks (e.g., M9, M26 Or G Series Rootstock) that promote early fruiting and control tree size.\n • High-Density Planting: Plant trees at higher densities to optimize sunlight, space, and resources.\n • Pre-Grafted Saplings: Plant pre-grafted, 2-3 year-old saplings with well-developed root systems.\n • Precision Farming: Implement fertigation, optimal irrigation, and nutrient management to accelerate growth and flowering.\n • Plant Growth Regulators: Apply gibberellins or other hormones to promote flowering.\n • Pruning & Training: Use specialized pruning and training systems (e.g., trellis) to encourage productive growth. These methods ensure early productivity and profitability.",
     },
     {
       question:
@@ -52,9 +51,10 @@ const FAQ = () => {
         "While establishing a High Density apple Orchard, we work on 3 components Viz; Plant material, Trellis infrastructure and Irrigation network. All three components have their own essence in a commercial developed orchard. We have seen growers lay over-emphasis on plants and ignore Trellis component sustainability. High Density Plants, in a commercial orchard, last for lesser than a decade. We have seen varieties planted some 6 years ago are now obsolete. Every two years, we see a new variety come in the market and fetch more price, has more disease resistance, intense coloration and other characteristics. A progressive grower can change plants in an HDP orchard every 10 years with homegrown plants. But, it can never change Trellis Infra structure and irrigation system every now and then. We should give extra emphasis on selecting Trellis material and its structure which can withstand environmental adversities, like hail, snow, high temperature, wind and other rough climatic conditions. While choosing trellis material, we must ask the supplier various tough questions about the material quality, like protective coating for rust resistivity, tensile strength, MBL, IS standards lie IS1239 in GI pipes, wire reinforcement in pre-stressed poles, length of posts, grouping, angle at which the head post is installed and many other technical aspects of Trellis that could make it a Sustainable structure.",
     },
     {
-      question: "How do you ensure quality?",
+      question:
+        "What are rootstock plants and how are they different from seedling plants?",
       answer:
-        "We believe in a mantra that Quality never comes cheap. We outrightly reject any material offering more profit margins. We believe that any material used for orchard development, disease and nutrition management, if it comes cheap, can never deliver quality. We acquire material of a specific standard which is backed by reasonable certification. Our technical experts discuss thread bare with the suppliers and manufacturers about the product specifications and quality. Any material that comes to us an does not stand our quality test has to be dropped. This is the reason you see our products and services differently perform and are differently priced too.",
+        "Rootstock plants in apples are essential for modern orchard practices. They are specially developed plants used as the foundation for grafting desired apple varieties. Rootstocks influence tree size, disease resistance, cold tolerance, and adaptability to soil conditions, ensuring consistent performance. Unlike seedling-based plants, which are grown from seeds and exhibit genetic variation, rootstock plants guarantee uniformity, making orchard management more efficient. Rootstocks allow precise control of tree vigor, enabling high-density planting and easier pruning, harvesting, and maintenance. By combining the best traits of rootstocks and scion varieties, growers achieve better yields, superior fruit quality, and sustainability in commercial apple production.",
     },
   ];
 
@@ -81,7 +81,7 @@ const FAQ = () => {
                 onClick={() => toggleQuestion(index)}
                 className="w-full flex justify-between items-center py-3 px-4 text-left bg-[#F6F4EC] rounded-md hover:bg-gray-300 transition duration-300"
               >
-                <span className="text-lg text-[#122F2A] font-medium">
+                <span className="text-[#122F2A] font-medium">
                   {faq.question}
                 </span>
                 <ChevronDownIcon

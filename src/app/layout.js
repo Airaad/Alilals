@@ -8,20 +8,35 @@ import { AlertProvider } from "@/context/AlertContext";
 import { StatsProvider } from "@/context/StatContext";
 import { ProjectProvider } from "@/context/ProjectContext";
 import { BlogsProvider } from "@/context/BlogContext";
+import { Playfair_Display, Roboto } from "@next/font/google";
 
 export const metadata = {
-  title: "Alilals Agrico - Best Orchard Service Provider in Jammu and Kashmir",
+  title: "Alilals Agrico | Best Orchard Service Provider",
   description:
-    "Alilals Agrico, based in Jammu and Kashmir, revolutionizes Indian agriculture with sustainable practices and farmer empowerment. Specializing in high-density orchards, precision farming, and eco-friendly innovations, we uplift rural communities and modernize traditional farming. Through our flagship brand AASH and initiatives like ZIRAAT, we deliver excellence in orchard care, fertilizers, and plant nutrition, ensuring optimized yields and minimized environmental impact. Join us in creating a sustainable agricultural future that harmonizes innovation and tradition for long-term prosperity.",
+    "Alilals Agrico, based in Jammu and Kashmir, revolutionizes Indian agriculture with sustainable practices and farmer empowerment. Specializing in high-density orchards, precision farming, and eco-friendly innovations, we uplift rural communities and modernize traditional farming.",
 };
 
-const appFont = {
-  fontFamily: "Inter, sans-serif", // Replace with your desired font family
-};
+// Define fonts using @next/font/google
+const playfairDisplay = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
+
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" style={appFont}>
+    <html
+      lang="en"
+      className={`${roboto.className}`}
+      style={{
+        "--font-heading": roboto.style.fontFamily,
+        "--font-body": roboto.style.fontFamily,
+      }}
+    >
       <body>
         <AlertProvider>
           <StatsProvider>
