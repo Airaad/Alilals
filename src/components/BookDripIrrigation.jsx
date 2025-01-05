@@ -276,7 +276,7 @@ const BookDripIrrigation = () => {
           <div
             className={`text-xs md:text-sm px-5 py-3 border border-[#035803] rounded-tl-xl ${formStage === 1 ? "bg-[#035803] text-white" : "bg-white"}`}
           >
-            Grover Details
+            Customer Details
           </div>
           <div
             className={`text-xs md:text-sm px-5 py-3 border border-[#035803] ${formStage === 2 ? "bg-[#035803] text-white" : "bg-white"}`}
@@ -293,7 +293,7 @@ const BookDripIrrigation = () => {
         {/* Form step 1 */}
         <form className={`py-10 px-10 ${formStage === 1 ? "" : "hidden"}`}>
           <label htmlFor="groverName">
-            Name of Grover<span className="text-red-500">*</span>
+            Name<span className="text-red-500">*</span>
           </label>
           <Input
             className="bg-white my-2 lg:w-1/2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]"

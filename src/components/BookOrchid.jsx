@@ -304,8 +304,14 @@ const BookOrchid = () => {
       { label: "Post Gap", value: `${postGap} m` },
       { label: "Post Type", value: postType },
       { label: "Wire Pattern", value: `${wirePattern} lines` },
-      { label: "Total Posts", value: `${getTotalPosts()} posts` },
-      { label: "Total Plants", value: `${getTotalPlants()} plants` },
+      {
+        label: "Total Posts",
+        value: `${Math.floor(getTotalPosts() * totalLand())} posts`,
+      },
+      {
+        label: "Total Plants",
+        value: `${Math.floor(getTotalPlants() * totalLand())} plants`,
+      },
       { label: "Estimated Cost", value: formatAmount(totalPrice()).slice(1) },
     ];
 
@@ -358,7 +364,7 @@ const BookOrchid = () => {
           <div
             className={`text-xs md:text-sm px-5 py-3 border border-[#035803] rounded-tl-xl ${formStage === 1 ? "bg-[#035803] text-white" : "bg-white"}`}
           >
-            Grover Details
+            Customer Details
           </div>
           <div
             className={`text-xs md:text-sm px-5 py-3 border border-[#035803] ${formStage === 2 ? "bg-[#035803] text-white" : "bg-white"}`}
@@ -380,7 +386,7 @@ const BookOrchid = () => {
         {/* Form step 1 */}
         <form className={`py-10 px-10 ${formStage === 1 ? "" : "hidden"}`}>
           <label htmlFor="groverName">
-            Name of Grover<span className="text-red-500">*</span>
+            Name<span className="text-red-500">*</span>
           </label>
           <Input
             className="bg-white my-2 lg:w-1/2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]"
@@ -478,7 +484,7 @@ const BookOrchid = () => {
           </label>
           <Select value={rowGap} onValueChange={setRowGap} required>
             <SelectTrigger className="bg-white lg:w-1/3 mb-10 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]">
-              <SelectValue placeholder="Select row to row distance" />
+              <SelectValue placeholder="Select row gap" />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="8">8ft</SelectItem>
@@ -493,7 +499,7 @@ const BookOrchid = () => {
           </label>
           <Select value={postGap} onValueChange={setPostGap} required>
             <SelectTrigger className="bg-white lg:w-1/3 mb-10 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]">
-              <SelectValue placeholder="Select pole to pole distance" />
+              <SelectValue placeholder="Select post gap" />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="9">9m</SelectItem>

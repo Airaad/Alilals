@@ -235,7 +235,7 @@ export const generateInvoice = ({
     doc.setFontSize(12);
     doc.setFont("helvetica", "bold");
     doc.setTextColor(...hexToRGB(defaultStyling.titleColor));
-    doc.text(TERMS_AND_CONDITIONS.title, 12, currentY);
+    doc.text(TERMS_AND_CONDITIONS.title, 14, currentY);
 
     currentY += 7;
     doc.setFontSize(8);
