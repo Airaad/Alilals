@@ -29,7 +29,7 @@ import { ButtonComponent } from "./ButtonComponent";
 import { useSuccessDialog } from "@/context/DialogContext";
 import { generateInvoice } from "@/utils/generatePDF";
 import { addBooking, checkBookingExists } from "@/utils/BookDrip";
-import { generateId } from "@/utils/GenerateId";
+import { getReferenceNo, incrementReferenceNo } from "@/utils/GenerateId";
 
 const BookDripIrrigation = () => {
   const basicPrices = {
@@ -197,7 +197,7 @@ const BookDripIrrigation = () => {
     return totalLand() * basicPrices.dripIrrigation;
   };
 
-  const bookingHandler = (e) => {
+  const bookingHandler = async (e) => {
     e.preventDefault();
     setOpen(false);
     toast({
@@ -206,7 +206,7 @@ const BookDripIrrigation = () => {
       className: "bg-yellow-500 text-white border border-yellow-700",
     });
 
-    const referenceNo = `DRIP-${generateId()}`;
+    const referenceNo = await getReferenceNo();
 
     // for storing in firestore
     const bookingData = {
@@ -229,34 +229,35 @@ const BookDripIrrigation = () => {
 
     setDisableBookingBtn(true);
 
-    addBooking(bookingData)
-      .then(() => {
-        setDisableBookingBtn(false);
-        openDialog();
-        router.push("/");
+    const bookingResult = await addBooking(bookingData);
 
-        generateInvoice({
-          title: "Drip Irrigation Estimation",
-          filename: `DripIrrigation_Booking_${referenceNo}.pdf`,
-          data: pdfData,
-          referenceNo: referenceNo,
-          includeDateTime: true,
-          includeTerms: true,
-          customerDetails: {
-            name: groverName,
-            address: groverAddress,
-            phone: groverNumber,
-          },
-        });
-      })
-      .catch((err) => {
-        setDisableBookingBtn(false);
-        toast({
-          title: "Failed to send booking",
-          description: err.message,
-          className: "bg-red-500 text-white border border-red-700",
-        });
+    if (bookingResult.success) {
+      setDisableBookingBtn(false);
+      openDialog();
+      router.push("/");
+
+      generateInvoice({
+        title: "Drip Irrigation Estimation",
+        filename: `DripIrrigation_Booking_${referenceNo}.pdf`,
+        data: pdfData,
+        referenceNo: referenceNo,
+        includeDateTime: true,
+        includeTerms: true,
+        customerDetails: {
+          name: groverName,
+          address: groverAddress,
+          phone: groverNumber,
+        },
       });
+      await incrementReferenceNo();
+    } else {
+      setDisableBookingBtn(false);
+      toast({
+        title: "Failed to send booking",
+        description: bookingResult.message,
+        className: "bg-red-500 text-white border border-red-700",
+      });
+    }
   };
 
   return (

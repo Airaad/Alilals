@@ -35,7 +35,7 @@ import {
 import { useSuccessDialog } from "@/context/DialogContext";
 import { generateInvoice } from "@/utils/generatePDF";
 import { addBooking, checkBookingExists } from "@/utils/BookSoilTest";
-import { generateId } from "@/utils/GenerateId";
+import { getReferenceNo, incrementReferenceNo } from "@/utils/GenerateId";
 
 const BookSoilTest = () => {
   const { toast } = useToast();
@@ -177,7 +177,7 @@ const BookSoilTest = () => {
     setOpen(!open);
   };
 
-  const confirmBooking = () => {
+  const confirmBooking = async () => {
     setOpen(false);
     toast({
       title: "Sending Booking...",
@@ -185,7 +185,7 @@ const BookSoilTest = () => {
       className: "bg-yellow-500 text-white border border-yellow-700",
     });
 
-    const referenceNo = `SOIL-${generateId()}`;
+    const referenceNo = await getReferenceNo();
 
     // For storing in firestore
     const bookingData = {
@@ -210,33 +210,35 @@ const BookSoilTest = () => {
 
     setDisableBookingBtn(true);
 
-    addBooking(bookingData)
-      .then(() => {
-        setDisableBookingBtn(false);
-        openDialog();
-        router.push("/");
+    const bookingResult = await addBooking(bookingData);
 
-        generateInvoice({
-          title: "Soil Test Booking Details",
-          filename: `SoilTest_Booking_${referenceNo}.pdf`,
-          data: pdfData,
-          referenceNo: referenceNo,
-          includeDateTime: true,
-          customerDetails: {
-            name: groverName,
-            address: groverAddress,
-            phone: groverNumber,
-          },
-        });
-      })
-      .catch((err) => {
-        setDisableBookingBtn(false);
-        toast({
-          title: "Failed to send booking",
-          description: err.message,
-          className: "bg-red-500 text-white border border-red-700",
-        });
+    if (bookingResult.success) {
+      setDisableBookingBtn(false);
+      openDialog();
+      router.push("/");
+
+      generateInvoice({
+        title: "Soil Test Booking Details",
+        filename: `SoilTest_Booking_${referenceNo}.pdf`,
+        data: pdfData,
+        referenceNo: referenceNo,
+        includeDateTime: true,
+        customerDetails: {
+          name: groverName,
+          address: groverAddress,
+          phone: groverNumber,
+        },
       });
+
+      await incrementReferenceNo();
+    } else {
+      setDisableBookingBtn(false);
+      toast({
+        title: "Failed to send booking",
+        description: err.message,
+        className: "bg-red-500 text-white border border-red-700",
+      });
+    }
   };
 
   const handleReset = () => {

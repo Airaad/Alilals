@@ -36,7 +36,7 @@ import { ButtonComponent } from "./ButtonComponent";
 import { useSuccessDialog } from "@/context/DialogContext";
 import { generateInvoice } from "@/utils/generatePDF";
 import { addBooking, checkBookingExists } from "@/utils/BookTrellis";
-import { generateId } from "@/utils/GenerateId";
+import { getReferenceNo, incrementReferenceNo } from "@/utils/GenerateId";
 
 const BookTrellis = () => {
   const basicPrices = {
@@ -213,7 +213,7 @@ const BookTrellis = () => {
       : totalLand() * basicPrices.concrete;
   };
 
-  const bookingHandler = (e) => {
+  const bookingHandler = async (e) => {
     e.preventDefault();
     setOpen(false);
     toast({
@@ -222,7 +222,7 @@ const BookTrellis = () => {
       className: "bg-yellow-500 text-white border border-yellow-700",
     });
 
-    const referenceNo = `TRELLIS-${generateId()}`;
+    const referenceNo = await getReferenceNo();
 
     // For storing in firestore
     const bookingData = {
@@ -247,34 +247,36 @@ const BookTrellis = () => {
 
     setDisableBookingBtn(true);
 
-    addBooking(bookingData)
-      .then(() => {
-        setDisableBookingBtn(false);
-        openDialog();
-        router.push("/");
+    const bookingResult = await addBooking(bookingData);
 
-        generateInvoice({
-          title: "Trellis Installation Estimation",
-          filename: `Trellis_Booking_${referenceNo}.pdf`,
-          data: pdfData,
-          referenceNo: referenceNo,
-          includeDateTime: true,
-          includeTerms: true,
-          customerDetails: {
-            name: groverName,
-            address: groverAddress,
-            phone: groverNumber,
-          },
-        });
-      })
-      .catch((err) => {
-        setDisableBookingBtn(false);
-        toast({
-          title: "Failed to send booking",
-          description: err.message,
-          className: "bg-red-500 text-white border border-red-700",
-        });
+    if (bookingResult.success) {
+      setDisableBookingBtn(false);
+      openDialog();
+      router.push("/");
+
+      generateInvoice({
+        title: "Trellis Installation Estimation",
+        filename: `Trellis_Booking_${referenceNo}.pdf`,
+        data: pdfData,
+        referenceNo: referenceNo,
+        includeDateTime: true,
+        includeTerms: true,
+        customerDetails: {
+          name: groverName,
+          address: groverAddress,
+          phone: groverNumber,
+        },
       });
+
+      await incrementReferenceNo();
+    } else {
+      setDisableBookingBtn(false);
+      toast({
+        title: "Failed to send booking",
+        description: err.message,
+        className: "bg-red-500 text-white border border-red-700",
+      });
+    }
   };
 
   return (

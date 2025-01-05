@@ -34,7 +34,7 @@ import {
 import { useSuccessDialog } from "@/context/DialogContext";
 import { generateInvoice } from "@/utils/generatePDF";
 import { addBooking, checkBookingExists } from "@/utils/BookExpert";
-import { generateId } from "@/utils/GenerateId";
+import { getReferenceNo, incrementReferenceNo } from "@/utils/GenerateId";
 
 const BookExpertCall = () => {
   const { toast } = useToast();
@@ -122,7 +122,7 @@ const BookExpertCall = () => {
     setOpen(!open);
   };
 
-  const confirmBooking = () => {
+  const confirmBooking = async () => {
     setOpen(false);
     toast({
       title: "Sending Booking...",
@@ -130,7 +130,16 @@ const BookExpertCall = () => {
       className: "bg-yellow-500 text-white border border-yellow-700",
     });
 
-    const referenceNo = `EXPERT-${generateId()}`;
+    const referenceNo = await getReferenceNo();
+
+    if (!referenceNo) {
+      toast({
+        title: "Failed to book expert call",
+        description: "An error occurred while generating reference number",
+        className: "bg-red-500 text-white border border-red-700",
+      });
+      return;
+    }
 
     // Create URL-encoded data
     const bookingData = {
@@ -146,33 +155,35 @@ const BookExpertCall = () => {
 
     setDisableBookingBtn(true);
 
-    addBooking(bookingData)
-      .then(() => {
-        setDisableBookingBtn(false);
-        openDialog();
-        router.push("/");
+    const bookingResult = await addBooking(bookingData);
 
-        generateInvoice({
-          title: "Expert Call Booking Details",
-          filename: `ExpertCall_${referenceNo}.pdf`,
-          data: pdfData,
-          referenceNo: referenceNo,
-          includeDateTime: true,
-          customerDetails: {
-            name: groverName,
-            address: groverAddress,
-            phone: groverNumber,
-          },
-        });
-      })
-      .catch((err) => {
-        setDisableBookingBtn(false);
-        toast({
-          title: "Failed to send booking",
-          description: err.message,
-          className: "bg-red-500 text-white border border-red-700",
-        });
+    if (bookingResult.success) {
+      setDisableBookingBtn(false);
+      openDialog();
+      router.push("/");
+
+      generateInvoice({
+        title: "Expert Call Booking Details",
+        filename: `${referenceNo}.pdf`,
+        data: pdfData,
+        referenceNo: referenceNo,
+        includeDateTime: true,
+        customerDetails: {
+          name: groverName,
+          address: groverAddress,
+          phone: groverNumber,
+        },
       });
+
+      await incrementReferenceNo();
+    } else {
+      setDisableBookingBtn(false);
+      toast({
+        title: "Failed to send booking",
+        description: bookingResult.message,
+        className: "bg-red-500 text-white border border-red-700",
+      });
+    }
   };
 
   const handleReset = () => {

@@ -1,4 +1,4 @@
-import { getFirestore, setDoc, doc } from "firebase/firestore";
+import { getFirestore, addDoc, collection } from "firebase/firestore";
 import { UserApp } from "../../firebase/firebase2";
 
 const db = getFirestore(UserApp);
@@ -6,8 +6,7 @@ const db = getFirestore(UserApp);
 const addQuery = async (bookingData) => {
   try {
     const { referenceNo } = bookingData;
-    // Use the referenceNo as the document ID in the collection
-    await setDoc(doc(db, "QueryBooking", referenceNo), {
+    await addDoc(collection(db, "QueryBooking"), {
       ...bookingData,
       createdAt: Date.now(),
     });

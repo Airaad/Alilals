@@ -11,7 +11,7 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
-import { generateId } from "@/utils/GenerateId";
+import { getReferenceNo, incrementReferenceNo } from "@/utils/GenerateId";
 import { addQuery } from "@/utils/QueryBooking";
 
 const ContactForm = () => {
@@ -55,7 +55,7 @@ const ContactForm = () => {
     return false;
   };
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target); // Extract form data
 
@@ -65,7 +65,7 @@ const ContactForm = () => {
     const address = formData.get("Address");
     const query = formData.get("Query");
 
-    const referenceNo = `QUERY-${generateId()}`;
+    const referenceNo = await getReferenceNo(true);
 
     if (!checkName(name) || !checkEmail(email) || !checkPhoneNumber(phone)) {
       return;
@@ -86,19 +86,20 @@ const ContactForm = () => {
       referenceNo,
     };
 
-    addQuery(queryData)
-      .then(() => {
-        setOpen(true);
-        e.target.reset();
-      })
-      .catch((err) => {
-        toast({
-          title: "Failed to send message",
-          description: err.message,
-          className: "bg-red-500 text-white border border-red-700",
-        });
-        setDisableBtn(false);
+    const result = await addQuery(queryData);
+
+    if (result.success) {
+      setOpen(true);
+      e.target.reset();
+      await incrementReferenceNo(true);
+    } else {
+      toast({
+        title: "Failed to send message",
+        description: result.message,
+        className: "bg-red-500 text-white border border-red-700",
       });
+      setDisableBtn(false);
+    }
   };
 
   return (
