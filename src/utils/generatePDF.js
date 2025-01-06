@@ -32,7 +32,9 @@ const isIOS = () => {
  * @property {string} [styling.alternateRowColor] - Alternate row background color in hex
  * @property {string} [footerText] - Optional footer text
  * @property {boolean} [includeDateTime] - Whether to include date and time in the PDF
- * @property {boolean} [includeTerms] - Whether to include t&c in the PDF
+ * @property {boolean} [includeEstTerms] - Whether to include t&c in the PDF
+ * @property {boolean} [includeSoilTerms] - Whether to include t&c in the PDF
+ * @property {boolean} [includeBanking] - Whether to include t&c in the PDF
  * @property {Object} customerDetails - Customer details (name, address, phone)
  * @property {string} referenceNo - Reference number
  */
@@ -50,7 +52,7 @@ const hexToRGB = (hex) => {
 };
 
 // Static terms and conditions
-const TERMS_AND_CONDITIONS = {
+const EST_TERMS_AND_CONDITIONS = {
   title: "Terms and Conditions",
   terms: [
     "This estimate is for reference purposes only and is subject to change. The actual charges will be calculated more precisely after the completion of the orchard layout and site evaluation.",
@@ -61,6 +63,40 @@ const TERMS_AND_CONDITIONS = {
     "Service Booking: A revised Estimate will be generated within 7-days of Booking of services based on actual site layout.",
     "This estimate does not constitute a binding agreement. The final charges and terms will be agreed upon in a separate contract following site evaluation and layout finalization.",
   ],
+};
+
+const SOIL_TERMS_AND_CONDITIONS = {
+  terms: {
+    title: "Terms and Conditions",
+    terms: [
+      "Soil testing will only be conducted if there has been a gap of at least 45 days since the last application of any fertilizer, manure, or soil amendment.",
+      "Collection will be conducted by authorized personnel only.",
+      "Customers must provide accurate information about the area to be tested and grant access to the site.",
+      "Any misinformation about the area size may lead to additional charges or cancellation of the booking.",
+      "Bookings must be made at least 72 hours in advance to allow proper scheduling of services.",
+      "The scheduled collection date and time will be confirmed after booking.",
+      "Rescheduling is allowed with a minimum of 24 hours’ notice, subject to availability.",
+      "Test reports will be provided within 7-10 working days from the date of sample collection.",
+      "Reports will be delivered via WhatsApp or can be collected in person from Alilals Soil Testing Lab at Chadoora.",
+    ],
+  },
+  limits: {
+    title: "Accuracy and Limitations",
+    terms: [
+      "While every effort is made to ensure the accuracy of soil testing results, they are based on the samples collected and are subject to laboratory limitations.",
+      "Results should be used as a guideline for soil and crop management decisions only.",
+      "The service provider is not liable for any losses, damages, or crop failures arising from the use or interpretation of soil test results.",
+      "Customers are advised to consult agronomy experts for specific fertilizer and nutrient recommendations.",
+    ],
+  },
+  charges: {
+    title: "Charges",
+    terms: [
+      "Soil Testing: Rs. 900 per sample (analysis of 13 parameters).",
+      "Sample Collection: Rs. 300 per visit + Rs. 100 per Kanal of the area.",
+      "Full payment is required at the time of booking.",
+    ],
+  },
 };
 
 // Static bank details
@@ -85,7 +121,9 @@ export const generateInvoice = ({
   data,
   styling = {},
   includeDateTime = true,
-  includeTerms = false,
+  includeEstTerms = false,
+  includeSoilTerms = false,
+  includeBanking = false,
   customerDetails,
   referenceNo,
 }) => {
@@ -172,7 +210,11 @@ export const generateInvoice = ({
   doc.text(`Phone: ${customerDetails.phone}`, 14, currentY);
 
   currentY += 7;
+  doc.setTextColor(255, 0, 0);
+  doc.setFont("helvetica", "bold");
   doc.text(`Reference No: ${referenceNo}`, 14, currentY);
+  doc.setTextColor(0, 0, 0);
+  doc.setFont("helvetica", "normal");
 
   // Add reference number and date/time
   if (includeDateTime) {
@@ -231,18 +273,18 @@ export const generateInvoice = ({
     currentY = 20;
   }
 
-  if (includeTerms) {
+  if (includeEstTerms) {
     doc.setFontSize(12);
     doc.setFont("helvetica", "bold");
     doc.setTextColor(...hexToRGB(defaultStyling.titleColor));
-    doc.text(TERMS_AND_CONDITIONS.title, 14, currentY);
+    doc.text(EST_TERMS_AND_CONDITIONS.title, 14, currentY);
 
     currentY += 7;
     doc.setFontSize(8);
     doc.setFont("helvetica", "normal");
     doc.setTextColor(80, 80, 80);
 
-    TERMS_AND_CONDITIONS.terms.forEach((term, index) => {
+    EST_TERMS_AND_CONDITIONS.terms.forEach((term, index) => {
       const lines = doc.splitTextToSize(`${index + 1}. ${term}`, 180); // Automatically wrap the text to fit the width
 
       // Check if the currentY position can accommodate all lines for this term
@@ -261,7 +303,95 @@ export const generateInvoice = ({
     doc.setFillColor(...bgColor);
     doc.rect(14, currentY, 182, 0.5, "F");
     currentY += 10;
+  }
 
+  if (includeSoilTerms) {
+    doc.setFontSize(12);
+    doc.setFont("helvetica", "bold");
+    doc.setTextColor(...hexToRGB(defaultStyling.titleColor));
+    doc.text(SOIL_TERMS_AND_CONDITIONS.terms.title, 14, currentY);
+
+    currentY += 7;
+    doc.setFontSize(6);
+    doc.setFont("helvetica", "normal");
+    doc.setTextColor(80, 80, 80);
+
+    SOIL_TERMS_AND_CONDITIONS.terms.terms.forEach((term, index) => {
+      const lines = doc.splitTextToSize(`${index + 1}. ${term}`, 180); // Automatically wrap the text to fit the width
+
+      // Check if the currentY position can accommodate all lines for this term
+      lines.forEach((line, lineIndex) => {
+        if (currentY + 7 > doc.internal.pageSize.height) {
+          doc.addPage();
+          currentY = 20;
+        }
+
+        // Add the line of the term
+        doc.text(line, 14, currentY);
+        currentY += 5;
+      });
+    });
+
+    currentY += 2;
+    doc.setFontSize(12);
+    doc.setFont("helvetica", "bold");
+    doc.setTextColor(...hexToRGB(defaultStyling.titleColor));
+    doc.text(SOIL_TERMS_AND_CONDITIONS.limits.title, 14, currentY);
+
+    currentY += 7;
+    doc.setFontSize(6);
+    doc.setFont("helvetica", "normal");
+    doc.setTextColor(80, 80, 80);
+
+    SOIL_TERMS_AND_CONDITIONS.limits.terms.forEach((term, index) => {
+      const lines = doc.splitTextToSize(`${index + 1}. ${term}`, 180); // Automatically wrap the text to fit the width
+
+      // Check if the currentY position can accommodate all lines for this term
+      lines.forEach((line, lineIndex) => {
+        if (currentY + 7 > doc.internal.pageSize.height) {
+          doc.addPage();
+          currentY = 20;
+        }
+
+        // Add the line of the term
+        doc.text(line, 14, currentY);
+        currentY += 5;
+      });
+    });
+
+    currentY += 2;
+    doc.setFontSize(12);
+    doc.setFont("helvetica", "bold");
+    doc.setTextColor(...hexToRGB(defaultStyling.titleColor));
+    doc.text(SOIL_TERMS_AND_CONDITIONS.charges.title, 14, currentY);
+
+    currentY += 7;
+    doc.setFontSize(6);
+    doc.setFont("helvetica", "normal");
+    doc.setTextColor(80, 80, 80);
+
+    SOIL_TERMS_AND_CONDITIONS.charges.terms.forEach((term, index) => {
+      const lines = doc.splitTextToSize(`${index + 1}. ${term}`, 180); // Automatically wrap the text to fit the width
+
+      // Check if the currentY position can accommodate all lines for this term
+      lines.forEach((line, lineIndex) => {
+        if (currentY + 7 > doc.internal.pageSize.height) {
+          doc.addPage();
+          currentY = 20;
+        }
+
+        // Add the line of the term
+        doc.text(line, 14, currentY);
+        currentY += 5;
+      });
+    });
+
+    doc.setFillColor(...bgColor);
+    doc.rect(14, currentY, 182, 0.5, "F");
+    currentY += 10;
+  }
+
+  if (includeBanking) {
     // Add bank details
     const qr = "/assets/images/alilalsQR.png";
     doc.setFontSize(10);
@@ -270,7 +400,9 @@ export const generateInvoice = ({
     doc.addImage(qr, "PNG", 14, currentY - 3, 30, 30);
     doc.text(BANK_DETAILS.title, 50, currentY);
     doc.setFontSize(8);
-    doc.text(BANK_DETAILS.desc, 150, currentY);
+    if (includeEstTerms) {
+      doc.text(BANK_DETAILS.desc, 150, currentY);
+    }
     currentY += 7;
     doc.setTextColor(0, 0, 0);
     BANK_DETAILS.details.forEach((line) => {

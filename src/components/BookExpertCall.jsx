@@ -32,14 +32,14 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useSuccessDialog } from "@/context/DialogContext";
-import { generateInvoice } from "@/utils/generatePDF";
 import { addBooking, checkBookingExists } from "@/utils/BookExpert";
 import { getReferenceNo, incrementReferenceNo } from "@/utils/GenerateId";
 
 const BookExpertCall = () => {
   const { toast } = useToast();
   const router = useRouter();
-  const { openDialog } = useSuccessDialog();
+  const { openDialog, setDialogTitle, setDialogDesc, setDialogImg } =
+    useSuccessDialog();
 
   const formRef = useRef(null);
 
@@ -150,9 +150,6 @@ const BookExpertCall = () => {
       referenceNo: referenceNo,
     };
 
-    // For creating PDF
-    const pdfData = [{ label: "Expert Type", value: expertType }];
-
     setDisableBookingBtn(true);
 
     const bookingResult = await addBooking(bookingData);
@@ -160,20 +157,12 @@ const BookExpertCall = () => {
     if (bookingResult.success) {
       setDisableBookingBtn(false);
       openDialog();
+      setDialogTitle("Booking Recorded!");
+      setDialogDesc(
+        "This service is under development and will be available soon, stay tuned!",
+      );
+      setDialogImg("/assets/images/commingsoon.png");
       router.push("/");
-
-      generateInvoice({
-        title: "Expert Call Booking Details",
-        filename: `${referenceNo}.pdf`,
-        data: pdfData,
-        referenceNo: referenceNo,
-        includeDateTime: true,
-        customerDetails: {
-          name: groverName,
-          address: groverAddress,
-          phone: groverNumber,
-        },
-      });
 
       await incrementReferenceNo();
     } else {

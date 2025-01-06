@@ -34,7 +34,7 @@ const FAQ = () => {
     },
     {
       question:
-        "Why many local nursery growers say MM111 is a non-drip apple plant which doesn't need irrigation? By adapting to MM111 plantation, we can save on irrigation system cost?",
+        "Why many local nursery growers believe MM111 doesn't need drip irrigation? Can we save on irrigation component cost by using MM111 rootstock over M9 rootstock?",
       answer:
         "No! MM111 is relatively a drought resistant rootstock than M9. It can resist longer rainfall shortage periods, but that doesn't make MM111 a no-irrigation plant. It also requires an adequate amount of water to help transport nutrients in a plant. Drip-irrigation has nothing to do with the Rootstock type. It has its own essence, like; it saves water, ensures precession irrigation, saves on labour and is easy to operate. Rather, we need Drip-irrigation in seedling plants, which are more drought resistant than MM111 plants. This is why we irrigate our traditional apple tree orchards during Jun, July and August months. Irrigation also has very important role in transporting calcium in a plant. In absence of adequate water in hot summer days, we supply calcium to a plant through leaves by spraying calcium, while as same is available is almost every soil. What makes Calcium unavailable to a plant is non-availability of water. Hence, Drip-irrigation is an important component of modern farming in Apple.",
     },

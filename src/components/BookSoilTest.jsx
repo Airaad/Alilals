@@ -223,6 +223,8 @@ const BookSoilTest = () => {
         data: pdfData,
         referenceNo: referenceNo,
         includeDateTime: true,
+        includeSoilTerms: true,
+        includeBanking: true,
         customerDetails: {
           name: groverName,
           address: groverAddress,

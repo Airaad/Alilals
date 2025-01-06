@@ -8,9 +8,17 @@ const SuccessDialogContext = createContext();
 export const SuccessDialogProvider = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [alertOpen, setAlertOpen] = useState(true);
+  const [dialogTitle, setDialogTitle] = useState("");
+  const [dialogDesc, setDialogDesc] = useState("");
+  const [dialogImg, setDialogImg] = useState("");
 
   const openDialog = () => setIsOpen(true);
-  const closeDialog = () => setIsOpen(false);
+  const closeDialog = () => {
+    setDialogDesc("");
+    setDialogTitle("");
+    setDialogImg("");
+    setIsOpen(false);
+  };
 
   const openAlert = () => setAlertOpen(true);
   const closeAlert = () => setAlertOpen(false);
@@ -24,6 +32,12 @@ export const SuccessDialogProvider = ({ children }) => {
         alertOpen,
         openAlert,
         closeAlert,
+        dialogTitle,
+        dialogDesc,
+        dialogImg,
+        setDialogTitle,
+        setDialogDesc,
+        setDialogImg,
       }}
     >
       {children}

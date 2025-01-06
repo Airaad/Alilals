@@ -9,7 +9,7 @@ const AboutCompany = () => {
     <div className="flex flex-col lg:flex-row items-center lg:items-start md:space-x-8 py-12 px-6 bg-[#F6F2EF] md:px-20">
       <div className="lg:w-[30%] md:w-[50%] w-full mb-6 lg:mb-0">
         <img
-          src="/assets/images/aboutus_hero.jpg"
+          src="/assets/images/Gallery/20230310_181728.jpg"
           alt="Company Image"
           className="lg:w-[600px] lg:h-[700px] object-cover rounded-lg shadow-md"
         />
@@ -21,16 +21,16 @@ const AboutCompany = () => {
           <span className="text-[#44A05B]">Who We Are</span>
         </div>
         <h2 className="text-4xl font-bold text-[#1A3A32] mb-4">
-          Welcome to AlilalsAgrico Pvt. Ltd
+          Welcome to Alilals Agrico Pvt. Ltd
         </h2>
         <div className="mb-6">
           <p className="text-md text-[#636363] mb-4 text-justify">
             We are an agriculture company based in the heart of Jammu and
             Kashmir, dedicated to transforming the region's agricultural
             landscape through innovation, sustainability, and farmer
-            empowerment. Established with a vision to uplift rural communities
-            and modernize traditional farming practices, the company specializes
-            in high-density orchard development, precision farming, and advanced
+            empowerment. Established with a vision to uplift communities and
+            modernize traditional farming practices, the company specializes in
+            high-density orchard development, precision farming, and advanced
             technological interventions tailored to the unique needs of farmers.
             <br />
             Driven by the mission to optimise yields, enhance profitability, and

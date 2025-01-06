@@ -260,7 +260,8 @@ const BookTrellis = () => {
         data: pdfData,
         referenceNo: referenceNo,
         includeDateTime: true,
-        includeTerms: true,
+        includeEstTerms: true,
+        includeBanking: true,
         customerDetails: {
           name: groverName,
           address: groverAddress,

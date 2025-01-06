@@ -242,11 +242,10 @@ const OrchardDevelopment = () => {
       {/* Services Offered Section */}
       <div className="bg-[#142827] text-center my-12 py-16 px-10">
         <h2 className="text-4xl md:text-5xl font-semibold text-[#44A05B] tracking-wide mb-4">
-          Services offered
+          Smart Farming Starts Here
         </h2>
         <p className="text-lg text-gray-300 font-light mb-12">
-          Delivering sustainability through innovation in orchard care and
-          farming.
+          Effortless service, just a click away
         </p>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <ServiceCard

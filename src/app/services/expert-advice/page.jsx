@@ -228,11 +228,10 @@ const ExpertAdvice = () => {
       {/* Services Offered Section */}
       <div className="bg-[#142827] text-center my-12 py-16 px-10">
         <h2 className="text-4xl md:text-5xl font-semibold text-[#44A05B] tracking-wide mb-4">
-          Services offered
+          Smart Farming Starts Here
         </h2>
         <p className="text-lg text-gray-300 font-light mb-12">
-          Delivering sustainability through innovation in orchard care and
-          farming.
+          Effortless service, just a click away
         </p>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <ServiceCard
@@ -241,6 +240,20 @@ const ExpertAdvice = () => {
             image="/assets/images/expertspeak.jpg"
             link="expert-advice/expert"
             delay={0.4}
+          />
+          <ServiceCard
+            title="Trellis Infrastructure"
+            description="Boost crop support with our trellis systems, designed to improve growth, maximize sunlight, and simplify maintenance for your orchard."
+            image="/assets/images/trellis2.jpg"
+            link="orchard-development/book-trellis-infrastructure"
+            delay={0.6}
+          />
+          <ServiceCard
+            title="Drip Irrigation"
+            description="Save water and enhance crop health with drip irrigation, delivering precise watering directly to plant roots for optimal growth and efficiency."
+            image="/assets/images/drip.jpg"
+            link="orchard-development/book-drip-irrigation"
+            delay={0.8}
           />
         </div>
       </div>

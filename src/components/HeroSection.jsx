@@ -8,7 +8,15 @@ import { useAlert } from "@/context/AlertContext";
 
 const HeroVideo = () => {
   const { alert, loading, error } = useAlert();
-  const { isOpen, closeDialog, alertOpen, closeAlert } = useSuccessDialog();
+  const {
+    isOpen,
+    closeDialog,
+    alertOpen,
+    closeAlert,
+    dialogTitle,
+    dialogDesc,
+    dialogImg,
+  } = useSuccessDialog();
 
   return (
     <div className="relative w-full" style={{ aspectRatio: "16 / 9" }}>
@@ -26,7 +34,13 @@ const HeroVideo = () => {
       {/* Overlay */}
       <div className="absolute top-0 left-0 w-full h-full bg-black opacity-40"></div>
 
-      <SuccessDialog isOpen={isOpen} onClose={closeDialog} />
+      <SuccessDialog
+        isOpen={isOpen}
+        onClose={closeDialog}
+        title={dialogTitle}
+        desc={dialogDesc}
+        img={dialogImg}
+      />
       {loading ? (
         ""
       ) : alert?.publish && !isOpen ? (

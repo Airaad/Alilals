@@ -12,7 +12,7 @@ const TopNav = () => {
           <div className="flex items-center gap-1">
             <ClockIcon className="h-4 w-4 text-[#44A05B]" aria-hidden="true" />
             <span className="text-white text-xs lg:text-sm font-normal">
-              Mon - Sat 8.00 - 18.00. Sun Closed
+              Mon - Sat 9.00 - 17.00. Sun Closed
             </span>
           </div>
 
