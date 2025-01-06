@@ -74,7 +74,7 @@ const OurServices = () => {
             viewport={{ once: true }}
           >
             <div className="flex flex-col gap-4 items-center text-center">
-              <Image
+              <img
                 src={section.imgSrc}
                 alt={section.title}
                 width={200}

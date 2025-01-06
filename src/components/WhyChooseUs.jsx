@@ -93,7 +93,7 @@ export function WhyChooseUs() {
             transition={{ duration: 0.6, delay: 0.4 }}
             viewport={{ once: true }}
           >
-            <Image
+            <img
               src="/assets/images/whychooseus.jpg"
               alt="Plant Image"
               width={700}
