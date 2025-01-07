@@ -61,7 +61,7 @@ const FeaturedWork = () => {
         </p>
       </motion.div>
 
-      <div className="relative container mx-auto px-6 mt-10">
+      <div className="relative container mx-auto px-6 my-10">
         <motion.div
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
           initial={{ opacity: 0 }}
