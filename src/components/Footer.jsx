@@ -122,6 +122,15 @@ export function Footer() {
                 Company
               </h3>
               <ul>
+              <li className="mb-4">
+                  <a
+                    className="text-base font-medium text-white hover:text-gray-300"
+                    href="http://www.ziraat.in"
+                    target="__BLANK"
+                  >
+                    Career
+                  </a>
+                </li>
                 <li className="mb-4">
                   <a
                     className="text-base font-medium text-white hover:text-gray-300"
