@@ -7,6 +7,7 @@ import {
   FaLinkedin,
   FaYoutube,
 } from "react-icons/fa";
+import Image from "next/image";
 
 export function Footer() {
   return (
@@ -24,7 +25,12 @@ export function Footer() {
             <div className="flex h-full flex-col justify-between">
               <div className="mb-4 inline-flex items-center">
                 {/* SVG Logo */}
-                <img src="/assets/logo/logo.png" className="h-16 w-16" />
+                <Image
+                  src="/assets/logo/logo.png"
+                  alt="Alilals"
+                  height={40}
+                  width={64}
+                />
                 <span className="ml-4 text-2xl font-bold text-white">
                   Alilals Agrico Private Limited
                 </span>
@@ -122,7 +128,7 @@ export function Footer() {
                 Company
               </h3>
               <ul>
-              <li className="mb-4">
+                <li className="mb-4">
                   <a
                     className="text-base font-medium text-white hover:text-gray-300"
                     href="http://www.ziraat.in"
