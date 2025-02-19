@@ -21,25 +21,29 @@ const VarietyDetails = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-screen">
+      <div className="flex justify-center items-center min-h-screen bg-[#F6F2EF]">
         <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-green-500"></div>
-        <span className="ml-4 text-lg">Loading Variety Details...</span>
+        <span className="ml-4 text-2xl">Loading variety details...</span>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="flex justify-center items-center min-h-screen">
-        <span className="ml-4 text-lg">
-          Error fetching variety. Please try again later.
+      <div className="flex justify-center items-center min-h-screen bg-[#F6F2EF]">
+        <span className="text-2x">
+          Error fetching details. Please try again.
         </span>
       </div>
     );
   }
 
   if (!apple) {
-    return <div className="text-center">No such variety found.</div>;
+    return (
+      <div className="flex justify-center items-center min-h-screen bg-[#F6F2EF]">
+        <span className="text-2xl">Apple Variety not found.</span>
+      </div>
+    );
   }
 
   return (

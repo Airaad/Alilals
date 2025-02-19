@@ -32,10 +32,12 @@ export default function Blogs() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-screen bg-[#F6F2EF]">
-        <div className="flex flex-col items-center">
+      <div>
+        <div className="flex items-center justify-center min-h-[400px]">
           <div className="animate-spin rounded-full h-24 w-24 border-t-4 border-b-4 border-green-500 mb-4"></div>
-          <p className="text-lg text-gray-500">Loading blogs, please wait...</p>
+          <h3 className="text-gray-800 font-semibold text-lg ml-2">
+            Loading Blogs...
+          </h3>
         </div>
       </div>
     );
@@ -43,23 +45,32 @@ export default function Blogs() {
 
   if (error) {
     return (
-      <div className="flex justify-center items-center min-h-screen bg-[#F6F2EF]">
-        <p className="text-lg text-gray-500">
-          Error fetching blogs. Please try again later.
-        </p>
+      <div>
+        <div className="container mx-auto px-4 py-8">
+          <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+            <h3 className="text-red-800 font-semibold text-lg mb-2">Error</h3>
+            <p className="text-red-600">
+              There was an error loading blogs. Please try again later.
+            </p>
+          </div>
+        </div>
       </div>
     );
   }
 
-  if (!loading && blogs?.length === 0) {
+  if (!blogs || blogs.length === 0) {
     return (
-      <div className="flex flex-col justify-center items-center min-h-screen bg-[#F6F2EF]">
-        <h2 className="text-2xl font-semibold text-gray-400 mb-4">
-          No blogs found!
-        </h2>
-        <p className="text-lg text-gray-500">
-          Check back later for exciting content.
-        </p>
+      <div>
+        <div className="container mx-auto px-4 py-8">
+          <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+            <h3 className="text-gray-800 font-semibold text-lg mb-2">
+              No Blogs Found
+            </h3>
+            <p className="text-gray-600">
+              There are currently no blogs available.
+            </p>
+          </div>
+        </div>
       </div>
     );
   }

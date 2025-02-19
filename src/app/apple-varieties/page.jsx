@@ -34,6 +34,9 @@ const AppleVarietiesPage = () => {
         />
         <div className="flex items-center justify-center min-h-[400px]">
           <div className="animate-spin rounded-full h-24 w-24 border-t-4 border-b-4 border-green-500 mb-4"></div>
+          <h3 className="text-gray-800 font-semibold text-lg ml-2">
+            Loading Varieties...
+          </h3>
         </div>
       </div>
     );

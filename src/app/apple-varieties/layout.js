@@ -3,7 +3,7 @@ import React from "react";
 export const metadata = {
   title: "Apple Varieties | Alilals Agrico",
   description:
-    "Explore the Alilals Agrico blog for insights on sustainable agriculture, high-density orchards, precision farming, and eco-friendly innovations. Stay updated with expert tips, success stories, and plant diseases more.",
+    "Discover a wide range of premium apple varieties at Alilals Agrico. Explore detailed characteristics, fruit & tree info, growth performance, and download maturity calendars for each variety. Find the perfect apple for your orchard today",
 };
 
 const BlogLayout = ({ children }) => {
