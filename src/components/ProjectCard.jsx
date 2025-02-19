@@ -26,7 +26,7 @@ const ProjectCard = ({ title, imageUrl, id }) => {
       onClick={goToProject}
     >
       <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        <h3 className="text-lg font-semibold mb-2">{title}</h3>
+        <h3 className="text-2xl font-semibold mb-2">{title}</h3>
         <div className="flex items-center space-x-2 text-sm">
           <span>See Project</span>
           <span className="ml-2">»»</span>

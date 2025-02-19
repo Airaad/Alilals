@@ -84,7 +84,7 @@ const OurServices = () => {
               <h2 className="text-2xl font-semibold text-white">
                 {section.title}
               </h2>
-              <p className="text-sm text-[#a9b3b1] max-w-xs">
+              <p className="text-sm text-[#a9b3b1] max-w-xs ">
                 {section.description}
               </p>
             </div>

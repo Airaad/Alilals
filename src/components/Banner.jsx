@@ -20,11 +20,13 @@ const Banner = ({ title, backgroundImage, height = "h-auto" }) => {
           {/* Dark overlay */}
           <div className="absolute inset-0 bg-black bg-opacity-50"></div>
 
-          {/* Title */}
-          <div className="relative z-10 flex justify-center items-center h-full">
+          {/* Title and line container */}
+          <div className="relative z-10 flex flex-col items-center justify-center h-full">
             <h1 className="text-white text-center text-4xl md:text-6xl font-semibold">
               {title}
             </h1>
+            {/* Decorative line */}
+            <div className="w-24 h-1 bg-emerald-500 mt-4"></div>
           </div>
 
           {/* Top and bottom corner design elements */}
@@ -50,11 +52,13 @@ const Banner = ({ title, backgroundImage, height = "h-auto" }) => {
           {/* Dark overlay */}
           <div className="absolute inset-0 bg-black bg-opacity-50"></div>
 
-          {/* Title */}
-          <div className="relative z-10 flex justify-center items-center h-full">
+          {/* Title and line container */}
+          <div className="relative z-10 flex flex-col items-center justify-center h-full">
             <h1 className="text-white text-center text-4xl md:text-6xl font-semibold">
               {title}
             </h1>
+            {/* Decorative line */}
+            <div className="w-36 h-1 bg-[#44a05b] mt-5"></div>
           </div>
 
           {/* Top and bottom corner design elements */}

@@ -28,7 +28,7 @@ export default function BlogDetail() {
       const selectedBlog = blogs.find((b) => b.id == blogId);
       setBlog(selectedBlog);
     }
-  }, [blogId, blogs, loading, error]);
+  }, [blogId, blogs, loading, error, blog]);
 
   if (loading) {
     return (

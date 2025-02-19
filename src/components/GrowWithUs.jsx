@@ -23,7 +23,7 @@ export default function GrowWithUs() {
             Quick Access Tools
           </motion.h2>
           <motion.p
-            className="md:text-lg text-gray-600"
+            className="md:text-lg text-gray-600 "
             initial="hidden"
             whileInView="visible"
             variants={fadeInUp}

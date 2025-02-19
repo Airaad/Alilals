@@ -56,7 +56,7 @@ const Page = () => {
     <>
       {/* Project Details */}
       <motion.div
-        className="max-w-8xl mx-auto px-6 md:px-12 pt-12 grid gap-8 lg:grid-cols-2"
+        className="container mx-auto px-6 md:px-12 pt-12 grid gap-8 lg:grid-cols-2"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
@@ -118,7 +118,7 @@ const Page = () => {
       </motion.div>
 
       <motion.div
-        className="max-w-8xl mx-auto px-6 md:px-12 py-12"
+        className="container mx-auto px-6 md:px-12 py-12"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.5 }}

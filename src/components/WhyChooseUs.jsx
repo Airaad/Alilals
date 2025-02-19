@@ -93,7 +93,7 @@ export function WhyChooseUs() {
             transition={{ duration: 0.6, delay: 0.4 }}
             viewport={{ once: true }}
           >
-            <img
+            <Image
               src="/assets/images/whychooseus.jpg"
               alt="Plant Image"
               width={700}
@@ -117,7 +117,7 @@ export function WhyChooseUs() {
           <h1 className="text-5xl font-bold text-gray-800 leading-snug">
             Cultivating Sustainability, Impacting Lives.
           </h1>
-          <p className="text-gray-500 mt-4 mb-8">
+          <p className="text-gray-500 mt-4 mb-8 text-justify">
             We are transforming agriculture in Kashmir with a focus on
             sustainability and innovation. By combining precision farming,
             modern technology, and eco-friendly practices, the company empowers

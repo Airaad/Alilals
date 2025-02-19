@@ -181,6 +181,16 @@ export default function Nav() {
           >
             Knowledge
           </Link>
+
+          <Link
+            href="/apple-varieties"
+            className={`text-md font-semibold leading-6 text-[#636363] hover:text-green-700 relative inline-block 
+              before:content-[''] before:absolute before:-bottom-1 before:left-0 before:right-0 
+              before:h-0.5 before:bg-green-700 before:scale-x-0 
+              hover:before:scale-x-100 transition-transform duration-300 ${pathname.startsWith("/apple-varieties") ? "text-green-700" : ""}`}
+          >
+            Varieties
+          </Link>
         </PopoverGroup>
       </nav>
 
@@ -285,6 +295,13 @@ export default function Nav() {
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     Knowledge
+                  </Link>
+                  <Link
+                    href="/apple-varieties"
+                    className="-mx-3 block rounded-lg px-3 py-2 text-sm font-semibold leading-7 text-gray-200 hover:bg-gray-700"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Varieties
                   </Link>
                 </div>
                 <div className="py-6">

@@ -9,6 +9,7 @@ import { StatsProvider } from "@/context/StatContext";
 import { ProjectProvider } from "@/context/ProjectContext";
 import { BlogsProvider } from "@/context/BlogContext";
 import { Playfair_Display, Roboto } from "@next/font/google";
+import { AppleProvider } from "@/context/AppleContext";
 
 export const metadata = {
   title: "Alilals Agrico | Best Orchard Service Provider",
@@ -41,15 +42,17 @@ export default function RootLayout({ children }) {
         <AlertProvider>
           <StatsProvider>
             <ProjectProvider>
-              <BlogsProvider>
-                <SuccessDialogProvider>
-                  <TopNav />
-                  <Nav />
-                  {children}
-                  <Footer />
-                  <Toaster />
-                </SuccessDialogProvider>
-              </BlogsProvider>
+              <AppleProvider>
+                <BlogsProvider>
+                  <SuccessDialogProvider>
+                    <TopNav />
+                    <Nav />
+                    {children}
+                    <Footer />
+                    <Toaster />
+                  </SuccessDialogProvider>
+                </BlogsProvider>
+              </AppleProvider>
             </ProjectProvider>
           </StatsProvider>
         </AlertProvider>

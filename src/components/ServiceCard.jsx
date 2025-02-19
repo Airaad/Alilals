@@ -38,7 +38,7 @@ const ServiceCard = ({
       <div className="absolute inset-0 bg-black bg-opacity-50"></div>
       <div className="relative h-full flex flex-col justify-end p-6 text-left">
         <h3 className="text-2xl font-semibold text-white mb-4">{title}</h3>
-        <p className="text-gray-200 mb-6">{description}</p>
+        <p className="text-gray-200 mb-6 text-justify">{description}</p>
         <Link href={link}>
           <button className="bg-[#44A05B] text-white font-medium py-2 px-5 rounded-full shadow-lg hover:bg-white hover:text-[#44A05B] transition-colors self-start">
             {bookText}

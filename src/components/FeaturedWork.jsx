@@ -8,7 +8,7 @@ import { useProjects } from "@/context/ProjectContext";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 const FeaturedWork = () => {
-  const { projects } = useProjects();
+  const { projects, loading, error } = useProjects();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(3); // Default for desktop
 
@@ -30,7 +30,7 @@ const FeaturedWork = () => {
 
     // Cleanup event listener
     return () => window.removeEventListener("resize", handleResize);
-  }, [projects]);
+  }, []);
 
   const handleNext = () => {
     if (currentIndex < projects.length - itemsPerPage) {
@@ -44,8 +44,12 @@ const FeaturedWork = () => {
     }
   };
 
+  // Calculate disabled states
+  const isPreviousDisabled = currentIndex === 0;
+  const isNextDisabled = currentIndex + itemsPerPage >= projects.length;
+
   return (
-    <section className="py-16 h-auto bg-[#F6F2EF] relative">
+    <section className="pt-16 pb-8 h-auto bg-[#F6F2EF] relative">
       <motion.div
         className="flex flex-col items-center justify-center gap-4"
         initial={{ opacity: 0 }}
@@ -69,7 +73,6 @@ const FeaturedWork = () => {
           transition={{ duration: 0.8, ease: "easeInOut" }}
           viewport={{ once: true }}
         >
-          {/* Slice the projects based on currentIndex and itemsPerPage */}
           {projects
             .slice(currentIndex, currentIndex + itemsPerPage)
             .map((project) => (
@@ -86,8 +89,13 @@ const FeaturedWork = () => {
         {/* Left Arrow */}
         <button
           onClick={handlePrevious}
-          className="absolute left-0 top-[50%] transform -translate-y-1/2 bg-[#44A05B] text-white p-5 rounded-full shadow-lg hover:bg-green-600 transition-colors"
-          disabled={currentIndex === 0}
+          className={`absolute left-0 top-[50%] transform -translate-y-1/2 ${
+            isPreviousDisabled
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-[#44A05B] hover:bg-green-600"
+          } text-white p-5 rounded-full shadow-lg transition-colors`}
+          disabled={isPreviousDisabled}
+          aria-disabled={isPreviousDisabled}
         >
           <FaArrowLeft size={30} />
         </button>
@@ -95,8 +103,13 @@ const FeaturedWork = () => {
         {/* Right Arrow */}
         <button
           onClick={handleNext}
-          className="absolute right-0 top-[50%] transform -translate-y-1/2 bg-[#44A05B] text-white p-5 rounded-full shadow-lg hover:bg-green-600 transition-colors"
-          disabled={currentIndex >= projects.length - itemsPerPage}
+          className={`absolute right-0 top-[50%] transform -translate-y-1/2 ${
+            isNextDisabled
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-[#44A05B] hover:bg-green-600"
+          } text-white p-5 rounded-full shadow-lg transition-colors`}
+          disabled={isNextDisabled}
+          aria-disabled={isNextDisabled}
         >
           <FaArrowRight size={30} />
         </button>

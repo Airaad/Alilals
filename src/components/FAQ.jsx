@@ -91,7 +91,7 @@ const FAQ = () => {
               <div
                 className={`overflow-hidden transition-all duration-500 ${activeIndex === index ? "" : "max-h-0"}`}
               >
-                <p className="p-4 text-white">{faq.answer}</p>
+                <p className="p-4 text-white text-justify">{faq.answer}</p>
               </div>
             </div>
           ))}

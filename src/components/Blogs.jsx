@@ -1,27 +1,33 @@
 "use client";
+
+import React from "react";
 import Link from "next/link";
 import { useState } from "react";
 import { useBlogs } from "@/context/BlogContext";
 import { FaCalendarAlt, FaUserAlt } from "react-icons/fa";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 
 export default function Blogs() {
   const { blogs, loading, error } = useBlogs();
-
   const [currentPage, setCurrentPage] = useState(1);
-  const blogsPerPage = 8; // Show more blogs per page
+  const blogsPerPage = 8;
+  const totalPages = Math.ceil((blogs?.length || 0) / blogsPerPage);
 
-  const totalPages = Math.ceil(blogs.length / blogsPerPage);
+  const indexOfLastBlog = currentPage * blogsPerPage;
+  const indexOfFirstBlog = indexOfLastBlog - blogsPerPage;
+  const currentBlogs = blogs?.slice(indexOfFirstBlog, indexOfLastBlog);
 
-  let indexOfLastBlog = currentPage * blogsPerPage;
-  let indexOfFirstBlog = indexOfLastBlog - blogsPerPage;
-  let currentBlogs = blogs?.slice(indexOfFirstBlog, indexOfLastBlog);
-
-  const handleNextPage = () => {
-    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
-  };
-
-  const handlePrevPage = () => {
-    if (currentPage > 1) setCurrentPage(currentPage - 1);
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   if (loading) {
@@ -38,19 +44,16 @@ export default function Blogs() {
   if (error) {
     return (
       <div className="flex justify-center items-center min-h-screen bg-[#F6F2EF]">
-        <div className="flex flex-col items-center">
-          <div className="animate-spin rounded-full h-24 w-24 border-t-4 border-b-4 border-green-500 mb-4"></div>
-          <p className="text-lg text-gray-500">
-            Error fetching blogs. Please try again later.
-          </p>
-        </div>
+        <p className="text-lg text-gray-500">
+          Error fetching blogs. Please try again later.
+        </p>
       </div>
     );
   }
 
-  if (!loading && blogs.length === 0) {
+  if (!loading && blogs?.length === 0) {
     return (
-      <div className="flex flex-col justify-center items-center min-h-screen bg-[#142827]">
+      <div className="flex flex-col justify-center items-center min-h-screen bg-[#F6F2EF]">
         <h2 className="text-2xl font-semibold text-gray-400 mb-4">
           No blogs found!
         </h2>
@@ -62,47 +65,46 @@ export default function Blogs() {
   }
 
   return (
-    <div className="p-6 bg-[#F6F2EF]">
-      <div
-        id="blogs-section"
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 place-items-center gap-8 bg-[#F6F2EF]"
-      >
-        {currentBlogs.map((blog) => (
+    <div className="p-6 bg-[#F6F2EF] min-h-screen">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
+        {currentBlogs?.map((blog) => (
           <div
             key={blog.id}
-            className="max-w-[400px] w-full h-[600px] flex flex-col justify-between border rounded-lg shadow-lg bg-[#142827] hover:bg-[#1b3735] transition duration-300"
+            className="bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col"
           >
-            {/* Blog Image */}
-            <div className="overflow-hidden rounded-t-lg">
+            <div className="relative h-48 overflow-hidden">
               <img
                 src={blog.imageUrl}
                 alt={blog.title}
-                className="w-full h-[300px]  object-cover transform transition-transform duration-300 hover:scale-105"
+                className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
               />
             </div>
 
-            {/* Content */}
-            <div className="p-4 h-[300px] flex flex-col">
-              <div className="flex items-center text-gray-400 text-xs mb-3">
-                {/* Date and Author Icons */}
-                <FaCalendarAlt className="mr-2" />
-                <p className="mr-4">{blog.date}</p>
-                <FaUserAlt className="mr-2" />
-                <span className="text-gray-300">{blog.uploader}</span>
+            <div className="p-4 flex-1 flex flex-col">
+              <div className="flex items-center space-x-4 text-sm text-gray-500 mb-3">
+                <div className="flex items-center">
+                  <FaCalendarAlt className="mr-2" />
+                  <span>{blog.date}</span>
+                </div>
+                <div className="flex items-center">
+                  <FaUserAlt className="mr-2" />
+                  <span>{blog.uploader}</span>
+                </div>
               </div>
 
-              <h2 className="text-xl text-[#f4f4f4] font-semibold tracking-wide mb-2">
+              <h3 className="font-semibold text-xl mb-2 line-clamp-2 text-gray-800">
                 {blog.title}
-              </h2>
-              <div className="h-[0.08rem] bg-[#44A05B] w-12 mb-2" />
-              <p className="text-sm text-gray-400">{blog.brief}</p>
-            </div>
+              </h3>
 
-            {/* Read More Button */}
-            <div className="p-4">
+              <div className="h-1 w-16 bg-green-600 rounded mb-3"></div>
+
+              <p className="text-gray-600 line-clamp-3 mb-4 flex-1">
+                {blog.brief}
+              </p>
+
               <Link
                 href={`blog/${blog.id}`}
-                className="inline-block bg-[#44A05B] text-white px-4 py-2 rounded-full hover:bg-green-700 transition"
+                className="px-8 py-3 bg-[#44A05B] text-white text-lg font-medium rounded-md shadow-lg hover:bg-white hover:text-[#44A05B] transition-colors duration-300 text-center"
               >
                 Read More
               </Link>
@@ -111,34 +113,67 @@ export default function Blogs() {
         ))}
       </div>
 
-      {/* Pagination Controls */}
-      <div className="flex justify-center items-center space-x-4 mt-6">
-        <button
-          onClick={handlePrevPage}
-          disabled={currentPage === 1}
-          className={`px-4 py-2 rounded-lg ${
-            currentPage === 1
-              ? "bg-gray-300 cursor-not-allowed"
-              : "bg-[#44A05B] text-white hover:bg-green-700 transition"
-          }`}
-        >
-          Previous
-        </button>
-        <span className="text-lg text-black">
-          Page {currentPage} of {totalPages}
-        </span>
-        <button
-          onClick={handleNextPage}
-          disabled={currentPage === totalPages}
-          className={`px-4 py-2 rounded-lg ${
-            currentPage === totalPages
-              ? "bg-gray-300 cursor-not-allowed"
-              : "bg-[#44A05B] text-white hover:bg-green-700 transition"
-          }`}
-        >
-          Next
-        </button>
-      </div>
+      <Pagination className="justify-center">
+        <PaginationContent>
+          <PaginationItem>
+            <PaginationPrevious
+              onClick={() => handlePageChange(currentPage - 1)}
+              className={
+                currentPage === 1
+                  ? "pointer-events-none opacity-50"
+                  : "cursor-pointer"
+              }
+            />
+          </PaginationItem>
+
+          {[...Array(totalPages)].map((_, index) => {
+            const pageNumber = index + 1;
+
+            // Show first page, current page, last page, and pages around current page
+            if (
+              pageNumber === 1 ||
+              pageNumber === totalPages ||
+              (pageNumber >= currentPage - 1 && pageNumber <= currentPage + 1)
+            ) {
+              return (
+                <PaginationItem key={pageNumber}>
+                  <PaginationLink
+                    onClick={() => handlePageChange(pageNumber)}
+                    isActive={pageNumber === currentPage}
+                  >
+                    {pageNumber}
+                  </PaginationLink>
+                </PaginationItem>
+              );
+            }
+
+            // Show ellipsis for skipped pages
+            if (
+              pageNumber === currentPage - 2 ||
+              pageNumber === currentPage + 2
+            ) {
+              return (
+                <PaginationItem key={pageNumber}>
+                  <PaginationEllipsis />
+                </PaginationItem>
+              );
+            }
+
+            return null;
+          })}
+
+          <PaginationItem>
+            <PaginationNext
+              onClick={() => handlePageChange(currentPage + 1)}
+              className={
+                currentPage === totalPages
+                  ? "pointer-events-none opacity-50"
+                  : "cursor-pointer"
+              }
+            />
+          </PaginationItem>
+        </PaginationContent>
+      </Pagination>
     </div>
   );
 }
