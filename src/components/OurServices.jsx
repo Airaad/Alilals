@@ -38,7 +38,7 @@ const OurServices = () => {
     <div className="px-12 py-16 bg-[#142827]">
       <div className="flex flex-col justify-center items-center gap-5 mb-16">
         <div className="text-center">
-          <motion.h1
+          <motion.h2
             className="text-5xl font-semibold text-[#44A05B] tracking-wide mb-2"
             initial="hidden"
             whileInView="visible"
@@ -47,7 +47,7 @@ const OurServices = () => {
             viewport={{ once: true }}
           >
             Our Services
-          </motion.h1>
+          </motion.h2>
           <motion.p
             className="text-lg text-gray-300 font-light"
             initial="hidden"

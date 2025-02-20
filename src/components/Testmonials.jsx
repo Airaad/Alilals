@@ -37,7 +37,7 @@ export function Testimonials() {
   return (
     <section className="px-6 py-16 md:py-20 bg-[#142827]">
       <div className="text-center mb-14">
-        <motion.h1
+        <motion.h2
           className="text-5xl font-semibold text-[#44A05B] tracking-wide mb-2"
           initial="hidden"
           whileInView="visible"
@@ -47,7 +47,7 @@ export function Testimonials() {
         >
           What People Say
           {/* <GiPlantSeed className="inline-block text-4xl text-[#388D4B]" /> */}
-        </motion.h1>
+        </motion.h2>
         <motion.p
           className="text-lg text-gray-300"
           initial="hidden"
