@@ -114,9 +114,9 @@ export function WhyChooseUs() {
           <h3 className="text-[#44A05B] uppercase text-lg font-semibold mb-2">
             Why Choose Us
           </h3>
-          <h1 className="text-5xl font-bold text-gray-800 leading-snug">
+          <h2 className="text-5xl font-bold text-gray-800 leading-snug">
             Cultivating Sustainability, Impacting Lives.
-          </h1>
+          </h2>
           <p className="text-gray-500 mt-4 mb-8 text-justify">
             We are transforming agriculture in Kashmir with a focus on
             sustainability and innovation. By combining precision farming,

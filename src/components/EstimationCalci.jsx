@@ -346,7 +346,7 @@ const EstimationCalci = () => {
       </div>
 
       <div className="relative bg-white w-full rounded-xl mt-10 py-10 md:pb-14 md:px-20">
-        <h1 className="text-center text-2xl md:mb-10 mb-5">Estimated Cost</h1>
+        <h2 className="text-center text-2xl md:mb-10 mb-5">Estimated Cost</h2>
         <div className="flex justify-center md:justify-between items-center">
           <div className="flex items-center justify-center md:w-20 md:h-20 w-14 h-14 rounded-full border-2 border-green-600 mr-5">
             <FaWallet className="text-2xl md:text-5xl text-green-500" />
