@@ -104,9 +104,9 @@ const BANK_DETAILS = {
   title: "Bank Details for Booking",
   desc: "Booking Amount Rs. 10000/- per site",
   details: [
-    "Bank Name: Jammu & Kashmir Bank Limited, Chadura",
-    "Account Number: 0008010100004555",
-    "IFSC Code: JAKA0CHADUR",
+    "Bank Name: Jammu & Kashmir Bank Limited",
+    "Account Number: 0714 0201 4000 0001",
+    "IFSC Code: JAKA0NOWBUD",
     "Account Holder : Alilals Agrico Pvt Ltd",
   ],
 };
@@ -119,6 +119,7 @@ export const generateInvoice = ({
   title,
   filename,
   data,
+  addOnData = [],
   styling = {},
   includeDateTime = true,
   includeEstTerms = false,
@@ -267,6 +268,56 @@ export const generateInvoice = ({
   doc.rect(14, currentY, 182, 0.5, "F");
   currentY += 10;
 
+  // Add add-on services section if there are any
+  if (addOnData.length > 0) {
+    // Check if we need a new page
+    if (currentY + 30 > doc.internal.pageSize.height) {
+      doc.addPage();
+      currentY = 20;
+    }
+
+    // Add add-on services title
+    doc.setFontSize(12);
+    doc.setTextColor(...hexToRGB(defaultStyling.titleColor));
+    doc.setFont("helvetica", "bold");
+    doc.text("Add-on Services", 14, currentY);
+    currentY += 5;
+
+    // Prepare add-on data for the table
+    const addOnLabels = addOnData.map((item) => item.label);
+    const addOnValues = addOnData.map((item) => item.value);
+
+    // Add add-on services table
+    autoTable(doc, {
+      startY: currentY,
+      body: [
+        addOnLabels, // First row: labels
+        addOnValues, // Second row: corresponding values
+      ],
+      theme: "grid",
+      headStyles: {
+        fillColor: hexToRGB(defaultStyling.headerColor),
+        textColor: [255, 255, 255],
+        fontStyle: "bold",
+      },
+      styles: {
+        fontSize: 8,
+        cellPadding: 3,
+      },
+      alternateRowStyles: {
+        fillColor: hexToRGB(defaultStyling.alternateRowColor),
+      },
+      margin: { top: 10 },
+      didDrawPage: (data) => {
+        currentY = data.cursor.y + 5;
+      },
+    });
+
+    doc.setFillColor(...bgColor);
+    doc.rect(14, currentY, 182, 0.5, "F");
+    currentY += 10;
+  }
+
   // Add terms and conditions
   if (currentY + 30 > doc.internal.pageSize.height) {
     doc.addPage();
@@ -393,12 +444,10 @@ export const generateInvoice = ({
 
   if (includeBanking) {
     // Add bank details
-    const qr = "/assets/images/alilalsQR.png";
     doc.setFontSize(10);
     doc.setFont("helvetica", "normal");
     doc.setTextColor(...hexToRGB(defaultStyling.titleColor));
-    doc.addImage(qr, "PNG", 14, currentY - 3, 30, 30);
-    doc.text(BANK_DETAILS.title, 50, currentY);
+    doc.text(BANK_DETAILS.title, 14, currentY);
     doc.setFontSize(8);
     if (includeEstTerms) {
       doc.text(BANK_DETAILS.desc, 150, currentY);
@@ -406,7 +455,7 @@ export const generateInvoice = ({
     currentY += 7;
     doc.setTextColor(0, 0, 0);
     BANK_DETAILS.details.forEach((line) => {
-      doc.text(line, 50, currentY);
+      doc.text(line, 14, currentY);
       currentY += 5;
     });
   }
