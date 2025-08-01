@@ -2,7 +2,7 @@ import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
 /**
- * Checks if the device is running iOS
+ * Checks if the device is running iOS or Safari
  * @returns {boolean}
  */
 const isIOS = () => {
@@ -18,6 +18,14 @@ const isIOS = () => {
     // iPad on iOS 13 detection
     (navigator.userAgent.includes("Mac") && "ontouchend" in document)
   );
+};
+
+/**
+ * Checks if the browser is Safari
+ * @returns {boolean}
+ */
+const isSafari = () => {
+  return /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 };
 
 /**
@@ -37,6 +45,7 @@ const isIOS = () => {
  * @property {boolean} [includeBanking] - Whether to include t&c in the PDF
  * @property {Object} customerDetails - Customer details (name, address, phone)
  * @property {string} referenceNo - Reference number
+ * @property {Function} [toast] - Optional toast function for notifications
  */
 
 /**
@@ -127,6 +136,7 @@ export const generateInvoice = ({
   includeBanking = false,
   customerDetails,
   referenceNo,
+  toast,
 }) => {
   // Initialize default styling
   const defaultStyling = {
@@ -476,12 +486,48 @@ export const generateInvoice = ({
   // Add the footer text
   doc.text(footerText, footerX, footerY, { align: "center" });
 
-  // Handle PDF output based on device type
-  if (!isIOS()) {
+  // Handle PDF output based on device type and browser
+  if (isIOS() || isSafari()) {
+    // For iOS devices and Safari, use a more reliable approach
+    try {
+      // Try direct save first
+      doc.save(filename);
+      // Show success message for Safari users
+      if (toast) {
+        toast({
+          title: "PDF Downloaded",
+          description:
+            "Your PDF has been downloaded successfully. Check your Downloads folder.",
+          className: "bg-green-500 text-white border border-green-700",
+        });
+      }
+    } catch (error) {
+      // Fallback: create a temporary download link
+      const pdfBlob = doc.output("blob");
+      const url = URL.createObjectURL(pdfBlob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = filename;
+      link.style.display = "none";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+
+      // Show success message for Safari users
+      if (toast) {
+        toast({
+          title: "PDF Downloaded",
+          description:
+            "Your PDF has been downloaded successfully. Check your Downloads folder.",
+          className: "bg-green-500 text-white border border-green-700",
+        });
+      }
+    }
+  } else {
+    // For other browsers, use blob URL approach
     const pdfOutput = doc.output("bloburl");
     window.open(pdfOutput, "_blank");
     doc.name = filename;
-  } else {
-    doc.save(filename);
   }
 };
