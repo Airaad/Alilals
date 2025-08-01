@@ -830,182 +830,187 @@ const BookOrchid = () => {
                 </div>
               </AlertDialogTrigger>
 
-              <AlertDialogContent className="sm:max-w-[425px] bg-[#F6F2EF]">
+              <AlertDialogContent className="sm:max-w-[425px] bg-[#F6F2EF] max-h-[90vh]">
                 <AlertDialogHeader>
                   <AlertDialogTitle className="text-[#035803]">
                     Confirm your details
                   </AlertDialogTitle>
                 </AlertDialogHeader>
 
-                <Table className="bg-white ">
-                  <TableCaption className="text-green-700">
-                    Are you sure you want to book your orchard? Please review
-                    all details before confirming.
-                  </TableCaption>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead className="w-[200px] text-lg text-[#035803] font-bold">
-                        Label
-                      </TableHead>
-                      <TableHead className="text-right w-[200px] text-lg text-[#035803] font-bold">
-                        Info
-                      </TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody className="overflow-scroll">
-                    <TableRow>
-                      <TableCell className="font-medium text-green-700">
-                        Name
-                      </TableCell>
-                      <TableCell className="text-right text-green-700">
-                        {groverName}
-                      </TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell className="font-medium text-green-700">
-                        Address
-                      </TableCell>
-                      <TableCell className="text-right text-green-700">
-                        {groverAddress}
-                      </TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell className="font-medium text-green-700">
-                        Phone Number
-                      </TableCell>
-                      <TableCell className="text-right text-green-700">
-                        {groverNumber}
-                      </TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell className="font-medium text-green-700">
-                        Total Land
-                      </TableCell>
-                      <TableCell className="text-right text-green-700">
-                        {landSizeKanals ? `${landSizeKanals} Kanals ` : ""}
-                        {landSizeMarlas ? `${landSizeMarlas} Marlas` : ""}
-                      </TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell className="font-medium text-green-700">
-                        Row-to-Row Gap
-                      </TableCell>
-                      <TableCell className="text-right text-green-700">
-                        {rowToRowGap} ft
-                      </TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell className="font-medium text-green-700">
-                        Trellis Type
-                      </TableCell>
-                      <TableCell className="text-right text-green-700">
-                        {trellisType}
-                      </TableCell>
-                    </TableRow>
-                    {sideAnchors === "yes" && (
+                <div
+                  className="overflow-y-auto"
+                  style={{ maxHeight: "calc(90vh - 200px)" }}
+                >
+                  <Table className="bg-white">
+                    <TableCaption className="text-green-700">
+                      Are you sure you want to book your orchard? Please review
+                      all details before confirming.
+                    </TableCaption>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead className="w-[200px] text-lg text-[#035803] font-bold">
+                          Label
+                        </TableHead>
+                        <TableHead className="text-right w-[200px] text-lg text-[#035803] font-bold">
+                          Info
+                        </TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
                       <TableRow>
                         <TableCell className="font-medium text-green-700">
-                          Side Anchors
+                          Name
                         </TableCell>
                         <TableCell className="text-right text-green-700">
-                          Yes
+                          {groverName}
                         </TableCell>
                       </TableRow>
-                    )}
-                    {crossWire === "yes" && (
                       <TableRow>
                         <TableCell className="font-medium text-green-700">
-                          Cross Wire
+                          Address
                         </TableCell>
                         <TableCell className="text-right text-green-700">
-                          Yes
+                          {groverAddress}
                         </TableCell>
                       </TableRow>
-                    )}
-                    {postCaps === "yes" && (
                       <TableRow>
                         <TableCell className="font-medium text-green-700">
-                          Post Caps
+                          Phone Number
                         </TableCell>
                         <TableCell className="text-right text-green-700">
-                          Yes
+                          {groverNumber}
                         </TableCell>
                       </TableRow>
-                    )}
-                    {topWireHailNet === "yes" && (
                       <TableRow>
                         <TableCell className="font-medium text-green-700">
-                          Top-wire for Hail Net
+                          Total Land
                         </TableCell>
                         <TableCell className="text-right text-green-700">
-                          Yes
+                          {landSizeKanals ? `${landSizeKanals} Kanals ` : ""}
+                          {landSizeMarlas ? `${landSizeMarlas} Marlas` : ""}
                         </TableCell>
                       </TableRow>
-                    )}
-                    {headerAssembly === "yes" && (
                       <TableRow>
                         <TableCell className="font-medium text-green-700">
-                          Header Assembly
+                          Row-to-Row Gap
                         </TableCell>
                         <TableCell className="text-right text-green-700">
-                          Yes
+                          {rowToRowGap} ft
                         </TableCell>
                       </TableRow>
-                    )}
-                    {venturyInjector === "yes" && (
                       <TableRow>
                         <TableCell className="font-medium text-green-700">
-                          Ventury Injector/Fertigation Tank
+                          Trellis Type
                         </TableCell>
                         <TableCell className="text-right text-green-700">
-                          Yes
+                          {trellisType}
                         </TableCell>
                       </TableRow>
-                    )}
-                    {hydrocycloneFilter === "yes" && (
+                      {sideAnchors === "yes" && (
+                        <TableRow>
+                          <TableCell className="font-medium text-green-700">
+                            Side Anchors
+                          </TableCell>
+                          <TableCell className="text-right text-green-700">
+                            Yes
+                          </TableCell>
+                        </TableRow>
+                      )}
+                      {crossWire === "yes" && (
+                        <TableRow>
+                          <TableCell className="font-medium text-green-700">
+                            Cross Wire
+                          </TableCell>
+                          <TableCell className="text-right text-green-700">
+                            Yes
+                          </TableCell>
+                        </TableRow>
+                      )}
+                      {postCaps === "yes" && (
+                        <TableRow>
+                          <TableCell className="font-medium text-green-700">
+                            Post Caps
+                          </TableCell>
+                          <TableCell className="text-right text-green-700">
+                            Yes
+                          </TableCell>
+                        </TableRow>
+                      )}
+                      {topWireHailNet === "yes" && (
+                        <TableRow>
+                          <TableCell className="font-medium text-green-700">
+                            Top-wire for Hail Net
+                          </TableCell>
+                          <TableCell className="text-right text-green-700">
+                            Yes
+                          </TableCell>
+                        </TableRow>
+                      )}
+                      {headerAssembly === "yes" && (
+                        <TableRow>
+                          <TableCell className="font-medium text-green-700">
+                            Header Assembly
+                          </TableCell>
+                          <TableCell className="text-right text-green-700">
+                            Yes
+                          </TableCell>
+                        </TableRow>
+                      )}
+                      {venturyInjector === "yes" && (
+                        <TableRow>
+                          <TableCell className="font-medium text-green-700">
+                            Ventury Injector/Fertigation Tank
+                          </TableCell>
+                          <TableCell className="text-right text-green-700">
+                            Yes
+                          </TableCell>
+                        </TableRow>
+                      )}
+                      {hydrocycloneFilter === "yes" && (
+                        <TableRow>
+                          <TableCell className="font-medium text-green-700">
+                            Hydrocyclone Filter
+                          </TableCell>
+                          <TableCell className="text-right text-green-700">
+                            Yes
+                          </TableCell>
+                        </TableRow>
+                      )}
                       <TableRow>
                         <TableCell className="font-medium text-green-700">
-                          Hydrocyclone Filter
+                          Total Posts
                         </TableCell>
                         <TableCell className="text-right text-green-700">
-                          Yes
+                          {Math.ceil(getQuantities().posts * totalLand())}
                         </TableCell>
                       </TableRow>
-                    )}
-                    <TableRow>
-                      <TableCell className="font-medium text-green-700">
-                        Total Posts
-                      </TableCell>
-                      <TableCell className="text-right text-green-700">
-                        {Math.ceil(getQuantities().posts * totalLand())}
-                      </TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell className="font-medium text-green-700">
-                        Total Plants
-                      </TableCell>
-                      <TableCell className="text-right text-green-700">
-                        {Math.ceil(getQuantities().plants * totalLand())}
-                      </TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell className="font-medium text-green-700">
-                        Total Anchors
-                      </TableCell>
-                      <TableCell className="text-right text-green-700">
-                        {Math.ceil(getQuantities().anchors * totalLand())}
-                      </TableCell>
-                    </TableRow>
-                    <TableRow className="text-2xl font-bold">
-                      <TableCell className="font-medium text-green-700">
-                        Estimated Cost
-                      </TableCell>
-                      <TableCell className="text-right text-green-700">
-                        {formatAmount(totalPrice())}
-                      </TableCell>
-                    </TableRow>
-                  </TableBody>
-                </Table>
+                      <TableRow>
+                        <TableCell className="font-medium text-green-700">
+                          Total Plants
+                        </TableCell>
+                        <TableCell className="text-right text-green-700">
+                          {Math.ceil(getQuantities().plants * totalLand())}
+                        </TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell className="font-medium text-green-700">
+                          Total Anchors
+                        </TableCell>
+                        <TableCell className="text-right text-green-700">
+                          {Math.ceil(getQuantities().anchors * totalLand())}
+                        </TableCell>
+                      </TableRow>
+                      <TableRow className="text-2xl font-bold">
+                        <TableCell className="font-medium text-green-700">
+                          Estimated Cost
+                        </TableCell>
+                        <TableCell className="text-right text-green-700">
+                          {formatAmount(totalPrice())}
+                        </TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </div>
 
                 <AlertDialogFooter>
                   <AlertDialogCancel className="bg-gray-500 text-white font-medium  shadow-lg hover:bg-white hover:text-gray-500 transition-colors px-4 py-2 rounded-lg">
