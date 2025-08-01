@@ -13,9 +13,9 @@ const getReferenceNo = async (query = false) => {
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       const { value } = docSnap.data();
-      return query ? `query/2425-${value + 1}` : `eEST/2425-${value + 1}`;
+      return query ? `query/2526-${value + 1}` : `eEST/2526-${value + 1}`;
     } else {
-      return query ? "query/2425-1" : "eEST/2425-1";
+      return query ? "query/2526-1" : "eEST/2526-1";
     }
   } catch (error) {
     console.error("Error getting referenceNo:", error);
