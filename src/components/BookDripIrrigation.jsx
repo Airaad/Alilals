@@ -509,7 +509,7 @@ const BookDripIrrigation = () => {
               </span>
             )}
           </label>
-          <div className="flex gap-2">
+          <div className="flex flex-col md:flex-row gap-2 items-center">
             <Input
               className={`bg-white mb-2 mt-2 lg:w-1/2 border rounded-lg focus:outline-none shadow-sm transition-all duration-200 hover:shadow-md ${
                 otpVerified
@@ -558,16 +558,16 @@ const BookDripIrrigation = () => {
             </Button>
           </div>
           <p
-            className={`${phoneError ? "" : "invisible"} mb-2 text-red-500 text-sm`}
+            className={`${phoneError ? "" : "invisible"} ${!otpSent || otpVerified ? "mb-40 md:mb-0" : ""} text-red-500 text-sm`}
           >
             Enter valid 10 digit phone number
           </p>
           {otpSent && !otpVerified && (
-            <div className="mt-4">
+            <div className="mt-4 mb-20 md:mb-0">
               <label htmlFor="otp">
                 OTP<span className="text-red-500">*</span>
               </label>
-              <div className="flex gap-2">
+              <div className="flex flex-col md:flex-row gap-2 items-center">
                 <Input
                   className="bg-white mb-2 mt-2 lg:w-1/2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B] shadow-sm transition-all duration-200 hover:shadow-md"
                   type="text"
@@ -595,7 +595,7 @@ const BookDripIrrigation = () => {
               >
                 {otpError}
               </p>
-              <div className="flex items-center gap-4 mb-40 md:mb-20">
+              <div className="flex flex-col md:flex-row items-center gap-4 mb-40 md:mb-20">
                 <p className="text-sm text-gray-600">
                   Enter the 6-digit OTP sent to your phone number
                 </p>

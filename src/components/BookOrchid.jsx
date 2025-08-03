@@ -676,641 +676,635 @@ const BookOrchid = () => {
         </div>
 
         {/* Scrollable form container */}
-        <div className="h-[42rem] overflow-y-auto px-10 pb-24">
-          {/* Form step 1 */}
-          <form className={`py-10 ${formStage === 1 ? "" : "hidden"}`}>
-            <label htmlFor="groverName">
-              Name<span className="text-red-500">*</span>
-            </label>
+
+        {/* Form step 1 */}
+        <form className={`py-10 px-10 ${formStage === 1 ? "" : "hidden"}`}>
+          <label htmlFor="groverName">
+            Name<span className="text-red-500">*</span>
+          </label>
+          <Input
+            className="bg-white my-2 lg:w-1/2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B] shadow-sm transition-all duration-200 hover:shadow-md"
+            type="text"
+            placeholder="Enter Name"
+            id="groverName"
+            value={groverName}
+            onChange={(e) => setGroverName(e.target.value)}
+          />
+          <p
+            className={`${nameError ? "" : "invisible"} mb-2 text-red-500 text-sm`}
+          >
+            Name should be greater than 3 characters and only contain alphabets
+          </p>
+          <label htmlFor="groverAddress">
+            Address<span className="text-red-500">*</span>
+          </label>
+          <Input
+            className="bg-white mb-10 mt-2 lg:w-1/2  border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B] shadow-sm transition-all duration-200 hover:shadow-md"
+            type="text"
+            placeholder="Enter Address"
+            id="groverAddress"
+            value={groverAddress}
+            onChange={(e) => setGroverAddress(e.target.value)}
+          />
+          <label htmlFor="groverNumber">
+            Phone Number<span className="text-red-500">*</span>
+            {otpVerified && (
+              <span className="ml-2 text-green-600 text-sm">✓ Verified</span>
+            )}
+            {sendingOtp && (
+              <span className="ml-2 text-blue-600 text-sm">
+                📤 Sending OTP...
+              </span>
+            )}
+            {verifyingOtp && (
+              <span className="ml-2 text-blue-600 text-sm">
+                🔍 Verifying...
+              </span>
+            )}
+          </label>
+          <div className="flex flex-col md:flex-row gap-2 items-center">
             <Input
-              className="bg-white my-2 lg:w-1/2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B] shadow-sm transition-all duration-200 hover:shadow-md"
+              className={`bg-white mb-2 mt-2 lg:w-1/2 border rounded-lg focus:outline-none shadow-sm transition-all duration-200 hover:shadow-md ${
+                otpVerified
+                  ? "border-green-500 focus:border-green-600"
+                  : "border-gray-300 focus:border-[#44A05B]"
+              }`}
               type="text"
-              placeholder="Enter Name"
-              id="groverName"
-              value={groverName}
-              onChange={(e) => setGroverName(e.target.value)}
-            />
-            <p
-              className={`${nameError ? "" : "invisible"} mb-2 text-red-500 text-sm`}
-            >
-              Name should be greater than 3 characters and only contain
-              alphabets
-            </p>
-            <label htmlFor="groverAddress">
-              Address<span className="text-red-500">*</span>
-            </label>
-            <Input
-              className="bg-white mb-10 mt-2 lg:w-1/2  border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B] shadow-sm transition-all duration-200 hover:shadow-md"
-              type="text"
-              placeholder="Enter Address"
-              id="groverAddress"
-              value={groverAddress}
-              onChange={(e) => setGroverAddress(e.target.value)}
-            />
-            <label htmlFor="groverNumber">
-              Phone Number<span className="text-red-500">*</span>
-              {otpVerified && (
-                <span className="ml-2 text-green-600 text-sm">✓ Verified</span>
-              )}
-              {sendingOtp && (
-                <span className="ml-2 text-blue-600 text-sm">
-                  📤 Sending OTP...
-                </span>
-              )}
-              {verifyingOtp && (
-                <span className="ml-2 text-blue-600 text-sm">
-                  🔍 Verifying...
-                </span>
-              )}
-            </label>
-            <div className="flex gap-2">
-              <Input
-                className={`bg-white mb-2 mt-2 lg:w-1/2 border rounded-lg focus:outline-none shadow-sm transition-all duration-200 hover:shadow-md ${
-                  otpVerified
-                    ? "border-green-500 focus:border-green-600"
-                    : "border-gray-300 focus:border-[#44A05B]"
-                }`}
-                type="text"
-                placeholder="Enter Phone Number"
-                id="groverNumber"
-                value={groverNumber}
-                onChange={(e) => {
-                  const newNumber = e.target.value;
-                  setGroverNumber(newNumber);
-                  // Reset OTP verification if phone number changes
-                  if (
-                    newNumber !== prevPhoneNumberRef.current &&
-                    prevPhoneNumberRef.current !== ""
-                  ) {
-                    setOtpSent(false);
-                    setOtpVerified(false);
-                    setOtp("");
-                    setOtpError("");
-                    setResendTimer(0);
-                  }
-                  prevPhoneNumberRef.current = newNumber;
-                }}
-                disabled={sendingOtp || verifyingOtp || otpVerified}
-              />
-              <Button
-                type="button"
-                onClick={sendOTP}
-                className={`font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out ${
-                  otpVerified
-                    ? "bg-gray-400 text-gray-600 cursor-not-allowed"
-                    : "bg-green-500 hover:bg-green-600 text-white"
-                }`}
-                disabled={
-                  sendingOtp || verifyingOtp || !groverNumber || otpVerified
+              placeholder="Enter Phone Number"
+              id="groverNumber"
+              value={groverNumber}
+              onChange={(e) => {
+                const newNumber = e.target.value;
+                setGroverNumber(newNumber);
+                // Reset OTP verification if phone number changes
+                if (
+                  newNumber !== prevPhoneNumberRef.current &&
+                  prevPhoneNumberRef.current !== ""
+                ) {
+                  setOtpSent(false);
+                  setOtpVerified(false);
+                  setOtp("");
+                  setOtpError("");
+                  setResendTimer(0);
                 }
-              >
-                {otpVerified
-                  ? "Verified"
-                  : sendingOtp
-                    ? "Sending..."
-                    : "Send OTP"}
-              </Button>
-            </div>
-            <p
-              className={`${phoneError ? "" : "invisible"} mb-4 md:mb-2 text-red-500 text-sm`}
+                prevPhoneNumberRef.current = newNumber;
+              }}
+              disabled={sendingOtp || verifyingOtp || otpVerified}
+            />
+            <Button
+              type="button"
+              onClick={sendOTP}
+              className={`font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out ${
+                otpVerified
+                  ? "bg-gray-400 text-gray-600 cursor-not-allowed"
+                  : "bg-green-500 hover:bg-green-600 text-white"
+              }`}
+              disabled={
+                sendingOtp || verifyingOtp || !groverNumber || otpVerified
+              }
             >
-              Enter valid 10 digit phone number
-            </p>
-            {otpSent && !otpVerified && (
-              <div className="">
-                <label htmlFor="otp">
-                  OTP<span className="text-red-500">*</span>
-                </label>
-                <div className="flex gap-2">
-                  <Input
-                    className="bg-white mb-2 mt-2 lg:w-1/2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B] shadow-sm transition-all duration-200 hover:shadow-md"
-                    type="text"
-                    placeholder="Enter 6-digit OTP"
-                    id="otp"
-                    value={otp}
-                    onChange={(e) => {
-                      const value = e.target.value
-                        .replace(/\D/g, "")
-                        .slice(0, 6);
-                      setOtp(value);
-                    }}
-                    maxLength={6}
-                    disabled={verifyingOtp}
-                  />
+              {otpVerified
+                ? "Verified"
+                : sendingOtp
+                  ? "Sending..."
+                  : "Send OTP"}
+            </Button>
+          </div>
+          <p
+            className={`${phoneError ? "" : "invisible"} ${!otpSent || otpVerified ? "mb-40 md:mb-0" : ""} text-red-500 text-sm`}
+          >
+            Enter valid 10 digit phone number
+          </p>
+          {otpSent && !otpVerified && (
+            <div className="mb-20 md:mb-0">
+              <label htmlFor="otp">
+                OTP<span className="text-red-500">*</span>
+              </label>
+              <div className="flex flex-col md:flex-row gap-2 items-center">
+                <Input
+                  className="bg-white mb-2 mt-2 lg:w-1/2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B] shadow-sm transition-all duration-200 hover:shadow-md"
+                  type="text"
+                  placeholder="Enter 6-digit OTP"
+                  id="otp"
+                  value={otp}
+                  onChange={(e) => {
+                    const value = e.target.value.replace(/\D/g, "").slice(0, 6);
+                    setOtp(value);
+                  }}
+                  maxLength={6}
+                  disabled={verifyingOtp}
+                />
+                <Button
+                  type="button"
+                  onClick={verifyOTP}
+                  className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out"
+                  disabled={verifyingOtp || !otp || otp.length !== 6}
+                >
+                  {verifyingOtp ? "Verifying..." : "Verify OTP"}
+                </Button>
+              </div>
+              <p
+                className={`${otpError ? "" : "invisible"} mb-2 text-red-500 text-sm`}
+              >
+                {otpError}
+              </p>
+              <div className="flex flex-col md:flex-row items-center gap-4 mb-40 md:mb-20">
+                <p className="text-sm text-gray-600">
+                  Enter the 6-digit OTP sent to your phone number
+                </p>
+                {resendTimer > 0 ? (
+                  <span className="text-sm text-gray-500">
+                    Resend in {resendTimer}s
+                  </span>
+                ) : (
                   <Button
                     type="button"
-                    onClick={verifyOTP}
-                    className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out"
-                    disabled={verifyingOtp || !otp || otp.length !== 6}
+                    onClick={sendOTP}
+                    variant="link"
+                    className="text-blue-600 hover:text-blue-800 p-0 h-auto text-sm"
+                    disabled={sendingOtp}
                   >
-                    {verifyingOtp ? "Verifying..." : "Verify OTP"}
+                    {sendingOtp ? "Sending..." : "Resend OTP"}
                   </Button>
-                </div>
-                <p
-                  className={`${otpError ? "" : "invisible"} mb-2 text-red-500 text-sm`}
-                >
-                  {otpError}
-                </p>
-                <div className="flex items-center gap-4 mb-40 md:mb-20">
-                  <p className="text-sm text-gray-600">
-                    Enter the 6-digit OTP sent to your phone number
-                  </p>
-                  {resendTimer > 0 ? (
-                    <span className="text-sm text-gray-500">
-                      Resend in {resendTimer}s
-                    </span>
-                  ) : (
-                    <Button
-                      type="button"
-                      onClick={sendOTP}
-                      variant="link"
-                      className="text-blue-600 hover:text-blue-800 p-0 h-auto text-sm"
-                      disabled={sendingOtp}
-                    >
-                      {sendingOtp ? "Sending..." : "Resend OTP"}
-                    </Button>
-                  )}
-                </div>
-              </div>
-            )}
-          </form>
-
-          {/* Form step 2 - Structure Details */}
-          <form className={`py-10 ${formStage === 2 ? "" : "hidden"}`}>
-            <label htmlFor="landSizeKanals">
-              Land Area<span className="text-red-500">*</span>{" "}
-              <span className="text-sm text-gray-500">(Kanals)</span>
-            </label>
-            <Input
-              className="bg-white mb-2 mt-2 lg:w-1/2  border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B] shadow-sm transition-all duration-200 hover:shadow-md"
-              type="number"
-              placeholder="Enter Land Size"
-              id="landSizeKanals"
-              value={landSizeKanals}
-              min={1}
-              onChange={(e) => setLandSizeKanals(e.target.value)}
-            />
-            <p
-              className={`${kanalsError ? "" : "invisible"} mb-5 text-red-500 text-sm`}
-            >
-              Enter minimum 1 kanal
-            </p>
-
-            <label htmlFor="landSizeMarlas">
-              Land Area<span className="text-red-500">*</span>{" "}
-              <span className="text-sm text-gray-500">(Marlas)</span>
-            </label>
-            <Input
-              className="bg-white mb-2 mt-2 lg:w-1/2  border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B] shadow-sm transition-all duration-200 hover:shadow-md"
-              type="number"
-              placeholder="Enter Land Size"
-              id="landSizeMarlas"
-              value={landSizeMarlas}
-              min={0}
-              max={19}
-              onChange={(e) => setLandSizeMarlas(e.target.value)}
-            />
-            <p
-              className={`${marlasError ? "" : "invisible"} mb-5 text-red-500 text-sm`}
-            >
-              Marlas should be between 0-19 only
-            </p>
-
-            <div className="mb-8 md:text-xl text-green-700">
-              Total Land: {landSizeKanals ? `${landSizeKanals} Kanals ` : ""}
-              {landSizeMarlas ? `${landSizeMarlas} Marlas` : ""}
-            </div>
-
-            <label htmlFor="rowToRowGap">
-              Row-to-Row Gap<span className="text-red-500">*</span>{" "}
-              <span className="text-sm text-gray-500">(ft)</span>
-            </label>
-            <Select value={rowToRowGap} onValueChange={setRowToRowGap} required>
-              <SelectTrigger className="bg-white lg:w-1/3 mb-8 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B] shadow-sm transition-all duration-200 hover:shadow-md">
-                <SelectValue placeholder="Select row-to-row gap" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="10">
-                  10 Ft (Recommended for hassle free farm operations)
-                </SelectItem>
-                <SelectItem value="9">9 ft</SelectItem>
-                <SelectItem value="8">8 ft</SelectItem>
-              </SelectContent>
-            </Select>
-
-            <label htmlFor="trellisType">
-              Trellis Type<span className="text-red-500">*</span>
-            </label>
-            <Select value={trellisType} onValueChange={setTrellisType} required>
-              <SelectTrigger className="bg-white lg:w-1/3 mb-40 md:mb-20 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]">
-                <SelectValue placeholder="Select trellis type" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="Prestressed Concrete Trellis">
-                  Prestressed Concrete Trellis
-                </SelectItem>
-                <SelectItem value="GI Steel Trellis">
-                  GI Steel Trellis
-                </SelectItem>
-              </SelectContent>
-            </Select>
-          </form>
-
-          {/* Form step 3 - Add-on Services */}
-          <form className={`py-10 ${formStage === 3 ? "" : "hidden"}`}>
-            <label htmlFor="sideAnchors">
-              Side Anchors<span className="text-red-500">*</span>
-            </label>
-            <Select
-              value={sideAnchors}
-              onValueChange={(value) => {
-                setSideAnchors(value);
-                if (value === "no") {
-                  setCrossWire("");
-                  setPostCaps("");
-                  setTopWireHailNet("");
-                }
-              }}
-              required
-            >
-              <SelectTrigger className="bg-white lg:w-1/3 mb-5 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]">
-                <SelectValue placeholder="Select option" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="yes">Yes</SelectItem>
-                <SelectItem value="no">No</SelectItem>
-              </SelectContent>
-            </Select>
-
-            {/* Cross Wire - only show if Side Anchors is Yes */}
-            {sideAnchors === "yes" && (
-              <>
-                <label htmlFor="crossWire">
-                  Cross Wire<span className="text-red-500">*</span>
-                </label>
-                <Select
-                  value={crossWire}
-                  onValueChange={(value) => {
-                    setCrossWire(value);
-                    if (value === "no") {
-                      setPostCaps("");
-                      setTopWireHailNet("");
-                    }
-                  }}
-                  required
-                >
-                  <SelectTrigger className="bg-white lg:w-1/3 mb-5 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]">
-                    <SelectValue placeholder="Select option" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="yes">Yes</SelectItem>
-                    <SelectItem value="no">No</SelectItem>
-                  </SelectContent>
-                </Select>
-
-                {/* Post Caps - only show if Cross Wire is Yes */}
-                {crossWire === "yes" && (
-                  <>
-                    <label htmlFor="postCaps">
-                      Post Caps<span className="text-red-500">*</span>
-                    </label>
-                    <Select
-                      value={postCaps}
-                      onValueChange={(value) => {
-                        setPostCaps(value);
-                        if (value === "no") {
-                          setTopWireHailNet("");
-                        }
-                      }}
-                      required
-                    >
-                      <SelectTrigger className="bg-white lg:w-1/3 mb-5 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]">
-                        <SelectValue placeholder="Select option" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="yes">Yes</SelectItem>
-                        <SelectItem value="no">No</SelectItem>
-                      </SelectContent>
-                    </Select>
-
-                    {/* Top-wire for Hail Net - only show if Post Caps is Yes */}
-                    {postCaps === "yes" && (
-                      <>
-                        <label htmlFor="topWireHailNet">
-                          Top-wire for Hail Net
-                          <span className="text-red-500">*</span>
-                        </label>
-                        <Select
-                          value={topWireHailNet}
-                          onValueChange={setTopWireHailNet}
-                          required
-                        >
-                          <SelectTrigger className="bg-white lg:w-1/3 mb-5 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]">
-                            <SelectValue placeholder="Select option" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="yes">Yes</SelectItem>
-                            <SelectItem value="no">No</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </>
-                    )}
-                  </>
                 )}
-              </>
-            )}
-
-            <label htmlFor="headerAssembly">
-              Header Assembly<span className="text-red-500">*</span>{" "}
-              <span className="text-sm text-gray-500">
-                (For Fertigation purpose)
-              </span>
-            </label>
-            <Select
-              value={headerAssembly}
-              onValueChange={(value) => {
-                setHeaderAssembly(value);
-                if (value === "no") {
-                  setVenturyInjector("");
-                }
-              }}
-              required
-            >
-              <SelectTrigger className="bg-white lg:w-1/3 mb-5 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]">
-                <SelectValue placeholder="Select option" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="yes">Yes</SelectItem>
-                <SelectItem value="no">No</SelectItem>
-              </SelectContent>
-            </Select>
-
-            {/* Ventury Injector - only show if Header Assembly is Yes */}
-            {headerAssembly === "yes" && (
-              <>
-                <label htmlFor="venturyInjector">
-                  Ventury Injector/Fertigation Tank
-                  <span className="text-red-500">*</span>
-                </label>
-                <Select
-                  value={venturyInjector}
-                  onValueChange={setVenturyInjector}
-                  required
-                >
-                  <SelectTrigger className="bg-white lg:w-1/3 mb-5 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]">
-                    <SelectValue placeholder="Select option" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="yes">Yes</SelectItem>
-                    <SelectItem value="no">No</SelectItem>
-                  </SelectContent>
-                </Select>
-              </>
-            )}
-
-            <label htmlFor="hydrocycloneFilter">
-              Hydrocyclone Filter<span className="text-red-500">*</span>{" "}
-              <span className="text-sm text-gray-500">
-                (Recommended for sand and heavy dirt filtration)
-              </span>
-            </label>
-            <Select
-              value={hydrocycloneFilter}
-              onValueChange={setHydrocycloneFilter}
-              required
-            >
-              <SelectTrigger className="bg-white lg:w-1/3 mb-40 md:mb-20 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]">
-                <SelectValue placeholder="Select option" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="yes">Yes</SelectItem>
-                <SelectItem value="no">No</SelectItem>
-              </SelectContent>
-            </Select>
-          </form>
-
-          <div
-            className={`${formStage === 4 ? "" : "hidden"} flex flex-col items-center mt-24 md:mt-44`}
-          >
-            <div className="flex justify-center md:justify-around items-center">
-              <div className="flex items-center justify-center w-20 h-20 md:w-32 md:h-32 rounded-full border-2 border-green-600 mr-5">
-                <FaWallet className="text-4xl md:text-7xl text-[#44A05B]" />
-              </div>
-              <div className="flex items-end flex-col">
-                <span className="text-3xl md:text-5xl text-[#44A05B]">
-                  {formatAmount(totalPrice())}
-                </span>
               </div>
             </div>
-            <AlertDialog open={open} onOpenChange={setOpen}>
-              <AlertDialogTrigger asChild>
-                <div className="text-center mt-5">
-                  <ButtonComponent
-                    text={"Book Orchard"}
-                    disabled={disableBookingBtn}
-                  />
-                </div>
-              </AlertDialogTrigger>
+          )}
+        </form>
 
-              <AlertDialogContent className="sm:max-w-[425px] bg-[#F6F2EF] max-h-[90vh]">
-                <AlertDialogHeader>
-                  <AlertDialogTitle className="text-[#035803]">
-                    Confirm your details
-                  </AlertDialogTitle>
-                </AlertDialogHeader>
+        {/* Form step 2 - Structure Details */}
+        <form className={`py-10 px-10 ${formStage === 2 ? "" : "hidden"}`}>
+          <label htmlFor="landSizeKanals">
+            Land Area<span className="text-red-500">*</span>{" "}
+            <span className="text-sm text-gray-500">(Kanals)</span>
+          </label>
+          <Input
+            className="bg-white mb-2 mt-2 lg:w-1/2  border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B] shadow-sm transition-all duration-200 hover:shadow-md"
+            type="number"
+            placeholder="Enter Land Size"
+            id="landSizeKanals"
+            value={landSizeKanals}
+            min={1}
+            onChange={(e) => setLandSizeKanals(e.target.value)}
+          />
+          <p
+            className={`${kanalsError ? "" : "invisible"} mb-5 text-red-500 text-sm`}
+          >
+            Enter minimum 1 kanal
+          </p>
 
-                <div
-                  className="overflow-y-auto"
-                  style={{ maxHeight: "calc(90vh - 200px)" }}
-                >
-                  <Table className="bg-white">
-                    <TableCaption className="text-green-700">
-                      Are you sure you want to book your orchard? Please review
-                      all details before confirming.
-                    </TableCaption>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead className="w-[200px] text-lg text-[#035803] font-bold">
-                          Label
-                        </TableHead>
-                        <TableHead className="text-right w-[200px] text-lg text-[#035803] font-bold">
-                          Info
-                        </TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      <TableRow>
-                        <TableCell className="font-medium text-green-700">
-                          Name
-                        </TableCell>
-                        <TableCell className="text-right text-green-700">
-                          {groverName}
-                        </TableCell>
-                      </TableRow>
-                      <TableRow>
-                        <TableCell className="font-medium text-green-700">
-                          Address
-                        </TableCell>
-                        <TableCell className="text-right text-green-700">
-                          {groverAddress}
-                        </TableCell>
-                      </TableRow>
-                      <TableRow>
-                        <TableCell className="font-medium text-green-700">
-                          Phone Number
-                        </TableCell>
-                        <TableCell className="text-right text-green-700">
-                          {groverNumber}
-                        </TableCell>
-                      </TableRow>
-                      <TableRow>
-                        <TableCell className="font-medium text-green-700">
-                          Total Land
-                        </TableCell>
-                        <TableCell className="text-right text-green-700">
-                          {landSizeKanals ? `${landSizeKanals} Kanals ` : ""}
-                          {landSizeMarlas ? `${landSizeMarlas} Marlas` : ""}
-                        </TableCell>
-                      </TableRow>
-                      <TableRow>
-                        <TableCell className="font-medium text-green-700">
-                          Row-to-Row Gap
-                        </TableCell>
-                        <TableCell className="text-right text-green-700">
-                          {rowToRowGap} ft
-                        </TableCell>
-                      </TableRow>
-                      <TableRow>
-                        <TableCell className="font-medium text-green-700">
-                          Trellis Type
-                        </TableCell>
-                        <TableCell className="text-right text-green-700">
-                          {trellisType}
-                        </TableCell>
-                      </TableRow>
-                      {sideAnchors === "yes" && (
-                        <TableRow>
-                          <TableCell className="font-medium text-green-700">
-                            Side Anchors
-                          </TableCell>
-                          <TableCell className="text-right text-green-700">
-                            Yes
-                          </TableCell>
-                        </TableRow>
-                      )}
-                      {crossWire === "yes" && (
-                        <TableRow>
-                          <TableCell className="font-medium text-green-700">
-                            Cross Wire
-                          </TableCell>
-                          <TableCell className="text-right text-green-700">
-                            Yes
-                          </TableCell>
-                        </TableRow>
-                      )}
-                      {postCaps === "yes" && (
-                        <TableRow>
-                          <TableCell className="font-medium text-green-700">
-                            Post Caps
-                          </TableCell>
-                          <TableCell className="text-right text-green-700">
-                            Yes
-                          </TableCell>
-                        </TableRow>
-                      )}
-                      {topWireHailNet === "yes" && (
-                        <TableRow>
-                          <TableCell className="font-medium text-green-700">
-                            Top-wire for Hail Net
-                          </TableCell>
-                          <TableCell className="text-right text-green-700">
-                            Yes
-                          </TableCell>
-                        </TableRow>
-                      )}
-                      {headerAssembly === "yes" && (
-                        <TableRow>
-                          <TableCell className="font-medium text-green-700">
-                            Header Assembly
-                          </TableCell>
-                          <TableCell className="text-right text-green-700">
-                            Yes
-                          </TableCell>
-                        </TableRow>
-                      )}
-                      {venturyInjector === "yes" && (
-                        <TableRow>
-                          <TableCell className="font-medium text-green-700">
-                            Ventury Injector/Fertigation Tank
-                          </TableCell>
-                          <TableCell className="text-right text-green-700">
-                            Yes
-                          </TableCell>
-                        </TableRow>
-                      )}
-                      {hydrocycloneFilter === "yes" && (
-                        <TableRow>
-                          <TableCell className="font-medium text-green-700">
-                            Hydrocyclone Filter
-                          </TableCell>
-                          <TableCell className="text-right text-green-700">
-                            Yes
-                          </TableCell>
-                        </TableRow>
-                      )}
-                      <TableRow>
-                        <TableCell className="font-medium text-green-700">
-                          Total Posts
-                        </TableCell>
-                        <TableCell className="text-right text-green-700">
-                          {Math.ceil(getQuantities().posts * totalLand())}
-                        </TableCell>
-                      </TableRow>
-                      <TableRow>
-                        <TableCell className="font-medium text-green-700">
-                          Total Plants
-                        </TableCell>
-                        <TableCell className="text-right text-green-700">
-                          {Math.ceil(getQuantities().plants * totalLand())}
-                        </TableCell>
-                      </TableRow>
-                      <TableRow>
-                        <TableCell className="font-medium text-green-700">
-                          Total Anchors
-                        </TableCell>
-                        <TableCell className="text-right text-green-700">
-                          {Math.ceil(getQuantities().anchors * totalLand())}
-                        </TableCell>
-                      </TableRow>
-                      <TableRow className="text-2xl font-bold">
-                        <TableCell className="font-medium text-green-700">
-                          Estimated Cost
-                        </TableCell>
-                        <TableCell className="text-right text-green-700">
-                          {formatAmount(totalPrice())}
-                        </TableCell>
-                      </TableRow>
-                    </TableBody>
-                  </Table>
-                </div>
+          <label htmlFor="landSizeMarlas">
+            Land Area<span className="text-red-500">*</span>{" "}
+            <span className="text-sm text-gray-500">(Marlas)</span>
+          </label>
+          <Input
+            className="bg-white mb-2 mt-2 lg:w-1/2  border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B] shadow-sm transition-all duration-200 hover:shadow-md"
+            type="number"
+            placeholder="Enter Land Size"
+            id="landSizeMarlas"
+            value={landSizeMarlas}
+            min={0}
+            max={19}
+            onChange={(e) => setLandSizeMarlas(e.target.value)}
+          />
+          <p
+            className={`${marlasError ? "" : "invisible"} mb-5 text-red-500 text-sm`}
+          >
+            Marlas should be between 0-19 only
+          </p>
 
-                <AlertDialogFooter>
-                  <AlertDialogCancel className="bg-gray-500 text-white font-medium  shadow-lg hover:bg-white hover:text-gray-500 transition-colors px-4 py-2 rounded-lg">
-                    Cancel
-                  </AlertDialogCancel>
-                  <AlertDialogAction
-                    onClick={bookingHandler}
-                    className="bg-[#44A05B] text-white font-medium  shadow-lg hover:bg-white hover:text-[#44A05B] transition-colors px-4 py-2 rounded-lg"
-                  >
-                    Confirm Booking
-                  </AlertDialogAction>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
-            <p className="mt-4 mb-20 md:text-lg text-gray-600 text-center">
-              Click the button to book your orchard today!
-            </p>
+          <div className="mb-8 md:text-xl text-green-700">
+            Total Land: {landSizeKanals ? `${landSizeKanals} Kanals ` : ""}
+            {landSizeMarlas ? `${landSizeMarlas} Marlas` : ""}
           </div>
+
+          <label htmlFor="rowToRowGap">
+            Row-to-Row Gap<span className="text-red-500">*</span>{" "}
+            <span className="text-sm text-gray-500">(ft)</span>
+          </label>
+          <Select value={rowToRowGap} onValueChange={setRowToRowGap} required>
+            <SelectTrigger className="bg-white lg:w-1/3 mb-8 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B] shadow-sm transition-all duration-200 hover:shadow-md">
+              <SelectValue placeholder="Select row-to-row gap" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="10">
+                10 Ft (Recommended for hassle free farm operations)
+              </SelectItem>
+              <SelectItem value="9">9 ft</SelectItem>
+              <SelectItem value="8">8 ft</SelectItem>
+            </SelectContent>
+          </Select>
+
+          <label htmlFor="trellisType">
+            Trellis Type<span className="text-red-500">*</span>
+          </label>
+          <Select value={trellisType} onValueChange={setTrellisType} required>
+            <SelectTrigger className="bg-white lg:w-1/3 mb-40 md:mb-20 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]">
+              <SelectValue placeholder="Select trellis type" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="Prestressed Concrete Trellis">
+                Prestressed Concrete Trellis
+              </SelectItem>
+              <SelectItem value="GI Steel Trellis">GI Steel Trellis</SelectItem>
+            </SelectContent>
+          </Select>
+        </form>
+
+        {/* Form step 3 - Add-on Services */}
+        <form className={`py-10 px-10 ${formStage === 3 ? "" : "hidden"}`}>
+          <label htmlFor="sideAnchors">
+            Side Anchors<span className="text-red-500">*</span>
+          </label>
+          <Select
+            value={sideAnchors}
+            onValueChange={(value) => {
+              setSideAnchors(value);
+              if (value === "no") {
+                setCrossWire("");
+                setPostCaps("");
+                setTopWireHailNet("");
+              }
+            }}
+            required
+          >
+            <SelectTrigger className="bg-white lg:w-1/3 mb-5 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]">
+              <SelectValue placeholder="Select option" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="yes">Yes</SelectItem>
+              <SelectItem value="no">No</SelectItem>
+            </SelectContent>
+          </Select>
+
+          {/* Cross Wire - only show if Side Anchors is Yes */}
+          {sideAnchors === "yes" && (
+            <>
+              <label htmlFor="crossWire">
+                Cross Wire<span className="text-red-500">*</span>
+              </label>
+              <Select
+                value={crossWire}
+                onValueChange={(value) => {
+                  setCrossWire(value);
+                  if (value === "no") {
+                    setPostCaps("");
+                    setTopWireHailNet("");
+                  }
+                }}
+                required
+              >
+                <SelectTrigger className="bg-white lg:w-1/3 mb-5 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]">
+                  <SelectValue placeholder="Select option" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="yes">Yes</SelectItem>
+                  <SelectItem value="no">No</SelectItem>
+                </SelectContent>
+              </Select>
+
+              {/* Post Caps - only show if Cross Wire is Yes */}
+              {crossWire === "yes" && (
+                <>
+                  <label htmlFor="postCaps">
+                    Post Caps<span className="text-red-500">*</span>
+                  </label>
+                  <Select
+                    value={postCaps}
+                    onValueChange={(value) => {
+                      setPostCaps(value);
+                      if (value === "no") {
+                        setTopWireHailNet("");
+                      }
+                    }}
+                    required
+                  >
+                    <SelectTrigger className="bg-white lg:w-1/3 mb-5 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]">
+                      <SelectValue placeholder="Select option" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="yes">Yes</SelectItem>
+                      <SelectItem value="no">No</SelectItem>
+                    </SelectContent>
+                  </Select>
+
+                  {/* Top-wire for Hail Net - only show if Post Caps is Yes */}
+                  {postCaps === "yes" && (
+                    <>
+                      <label htmlFor="topWireHailNet">
+                        Top-wire for Hail Net
+                        <span className="text-red-500">*</span>
+                      </label>
+                      <Select
+                        value={topWireHailNet}
+                        onValueChange={setTopWireHailNet}
+                        required
+                      >
+                        <SelectTrigger className="bg-white lg:w-1/3 mb-5 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]">
+                          <SelectValue placeholder="Select option" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="yes">Yes</SelectItem>
+                          <SelectItem value="no">No</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </>
+                  )}
+                </>
+              )}
+            </>
+          )}
+
+          <label htmlFor="headerAssembly">
+            Header Assembly<span className="text-red-500">*</span>{" "}
+            <span className="text-sm text-gray-500">
+              (For Fertigation purpose)
+            </span>
+          </label>
+          <Select
+            value={headerAssembly}
+            onValueChange={(value) => {
+              setHeaderAssembly(value);
+              if (value === "no") {
+                setVenturyInjector("");
+              }
+            }}
+            required
+          >
+            <SelectTrigger className="bg-white lg:w-1/3 mb-5 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]">
+              <SelectValue placeholder="Select option" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="yes">Yes</SelectItem>
+              <SelectItem value="no">No</SelectItem>
+            </SelectContent>
+          </Select>
+
+          {/* Ventury Injector - only show if Header Assembly is Yes */}
+          {headerAssembly === "yes" && (
+            <>
+              <label htmlFor="venturyInjector">
+                Ventury Injector/Fertigation Tank
+                <span className="text-red-500">*</span>
+              </label>
+              <Select
+                value={venturyInjector}
+                onValueChange={setVenturyInjector}
+                required
+              >
+                <SelectTrigger className="bg-white lg:w-1/3 mb-5 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]">
+                  <SelectValue placeholder="Select option" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="yes">Yes</SelectItem>
+                  <SelectItem value="no">No</SelectItem>
+                </SelectContent>
+              </Select>
+            </>
+          )}
+
+          <label htmlFor="hydrocycloneFilter">
+            Hydrocyclone Filter<span className="text-red-500">*</span>{" "}
+            <span className="text-sm text-gray-500">
+              (Recommended for sand and heavy dirt filtration)
+            </span>
+          </label>
+          <Select
+            value={hydrocycloneFilter}
+            onValueChange={setHydrocycloneFilter}
+            required
+          >
+            <SelectTrigger className="bg-white lg:w-1/3 mb-40 md:mb-20 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B]">
+              <SelectValue placeholder="Select option" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="yes">Yes</SelectItem>
+              <SelectItem value="no">No</SelectItem>
+            </SelectContent>
+          </Select>
+        </form>
+
+        <div
+          className={`${formStage === 4 ? "" : "hidden"} flex flex-col items-center mt-24 md:mt-44`}
+        >
+          <div className="flex justify-center md:justify-around items-center">
+            <div className="flex items-center justify-center w-20 h-20 md:w-32 md:h-32 rounded-full border-2 border-green-600 mr-5">
+              <FaWallet className="text-4xl md:text-7xl text-[#44A05B]" />
+            </div>
+            <div className="flex items-end flex-col">
+              <span className="text-3xl md:text-5xl text-[#44A05B]">
+                {formatAmount(totalPrice())}
+              </span>
+            </div>
+          </div>
+          <AlertDialog open={open} onOpenChange={setOpen}>
+            <AlertDialogTrigger asChild>
+              <div className="text-center mt-5">
+                <ButtonComponent
+                  text={"Book Orchard"}
+                  disabled={disableBookingBtn}
+                />
+              </div>
+            </AlertDialogTrigger>
+
+            <AlertDialogContent className="sm:max-w-[425px] bg-[#F6F2EF] max-h-[90vh]">
+              <AlertDialogHeader>
+                <AlertDialogTitle className="text-[#035803]">
+                  Confirm your details
+                </AlertDialogTitle>
+              </AlertDialogHeader>
+
+              <div
+                className="overflow-y-auto"
+                style={{ maxHeight: "calc(90vh - 200px)" }}
+              >
+                <Table className="bg-white">
+                  <TableCaption className="text-green-700">
+                    Are you sure you want to book your orchard? Please review
+                    all details before confirming.
+                  </TableCaption>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="w-[200px] text-lg text-[#035803] font-bold">
+                        Label
+                      </TableHead>
+                      <TableHead className="text-right w-[200px] text-lg text-[#035803] font-bold">
+                        Info
+                      </TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell className="font-medium text-green-700">
+                        Name
+                      </TableCell>
+                      <TableCell className="text-right text-green-700">
+                        {groverName}
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell className="font-medium text-green-700">
+                        Address
+                      </TableCell>
+                      <TableCell className="text-right text-green-700">
+                        {groverAddress}
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell className="font-medium text-green-700">
+                        Phone Number
+                      </TableCell>
+                      <TableCell className="text-right text-green-700">
+                        {groverNumber}
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell className="font-medium text-green-700">
+                        Total Land
+                      </TableCell>
+                      <TableCell className="text-right text-green-700">
+                        {landSizeKanals ? `${landSizeKanals} Kanals ` : ""}
+                        {landSizeMarlas ? `${landSizeMarlas} Marlas` : ""}
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell className="font-medium text-green-700">
+                        Row-to-Row Gap
+                      </TableCell>
+                      <TableCell className="text-right text-green-700">
+                        {rowToRowGap} ft
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell className="font-medium text-green-700">
+                        Trellis Type
+                      </TableCell>
+                      <TableCell className="text-right text-green-700">
+                        {trellisType}
+                      </TableCell>
+                    </TableRow>
+                    {sideAnchors === "yes" && (
+                      <TableRow>
+                        <TableCell className="font-medium text-green-700">
+                          Side Anchors
+                        </TableCell>
+                        <TableCell className="text-right text-green-700">
+                          Yes
+                        </TableCell>
+                      </TableRow>
+                    )}
+                    {crossWire === "yes" && (
+                      <TableRow>
+                        <TableCell className="font-medium text-green-700">
+                          Cross Wire
+                        </TableCell>
+                        <TableCell className="text-right text-green-700">
+                          Yes
+                        </TableCell>
+                      </TableRow>
+                    )}
+                    {postCaps === "yes" && (
+                      <TableRow>
+                        <TableCell className="font-medium text-green-700">
+                          Post Caps
+                        </TableCell>
+                        <TableCell className="text-right text-green-700">
+                          Yes
+                        </TableCell>
+                      </TableRow>
+                    )}
+                    {topWireHailNet === "yes" && (
+                      <TableRow>
+                        <TableCell className="font-medium text-green-700">
+                          Top-wire for Hail Net
+                        </TableCell>
+                        <TableCell className="text-right text-green-700">
+                          Yes
+                        </TableCell>
+                      </TableRow>
+                    )}
+                    {headerAssembly === "yes" && (
+                      <TableRow>
+                        <TableCell className="font-medium text-green-700">
+                          Header Assembly
+                        </TableCell>
+                        <TableCell className="text-right text-green-700">
+                          Yes
+                        </TableCell>
+                      </TableRow>
+                    )}
+                    {venturyInjector === "yes" && (
+                      <TableRow>
+                        <TableCell className="font-medium text-green-700">
+                          Ventury Injector/Fertigation Tank
+                        </TableCell>
+                        <TableCell className="text-right text-green-700">
+                          Yes
+                        </TableCell>
+                      </TableRow>
+                    )}
+                    {hydrocycloneFilter === "yes" && (
+                      <TableRow>
+                        <TableCell className="font-medium text-green-700">
+                          Hydrocyclone Filter
+                        </TableCell>
+                        <TableCell className="text-right text-green-700">
+                          Yes
+                        </TableCell>
+                      </TableRow>
+                    )}
+                    <TableRow>
+                      <TableCell className="font-medium text-green-700">
+                        Total Posts
+                      </TableCell>
+                      <TableCell className="text-right text-green-700">
+                        {Math.ceil(getQuantities().posts * totalLand())}
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell className="font-medium text-green-700">
+                        Total Plants
+                      </TableCell>
+                      <TableCell className="text-right text-green-700">
+                        {Math.ceil(getQuantities().plants * totalLand())}
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell className="font-medium text-green-700">
+                        Total Anchors
+                      </TableCell>
+                      <TableCell className="text-right text-green-700">
+                        {Math.ceil(getQuantities().anchors * totalLand())}
+                      </TableCell>
+                    </TableRow>
+                    <TableRow className="text-2xl font-bold">
+                      <TableCell className="font-medium text-green-700">
+                        Estimated Cost
+                      </TableCell>
+                      <TableCell className="text-right text-green-700">
+                        {formatAmount(totalPrice())}
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </div>
+
+              <AlertDialogFooter>
+                <AlertDialogCancel className="bg-gray-500 text-white font-medium  shadow-lg hover:bg-white hover:text-gray-500 transition-colors px-4 py-2 rounded-lg">
+                  Cancel
+                </AlertDialogCancel>
+                <AlertDialogAction
+                  onClick={bookingHandler}
+                  className="bg-[#44A05B] text-white font-medium  shadow-lg hover:bg-white hover:text-[#44A05B] transition-colors px-4 py-2 rounded-lg"
+                >
+                  Confirm Booking
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+          <p className="mt-4 mb-64 md:mb-20 md:text-lg text-gray-600 text-center">
+            Click the button to book your orchard today!
+          </p>
         </div>
 
         {/* Buttons outside the scrollable container */}
