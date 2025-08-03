@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
 import { useToast } from "@/hooks/use-toast";
 import {
@@ -83,6 +84,7 @@ const BookOrchid = () => {
   const { openDialog } = useSuccessDialog();
 
   const formRef = useRef(null);
+  const prevPhoneNumberRef = useRef("");
 
   const [formStage, setFormStage] = useState(1);
   const [groverName, setGroverName] = useState("");
@@ -107,11 +109,162 @@ const BookOrchid = () => {
   const [open, setOpen] = useState(false);
   const [disableBookingBtn, setDisableBookingBtn] = useState(false);
 
+  // OTP related states
+  const [otp, setOtp] = useState("");
+  const [otpSent, setOtpSent] = useState(false);
+  const [otpVerified, setOtpVerified] = useState(false);
+  const [sendingOtp, setSendingOtp] = useState(false);
+  const [verifyingOtp, setVerifyingOtp] = useState(false);
+  const [otpError, setOtpError] = useState("");
+  const [resendTimer, setResendTimer] = useState(0);
+
   //Errors
   const [kanalsError, setKanalsError] = useState(false);
   const [marlasError, setMarlasError] = useState(false);
   const [nameError, setNameError] = useState(false);
   const [phoneError, setPhoneError] = useState(false);
+
+  // Get base URL from environment or use default
+  const getBaseUrl = () => {
+    return process.env.NEXT_PUBLIC_SERVER_URL || "http://localhost:4000";
+  };
+
+  // Handle resend timer
+  useEffect(() => {
+    let interval;
+    if (resendTimer > 0) {
+      interval = setInterval(() => {
+        setResendTimer((prev) => prev - 1);
+      }, 1000);
+    }
+    return () => clearInterval(interval);
+  }, [resendTimer]);
+
+  // Send OTP function
+  const sendOTP = async () => {
+    if (!groverNumber) {
+      toast({
+        title: "Phone number required",
+        description: "Please enter your phone number first.",
+        className: "bg-red-500 text-white border border-red-700",
+      });
+      return;
+    }
+
+    if (!checkPhoneNumber()) {
+      return;
+    }
+
+    // Additional validation for Indian mobile numbers
+    const phoneRegex = /^[6-9]\d{9}$/;
+    if (!phoneRegex.test(groverNumber)) {
+      toast({
+        title: "Invalid phone number",
+        description:
+          "Please enter a valid 10-digit Indian mobile number starting with 6, 7, 8, or 9.",
+        className: "bg-red-500 text-white border border-red-700",
+      });
+      return;
+    }
+
+    setSendingOtp(true);
+    setOtpError("");
+
+    try {
+      const response = await fetch(`${getBaseUrl()}/api/send-otp`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ number: groverNumber }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setOtpSent(true);
+        setOtpVerified(false);
+        setOtp("");
+        setResendTimer(60); // 60 seconds cooldown
+        toast({
+          title: "OTP Sent",
+          description: "OTP has been sent to your phone number.",
+          className: "bg-green-500 text-white border border-green-700",
+        });
+      } else {
+        setOtpError(data.error || "Failed to send OTP");
+        toast({
+          title: "Failed to send OTP",
+          description: data.error || "Please try again later.",
+          className: "bg-red-500 text-white border border-red-700",
+        });
+      }
+    } catch (error) {
+      console.error("Error sending OTP:", error);
+      setOtpError("Network error. Please try again.");
+      toast({
+        title: "Network Error",
+        description: "Failed to send OTP. Please check your connection.",
+        className: "bg-red-500 text-white border border-red-700",
+      });
+    } finally {
+      setSendingOtp(false);
+    }
+  };
+
+  // Verify OTP function
+  const verifyOTP = async () => {
+    if (!otp || otp.length !== 6) {
+      setOtpError("Please enter a valid 6-digit OTP");
+      return;
+    }
+
+    setVerifyingOtp(true);
+    setOtpError("");
+
+    try {
+      const response = await fetch(`${getBaseUrl()}/api/verify-otp`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ number: groverNumber, otp: otp }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setOtpVerified(true);
+        setOtpError("");
+        toast({
+          title: "Phone Verified",
+          description: "Your phone number has been verified successfully.",
+          className: "bg-green-500 text-white border border-green-700",
+        });
+      } else {
+        const errorMessage = data.error || "Invalid OTP";
+        const remainingAttempts = data.remaining_attempts;
+        setOtpError(errorMessage);
+        toast({
+          title: "Verification Failed",
+          description: remainingAttempts
+            ? `${errorMessage}. ${remainingAttempts} attempts remaining.`
+            : errorMessage,
+          className: "bg-red-500 text-white border border-red-700",
+        });
+      }
+    } catch (error) {
+      console.error("Error verifying OTP:", error);
+      setOtpError("Network error. Please try again.");
+      toast({
+        title: "Network Error",
+        description: "Failed to verify OTP. Please check your connection.",
+        className: "bg-red-500 text-white border border-red-700",
+      });
+    } finally {
+      setVerifyingOtp(false);
+    }
+  };
 
   const fillError = () => {
     toast({
@@ -166,6 +319,18 @@ const BookOrchid = () => {
         if (!checkName() || !checkPhoneNumber()) {
           return;
         }
+
+        // Check if phone number is verified
+        if (!otpVerified) {
+          toast({
+            title: "Phone verification required",
+            description:
+              "Please verify your phone number with OTP before proceeding.",
+            className: "bg-red-500 text-white border border-red-700",
+          });
+          return;
+        }
+
         const numberExists = await checkBookingExists(groverNumber);
 
         if (numberExists) {
@@ -241,6 +406,12 @@ const BookOrchid = () => {
     setHeaderAssembly("");
     setVenturyInjector("");
     setHydrocycloneFilter("");
+    // Reset OTP states
+    setOtp("");
+    setOtpSent(false);
+    setOtpVerified(false);
+    setOtpError("");
+    setResendTimer(0);
     toast({
       title: "Form Resetted",
       className: "bg-red-500 text-white border border-red-700",
@@ -538,20 +709,130 @@ const BookOrchid = () => {
             />
             <label htmlFor="groverNumber">
               Phone Number<span className="text-red-500">*</span>
+              {otpVerified && (
+                <span className="ml-2 text-green-600 text-sm">✓ Verified</span>
+              )}
+              {sendingOtp && (
+                <span className="ml-2 text-blue-600 text-sm">
+                  📤 Sending OTP...
+                </span>
+              )}
+              {verifyingOtp && (
+                <span className="ml-2 text-blue-600 text-sm">
+                  🔍 Verifying...
+                </span>
+              )}
             </label>
-            <Input
-              className="bg-white mb-2 mt-2  lg:w-1/2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B] shadow-sm transition-all duration-200 hover:shadow-md"
-              type="text"
-              placeholder="Enter Phone Number"
-              id="groverNumber"
-              value={groverNumber}
-              onChange={(e) => setGroverNumber(e.target.value)}
-            />
+            <div className="flex gap-2">
+              <Input
+                className={`bg-white mb-2 mt-2 lg:w-1/2 border rounded-lg focus:outline-none shadow-sm transition-all duration-200 hover:shadow-md ${
+                  otpVerified
+                    ? "border-green-500 focus:border-green-600"
+                    : "border-gray-300 focus:border-[#44A05B]"
+                }`}
+                type="text"
+                placeholder="Enter Phone Number"
+                id="groverNumber"
+                value={groverNumber}
+                onChange={(e) => {
+                  const newNumber = e.target.value;
+                  setGroverNumber(newNumber);
+                  // Reset OTP verification if phone number changes
+                  if (
+                    newNumber !== prevPhoneNumberRef.current &&
+                    prevPhoneNumberRef.current !== ""
+                  ) {
+                    setOtpSent(false);
+                    setOtpVerified(false);
+                    setOtp("");
+                    setOtpError("");
+                    setResendTimer(0);
+                  }
+                  prevPhoneNumberRef.current = newNumber;
+                }}
+                disabled={sendingOtp || verifyingOtp || otpVerified}
+              />
+              <Button
+                type="button"
+                onClick={sendOTP}
+                className={`font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out ${
+                  otpVerified
+                    ? "bg-gray-400 text-gray-600 cursor-not-allowed"
+                    : "bg-green-500 hover:bg-green-600 text-white"
+                }`}
+                disabled={
+                  sendingOtp || verifyingOtp || !groverNumber || otpVerified
+                }
+              >
+                {otpVerified
+                  ? "Verified"
+                  : sendingOtp
+                    ? "Sending..."
+                    : "Send OTP"}
+              </Button>
+            </div>
             <p
-              className={`${phoneError ? "" : "invisible"} mb-40 md:mb-20 text-red-500 text-sm`}
+              className={`${phoneError ? "" : "invisible"} mb-4 md:mb-2 text-red-500 text-sm`}
             >
               Enter valid 10 digit phone number
             </p>
+            {otpSent && !otpVerified && (
+              <div className="">
+                <label htmlFor="otp">
+                  OTP<span className="text-red-500">*</span>
+                </label>
+                <div className="flex gap-2">
+                  <Input
+                    className="bg-white mb-2 mt-2 lg:w-1/2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#44A05B] shadow-sm transition-all duration-200 hover:shadow-md"
+                    type="text"
+                    placeholder="Enter 6-digit OTP"
+                    id="otp"
+                    value={otp}
+                    onChange={(e) => {
+                      const value = e.target.value
+                        .replace(/\D/g, "")
+                        .slice(0, 6);
+                      setOtp(value);
+                    }}
+                    maxLength={6}
+                    disabled={verifyingOtp}
+                  />
+                  <Button
+                    type="button"
+                    onClick={verifyOTP}
+                    className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out"
+                    disabled={verifyingOtp || !otp || otp.length !== 6}
+                  >
+                    {verifyingOtp ? "Verifying..." : "Verify OTP"}
+                  </Button>
+                </div>
+                <p
+                  className={`${otpError ? "" : "invisible"} mb-2 text-red-500 text-sm`}
+                >
+                  {otpError}
+                </p>
+                <div className="flex items-center gap-4 mb-40 md:mb-20">
+                  <p className="text-sm text-gray-600">
+                    Enter the 6-digit OTP sent to your phone number
+                  </p>
+                  {resendTimer > 0 ? (
+                    <span className="text-sm text-gray-500">
+                      Resend in {resendTimer}s
+                    </span>
+                  ) : (
+                    <Button
+                      type="button"
+                      onClick={sendOTP}
+                      variant="link"
+                      className="text-blue-600 hover:text-blue-800 p-0 h-auto text-sm"
+                      disabled={sendingOtp}
+                    >
+                      {sendingOtp ? "Sending..." : "Resend OTP"}
+                    </Button>
+                  )}
+                </div>
+              </div>
+            )}
           </form>
 
           {/* Form step 2 - Structure Details */}
